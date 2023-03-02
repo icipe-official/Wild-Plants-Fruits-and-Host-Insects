@@ -1,4 +1,4 @@
-/*Thes  SQL codes creates 40 tables to store the information about wild plants, fruits and their insects:
+/*Thes  SQL codes creates 35 tables to store the information about wild plants, fruits and their insects:
 The tables include: 'plants', 'plant-genera', 'plant_fruit_types',fruit_type,plants-latex,latex,plants_shrub_climbing,
 shrubs_climbing,plants_woody_herbaceous, woody_herbaceous, plants_spines_thorns,spines_thorns,plant_fruiting_months,
 fruiting months,plants_photos,plant_fruit_colors,plants_leaf margins, leaf_margin,plants_leaf_arrangements,
@@ -156,7 +156,6 @@ multiple leaf arrangement patterns and each leaf arrangement pattern can be asso
     'taxon_name': This will be a variable length string column that stores the unique code for each order, and it will be unique and not null constrains
     'species_name': a variable length string column , and which is not null constrain 
     'genus-id': an inatger column that stores the id of genus of insect species
-    'sub_family_id': an intager column that stores the id for insect sub_family
     'family_id': an intager column that stores the id of insect's family
     'order_id': an inatger column that stores the id of insects's order
     This table has three foreign keys defined, one for column "genus_id" referencing the "id" column of "insects_genera" table, one for column "family_id" referencing the "id" column of "insect_families" table,
@@ -170,10 +169,13 @@ multiple leaf arrangement patterns and each leaf arrangement pattern can be asso
 This table will contain information about families of the insects, and it will have three columns:
     'id': a serial primary key to identify each record of family lan
     'family_name': a varying string column that described each insect's family and with not null and unique constraints
+    'order_id': foreign key column that refeences the 'id' column in the 'insect_orders' table
 
 31. The 'insect_genera' table stores information about  each genus of the insects, and with three columns:
     "id":a serial primary key to uniquely identify each genus
     "genus_name": a string colum of varying lengths, it is unique and cannot be null
+    There is also a foreign key "family_id" that references the "id" column of the "insect_families" table.
+     This statement creates the table and the foreign key constraint correctly.
 
 32. The "insect_photos" table contains information about photos of insects where available, and where an insect specie can have 
 multiple photos and each photo is associated with only one insect and it has three columns:
@@ -201,30 +203,6 @@ regions, and one region can have multiple plants, and it has three columns;
     "plants_id" and "region_id": are used as a composite primary key
     This table has two foreign keys "plants_id" and "region_id" that references the "id" column 
     of the "plants" and "regions" table, respectively.
-36. The "insect sub_families" table that contains information about plant families with two columns
-    "id":a serial primary key to uniquely identify each genus
-    "sub_family_name":a string colum of varying lengths, it is unique and cannot be null
-
-37. The "plants_ukwf areas" table that represent a many-to-many relationship between plants and ukwf areas, where one plant can be found in multiple 
-    ukwf, and one ukwf area can have multiple plants, and it has three columns;
-    "plants_id" and "ukwf_area_id": are used as a composite primary key
-    This table has two foreign keys "plants_id" and "ukwf_area_id" that references the "id" column 
-    of the "plants" and "ukwf_areas" table, respectively.
-
-38. The "ukwf_areas" table table store information about ukwf areas of occurence of the plants, and it has  two columns:
-    "id" : set as a serial primary key
-    "ukwf_area":a string of varying length and cannot be null.
-
-39. The k_sectors table table store information about k_sectors where the plant was collected, and it has  two columns:
-    "id" : set as a serial primary key
-    "k_sector":a string of varying length and cannot be null.
-
-40. The "plants_k_sectors" table that represent a many-to-many relationship between plants and k sectors, where one plant can be found in multiple 
-    k_sector, and one k_sector can have multiple plants, and it has three columns;
-    "plants_id" and "k_sector_id": are used as a composite primary key
-    This table has two foreign keys "plants_id" and "k_sector_id" that references the "id" column 
-    of the "plants" and "k_sector" table, respectively.
-
 
  */
 
@@ -441,11 +419,10 @@ CREATE TABLE insects(
 	sub_family_id int,
         family_id int,
         order_id int,
-	sex varchar(10),
         FOREIGN KEY (genus_id) REFERENCES insect_genera(id),
         FOREIGN KEY (family_id) REFERENCES insect_families(id),
-        FOREIGN KEY (order_id) REFERENCES insect_orders(id)
-
+        FOREIGN KEY (order_id) REFERENCES insect_orders(id),
+        FOREIGN KEY (sub_family_id) REFERENCES insect_sub_families(id)
 );
 
 CREATE TABLE plants_insects(
@@ -460,10 +437,9 @@ CREATE TABLE plants_insects(
 
 CREATE TABLE insect_photos(
         insect_id int,
-        photo_id  int UNIQUE,
-        sex varchar(5),
+        photo_id  varchar(10) UNIQUE,
+        sex varchar(30),
 	PRIMARY KEY (insect_id,photo_id),
-	    name varchar (50) UNIQUE NOT NULL,
         FOREIGN KEY (insect_id) REFERENCES insects(id)
 
 );
