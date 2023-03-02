@@ -1,0 +1,335 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model fruit_colors {
+  color_id            Int                   @id @default(autoincrement())
+  color               String                @unique @db.VarChar(20)
+  plants_fruit_colors plants_fruit_colors[]
+}
+
+model fruit_shapes {
+  fruit_shape_id      Int                   @id @default(autoincrement())
+  shape               String                @unique @db.VarChar(20)
+  plants_fruit_shapes plants_fruit_shapes[]
+}
+
+model fruit_sizes {
+  id                 Int                  @id @default(autoincrement())
+  size               String               @unique @db.VarChar(15)
+  plants_fruit_sizes plants_fruit_sizes[]
+}
+
+model fruit_types {
+  fruit_type_id      Int                  @id @default(autoincrement())
+  type_of_fruit      String               @unique @db.VarChar(50)
+  plants_fruit_types plants_fruit_types[]
+}
+
+model fruiting_months {
+  fruiting_month_id      Int                      @id @default(autoincrement())
+  month                  String                   @unique @db.VarChar(10)
+  plants_fruiting_months plants_fruiting_months[]
+}
+
+model insect_families {
+  id          Int       @id @default(autoincrement())
+  family_name String?   @unique @db.VarChar(50)
+  insects     insects[]
+}
+
+model insect_genera {
+  id         Int       @id @default(autoincrement())
+  genus_name String?   @unique @db.VarChar(50)
+  insects    insects[]
+}
+
+model insect_orders {
+  id         Int       @id @default(autoincrement())
+  order_name String    @unique @db.VarChar(20)
+  insects    insects[]
+}
+
+model insect_photos {
+  insect_id Int
+  photo_id  String  @unique @db.VarChar(10)
+  sex       String? @db.VarChar(30)
+  insects   insects @relation(fields: [insect_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([insect_id, photo_id])
+}
+
+model insect_sub_families {
+  id              Int       @id @default(autoincrement())
+  sub_family_name String?   @unique @db.VarChar(50)
+  insects         insects[]
+}
+
+model insects {
+  id                  Int                  @id @default(autoincrement())
+  unique_code         String?              @unique @db.VarChar(30)
+  species_name        String?              @db.VarChar(100)
+  genus_id            Int?
+  sub_family_id       Int?
+  family_id           Int?
+  order_id            Int?
+  insect_photos       insect_photos[]
+  insect_families     insect_families?     @relation(fields: [family_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  insect_genera       insect_genera?       @relation(fields: [genus_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  insect_orders       insect_orders?       @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  insect_sub_families insect_sub_families? @relation(fields: [sub_family_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plants_insects      plants_insects[]
+}
+
+model insects_regions {
+  insect_id Int
+  region_id Int
+  regions   regions @relation(fields: [region_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([insect_id, region_id])
+}
+
+model k_sectors {
+  k_sector_id      Int                @id @default(autoincrement())
+  sector           String             @db.VarChar(10)
+  plants_k_sectors plants_k_sectors[]
+}
+
+model latex {
+  fruit_latex_id    Int            @id @default(autoincrement())
+  latex_description String         @unique @db.VarChar(10)
+  plants_latex      plants_latex[]
+}
+
+model leaf_arrangements {
+  leaf_arrangement_id      Int                        @id @default(autoincrement())
+  arrangement              String                     @unique @db.VarChar(20)
+  plants_leaf_arrangements plants_leaf_arrangements[]
+}
+
+model leaf_margins {
+  leaf_margin_id      Int                   @id @default(autoincrement())
+  type_of_leaf_margin String                @unique @db.VarChar(20)
+  plants_leaf_margins plants_leaf_margins[]
+}
+
+model plant_families {
+  id           Int            @id @default(autoincrement())
+  family_name  String         @unique @db.VarChar(50)
+  plant_genera plant_genera[]
+}
+
+model plant_genera {
+  id             Int            @id @default(autoincrement())
+  genus_name     String         @unique @db.VarChar(50)
+  family_id      Int
+  plant_families plant_families @relation(fields: [family_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plants         plants[]
+}
+
+model plant_photos {
+  plant_id   Int
+  photo_id   Int    @unique
+  photo_name String @unique @db.VarChar(10)
+  plants     plants @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, photo_id])
+}
+
+model plants {
+  id                       Int                        @id @default(autoincrement())
+  species_name             String?                    @db.VarChar(110)
+  leaf_type                String?                    @db.VarChar(50)
+  description              String?                    @db.VarChar
+  max_latitude             Int?
+  min_latitude             Int?
+  genus_id                 Int
+  plant_photos             plant_photos[]
+  plant_genera             plant_genera               @relation(fields: [genus_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plants_fruit_colors      plants_fruit_colors[]
+  plants_fruit_shapes      plants_fruit_shapes[]
+  plants_fruit_sizes       plants_fruit_sizes[]
+  plants_fruit_types       plants_fruit_types[]
+  plants_fruiting_months   plants_fruiting_months[]
+  plants_insects           plants_insects[]
+  plants_k_sectors         plants_k_sectors[]
+  plants_latex             plants_latex[]
+  plants_leaf_arrangements plants_leaf_arrangements[]
+  plants_leaf_margins      plants_leaf_margins[]
+  plants_regions           plants_regions[]
+  plants_shrub_climbings   plants_shrub_climbings[]
+  plants_spines_thorns     plants_spines_thorns[]
+  plants_ukwf_areas        plants_ukwf_areas[]
+  plants_woody_herbaceous  plants_woody_herbaceous[]
+}
+
+model plants_fruit_colors {
+  plant_id     Int
+  color_id     Int
+  fruit_colors fruit_colors @relation(fields: [color_id], references: [color_id], onDelete: NoAction, onUpdate: NoAction)
+  plants       plants       @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, color_id])
+}
+
+model plants_fruit_shapes {
+  plant_id       Int
+  fruit_shape_id Int
+  fruit_shapes   fruit_shapes @relation(fields: [fruit_shape_id], references: [fruit_shape_id], onDelete: NoAction, onUpdate: NoAction)
+  plants         plants       @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, fruit_shape_id])
+}
+
+model plants_fruit_sizes {
+  plant_id      Int
+  fruit_size_id Int
+  fruit_sizes   fruit_sizes @relation(fields: [fruit_size_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plants        plants      @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, fruit_size_id])
+}
+
+model plants_fruit_types {
+  plant_id      Int
+  fruit_type_id Int
+  fruit_types   fruit_types @relation(fields: [fruit_type_id], references: [fruit_type_id], onDelete: NoAction, onUpdate: NoAction)
+  plants        plants      @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, fruit_type_id])
+}
+
+model plants_fruiting_months {
+  plant_id          Int
+  fruiting_month_id Int
+  fruiting_months   fruiting_months @relation(fields: [fruiting_month_id], references: [fruiting_month_id], onDelete: NoAction, onUpdate: NoAction)
+  plants            plants          @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, fruiting_month_id])
+}
+
+model plants_insects {
+  plant_id  Int
+  insect_id Int
+  insects   insects @relation(fields: [insect_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plants    plants  @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, insect_id])
+}
+
+model plants_k_sectors {
+  plant_id    Int
+  k_sector_id Int
+  k_sectors   k_sectors @relation(fields: [k_sector_id], references: [k_sector_id], onDelete: NoAction, onUpdate: NoAction)
+  plants      plants    @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, k_sector_id])
+}
+
+model plants_latex {
+  plant_id       Int
+  fruit_latex_id Int
+  latex          latex  @relation(fields: [fruit_latex_id], references: [fruit_latex_id], onDelete: NoAction, onUpdate: NoAction)
+  plants         plants @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, fruit_latex_id])
+}
+
+model plants_leaf_arrangements {
+  plant_id            Int
+  leaf_arrangement_id Int
+  leaf_arrangements   leaf_arrangements @relation(fields: [leaf_arrangement_id], references: [leaf_arrangement_id], onDelete: NoAction, onUpdate: NoAction)
+  plants              plants            @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, leaf_arrangement_id])
+}
+
+model plants_leaf_margins {
+  plant_id       Int
+  leaf_margin_id Int
+  leaf_margins   leaf_margins @relation(fields: [leaf_margin_id], references: [leaf_margin_id], onDelete: NoAction, onUpdate: NoAction)
+  plants         plants       @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, leaf_margin_id])
+}
+
+model plants_regions {
+  plants_id Int
+  region_id Int
+  plants    plants  @relation(fields: [plants_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  regions   regions @relation(fields: [region_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plants_id, region_id])
+}
+
+model plants_shrub_climbings {
+  plant_id        Int
+  shrub_id        Int
+  plants          plants          @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  shrub_climbings shrub_climbings @relation(fields: [shrub_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, shrub_id])
+}
+
+model plants_spines_thorns {
+  plant_id      Int
+  thorn_id      Int
+  plants        plants        @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  spines_thorns spines_thorns @relation(fields: [thorn_id], references: [thorn_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, thorn_id])
+}
+
+model plants_ukwf_areas {
+  plant_id     Int
+  ukwf_area_id Int
+  plants       plants     @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ukwf_areas   ukwf_areas @relation(fields: [ukwf_area_id], references: [ukwf_area_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, ukwf_area_id])
+}
+
+model plants_woody_herbaceous {
+  plant_id         Int
+  back_id          Int
+  woody_herbaceous woody_herbaceous @relation(fields: [back_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plants           plants           @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, back_id])
+}
+
+model regions {
+  id              Int               @id @default(autoincrement())
+  region          String            @db.VarChar(50)
+  insects_regions insects_regions[]
+  plants_regions  plants_regions[]
+}
+
+model shrub_climbings {
+  id                     Int                      @id @default(autoincrement())
+  tree_type              String                   @unique @db.VarChar(10)
+  plants_shrub_climbings plants_shrub_climbings[]
+}
+
+model spines_thorns {
+  thorn_id             Int                    @id @default(autoincrement())
+  thorns_spines        String                 @unique @db.VarChar(10)
+  plants_spines_thorns plants_spines_thorns[]
+}
+
+model ukwf_areas {
+  ukwf_area_id      Int                 @id @default(autoincrement())
+  ukwf_area         String              @db.VarChar(10)
+  plants_ukwf_areas plants_ukwf_areas[]
+}
+
+model woody_herbaceous {
+  id                      Int                       @id @default(autoincrement())
+  type_of_stem            String                    @unique @db.VarChar(10)
+  plants_woody_herbaceous plants_woody_herbaceous[]
+}
