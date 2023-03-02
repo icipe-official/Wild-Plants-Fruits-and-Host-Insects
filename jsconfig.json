@@ -1,0 +1,11 @@
+/*This code is a configuration object for TypeScript compiler options. 
+It sets the "baseUrl" property to "./src".
+The "baseUrl" property is used to specify the base directory to resolve non-relative module names. 
+Aany module imports that are not relative to the current file will be resolved from the specified base directory.
+For example, if a module import statement includes "myModule", and the "baseUrl" is set to "./src", then the compiler will look for the "myModule" module in the "./src" directory.
+*/
+{
+  "compilerOptions": {
+    "baseUrl": "./src"
+  }
+}
