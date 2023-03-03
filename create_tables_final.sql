@@ -215,7 +215,7 @@ CREATE TABLE plant_genera(
     id serial PRIMARY KEY,
     genus_name varchar(50) UNIQUE NOT NULL,
     family_id int NOT NULL,
-    FOREIGN KEY (family_id) REFERENCES plant_families(id)
+    FOREIGN KEY (family_id) REFERENCES plant_families(id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 CREATE TABLE plants(
@@ -226,7 +226,7 @@ CREATE TABLE plants(
     max_latitude int,
     min_latitude int,
     genus_id int NOT NULL,
-    FOREIGN KEY (genus_id) REFERENCES plant_genera(id)
+    FOREIGN KEY (genus_id) REFERENCES plant_genera(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE fruit_types(
@@ -239,8 +239,8 @@ CREATE TABLE plants_fruit_types(
     plant_id int,
     fruit_type_id int,
     PRIMARY KEY (plant_id,fruit_type_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (fruit_type_id) REFERENCES fruit_types(fruit_type_id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fruit_type_id) REFERENCES fruit_types(fruit_type_id),ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 
@@ -253,8 +253,9 @@ CREATE TABLE plants_latex(
     plant_id int,
     fruit_latex_id int,
     PRIMARY KEY (plant_id,fruit_latex_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (fruit_latex_id) REFERENCES latex(fruit_latex_id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fruit_latex_id) REFERENCES latex(fruit_latex_id) ON DELETE CASCADE ON UPDATE CASCADE
+
 
 );
 
@@ -267,8 +268,8 @@ CREATE TABLE plants_shrub_climbings(
     plant_id int,
     shrub_id int,
     PRIMARY KEY (plant_id,shrub_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (shrub_id) REFERENCES shrub_climbings(id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (shrub_id) REFERENCES shrub_climbings(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE woody_herbaceous(
@@ -280,8 +281,9 @@ CREATE TABLE plants_woody_herbaceous(
     plant_id int,
     back_id int,
     PRIMARY KEY(plant_id,back_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (back_id) REFERENCES woody_herbaceous(id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (back_id) REFERENCES woody_herbaceous(id) ON DELETE CASCADE ON UPDATE CASCADE
+
 
 );
 
@@ -295,8 +297,9 @@ CREATE TABLE plants_spines_thorns(
     plant_id int,
     thorn_id int,
    PRIMARY KEY(plant_id,thorn_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (thorn_id) REFERENCES spines_thorns(thorn_id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (thorn_id) REFERENCES spines_thorns(thorn_id) ON DELETE CASCADE ON UPDATE CASCADE
+
 
 );
 
@@ -310,8 +313,9 @@ CREATE TABLE plants_fruiting_months(
     plant_id int,
     fruiting_month_id int,
     PRIMARY KEY (plant_id,fruiting_month_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (fruiting_month_id) REFERENCES fruiting_months(fruiting_month_id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fruiting_month_id) REFERENCES fruiting_months(fruiting_month_id) ON DELETE CASCADE ON UPDATE CASCADE
+
 
 );
 
@@ -320,7 +324,7 @@ CREATE TABLE plant_photos(
     	photo_id int UNIQUE,
 	photo_name varchar (10) UNIQUE NOT NULL,
         PRIMARY KEY (plant_id,photo_id),
-  	FOREIGN KEY (plant_id) REFERENCES plants(id)
+  	FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE fruit_colors(
@@ -332,8 +336,9 @@ CREATE TABLE plants_fruit_colors(
     plant_id int,
     color_id int,
     PRIMARY KEY (plant_id,color_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (color_id) REFERENCES fruit_colors(color_id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (color_id) REFERENCES fruit_colors(color_id) ON DELETE CASCADE ON UPDATE CASCADE
+
 );
 
 CREATE TABLE leaf_margins(
@@ -345,8 +350,8 @@ CREATE TABLE plants_leaf_margins(
     plant_id int ,
     leaf_margin_id int,
     PRIMARY KEY (plant_id,leaf_margin_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (leaf_margin_id) REFERENCES leaf_margins(leaf_margin_id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (leaf_margin_id) REFERENCES leaf_margins(leaf_margin_id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 
@@ -359,8 +364,8 @@ CREATE TABLE plants_leaf_arrangements(
     plant_id int,
     leaf_arrangement_id int,
     PRIMARY KEY (plant_id, leaf_arrangement_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (leaf_arrangement_id) REFERENCES leaf_arrangements(leaf_arrangement_id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (leaf_arrangement_id) REFERENCES leaf_arrangements(leaf_arrangement_id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 
@@ -373,8 +378,8 @@ CREATE TABLE plants_fruit_sizes(
     plant_id int,
     fruit_size_id int,
     PRIMARY KEY (plant_id, fruit_size_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (fruit_size_id) REFERENCES fruit_sizes(id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fruit_size_id) REFERENCES fruit_sizes(id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 
@@ -387,8 +392,8 @@ CREATE TABLE plants_fruit_shapes(
     plant_id int,
     fruit_shape_id int,
     PRIMARY KEY (plant_id, fruit_shape_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (fruit_shape_id) REFERENCES fruit_shapes(fruit_shape_id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fruit_shape_id) REFERENCES fruit_shapes(fruit_shape_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE insect_orders(
@@ -419,18 +424,18 @@ CREATE TABLE insects(
 	sub_family_id int,
         family_id int,
         order_id int,
-        FOREIGN KEY (genus_id) REFERENCES insect_genera(id),
-        FOREIGN KEY (family_id) REFERENCES insect_families(id),
-        FOREIGN KEY (order_id) REFERENCES insect_orders(id),
-        FOREIGN KEY (sub_family_id) REFERENCES insect_sub_families(id)
+        FOREIGN KEY (genus_id) REFERENCES insect_genera(id) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (family_id) REFERENCES insect_families(id) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (order_id) REFERENCES insect_orders(id) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (sub_family_id) REFERENCES insect_sub_families(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE plants_insects(
     plant_id int,
     insect_id int,
     PRIMARY KEY (plant_id, insect_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-    FOREIGN KEY (insect_id) REFERENCES insects(id)
+    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (insect_id) REFERENCES insects(id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 
@@ -440,7 +445,7 @@ CREATE TABLE insect_photos(
         photo_id  varchar(10) UNIQUE,
         sex varchar(30),
 	PRIMARY KEY (insect_id,photo_id),
-        FOREIGN KEY (insect_id) REFERENCES insects(id)
+        FOREIGN KEY (insect_id) REFERENCES insects(id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 
@@ -454,16 +459,16 @@ CREATE TABLE insects_regions(
     	insect_id int,
 	region_id int,
 	PRIMARY KEY (insect_id,region_id),
-    	FOREIGN KEY (insect_id) REFERENCES insects(id),
-	FOREIGN KEY (region_id) REFERENCES regions(id)
+    	FOREIGN KEY (insect_id) REFERENCES insects(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE plants_regions(
     plants_id int,
 	region_id int,
 	PRIMARY KEY (plants_id,region_id),
-    FOREIGN KEY (plants_id) REFERENCES plants(id),
-	FOREIGN KEY (region_id) REFERENCES regions(id)
+    	FOREIGN KEY (plants_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE k_sectors(
@@ -475,8 +480,8 @@ CREATE TABLE plants_k_sectors(
     	plant_id int,
         k_sector_id int,
         PRIMARY KEY (plant_id,k_sector_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-        FOREIGN KEY (k_sector_id) REFERENCES k_sectors(k_sector_id)
+    	FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (k_sector_id) REFERENCES k_sectors(k_sector_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -491,7 +496,7 @@ CREATE TABLE plants_ukwf_areas(
         plant_id int,
         ukwf_area_id int,
         PRIMARY KEY (plant_id,ukwf_area_id),
-    FOREIGN KEY (plant_id) REFERENCES plants(id),
-        FOREIGN KEY (ukwf_area_id) REFERENCES ukwf_areas(ukwf_area_id)
+    	FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (ukwf_area_id) REFERENCES ukwf_areas(ukwf_area_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
