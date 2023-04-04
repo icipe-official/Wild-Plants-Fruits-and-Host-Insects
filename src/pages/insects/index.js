@@ -11,7 +11,15 @@ const Lepidoptera = dynamic(() => import('components/insects/lepidoptera'), {
 });
 const DipteraTephridiae = dynamic(() => import('components/insects/dipteraTephritidae'), {
   ssr: false,});
+ 
+  const DipteraTephridiae2Trial = dynamic(() => import('components/insects/dipteraTeph2'), {
+    ssr: false,});
   
+
+
+  // const DipteraTephridiaeredux= dynamic(() => import('components/insects/dipteraTephritidaeredux'), {
+  //   ssr: false,});
+    
 // const OtherDiptera = dynamic(() => import('components/insects/otherDiptera'), {
 //   ssr: false,
 // });
@@ -29,12 +37,12 @@ export default function order(props){
     <Container>
       <Box sx={{display:'flex',marginTop:'1rem',marginBottom:'1rem'}}>
         <Box>
-        <DipteraTephritidae 
+        <DipteraTephridiae2Trial 
         diptera_tephritideae_data={props.diptera_tephritideae_data}
         other_diptera_data={props.other_diptera_data}/>
        </Box>
       
-       <Box sx={{marginLeft:''}} >
+       {/* <Box sx={{marginLeft:''}} >
         <Lepidoptera lepidoptera_data={props.lepidoptera_data}/>
         </Box>
 
@@ -47,7 +55,7 @@ export default function order(props){
         hym_ichumonoidae_data={props.hym_ichumonoidae_data}
         other_hymenoptera_data={props.other_hymenoptera_data}
         />
-      </Box>
+      </Box> */}
 
         </Box>
     </Container>

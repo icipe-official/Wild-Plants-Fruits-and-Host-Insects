@@ -124,36 +124,5 @@ export async function getServerSideProps(context){
       props,
     };
   }
-    //selected species
-    // const specie = context.query.selected_species
-      // Fetch data for the selected species using its ID if the ID is available in the URL
-//   let selected_species;
-//   if (specie) {
-//     // speciesData = await fetch(`/api/species/${selected_species}`).then(res => res.json());
-//     speciesData = await specie;
-  
-// }
-
  
-    // Use the selected item ID to fetch the item details from the server
-    // const response = await fetch(`/api/item-details?id=${selectedItem}`);
-    // const itemDetails = await response.json();
-
-       // Only query for insects if the genus is defined
-//   if (genus) {
-//     const res = await fetch(`https://api.example.com/insects?genus=${genus}`);
-//     const insects = await res.json();
-
-//     return {
-//       props: { insects, genus },
-//     };
-//   }
-    //   console.log(insect_data)
-    // fetch photo data
-//     const photo = await fetch('http://localhost:3000/api/insects/photo' +genus)
-//     const photo_data= await insect.json()
-//     console.log('diptera_tephritideae_data serverside')
-//   //   console.log(insect_data)
-
-
   
