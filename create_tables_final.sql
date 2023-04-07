@@ -226,12 +226,15 @@ CREATE TABLE plants(
     max_latitude int,
     min_latitude int,
     genus_id int NOT NULL,
+    rbcl varchar,
+    matk varchar,
     FOREIGN KEY (genus_id) REFERENCES plant_genera(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE fruit_types(
 	fruit_type_id serial PRIMARY KEY,
-	type_of_fruit varchar (50) UNIQUE NOT NULL
+	type_of_fruit varchar (50) UNIQUE NOT NULL,
+    fruit_type_description varchar
 );
 
 
@@ -240,7 +243,7 @@ CREATE TABLE plants_fruit_types(
     fruit_type_id int,
     PRIMARY KEY (plant_id,fruit_type_id),
     FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (fruit_type_id) REFERENCES fruit_types(fruit_type_id),ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (fruit_type_id) REFERENCES fruit_types(fruit_type_id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
 
@@ -319,7 +322,7 @@ CREATE TABLE plants_fruiting_months(
 
 );
 
-CREATE TABLE plant_photos(
+CREATE TABLE plants_photos(
 	plant_id int,
     	photo_id int UNIQUE,
 	photo_name varchar (10) UNIQUE NOT NULL,
@@ -451,15 +454,17 @@ CREATE TABLE insect_photos(
 
 CREATE TABLE regions(
         id serial PRIMARY KEY,
-        region varchar(50) NOT NULL 
+        region varchar(50) NOT NULL ,
+        latitude varchar(10),
+        longitude varchar(10)
 );
 
 
 CREATE TABLE insects_regions(
-    	insect_id int,
+    insect_id int,
 	region_id int,
 	PRIMARY KEY (insect_id,region_id),
-    	FOREIGN KEY (insect_id) REFERENCES insects(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (insect_id) REFERENCES insects(id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
