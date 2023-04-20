@@ -158,14 +158,14 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
       });
       setunique__diptera_tephtitidae(unique__diptera_tephtitidae);
 
-      const unique_other_diptera_data = Array.from(
-        new Set(data.otherdiptera.map((item) => item.insect_genera.genus_name))
-      ).map((name) => {
-        return data.otherdiptera.find(
-          (item) => item.insect_genera.genus_name === name
-        );
-      });
-      setunique__other_diptera(unique_other_diptera_data);
+      // const unique_other_diptera_data = Array.from(
+      //   new Set(data.otherdiptera.map((item) => item.insect_genera.genus_name))
+      // ).map((name) => {
+      //   return data.otherdiptera.find(
+      //     (item) => item.insect_genera.genus_name === name
+      //   );
+      // });
+      // setunique__other_diptera(unique_other_diptera_data);
     }
   }, [data]);
 
