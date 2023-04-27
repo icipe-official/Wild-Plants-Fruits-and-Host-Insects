@@ -20,6 +20,7 @@ import {useMediaQuery} from "@mui/material";
 import { TreeView,TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import { SelectedItemsContext } from "./selectedFamily";
 const useStyles = makeStyles({
   root: {
     display: "row",
@@ -33,6 +34,8 @@ export default function PlantDetailsFeaturesValues() {
   const handleNodeSelect = (event, nodeId) => {
     setSelectedNode(nodeId);
   };
+  //maintain state of plants page
+  const [selectedItems, setSelectedItems] = useState([]);
   // const [plantsData, setPlantsData] = useState([]);
   // const [loaded, setLoaded] = useState(false);
   // // const [error, setError] = useState(null);
@@ -40,7 +43,7 @@ export default function PlantDetailsFeaturesValues() {
   // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL; cause of error originally
   const base_url = "http://localhost:3000";
   const router = useRouter();
-  const species = router.query.species;
+  const species = router.query.species ? router.query.species : null; //only if url
   const classes = useStyles();
   console.log("species id");
   console.log(species);
@@ -61,6 +64,7 @@ export default function PlantDetailsFeaturesValues() {
 
   if (data && data.length > 0) {
     return (
+      <SelectedItemsContext.Provider value={{ selectedItems, setSelectedItems }}>
       <Container
         
         sx={{
@@ -144,7 +148,7 @@ export default function PlantDetailsFeaturesValues() {
                {/* <KsectorValues k_sector_data={data} /> */}
               {/* <UKWFValues ukwf_area_data={data} /> */}
               {/* <PlantDescription plants_data={data} />  */}
-              <PhotosComponent photos_data={data} />
+              <PhotosComponent photos_data={data} selectedIndex={0}/>
             </Box>
           </Grid>
           {/* <Box> */}
@@ -164,6 +168,7 @@ export default function PlantDetailsFeaturesValues() {
   
         {/* <OpenLayersMap location_data={data} /> */}
       </Container>
+      </SelectedItemsContext.Provider>
     );
   }
 }
