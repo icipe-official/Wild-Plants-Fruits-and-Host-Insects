@@ -13,13 +13,17 @@ import { NeighborJoining } from "./generateDistanceMatrix";
 // export default function Newick() {
 
 export default function TreeTrial() {
-  const base_url = "http://localhost:3000";
+  // const base_url = "http://localhost:3000";
+
+  const base_url="http://192.168.43.93:3000"
+
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error, isLoading } = useSWR(
     `${base_url}/api/plants/plantSpecies`,
     fetcher
   );
+  console.log(data)
   const [newickData, setNewickData] = useState(
     "(Avicennia-marina-country_unknown49:0.0000022752,((((((((((((((((((((((((((((((((((((((((((((((((((((((Avicennia-marina-country_unknown50:0.0000000000,Avicennia-marina-country_unknown91:0.0000000000):0.0000000000,Avicennia-marina-country_unknown84:0.0000000000):0.0000000000,Avicennia-marina-country_unknown61:0.0000000000):0.0000000000,Avicennia-marina-country_unknown66:0.0000000000):0.0000000000,Avicennia-marina-country_unknown62:0.0000000000):0.0000000000,Avicennia-marina-country_unknown63:0.0000000000):0.0000000000,Avicennia-marina-country_unknown53:0.0000000000):0.0000000000,Avicennia-marina-country_unknown57:0.0000000000):0.0000000000,Avicennia-marina-country_unknown81:0.0000000000):0.0000000000,Avicennia-marina-country_unknown92:0.0000000000):0.0000000000,Avicennia-marina-country_unknown54:0.0000000000):0.0000000000,Avicennia-marina-country_unknown77:0.0000000000):0.0000000000,Avicennia-marina-country_unknown59:0.0000000000):0.0000000000,Avicennia-marina-country_unknown70:0.0000000000):0.0000000000,Avicennia-marina-country_unknown90:0.0000000000):0.0000000000,Avicennia-marina-country_unknown72:0.0000000000):0.0000000000,Avicennia-marina-country_unknown104:0.0000000000):0.0000000000,Avicennia-marina-country_unknown60:0.0000000000):0.0000000000,Avicennia-marina-country_unknown95:0.0000000000):0.0000000000,Avicennia-marina-country_unknown93:0.0000000000):0.0000000000,Avicennia-marina-country_unknown55:0.0000000000):0.0000000000,Avicennia-marina-country_unknown105:0.0000000000):0.0000000000,Avicennia-marina-country_unknown96:0.0000000000):0.0000000000,Avicennia-marina-country_unknown52:0.0000000000):0.0000000000,Avicennia-marina-country_unknown76:0.0000000000):0.0000000000,Avicennia-marina-country_unknown74:0.0000000000):0.0000000000,Avicennia-marina-country_unknown69:0.0000000000):0.0000000000,Avicennia-marina-country_unknown83:0.0000000000):0.0000000000,Avicennia-marina-country_unknown89:0.0000000000):0.0000000000,Avicennia-marina-country_unknown97:0.0000000000):0.0000000000,Avicennia-marina-country_unknown79:0.0000000000):0.0000000000,Avicennia-marina-country_unknown67:0.0000000000):0.0000000000,Avicennia-marina-country_unknown73:0.0000000000):0.0000000000,Avicennia-marina-country_unknown94:0.0000000000):0.0000000000,Avicennia-marina-country_unknown86:0.0000000000):0.0000000000,Avicennia-marina-country_unknown68:0.0000000000):0.0000000000,Avicennia-marina-country_unknown88:0.0000000000):0.0000000000,Avicennia-marina-country_unknown75:0.0000000000):0.0000000000,Avicennia-marina-country_unknown82:0.0000000000):0.0000000000,Avicennia-marina-country_unknown98:0.0000000000):0.0000000000,Avicennia-marina-country_unknown80:0.0000000000):0.0000000000,Avicennia-marina-country_unknown87:0.0000000000):0.0000000000,Avicennia-marina-country_unknown71:0.0000000000):0.0000000000,Avicennia-marina-country_unknown56:0.0000000000):0.0000000000,Avicennia-marina-country_unknown99:0.0000000000):0.0000000000,Avicennia-marina-country_unknown58:0.0000000000):0.0000000000,Avicennia-marina-country_unknown78:0.0000000000):0.0000000000,Avicennia-marina-country_unknown106:0.0000000000):0.0000000000,Avicennia-marina-country_unknown100:0.0000000000):0.0000010000,Avicennia-marina-country_unknown51:0.0000010000)52:0.0000010000,(Avicennia-marina-country_unknown85:0.0090560338,Avicennia-marina-country_unknown102:0.0011562542)68:0.0011507546)74:0.0006551628,Avicennia-marina-country_unknown101:0.0000010000)54:0.0000010000,Avicennia-marina-India65:0.0000010000)56:0.0000010000,Avicennia-marina-India64:0.0054971285)71:0.0014232247,Avicennia-marina-India103:0.0011484884);"
   );
@@ -48,14 +52,21 @@ export default function TreeTrial() {
     
 
 function handleChange(event) {
-    if(data){
-    const selectedValue = event.target.value;
-    console.log("selectedValue");
-    console.log(selectedValue);
+    // if(data){
+      const selectedValue = event.target.value;
+      setSelectedFamily(selectedValue);
+    
+      const filteredData = data.filter(dat => dat.plant_genera.plant_families.family_name === selectedValue);
+    
+    // const selectedValue = event.target.value;
+    // console.log("selectedValue");
+    // console.log(selectedValue);
 
     setSelectedFamily(selectedValue);
-    const filteredData = data.filter(dat=>dat.plant_genera.plant_families.family_name==selectedFamily);
+    // const filteredData = data.filter(dat=>dat.plant_genera.plant_families.family_name===selectedFamily);
     console.log("filteredData");
+    console.log(filteredData);
+
     // console.log(data.filter(dat=>dat.plant_genera.plant_families.family_name==selectedFamily));
     const sequences = Object.values(filteredData)
   .map((obj) => {
@@ -79,8 +90,8 @@ function handleChange(event) {
   var newick = NeighborJoining(result.dist_mat, result.names);
   console.log("newick");
 setNewickData(newick)  
-
- } };
+setSelectedFamily(selectedValue)
+ } ;
   
     //   const iframeRef = useRef(null);
     
