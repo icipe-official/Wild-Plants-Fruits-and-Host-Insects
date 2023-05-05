@@ -16,11 +16,13 @@ import OpenLayersMap from "./distribution/map";
 import InsectsRearedfromPlants from "./insectsRared/insects";
 import PlantFamilyGenusSpecies from "./FamilyGenusSpecies/PlantGenusFamilySearchbar";
 import PlantSpecieFamilyGenus from "./plantSpeciesFamily";
-import {useMediaQuery} from "@mui/material";
-import { TreeView,TreeItem } from '@mui/lab';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import { useMediaQuery } from "@mui/material";
+import { TreeView, TreeItem } from "@mui/lab";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { SelectedItemsContext } from "./selectedFamily";
+// import PlantFamilyGenusSpecies from "./FamilyGenusSpecies/PlantGenusFamilySearchbar";
+import { useContext } from "react";
 const useStyles = makeStyles({
   root: {
     display: "row",
@@ -34,19 +36,26 @@ export default function PlantDetailsFeaturesValues() {
   const handleNodeSelect = (event, nodeId) => {
     setSelectedNode(nodeId);
   };
+  const [state, setState] = useState({});
+  const handleStateUpdate = (updatedState) => {
+    setState(updatedState);
+  };
   //maintain state of plants page
-  const [selectedItems, setSelectedItems] = useState([]);
   // const [plantsData, setPlantsData] = useState([]);
   // const [loaded, setLoaded] = useState(false);
   // // const [error, setError] = useState(null);
   // // const classes = useStyles();
   // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL; cause of error originally
-  const base_url = "http://localhost:3000";
+  // const base_url = "http://localhost:3000";
+  const base_url = "http://192.168.43.93:3000";
   const router = useRouter();
   const species = router.query.species ? router.query.species : null; //only if url
   const classes = useStyles();
   console.log("species id");
   console.log(species);
+  const contextValue = useContext(PlantFamilyGenusSpecies);
+  console.log("contextValue");
+
   // const { data, error, isLoading } = usePlantFeatures(species);
   const { data, error, isLoading } = useSWR(
     `${base_url}/api/plantsPage/${species}`,
@@ -63,113 +72,133 @@ export default function PlantDetailsFeaturesValues() {
   // console.log(plantsData);
 
   if (data && data.length > 0) {
-    return (
-      <SelectedItemsContext.Provider value={{ selectedItems, setSelectedItems }}>
-      <Container
-        
-        sx={{
-          backgroundColor: "lightbrown",
-          overflowY: "scroll",
-          // display: flex;
-          justifyContent: "space-between",
-        }}
-      >
-        <PlantFamilyGenusSpecies />
-        <Box>
-          {" "}
-          <PlantSpecieFamilyGenus />
-        </Box>
-        <Box>
-        {isSmallScreen? (
-          <TreeView
-          className={classes.root}
-          defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpandIcon={<ChevronRightIcon />}
-          selected={selectedNode}
-          onNodeSelect={handleNodeSelect}
-        >
-          <TreeItem nodeId="1" label="Morphological Features">
-          <TreeItem nodeId="2" label="Plant">
-              <PlantDetailValues plants_data={data}/>
-              {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
-            </TreeItem>
-    
-            <TreeItem nodeId="5" label="Fruit">
-              <FruitDetailValues fruits_data={data}/>
-            </TreeItem>
-    
-            <TreeItem nodeId="8" label="Leaf">
-              <LeafDetailValues leaves_data={data}/>
-            </TreeItem>
-             </TreeItem>
-    
-    
-          <TreeItem nodeId="11" label="Distribution">
-           <KsectorValues k_sector_data={data}/>
-          </TreeItem>
-          <TreeItem nodeId="12" label="Map">
-           <OpenLayersMap location_data={data}/>
-          </TreeItem>
-    
-    
-        <TreeItem nodeId="15" label="Image">
-            <PhotosComponent photos_data={data}/>
-          </TreeItem>
-    
-          <TreeItem nodeId="19" label="Insects Reared">
-            <InsectsRearedfromPlants/>
-          </TreeItem>
-    
-        <TreeItem nodeId="23" label="Description">
-           <PlantDescription plants_data={data}/>
-          </TreeItem>
-          </TreeView>
-         ):
-    
-        <Grid container columns={12}>
-          <Grid xs={12} sm={6} md={5} lg={3}>
-            <Box className={classes.root} sx={{ marginTop: 2 }}>
-              <Box>
-                <PlantDetailValues plants_data={data} />
-              </Box>
-              <Box sx={{ padding: 0.5 }}>
-                <LeafDetailValues leaves_data={data} />
-              </Box>
-              <Box sx={{ padding: 0.5 }}>
-                <FruitDetailValues fruits_data={data} />
-              </Box>
-            </Box>
-          </Grid>
-          <Grid xs={12} sm={6} md={5} lg={4}>
-            <Box sx={{ marginLeft: 0 }}>
-              <Box sx={{ fontWeight: "bold", marginTop: 2 }}>Distribution</Box>
-              <OpenLayersMap location_data={data} />
-
-               {/* <KsectorValues k_sector_data={data} /> */}
-              {/* <UKWFValues ukwf_area_data={data} /> */}
-              {/* <PlantDescription plants_data={data} />  */}
-              <PhotosComponent photos_data={data} selectedIndex={0}/>
-            </Box>
-          </Grid>
-          {/* <Box> */}
-          {/* </Box> */}
-          <Grid xs={12} sm={6} md={5} lg={5}>
-            <Box>
-              <Box sx={{ marginLeft: 2, marginTop: 3 }}>
-                <Box sx={{ fontWeight: "bold" }}>Insects reared</Box>
-                <Box>
-                  <InsectsRearedfromPlants />
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>}
-        </Box>
-  
-        {/* <OpenLayersMap location_data={data} /> */}
-      </Container>
-      </SelectedItemsContext.Provider>
+    //extract coordinates
+    const coordinates = data.map((specie) =>
+      specie.plants_regions.map((region) => {
+        const latitude = parseFloat(region.regions.latitude);
+        const longitude = parseFloat(region.regions.longitude);
+        return [longitude, latitude];
+      })
     );
+    console.log("coordinates");
+    console.log(
+      coordinates.map((c) => {
+        return c;
+      })
+    );
+    if (data) {
+      console.log("contextValue yyyy");
+
+      console.log(contextValue);
+
+      return (
+        <Container
+          sx={{
+            backgroundColor: "lightbrown",
+            overflowY: "scroll",
+            // display: flex;
+            justifyContent: "space-between",
+          }}
+        >
+          {/* <PlantFamilyGenusSpecies
+            state={state}
+            onStateUpdate={handleStateUpdate}
+          /> */}
+          {/* <Box sx={{ marginTop: 6 }}>contextValue</Box>; */}
+          <Box>
+            {" "}
+            <PlantSpecieFamilyGenus />
+          </Box>
+          <Box>
+            {isSmallScreen ? (
+              <TreeView
+                className={classes.root}
+                defaultCollapseIcon={<ExpandMoreIcon />}
+                defaultExpandIcon={<ChevronRightIcon />}
+                selected={selectedNode}
+                onNodeSelect={handleNodeSelect}
+              >
+                <TreeItem nodeId="1" label="Morphological Features">
+                  <TreeItem nodeId="2" label="Plant">
+                    <PlantDetailValues plants_data={data} />
+                    {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
+                  </TreeItem>
+
+                  <TreeItem nodeId="5" label="Fruit">
+                    <FruitDetailValues fruits_data={data} />
+                  </TreeItem>
+
+                  <TreeItem nodeId="8" label="Leaf">
+                    <LeafDetailValues leaves_data={data} />
+                  </TreeItem>
+                </TreeItem>
+
+                <TreeItem nodeId="11" label="Distribution">
+                  <KsectorValues k_sector_data={data} />
+                </TreeItem>
+                <TreeItem nodeId="12" label="Map">
+                  <OpenLayersMap location_data={data} />
+                </TreeItem>
+
+                <TreeItem nodeId="15" label="Image">
+                  <PhotosComponent photos_data={data} selectedIndex={0} />
+                </TreeItem>
+
+                <TreeItem nodeId="19" label="Insects Reared">
+                  <InsectsRearedfromPlants />
+                </TreeItem>
+
+                <TreeItem nodeId="23" label="Description">
+                  <PlantDescription plants_data={data} />
+                </TreeItem>
+              </TreeView>
+            ) : (
+              <Grid container columns={12}>
+                <Grid xs={12} sm={6} md={5} lg={3}>
+                  <Box className={classes.root} sx={{ marginTop: 2 }}>
+                    <Box>
+                      <PlantDetailValues plants_data={data} />
+                    </Box>
+                    <Box sx={{ padding: 0.5 }}>
+                      <LeafDetailValues leaves_data={data} />
+                    </Box>
+                    <Box sx={{ padding: 0.5 }}>
+                      <FruitDetailValues fruits_data={data} />
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid xs={12} sm={6} md={5} lg={4}>
+                  <Box sx={{ marginLeft: 0 }}>
+                    <Box sx={{ fontWeight: "bold", marginTop: 2 }}>
+                      Distribution
+                    </Box>
+                    <OpenLayersMap coordinates={coordinates} />
+
+                    {/* <KsectorValues k_sector_data={data} /> */}
+                    {/* <UKWFValues ukwf_area_data={data} /> */}
+                    {/* <PlantDescription plants_data={data} />  */}
+                    <PhotosComponent photos_data={data} selectedIndex={0} />
+                  </Box>
+                </Grid>
+                {/* <Box> */}
+                {/* </Box> */}
+                <Grid xs={12} sm={6} md={5} lg={5}>
+                  <Box>
+                    <Box sx={{ marginLeft: 2, marginTop: 3 }}>
+                      <Box sx={{ fontWeight: "bold" }}>Insects reared</Box>
+                      <Box>
+                        <InsectsRearedfromPlants />
+                      </Box>
+                    </Box>
+                  </Box>
+                </Grid>
+              </Grid>
+            )}
+          </Box>
+          {/* <OpenLayersMap location_data={data} /> */}
+        </Container>
+      );
+    }
   }
 }
 
