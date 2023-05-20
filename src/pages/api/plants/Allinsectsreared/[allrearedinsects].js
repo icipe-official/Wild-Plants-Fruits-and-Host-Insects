@@ -52,6 +52,7 @@ export default async function getColeoptera(req, res) {
         insect_genera: {
           select: {
             genus_name: true,
+            id:true
           },
         },
       },
