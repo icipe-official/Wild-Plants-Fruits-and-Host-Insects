@@ -29,14 +29,6 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
   const toggleExpandImage = () => {
     setIsExpanded(!isExpanded);
   };
-
-  //   const router = useRouter();
-  //   const species = router.query.speciesName;
-  //   console.log("species");
-  //   console.log(species);
-  // fetch(`/api/plantsPage/${species}`)
-  // if (error) return <div>Failed to load</div>;
-  // if (!data) return <div>Loading...</div>;
   console.log(" photo");
   console.log(photos_data);
   if (photos_data) {
@@ -93,24 +85,6 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
         }
       };
       return (
-        // <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
-        //   <Image
-        //     src={`/plants/${photos[open]}`}
-        //     alt="No Image"
-        //     width={500}
-        //     height={400}
-        //     layout="responsive"
-        //   />
-        //   <span>
-        //     {open + 1}/{photos.length}
-        //   </span>
-        //   <Box>
-        //     <button onClick={() => OpenImage(open)} className="ground">
-        //       Next Image
-        //     </button>
-        //   </Box>
-        // </Box>
-
         <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
           <Image
             src={`/plants/${photos[currentImage]}`}
