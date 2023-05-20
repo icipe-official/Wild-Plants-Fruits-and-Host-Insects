@@ -2,12 +2,12 @@ import Main from "components/multipleentry/planttype";
 import CheckboxGroup from "components/multipleentry/multipleEntryMUI";
 // import GroupcheckboxAPI from "components/multipleentry/multip;eentryMUIAPI"
 // import GroupcheckboxColor from "components/multipleentry/fruitcolor"
-import QuerySelect from "components/multipleentry/trialAllclientside";
+import QuerySelectAdvancedSearch from "components/multipleentry/advancedSearch";
 import { Container } from "@mui/material";
 export default function GroupCheckboxMin(props) {
   return (
     <Container>
-      <QuerySelect />
+      <QuerySelectAdvancedSearch />
     </Container>
   );
 }

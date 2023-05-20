@@ -1,4 +1,4 @@
-import { Container, Box } from "@mui/material";
+import { Container, Box, Grid } from "@mui/material";
 import {
   ButtonBase,
   Drawer,
@@ -25,6 +25,9 @@ import HymenopterahymenopteraIchneumonoidae from "components/insects/hymenoptera
 import OtherHymenopteracomponent from "components/insects/otherhymenoptera";
 import { Button } from "react-admin";
 import { makeStyles } from "@mui/styles";
+import { TreeView, TreeItem } from "@mui/lab";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 const drawerWidth = 240;
 
 //Dynamic imports to avoid hydration error. ensure serverdide and client side rendering are the same
@@ -97,6 +100,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function order(props) {
+  const [selectedNode, setSelectedNode] = useState(null);
+  const handleNodeSelect = (event, nodeId) => {
+    setSelectedNode(nodeId);
+  };
   const classes = useStyles();
   const handleMenuOpen = () => {
     setMenuOpen(true);
@@ -109,22 +116,58 @@ export default function order(props) {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   console.log("menuOpen");
   return (
-    <Container sx={{ marginTop: 3 }}>
-      <Box sx={{ display: "flex" }}>
-        <Box>
-          <DipteraTephridiae2Clientside />
-        </Box>
-        <LepidopteraClientside />
-        <Box>
-          <ColeopteraComponent />
-        </Box>
+    <Container sx={{ marginTop: 8 }}>
+      {isSmallScreen ? (
+        <TreeView
+          className={classes.root}
+          defaultCollapseIcon={<ExpandMoreIcon />}
+          defaultExpandIcon={<ChevronRightIcon />}
+          selected={selectedNode}
+          onNodeSelect={handleNodeSelect}
+        >
+          <TreeItem nodeId="1" label="Diptera">
+            <DipteraTephridiae2Clientside />
+            {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
+          </TreeItem>
 
-        <Box>
-          <HymenopteraBraconidaeComponent />
-          <HymenopterahymenopteraIchneumonoidae />
-        </Box>
-        <OtherHymenopteracomponent />
-      </Box>
+          <TreeItem nodeId="11" label="Lepidoptera">
+            <LepidopteraClientside />
+          </TreeItem>
+          <TreeItem nodeId="12" label="Coleoptera">
+            <ColeopteraComponent />
+          </TreeItem>
+
+          <TreeItem nodeId="15" label="Hymenoptera">
+            <TreeItem nodeId="16" label="Hymenoptera Braconidae">
+              <HymenopteraBraconidaeComponent />
+            </TreeItem>
+            <TreeItem nodeId="17" label="Ichnemodia">
+              <HymenopterahymenopteraIchneumonoidae />
+            </TreeItem>
+            <TreeItem nodeId="19" label="Other hymenoptera">
+              <OtherHymenopteracomponent />
+            </TreeItem>
+          </TreeItem>
+        </TreeView>
+      ) : (
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={3}>
+            <DipteraTephridiae2Clientside />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <LepidopteraClientside />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <ColeopteraComponent />
+          </Grid>
+          <Grid item xs={12} md={3} lg={3}>
+            <HymenopteraBraconidaeComponent />
+
+            <HymenopterahymenopteraIchneumonoidae />
+            <OtherHymenopteracomponent />
+          </Grid>
+        </Grid>
+      )}{" "}
     </Container>
   );
 }
