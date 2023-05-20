@@ -1,0 +1,100 @@
+import { hierarchy } from 'd3-hierarchy';
+
+export default function toNewick(node) {
+   // Define the distance matrix
+var matrix = [
+    [0, 0.3, 0.7, 0.4],
+    [0.3, 0, 0.4, 0.3],
+    [0.7, 0.4, 0, 0.7],
+    [0.4, 0.3, 0.7, 0]
+  ];
+  
+  // Define the names of the nodes
+  var names = ['A', 'B', 'C', 'D'];
+  
+  // Define a helper function to find the minimum value in the matrix
+  function findMin(matrix) {
+    var min = Infinity;
+    var min_i, min_j;
+    for (var i = 0; i < matrix.length; i++) {
+      for (var j = i + 1; j < matrix.length; j++) {
+        if (matrix[i][j] < min) {
+          min = matrix[i][j];
+          min_i = i;
+          min_j = j;
+        }
+      }
+    }
+    return [min_i, min_j, min];
+  }
+  
+  // Define the neighbor-joining algorithm
+  function neighborJoining(matrix, names) {
+    // Create a node for each name
+    var nodes = names.map(function(name) {
+      return {name: name, dist: 0};
+    });
+  
+    while (nodes.length > 1) {
+      // Calculate the total distance for each node
+      for (var i = 0; i < nodes.length; i++) {
+        var dist = 0;
+        for (var j = 0; j < nodes.length; j++) {
+          dist += matrix[i][j];
+        }
+        nodes[i].dist = dist;
+      }
+  
+      // Find the minimum Q value
+      var Q = [];
+      for (var i = 0; i < nodes.length; i++) {
+        Q[i] = [];
+        for (var j = 0; j < nodes.length; j++) {
+          Q[i][j] = (nodes.length - 2) * matrix[i][j] - nodes[i].dist - nodes[j].dist;
+        }
+      }
+      var min = findMin(Q);
+      var i = min[0];
+      var j = min[1];
+  
+      // Join the two nodes
+      var new_node = {
+        children: [nodes[i], nodes[j]],
+        dist: matrix[i][j] / 2
+      };
+      nodes.splice(j, 1);
+      nodes.splice(i, 1, new_node);
+  
+      // Calculate the new distances
+      for (var k = 0; k < nodes.length; k++) {
+        if (k != i && k != j) {
+          var dist_ik = (matrix[i][k] + matrix[j][k] - matrix[i][j]) / 2;
+          matrix[i][k] = matrix[k][i] = dist_ik;
+        }
+      }
+      matrix.splice(j, 1);
+      for (var k = 0; k < matrix.length; k++) {
+        matrix[k].splice(j, 1);
+      }
+    }
+  
+    // Return the root of the tree
+    return nodes[0];
+  }
+  
+  // Construct the Newick tree
+  var root = neighborJoining(matrix, names);
+  
+  // Define a function to generate the Newick string
+  function generateNewick(node) {
+    if (!node.children) {
+    return node.name;
+    }
+    var children = node.children.map(generateNewick);
+    return "(" + children.join(",") + "):" + node.dist;
+    }
+    
+    // Generate the Newick string for the constructed tree
+    var newick = generateNewick(root);
+    console.log(newick);
+}
