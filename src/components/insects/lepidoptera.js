@@ -117,7 +117,7 @@ export default function LepidopteraClientside({ other_diptera_data }) {
   //   const [uniqueColeopteraData, setUniqueColeopteraData] = useState([]);
   // const base_url = "http://localhost:3000";
 
-  const base_url = "http://192.168.43.92:3000";
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const [selectedGenus, setSelectedGenus] = useState(null);
   const fetcher = (url) => fetch(url).then((r) => r.json());
