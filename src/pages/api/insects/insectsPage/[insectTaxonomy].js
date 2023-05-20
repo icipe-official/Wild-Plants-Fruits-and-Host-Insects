@@ -1,12 +1,24 @@
 import prisma from "../../../../../lib/prisma";
+import NextCors from "nextjs-cors";
 // API for Coleoptera details
-export default async function getInsects(req, res) {
+export default async function getColeoptera(req, res) {
+  await NextCors(req, res, {
+    // Options
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+    origin: "*",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
   try {
-    const { fruits } = req.query;
-    // Fetch data from database
+    const { insectTaxonomy } = req.query;
+    // Fetch data from database for a specific genus
     const plants = await prisma.insects.findMany({
       where: {
-        id: parseInt(fruits),
+        insect_genera: {
+          is: {
+            id: parseInt(insectTaxonomy),
+            // genus_name: insectTaxonomy,
+          },
+        },
       },
       select: {
         id: true,
@@ -30,6 +42,23 @@ export default async function getInsects(req, res) {
           select: {
             id: true,
             genus_name: true,
+          },
+        },
+        insect_photos: {
+          select: {
+            photo_id: true,
+            sex: true,
+          },
+        },
+        insects_regions: {
+          select: {
+            regions: {
+              select: {
+                latitude: true,
+                longitude: true,
+                region: true,
+              },
+            },
           },
         },
         plants_insects: {

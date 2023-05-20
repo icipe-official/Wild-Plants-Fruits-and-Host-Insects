@@ -29,13 +29,13 @@ const useStyles = makeStyles((theme) => ({
     padding: "5px 0",
     textTransform: "none",
     margin: 0,
-    height: "auto",
+    height: "100%",
     lineHeight: "1",
     fontSize: "16px",
     fontWeight: "400",
     borderRadius: "4px",
     backgroundColor: "transparent",
-    color: "black",
+    color: "red",
     paddingBottom: 0,
     minWidth: 0,
     width: "100%",
@@ -116,15 +116,13 @@ const useStyles = makeStyles((theme) => ({
 import Link from "next/link";
 import { connect } from "react-redux";
 
-export default function HymenopterahymenopteraIchneumonoidae({
-  other_diptera_data,
-}) {
+export default function OtherHymenopteracomponent({ other_diptera_data }) {
   //   const [uniqueColeopteraData, setUniqueColeopteraData] = useState([]);
-  const [selectedGenus, setSelectedGenus] = useState(null);
   // const base_url = "http://localhost:3000";
 
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+  const [selectedGenus, setSelectedGenus] = useState(null);
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR(
     `${base_url}/api/insects/all/speciesAll`,
@@ -132,8 +130,9 @@ export default function HymenopterahymenopteraIchneumonoidae({
   );
   //   const { data, error1 } = useSWR("/api/insects/dipteraTephritidae/", fetcher);
   1;
-  const [unique_hymenopteraIchneumonoidae, setunique_hymenopterabraconidae] =
-    useState([]);
+  const [unique_otherhymenoptera, setunique_hymenopterabraconidae] = useState(
+    []
+  );
 
   const handleSelectGenus = (genus) => {
     setSelectedGenus([...selectedGenus, genus]);
@@ -146,18 +145,16 @@ export default function HymenopterahymenopteraIchneumonoidae({
 
   useEffect(() => {
     if (data) {
-      const unique_hymenopterabraconidae = Array.from(
+      const unique_otherhymenoptera = Array.from(
         new Set(
-          data.hymenopteraIchneumonoidae.map(
-            (item) => item.insect_genera.genus_name
-          )
+          data.otherHymenoptera.map((item) => item.insect_genera.genus_name)
         )
       ).map((name) => {
-        return data.hymenopteraIchneumonoidae.find(
+        return data.otherHymenoptera.find(
           (item) => item.insect_genera.genus_name === name
         );
       });
-      setunique_hymenopterabraconidae(unique_hymenopterabraconidae);
+      setunique_hymenopterabraconidae(unique_otherhymenoptera);
     }
   }, [data]);
 
@@ -167,26 +164,24 @@ export default function HymenopterahymenopteraIchneumonoidae({
 
   //obtain frst four genus nanmes
 
-  const unique_hymenopteraIchneumonoidae_data = Array.from(
+  const unique_otherhymenoptera_data = Array.from(
     new Set(
-      unique_hymenopteraIchneumonoidae.map(
+      unique_otherhymenoptera.map(
         (item) => item.insect_sub_families.sub_family_name
       )
     )
   ).map((name) => {
-    return unique_hymenopteraIchneumonoidae.find(
+    return unique_otherhymenoptera.find(
       (item) => item.insect_sub_families.sub_family_name === name
     );
   });
 
   console.log("unique__coleoptera data");
 
-  console.log(unique_hymenopteraIchneumonoidae);
+  console.log(unique_otherhymenoptera);
   //handle family click
   const [selectedFamily, setSelectedFamily] = useState(null);
-  const [selectedSubFamily, setSelectedSubFamily] = useState(null);
-
-  const genera = unique_hymenopteraIchneumonoidae_data.filter(
+  const genera = unique_otherhymenoptera_data.filter(
     (genus) => genus.insect_families.family_name === selectedFamily
   );
 
@@ -204,24 +199,20 @@ export default function HymenopterahymenopteraIchneumonoidae({
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
-  //handle subfamily click event
-  const handleSubFamilyClick = (event, subfamily) => {
-    setSelectedSubFamily(subfamily);
+  const handleFamilyClick = (event, family) => {
+    setSelectedFamily(family);
     setAnchorEl(event.currentTarget);
   };
   if (data) {
     return (
-      <Box sx={{ marginLeft: 2 }}>
-        <Box sx={{ color: "red", marginLeft: "1rem" }}> Ichneumonidae</Box>
+      <Box sx={{ marginLeft: 2, marginTop: 3, marginBottom: 2 }}>
+        <Box sx={{ color: "red", marginLeft: "1rem" }}> Other Hymenoptera</Box>
         <Box>
-          {unique_hymenopteraIchneumonoidae_data.map((genus) => (
+          {unique_otherhymenoptera_data.map((genus) => (
             <Button
               key={genus.id}
               onClick={(e) =>
-                handleSubFamilyClick(
-                  e,
-                  genus.insect_sub_families.sub_family_name
-                )
+                handleFamilyClick(e, genus.insect_families.family_name)
               }
               classes={{ root: classes.buttonfamily }}
 
@@ -256,12 +247,11 @@ export default function HymenopterahymenopteraIchneumonoidae({
             >
               Select a genus
             </MenuItem>
-            {selectedSubFamily &&
-              unique_hymenopteraIchneumonoidae
+            {selectedFamily &&
+              unique_otherhymenoptera
                 .filter(
                   (genus) =>
-                    genus.insect_sub_families.sub_family_name ===
-                    selectedSubFamily
+                    genus.insect_families.family_name === selectedFamily
                 )
                 .map((genus) => (
                   <MenuItem

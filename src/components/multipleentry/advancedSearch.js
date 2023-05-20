@@ -1,12 +1,32 @@
-
 import React, { useState } from "react";
 import { makeStyles } from "@mui/styles"; // custom component  styles
-import { Box, Button, FormControl, InputLabel, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  InputLabel,
+  useMediaQuery,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import Router from "next/router";
 import useSWR from "swr";
-import { style } from "d3";
+import PlantFeaturesComponent from "./plantfeatures";
+import PlantSpines from "./plantspines";
+import Plantlatex from "./plantlatex";
+import SubmitClearquery from "./submitclearquey";
+import Fruittype from "./fruittype";
+import FruitColor from "./fruitcolor";
+import FruitShape from "./fruitshape";
+import FruitSize from "./fruitsize";
+import Leaftype from "./leaftype";
+import LeafMargin from "./leafmargin";
+import Leafarrangement from "./leafarrangement";
+// import { TreeView } from "@mui/lab";
+import { TreeView, TreeItem } from "@mui/lab";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // custom styless
 const useStyles = makeStyles({
   component: {
@@ -52,7 +72,7 @@ const useStyles = makeStyles({
     marginBottom: "0.5rem",
   },
 });
-export default function QuerySelect() {
+export default function QuerySelectAdvancedSearch() {
   const [selected, setSelected] = useState(true);
   // const theme=useTheme()
   const classes = useStyles();
@@ -71,7 +91,8 @@ export default function QuerySelect() {
     leaf_arrangements: [],
   });
   //manage state
-  const [checkedStatePlantShrubClimbings, setCheckedStatePlantShrubClimbings] = useState([]);
+  const [checkedStatePlantShrubClimbings, setCheckedStatePlantShrubClimbings] =
+    useState([]);
   const [checkedStatePlantSpnines, setCheckedStatePlantSpnines] = useState([]);
   const [checkedStatePlantLatex, setCheckedStatePlantLatex] = useState([]);
   const [checkedStateFruitType, setCheckedStateFruitType] = useState([]);
@@ -82,7 +103,7 @@ export default function QuerySelect() {
   const [checkedStateLeafMargins, setCheckedStateLeafMargins] = useState([]);
   const [checkedStateLeafArrangement, setCheckedStateLeafArrangement] =
     useState([]);
-    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   // check all options
   const [showAllOptions, setShowAllOptions] = useState(false);
@@ -92,15 +113,25 @@ export default function QuerySelect() {
   const selectSpecieHandler = (value) => setSelectedSpecies(value);
   useState([]);
 
+  //handle small screen tree view
+  const [selectedNode, setSelectedNode] = useState(null);
+
+  const handleNodeSelect = (event, nodeId) => {
+    setSelectedNode(nodeId);
+  };
   // const plant_type_array = ["type1", "type2", "type3"]; // Replace with your own data
   const [selectedPlantTypes, setSelectedPlantTypes] = useState([]);
   const [uniqueColeopteraData, setUniqueColeopteraData] = useState([]);
-  const base_url = "http://localhost:3000";
+  // const base_url = "http://localhost:3000";
+
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR(
     `${base_url}/api/multipleEntry/allmultipleQuery`,
     fetcher
   );
+
   console.log(data);
   if (data) {
     // fetch(`/api/plantsPage/${species}`)
@@ -119,8 +150,12 @@ export default function QuerySelect() {
     console.log(plant_type_array);
 
     // manage states of checked plant type
-    if (checkedStatePlantShrubClimbings.length !== data.shrub_climbings.length) {
-      setCheckedStatePlantShrubClimbings(new Array(data.shrub_climbings.length).fill(false));
+    if (
+      checkedStatePlantShrubClimbings.length !== data.shrub_climbings.length
+    ) {
+      setCheckedStatePlantShrubClimbings(
+        new Array(data.shrub_climbings.length).fill(false)
+      );
     }
     // const plant_type = new Array(plant_type_array.length).fill(false);
 
@@ -527,7 +562,9 @@ export default function QuerySelect() {
       //states for check box
       setCheckedStateColor(new Array(fruit_color_array.length).fill(false));
       setCheckedStateSize(new Array(fruit_size_array.length).fill(false));
-      setCheckedStatePlantShrubClimbings(new Array(plant_type_array.length).fill(false));
+      setCheckedStatePlantShrubClimbings(
+        new Array(plant_type_array.length).fill(false)
+      );
       setCheckedStateFruitType(new Array(fruit_type_array.length).fill(false));
       setCheckedStateFruitShape(
         new Array(fruit_shape_array.length).fill(false)
@@ -613,473 +650,179 @@ export default function QuerySelect() {
     const handlePlantTypeChange = (event) => {
       setSelectedPlantTypes(event.target.value);
     };
-    // display the number of items selected
-    const message_plant_type =
-      query.shrub_climbings.length > 0
-        ? checkedStatePlantShrubClimbings.filter((state) => state).length +
-          " item(s) selected"
-        : "None selected";
-
-    const message_plant_latex =
-      query.plant_latex.length > 0
-        ? checkedStatePlantLatex.filter((state) => state).length +
-          " item(s) selected"
-        : "None selected";
-
-    const message_plant_spines =
-      query.plant_spines.length > 0
-        ? checkedStatePlantSpnines.filter((state) => state).length +
-          " item(s) selected"
-        : "None selected";
-
-    const message_type =
-      query.fruit_types.length > 0
-        ? checkedStateFruitType.filter((state) => state).length +
-          " item(s) selected"
-        : "None selected";
-    const message_fruit_color =
-      query.fruit_colors.length > 0
-        ? checkedStateColor.filter((state) => state).length +
-          " item(s) selected"
-        : "None selected";
-    const message_fruit_shape =
-      query.fruit_shapes.length > 0
-        ? checkedStateFruitShape.filter((state) => state).length +
-          " item(s) selected"
-        : "None selected";
-    const message_fruit_size =
-      query.fruit_sizes.length > 0
-        ? checkedStateSize.filter((state) => state).length + " item(s) selected"
-        : "None selected";
-    const message_leaf_type =
-      query.leaf_types.length > 0
-        ? checkedStateLeafType.filter((state) => state).length +
-          " item(s) selected"
-        : "None selected";
-    const message_leaf_margin =
-      query.leaf_margins.length > 0
-        ? checkedStateLeafMargins.filter((state) => state).length +
-          " item(s) selected"
-        : "None selected";
-    const message_leaf_arrangements =
-      query.leaf_arrangements.length > 0
-        ? checkedStateLeafArrangement.filter((state) => state).length +
-          " item(s) selected"
-        : "None selected";
-
-    // const [checkedStatePlantType, setCheckedStatePlantType] = useState(
-    //   new Array(plant_type_array.length).fill(false)
-    // );
 
     return (
-      <Box>
-        <Box sx={{display: isSmallScreen? "row":"flex",marginTop:3}}>
-          <Box sx={{ width: "100%" }} >
-            <Box sx={{ width: "100%" }}>
-              <Typography sx={{ color: "maroon", fontWeight: "bold"}}>
-                Plant
-              </Typography>
-              <Typography variant="subtitle1" sx={{ color: "maroon" }}>
-                Type{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "6rem",
-                  }}
-                >
-                  {message_plant_type}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component}>
-              {[...plant_type_array]
-                .sort((a, b) => {
-                  if (a === "tree") return -1;
-                  if (b === "tree") return 1;
-                  if (a === "shrub") return -1;
-                  if (b === "shrub") return 1;
-                  return a.localeCompare(b);
-                })
-                .map((type, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleOnChangePlantShrubClimbings(index)}
-                    className={`${classes.item} ${
-                      checkedStatePlantShrubClimbings[index] ? classes.itemChecked : ""
-                    }`}
-                  >
-                    {type}
-                  </div>
-                ))}
-            </Box>
-          </Box>
-          <Box sx={{marginLeft:isSmallScreen? 0:2,width:"100%"}}>
-            <Box sx={{paddingTop: "1.5rem" }}>
-              <Typography variant="subtitle1" sx={{ color: "maroon" }}>
-                Thorns{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "4rem",
-                  }}
-                >
-                  {message_plant_spines}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component}>
-              {plant_spines_array.map((spine, index) => (
-                <div
-                  key={spine}
-                  onClick={() => handleOnChangePlantSpnines(index)}
-                  className={`${classes.item} ${
-                    checkedStatePlantSpnines[index] ? classes.itemChecked : ""
-                  }`}
-                >
-                  {spine}
-                </div>
-              ))}
-            </Box>
-          </Box>
+      <Container sx={{ marginTop: 8 }}>
+        {isSmallScreen ? (
+          <>
+            <SubmitClearquery
+              handleCancel={handleCancel}
+              handleData={handleData}
+            />
 
-          <Box sx={{marginLeft:isSmallScreen? 0:2,width:"100%"}}>
-            <Box sx={{paddingTop: "1.5rem" }}>
-              <Typography variant="subtitle1" sx={{ color: "maroon" }}>
-                Latex{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "6rem",
-                  }}
-                >
-                  {message_plant_latex}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component}>
-              {plant_latex_array.map((spine, index) => (
-                <div
-                  key={spine}
-                  onClick={() => handleOnChangePlantLatex(index)}
-                  className={`${classes.item} ${
-                    checkedStatePlantLatex[index] ? classes.itemChecked : ""
-                  }`}
-                >
-                  {spine}
-                </div>
-              ))}
-            </Box>
-          </Box>
-          
-
-          {/* <Box sx={{ marginLeft:isSmallScreen? '0rem': "5rem", marginTop: "2rem",width:"100%" }}>
-            <Box sx={{ padding: 3 }}>
-              <Button
-                color="success"
-                variant="contained" // add background
-                onClick={() => {
-                  handleData();
-                }}
+            <Box marginTop={4} marginBottom={2}>
+              Plants and Fruits data
+              <TreeView
+                className={classes.root}
+                defaultCollapseIcon={<ExpandMoreIcon />}
+                defaultExpandIcon={<ChevronRightIcon />}
+                selected={selectedNode}
+                onNodeSelect={handleNodeSelect}
               >
-                {" "}
-                Submit Query
-              </Button>
+                <TreeItem nodeId="1" label="Plant type">
+                  <PlantFeaturesComponent
+                    plant_type_array={plant_type_array}
+                    checkedStatePlantShrubClimbings={
+                      checkedStatePlantShrubClimbings
+                    }
+                    handleOnChangePlantShrubClimbings={
+                      handleOnChangePlantShrubClimbings
+                    }
+                  />
+                  {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
+                </TreeItem>
+
+                <TreeItem nodeId="5" label="Spines">
+                  <PlantSpines
+                    plant_spines_array={plant_spines_array}
+                    checkedStatePlantSpnines={checkedStatePlantSpnines}
+                    handleOnChangePlantSpnines={handleOnChangePlantSpnines}
+                  />
+                </TreeItem>
+
+                <TreeItem nodeId="8" label="Latex">
+                  <Plantlatex
+                    plant_latex_array={plant_latex_array}
+                    checkedStatePlantLatex={checkedStatePlantLatex}
+                    handleOnChangePlantLatex={handleOnChangePlantLatex}
+                  />
+                </TreeItem>
+
+                <TreeItem nodeId="29" label="Fruit Type">
+                  <Fruittype
+                    fruit_type_array={fruit_type_array}
+                    checkedStateFruitType={checkedStateFruitType}
+                    handleOnChangeFruitType={handleOnChangeFruitType}
+                  />
+                </TreeItem>
+
+                <TreeItem nodeId="12" label="Fruit Color">
+                  <FruitColor
+                    fruit_color_array={fruit_color_array}
+                    checkedStateColor={checkedStateColor}
+                    handleOnChangeColor={handleOnChangeColor}
+                  />
+                </TreeItem>
+
+                <TreeItem nodeId="15" label="Fruit Shape">
+                  <FruitShape
+                    fruit_shape_array={fruit_shape_array}
+                    checkedStateFruitShape={checkedStateFruitShape}
+                    handleOnChangeFruitShape={handleOnChangeFruitShape}
+                  />
+                </TreeItem>
+
+                <TreeItem nodeId="19" label="Fruit Size">
+                  <FruitSize
+                    fruit_size_array={fruit_size_array}
+                    checkedStateSize={checkedStateSize}
+                    handleOnChangeSize={handleOnChangeSize}
+                  />
+                </TreeItem>
+
+                <TreeItem nodeId="30" label="Leaf type">
+                  <Leaftype
+                    leaf_type_array={leaf_type_array}
+                    checkedStateLeafType={checkedStateLeafType}
+                    handleOnChangeLeafType={handleOnChangeLeafType}
+                  />
+                </TreeItem>
+
+                <TreeItem nodeId="49" label="Leaf arrangement">
+                  <Leafarrangement
+                    leaf_arrangement_array={leaf_arrangement_array}
+                    checkedStateLeafArrangement={checkedStateLeafArrangement}
+                    handleOnChangeLeafArrangement={
+                      handleOnChangeLeafArrangement
+                    }
+                  />
+                </TreeItem>
+              </TreeView>
+            </Box>
+          </>
+        ) : (
+          <Box>
+            <Box sx={{ display: isSmallScreen ? "row" : "flex", marginTop: 3 }}>
+              <PlantFeaturesComponent
+                plant_type_array={plant_type_array}
+                checkedStatePlantShrubClimbings={
+                  checkedStatePlantShrubClimbings
+                }
+                handleOnChangePlantShrubClimbings={
+                  handleOnChangePlantShrubClimbings
+                }
+              />
+              <PlantSpines
+                plant_spines_array={plant_spines_array}
+                checkedStatePlantSpnines={checkedStatePlantSpnines}
+                handleOnChangePlantSpnines={handleOnChangePlantSpnines}
+              />
+              <Plantlatex
+                plant_latex_array={plant_latex_array}
+                checkedStatePlantLatex={checkedStatePlantLatex}
+                handleOnChangePlantLatex={handleOnChangePlantLatex}
+              />
+              <SubmitClearquery
+                handleCancel={handleCancel}
+                handleData={handleData}
+              />
             </Box>
 
-            <Box sx={{ padding: 3 }}>
-              <Button
-                variant="contained" // add
-                color="error"
-                onClick={() => {
-                  handleCancel();
-                }}
-              >
-                Clear Query
-              </Button>
-            </Box>
-          </Box> */}
-          {!isSmallScreen && (
-    <Box sx={{ width: "100%", marginLeft: "5rem", marginTop: "2rem" }}>
-      <Box sx={{ padding: 3 }}>
-        <Button
-          color="success"
-          variant="contained"
-          onClick={() => {
-            handleData();
-          }}
-        >
-          Submit Query
-        </Button>
-      </Box>
-      <Box sx={{ padding: 3 }}>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={() => {
-            handleCancel();
-          }}
-        >
-          Clear Query
-        </Button>
-      </Box>
-    </Box>
-  )}
-   {isSmallScreen && (
-      <Box sx={{ display:"flex",position:"fixed", top:60,marginLeft:3}}>
-        {/* <Box sx={{ justifyContent: 'flex-end', position:"fixed" }}> */}
-        <Box sx={{marginLeft:14}} >
-        <Button
-          color="success"
-          variant="contained"
-          onClick={() => {
-            handleData();
-          
-          }}
-        >
-          Submit Query
-        </Button>
-      </Box>
-      <Box sx={{marginLeft:2}}>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={() => {
-            handleCancel();
-          }}
-        >
-          Clear Query
-        </Button>
-      </Box>
-    </Box>
-    )}
+            <Box sx={{ display: isSmallScreen ? "row" : "flex", marginTop: 3 }}>
+              <Fruittype
+                fruit_type_array={fruit_type_array}
+                checkedStateFruitType={checkedStateFruitType}
+                handleOnChangeFruitType={handleOnChangeFruitType}
+              />
+              <FruitColor
+                fruit_color_array={fruit_color_array}
+                checkedStateColor={checkedStateColor}
+                handleOnChangeColor={handleOnChangeColor}
+              />
+              <FruitShape
+                fruit_shape_array={fruit_shape_array}
+                checkedStateFruitShape={checkedStateFruitShape}
+                handleOnChangeFruitShape={handleOnChangeFruitShape}
+              />
 
-        </Box>
+              <FruitSize
+                fruit_size_array={fruit_size_array}
+                checkedStateSize={checkedStateSize}
+                handleOnChangeSize={handleOnChangeSize}
+              />
+            </Box>
 
-        <Box sx={{display: isSmallScreen? "row":"flex",marginTop:3}}>
-          <Box sx={{width:"100%"}}>
-            <Box >
-              <Typography sx={{ color: "red", fontWeight: "bold" }}>
-                Fruit
-              </Typography>
-              <Typography variant="subtitle1" sx={{ color: "red" }}>
-                Type{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "6rem",
-                  }}
-                >
-                  {message_type}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component}>
-              {fruit_type_array.map((type, index) => (
-                <div
-                  key={type}
-                  onClick={() => handleOnChangeFruitType(index)}
-                  className={`${classes.item} ${
-                    checkedStateFruitType[index] ? classes.itemChecked : ""
-                  }`}
-                >
-                  {type}
-                </div>
-              ))}
-            </Box>
-          </Box>
-          <Box sx={{marginLeft:isSmallScreen? 0:2,width:"100%"}}>
-            <Box  sx={{marginTop:3}}>
-              <Typography variant="subtitle1" sx={{ color: "red" }}>
-                Color{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "4rem",
-                  }}
-                >
-                  {message_fruit_color}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component}>
-              {fruit_color_array.map((spine, index) => (
-                <div
-                  key={spine}
-                  onClick={() => handleOnChangeColor(index)}
-                  className={`${classes.item} ${
-                    checkedStateColor[index] ? classes.itemChecked : ""
-                  }`}
-                >
-                  {spine}
-                </div>
-              ))}
-            </Box>
-          </Box>
+            <Box sx={{ display: isSmallScreen ? "row" : "flex", marginTop: 3 }}>
+              <Leaftype
+                leaf_type_array={leaf_type_array}
+                checkedStateLeafType={checkedStateLeafType}
+                handleOnChangeLeafType={handleOnChangeLeafType}
+              />
 
-          <Box sx={{marginLeft:isSmallScreen? 0:2,width:"100%"}}>
-            <Box  sx={{marginTop:3}}>
-              <Typography variant="subtitle1" sx={{ color: "red" }}>
-                Shape{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "3rem",
-                  }}
-                >
-                  {message_fruit_shape}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component}>
-              {fruit_shape_array.map((spine, index) => (
-                <div
-                  key={spine}
-                  onClick={() => handleOnChangeFruitShape(index)}
-                  className={`${classes.item} ${
-                    checkedStateFruitShape[index] ? classes.itemChecked : ""
-                  }`}
-                >
-                  {spine}
-                </div>
-              ))}
+              <LeafMargin
+                leaf_margins_array={leaf_margins_array}
+                checkedStateLeafMargins={checkedStateLeafMargins}
+                handleOnChangeLeafMargins={handleOnChangeLeafMargins}
+              />
+              <Leafarrangement
+                leaf_arrangement_array={leaf_arrangement_array}
+                checkedStateLeafArrangement={checkedStateLeafArrangement}
+                handleOnChangeLeafArrangement={handleOnChangeLeafArrangement}
+              />
             </Box>
           </Box>
-
-          <Box  sx={{marginTop:3, width:"100%"}}>
-            <Box sx={{marginLeft:isSmallScreen? 0:2,width:"100%"}}>
-              <Typography variant="subtitle1" sx={{ color: "red" }}>
-                Size{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "4rem",
-                  }}
-                >
-                  {message_fruit_size}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component1}>
-              {fruit_size_array.map((size, index) => (
-                <div
-                  key={size}
-                  onClick={() => handleOnChangeSize(index)}
-                  className={`${classes.item} ${
-                    checkedStateSize[index] ? classes.itemChecked : ""
-                  }`}
-                >
-                  {size}
-                </div>
-              ))}
-            </Box>
-          </Box>
-        </Box>
-
-        <Box sx={{display: isSmallScreen? "row":"flex",marginTop:3}}>
-          <Box sx={{width:"100%"}} >
-            <Box>
-              <Typography sx={{ color: "green", fontWeight: "bold" }}>
-                Leaf
-              </Typography>
-              <Typography variant="subtitle1" sx={{ color: "green" }}>
-                Type{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "4rem",
-                  }}
-                >
-                  {message_leaf_type}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component}>
-              {leaf_type_array.map((type, index) => (
-                <div
-                  key={type}
-                  onClick={() => handleOnChangeLeafType(index)}
-                  className={`${classes.item} ${
-                    checkedStateLeafType[index] ? classes.itemChecked : ""
-                  }`}
-                >
-                  {type}
-                </div>
-              ))}
-            </Box>
-          </Box>
-          <Box sx={{marginLeft:isSmallScreen? 0:2,width:"100%"}}>
-            <Box  sx={{marginTop:3}}>
-              <Typography variant="subtitle1" sx={{ color: "green" }}>
-                Margin{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "3rem",
-                  }}
-                >
-                  {message_leaf_margin}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component1}>
-              {leaf_margins_array.map((spine, index) => (
-                <div
-                  key={spine}
-                  onClick={() => handleOnChangeLeafMargins(index)}
-                  className={`${classes.item} ${
-                    checkedStateLeafMargins[index] ? classes.itemChecked : ""
-                  }`}
-                >
-                  {spine}
-                </div>
-              ))}
-            </Box>
-          </Box>
-
-          <Box sx={{marginLeft:isSmallScreen? 0:2,width:"100%"}}>
-            <Box  sx={{marginTop:3}}>
-              <Typography variant="subtitle1" sx={{ color: "green" }}>
-                Arrangement{" "}
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    marginLeft: "1rem",
-                  }}
-                >
-                  {message_leaf_arrangements}
-                </Box>
-              </Typography>
-            </Box>
-            <Box className={classes.component1}>
-              {leaf_arrangement_array.map((spine, index) => (
-                <div
-                  key={spine}
-                  onClick={() => handleOnChangeLeafArrangement(index)}
-                  className={`${classes.item} ${
-                    checkedStateLeafArrangement[index]
-                      ? classes.itemChecked
-                      : ""
-                  }`}
-                >
-                  {spine}
-                </div>
-              ))}
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+        )}
+      </Container>
     );
   }
 }
-
-// Form control - controls the size of the form

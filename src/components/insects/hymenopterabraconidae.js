@@ -118,7 +118,9 @@ import { connect } from "react-redux";
 
 export default function HymenopteraBraconidaeComponent({ other_diptera_data }) {
   //   const [uniqueColeopteraData, setUniqueColeopteraData] = useState([]);
-  const base_url = "http://localhost:3000";
+  // const base_url = "http://localhost:3000";
+
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const [selectedGenus, setSelectedGenus] = useState(null);
   const fetcher = (url) => fetch(url).then((r) => r.json());
@@ -198,78 +200,81 @@ export default function HymenopteraBraconidaeComponent({ other_diptera_data }) {
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const handleFamilyClick = (event, family) => {
-    setSelectedFamily(family);
-    setAnchorEl(event.currentTarget);
-  };
-//handle subfamily click event
+
+  //handle subfamily click event
   const handleSubFamilyClick = (event, subfamily) => {
     setSelectedSubFamily(subfamily);
     setAnchorEl(event.currentTarget);
   };
 
+  if (data) {
+    return (
+      <Box sx={{ marginLeft: 2 }}>
+        <Box sx={{ color: "red", marginLeft: "1rem" }}> Hymenoptera(wasps)</Box>
+        <Box sx={{ color: "red", marginLeft: "1rem" }}>Braconidae</Box>
 
-  return (
-    <Box sx={{ marginLeft: 2 }}>
-      <Box sx={{ color: "red", marginLeft: "1rem" }}> Hymenoptera(wasps)</Box>
-      <Box sx={{ color: "red", marginLeft: "1rem" }}>Braconidae</Box>
+        <Box>
+          {unique__hymenopterabraconidae_data.map((genus) => (
+            <Button
+              key={genus.id}
+              onClick={(e) =>
+                handleSubFamilyClick(
+                  e,
+                  genus.insect_sub_families.sub_family_name
+                )
+              }
+              classes={{ root: classes.buttonfamily }}
 
-      <Box>
-        {unique__hymenopterabraconidae_data.map((genus) => (
-          <Button
-            key={genus.id}
-            onClick={(e) =>
-              handleSubFamilyClick(e, genus.insect_sub_families.sub_family_name)
-            }
-            classes={{ root: classes.buttonfamily }}
-
-            // classes={{
-            //   root: `${classes.buttonfamily} ${
-            //     selectedFamily === genus.insect_families.family_name
-            //       ? classes.selected
-            //       : ""
-            //   } ${classes.dropDownButton}`,
-            // }}
+              // classes={{
+              //   root: `${classes.buttonfamily} ${
+              //     selectedFamily === genus.insect_families.family_name
+              //       ? classes.selected
+              //       : ""
+              //   } ${classes.dropDownButton}`,
+              // }}
+            >
+              {genus.insect_sub_families.sub_family_name}
+              <IconButton className={classes.dropDownIcon}>
+                <ExpandMoreIcon />
+              </IconButton>
+            </Button>
+          ))}
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+            PaperProps={{
+              style: {
+                // maxHeight: "50vh",
+                width: "auto",
+              },
+            }}
           >
-            {genus.insect_sub_families.sub_family_name}
-            <IconButton className={classes.dropDownIcon}>
-              <ExpandMoreIcon />
-            </IconButton>
-          </Button>
-        ))}
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-          PaperProps={{
-            style: {
-              // maxHeight: "50vh",
-              width: "auto",
-            },
-          }}
-        >
-          <MenuItem
-            selected={selectedGenus === ""}
-            onClick={() => setSelectedGenus("")}
-          >
-            Select a genus
-          </MenuItem>
-          {selectedSubFamily &&
-            unique__hymenopterabraconidae
-              .filter(
-                (genus) => genus.insect_sub_families.sub_family_name === selectedSubFamily
-              )
-              .map((genus) => (
-                <MenuItem
-                  key={genus.id}
-                  selected={genus.genus_name === selectedGenus}
-                  onClick={() => handleClick(genus)}
-                >
-                  {genus.insect_genera.genus_name}
-                </MenuItem>
-              ))}
-        </Menu>
+            <MenuItem
+              selected={selectedGenus === ""}
+              onClick={() => setSelectedGenus("")}
+            >
+              Select a genus
+            </MenuItem>
+            {selectedSubFamily &&
+              unique__hymenopterabraconidae
+                .filter(
+                  (genus) =>
+                    genus.insect_sub_families.sub_family_name ===
+                    selectedSubFamily
+                )
+                .map((genus) => (
+                  <MenuItem
+                    key={genus.id}
+                    selected={genus.genus_name === selectedGenus}
+                    onClick={() => handleClick(genus)}
+                  >
+                    {genus.insect_genera.genus_name}
+                  </MenuItem>
+                ))}
+          </Menu>
+        </Box>
       </Box>
-    </Box>
-  );
+    );
+  }
 }

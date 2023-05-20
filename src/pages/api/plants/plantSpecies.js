@@ -25,6 +25,7 @@ export default async function handle(req, res) {
           id: true,
           species_name: true,
           genus_id: true,
+          matk: true,
           plant_genera: {
             select: {
               genus_name: true,
@@ -32,8 +33,16 @@ export default async function handle(req, res) {
               plant_families: {
                 select: {
                   family_name: true,
+                  id: true,
                 },
               },
+            },
+          },
+          plants_matk: {
+            select: {
+              nucleotide: true,
+              country: true,
+              genebank_accesion: true,
             },
           },
         },

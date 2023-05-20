@@ -45,9 +45,8 @@ export default function PlantDetailsFeaturesValues() {
   // const [loaded, setLoaded] = useState(false);
   // // const [error, setError] = useState(null);
   // // const classes = useStyles();
-  // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL; cause of error originally
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   // const base_url = "http://localhost:3000";
-  const base_url = "http://192.168.43.93:3000";
   const router = useRouter();
   const species = router.query.species ? router.query.species : null; //only if url
   const classes = useStyles();
@@ -101,14 +100,11 @@ export default function PlantDetailsFeaturesValues() {
           }}
         >
           {/* <PlantFamilyGenusSpecies
-            state={state}
-            onStateUpdate={handleStateUpdate}
+          // state={state}
+          // onStateUpdate={handleStateUpdate}
           /> */}
-          {/* <Box sx={{ marginTop: 6 }}>contextValue</Box>; */}
-          <Box>
-            {" "}
-            <PlantSpecieFamilyGenus />
-          </Box>
+          {/* <Box sx={{ marginTop: 6 }}>contextValue</Box>; */}{" "}
+          <PlantSpecieFamilyGenus />
           <Box>
             {isSmallScreen ? (
               <TreeView

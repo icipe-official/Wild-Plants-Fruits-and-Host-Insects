@@ -119,7 +119,9 @@ import { connect } from "react-redux";
 export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
   //   const [uniqueColeopteraData, setUniqueColeopteraData] = useState([]);
   const [selectedGenus, setSelectedGenus] = useState(null);
-  const base_url = "http://localhost:3000";
+  // const base_url = "http://localhost:3000";
+
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error, isLoading } = useSWR(
@@ -230,65 +232,65 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
   console.log(firstThreeGenera);
   //   console.log(selectedGenus);
   //   const classes = useStyles();
-
-  return (
-    <Box>
-      <Box sx={{ color: "blue", marginLeft: "0rem" }}>
-        {" "}
-        Order: Diptera (flies)
-      </Box>
-      <Box sx={{ color: "blue", marginLeft: "0rem" }}>
-        {" "}
-        Tephritidae (fruit flies)
-      </Box>
-
+  if (data) {
+    return (
       <Box>
-        {firstThreeGenera.map((genus) => (
-          <ul key={genus.id} className={classes.ul}>
-            <Button
-              onClick={() => {
-                handleClick(genus);
-              }}
-              classes={{ root: classes.buttongenus }}
-            >
-              {genus.insect_genera.genus_name}
-            </Button>
-          </ul>
-        ))}
-        {remainingGenera.length > 0 && (
-          <Box sx={{ fontWeight: "bold" }}>
-            <Button
-              onClick={() => setSelectedGenus(remainingGenera)}
-              onDoubleClick={() => setSelectedGenus(null)}
-              classes={{ root: classes.buttongenus }}
-            >
-              Other genera
-              <IconButton className={classes.dropDownIcon}>
-                <ExpandMoreIcon />
-              </IconButton>
-            </Button>
-          </Box>
-        )}
-        {selectedGenus && (
-          <Box>
-            {remainingGenera.map((genus) => (
-              <ul key={genus.id} className={classes.ul}>
-                <Button
-                  classes={{ root: classes.buttongenus }}
-                  onClick={() => {
-                    handleClick(genus);
-                  }}
-                >
-                  {genus.insect_genera.genus_name}
-                </Button>
-              </ul>
-            ))}
-          </Box>
-        )}
-        <Box sx={{ fontWeight: "bold", marginLeft: "1rem", color: "black" }}>
-          Other families
+        <Box sx={{ color: "blue", marginLeft: "0rem" }}>
+          {" "}
+          Order: Diptera (flies)
         </Box>
-        {/* {unique_other_diptera_data.map((genus) => (
+        <Box sx={{ color: "blue", marginLeft: "0rem" }}>
+          {" "}
+          Tephritidae (fruit flies)
+        </Box>
+
+        <Box>
+          {firstThreeGenera.map((genus) => (
+            <ul key={genus.id} className={classes.ul}>
+              <Button
+                onClick={() => {
+                  handleClick(genus);
+                }}
+                classes={{ root: classes.buttongenus }}
+              >
+                {genus.insect_genera.genus_name}
+              </Button>
+            </ul>
+          ))}
+          {remainingGenera.length > 0 && (
+            <Box sx={{ fontWeight: "bold" }}>
+              <Button
+                onClick={() => setSelectedGenus(remainingGenera)}
+                onDoubleClick={() => setSelectedGenus(null)}
+                classes={{ root: classes.buttongenus }}
+              >
+                Other genera
+                <IconButton className={classes.dropDownIcon}>
+                  <ExpandMoreIcon />
+                </IconButton>
+              </Button>
+            </Box>
+          )}
+          {selectedGenus && (
+            <Box>
+              {remainingGenera.map((genus) => (
+                <ul key={genus.id} className={classes.ul}>
+                  <Button
+                    classes={{ root: classes.buttongenus }}
+                    onClick={() => {
+                      handleClick(genus);
+                    }}
+                  >
+                    {genus.insect_genera.genus_name}
+                  </Button>
+                </ul>
+              ))}
+            </Box>
+          )}
+          <Box sx={{ fontWeight: "bold", marginLeft: "1rem", color: "black" }}>
+            Other families
+          </Box>
+          {/* {unique_other_diptera_data.map((genus) => (
           <ul key={item.id} className={classes.ul}>
             <Button
               onClick={() => {
@@ -302,61 +304,63 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
             </Button>
           </ul>
         ))} */}
-        {unique_other_diptera_data.map((genus) => (
-          <Button
-            key={genus.id}
-            onClick={(e) =>
-              handleFamilyClick(e, genus.insect_families.family_name)
-            }
-            classes={{ root: classes.buttonfamily }}
+          {unique_other_diptera_data.map((genus) => (
+            <Button
+              key={genus.id}
+              onClick={(e) =>
+                handleFamilyClick(e, genus.insect_families.family_name)
+              }
+              classes={{ root: classes.buttonfamily }}
 
-            // classes={{
-            //   root: `${classes.buttonfamily} ${
-            //     selectedFamily === genus.insect_families.family_name
-            //       ? classes.selected
-            //       : ""
-            //   } ${classes.dropDownButton}`,
-            // }}
+              // classes={{
+              //   root: `${classes.buttonfamily} ${
+              //     selectedFamily === genus.insect_families.family_name
+              //       ? classes.selected
+              //       : ""
+              //   } ${classes.dropDownButton}`,
+              // }}
+            >
+              {genus.insect_families.family_name}
+              <IconButton className={classes.dropDownIcon}>
+                <ExpandMoreIcon />
+              </IconButton>
+            </Button>
+          ))}
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+            PaperProps={{
+              style: {
+                // maxHeight: "50vh",
+                width: "auto",
+              },
+            }}
           >
-            {genus.insect_families.family_name}
-            <IconButton className={classes.dropDownIcon}>
-              <ExpandMoreIcon />
-            </IconButton>
-          </Button>
-        ))}
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-          PaperProps={{
-            style: {
-              // maxHeight: "50vh",
-              width: "auto",
-            },
-          }}
-        >
-          <MenuItem
-            selected={selectedGenus === ""}
-            onClick={() => setSelectedGenus("")}
-          >
-            Select a genus
-          </MenuItem>
-          {selectedFamily &&
-            data.otherdiptera
-              .filter(
-                (genus) => genus.insect_families.family_name === selectedFamily
-              )
-              .map((genus) => (
-                <MenuItem
-                  key={genus.id}
-                  selected={genus.genus_name === selectedGenus}
-                  onClick={() => handleClick(genus)}
-                >
-                  {genus.insect_genera.genus_name}
-                </MenuItem>
-              ))}
-        </Menu>
+            <MenuItem
+              selected={selectedGenus === ""}
+              onClick={() => setSelectedGenus("")}
+            >
+              Select a genus
+            </MenuItem>
+            {selectedFamily &&
+              data.otherdiptera
+                .filter(
+                  (genus) =>
+                    genus.insect_families.family_name === selectedFamily
+                )
+                .map((genus) => (
+                  <MenuItem
+                    key={genus.id}
+                    selected={genus.genus_name === selectedGenus}
+                    onClick={() => handleClick(genus)}
+                  >
+                    {genus.insect_genera.genus_name}
+                  </MenuItem>
+                ))}
+          </Menu>
+        </Box>
       </Box>
-    </Box>
-  );
+    );
+  }
 }

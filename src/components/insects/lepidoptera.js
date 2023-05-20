@@ -115,7 +115,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function LepidopteraClientside({ other_diptera_data }) {
   //   const [uniqueColeopteraData, setUniqueColeopteraData] = useState([]);
-  const base_url = "http://localhost:3000";
+  // const base_url = "http://localhost:3000";
+
+  const base_url = "http://192.168.43.92:3000";
+
   const [selectedGenus, setSelectedGenus] = useState(null);
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR(
@@ -189,74 +192,76 @@ export default function LepidopteraClientside({ other_diptera_data }) {
     setSelectedFamily(family);
     setAnchorEl(event.currentTarget);
   };
-
-  return (
-    <Box sx={{ marginLeft: 1 }}>
-      <Box sx={{ color: "maroon", marginLeft: "1rem" }}>
-        {" "}
-        Lepidoptera(moths and buttaflies)
-      </Box>
-      {/* <Box sx={{ color: "maroon", marginLeft: "1rem" }}>
+  if (data) {
+    return (
+      <Box sx={{ marginLeft: 1 }}>
+        <Box sx={{ color: "maroon", marginLeft: "1rem" }}>
+          {" "}
+          Lepidoptera(moths and buttaflies)
+        </Box>
+        {/* <Box sx={{ color: "maroon", marginLeft: "1rem" }}>
         {" "}
         (moths and buttaflies)
       </Box> */}
 
-      <Box>
-        {unique_lepidoptera_data.map((genus) => (
-          <Button
-            key={genus.id}
-            onClick={(e) =>
-              handleFamilyClick(e, genus.insect_families.family_name)
-            }
-            classes={{ root: classes.buttonfamily }}
+        <Box>
+          {unique_lepidoptera_data.map((genus) => (
+            <Button
+              key={genus.id}
+              onClick={(e) =>
+                handleFamilyClick(e, genus.insect_families.family_name)
+              }
+              classes={{ root: classes.buttonfamily }}
 
-            // classes={{
-            //   root: `${classes.buttonfamily} ${
-            //     selectedFamily === genus.insect_families.family_name
-            //       ? classes.selected
-            //       : ""
-            //   } ${classes.dropDownButton}`,
-            // }}
+              // classes={{
+              //   root: `${classes.buttonfamily} ${
+              //     selectedFamily === genus.insect_families.family_name
+              //       ? classes.selected
+              //       : ""
+              //   } ${classes.dropDownButton}`,
+              // }}
+            >
+              {genus.insect_families.family_name}
+              <IconButton className={classes.dropDownIcon}>
+                <ExpandMoreIcon />
+              </IconButton>
+            </Button>
+          ))}
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+            PaperProps={{
+              style: {
+                // maxHeight: "50vh",
+                width: "auto",
+              },
+            }}
           >
-            {genus.insect_families.family_name}
-            <IconButton className={classes.dropDownIcon}>
-              <ExpandMoreIcon />
-            </IconButton>
-          </Button>
-        ))}
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-          PaperProps={{
-            style: {
-              // maxHeight: "50vh",
-              width: "auto",
-            },
-          }}
-        >
-          <MenuItem
-            selected={selectedGenus === ""}
-            onClick={() => setSelectedGenus("")}
-          >
-            Select a genus
-          </MenuItem>
-          {selectedFamily &&
-            unique__lepidoptera
-              .filter(
-                (genus) => genus.insect_families.family_name === selectedFamily
-              )
-              .map((genus) => (
-                <MenuItem
-                  key={genus.id}
-                  selected={genus.genus_name === selectedGenus}
-                  onClick={() => handleClick(genus)}
-                >
-                  {genus.insect_genera.genus_name}
-                </MenuItem>
-              ))}
-        </Menu>
+            <MenuItem
+              selected={selectedGenus === ""}
+              onClick={() => setSelectedGenus("")}
+            >
+              Select a genus
+            </MenuItem>
+            {selectedFamily &&
+              unique__lepidoptera
+                .filter(
+                  (genus) =>
+                    genus.insect_families.family_name === selectedFamily
+                )
+                .map((genus) => (
+                  <MenuItem
+                    key={genus.id}
+                    selected={genus.genus_name === selectedGenus}
+                    onClick={() => handleClick(genus)}
+                  >
+                    {genus.insect_genera.genus_name}
+                  </MenuItem>
+                ))}
+          </Menu>
+        </Box>
       </Box>
-    </Box>
-  );
+    );
+  }
 }

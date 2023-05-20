@@ -1,15 +1,19 @@
 import prisma from "../../../../../lib/prisma";
 // API for Coleoptera details
-export default async function getInsects(req, res) {
+export default async function getColeoptera(req, res) {
   try {
-    const { fruits } = req.query;
     // Fetch data from database
+    const { insectquery } = req.query;
+
     const plants = await prisma.insects.findMany({
       where: {
-        id: parseInt(fruits),
+        insect_genera: {
+          is: {
+            genus_name: insectquery,
+          },
+        },
       },
       select: {
-        id: true,
         species_name: true,
         insect_orders: {
           select: {
@@ -28,7 +32,6 @@ export default async function getInsects(req, res) {
         },
         insect_genera: {
           select: {
-            id: true,
             genus_name: true,
           },
         },
@@ -36,7 +39,6 @@ export default async function getInsects(req, res) {
           select: {
             plants: {
               select: {
-                id: true,
                 species_name: true,
                 plant_genera: {
                   select: {

@@ -1,90 +1,108 @@
 // import { useState, useEffect } from 'react';
 // import { useRouter } from 'next/router';
-import Box from '@mui/material/Box';
-import { useState } from 'react';
-import Link from 'next/link';
-import { connect } from 'react-redux'
+import Box from "@mui/material/Box";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { connect } from "react-redux";
+import useSWR from "swr";
+import RegionsInsect from "./regeons";
+import { useRouter } from "next/router";
+import InsectQueryComponent from "./insectsQuery";
+import InsectPhotos from "./photo";
+import FruitsReared from "./fruitsReared";
+import OpenLayersMap from "components/plants/distribution/map";
+
+import Grid from "@mui/material/Grid";
 
 // import { Container,ButtonBase } from '@mui/material';
 // import Link from 'next/link';
-export default function InsectQuery2({insect_data,genus_list}) {
-  const [selectedIndexPlant, setSelectedIndexPlant] = useState(0);
-  const [selected, setSelectedItem] = useState(null);
+export default function InsectQuery2() {
+  const router = useRouter();
+  const genus = router.query.genus;
+  const species = parseInt(router.query.species);
+  console.log("species");
+  console.log(genus);
+  // const base_url = "http://localhost:3000";
+
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+
   const [selectedIndex, setSelectedIndex] = useState(0);
-  function mapStateToProps(state) {
-    return { count: state.count }
-  }
-  
-console.log(insect_data)
-
-console.log("selected_species client side")
-
-const fruits=insect_data.map(fruit=>fruit.plants_insects.map(specie=>specie.plants))[0] //[0] extract the first object 
-console.log('fruits reatred Fruits functionsl component')
-console.log(fruits)
-
-console.log("fruits_reared")  
-console.log(fruits)  
-console.log("singleList")  
-
-// console.log(singleList)  
-// handle item click
-// const newUrl = `/insects/query?genus=${specie.insect_genera.genus_name}$selected_species=${specie.species_name}`;
-//regions collected
-const regions=insect_data.map((specie, index) => (
-specie.insects_regions.map(region=>region.regions.region+ ', ')))
-  const handleItemClick = (index) => {
-    setSelectedIndex(index);
-  };
-  console.log("regions")
-  console.log(regions)
-
-  return (
-    <Box>
-      <Box sx={{ marginTop: '1rem', fontWeight: 'bold' }}>
-        {genus_list.length} Insect Species
-      </Box>
-      <Box
-        sx={{
-          height: '8rem',
-          overflowY: 'scroll',
-          width: '500px',
-          border: '1px solid #ccc',
-        }}
-      > {genus_list.map((specie, index) => (
-          <Box
-            key={specie.id}
-            sx={{
-              backgroundColor:
-                index === 0 && selectedIndex !== 0
-                  ? 'inherit'
-                  : selectedIndex === index
-                  ? 'gray'
-                  : 'inherit',
-              color: selectedIndex === index ? 'white' : 'black',
-            }}
-            onClick={() => handleItemClick(index)}>
-            <Link
-              href={`/insects/${specie.species_name}`}
-              style={{ textDecoration: 'none', color: 'black' }}>
-              {specie.insect_genera.genus_name} {specie.species_name}
-            </Link>
-          </Box>
-          )
-          )}
-          
-      </Box>
-      
-      <Box sx={{marginTop:'1rem',fontWeight:'bold'}}>Regions collected</Box>
-       <Box sx={{height: '8rem', overflowY: 'scroll', width: '500px', border: '1px solid #ccc'}}>
-        
-       {insect_data.map((specie, index) => (
-    specie.insects_regions.map(region=>region.regions.region+ ', ')))}
-
-        <Box>
-    </Box>
-    </Box>
-    </Box>
+  const [speciesdata, setSpecciesdata] = useState("");
+  //species list data set revalidation to false to prevent data refetch
+  const fetcher = (url) => fetch(url).then((r) => r.json());
+  const { data, error, isLoading } = useSWR(
+    `${base_url}/api/insects/insectsPage/${genus}`,
+    fetcher
   );
-};
 
+  if (error) return <div>Error fetching data</div>;
+  if (isLoading || !data) return <div>Loading...</div>;
+  console.log("species");
+
+  // insect data
+  // const { data: insect_data, error: insectserror } = useSWR(
+  //   `/api/insects/insectsPage/${species}`,
+  //   fetcher
+  // );
+  // useEffect(() => {
+  //   if (genus_data && genus_data.length > 0) {
+  //     setSpecciesdata(species);
+  //   }
+  // }, [genus_data]);
+  console.log("species insect page");
+  console.log(typeof species);
+  console.log("genus_data");
+
+  console.log(data);
+  console.log("insect_data");
+  // console.log(insect_data);
+
+  console.log("selected_species client side");
+  if (data) {
+    const fruits = data.map((fruit) =>
+      fruit.plants_insects.map((specie) => specie.plants)
+    )[0]; //[0] extract the first object
+    console.log("fruits reatred Fruits functionsl component");
+    console.log(fruits);
+
+    console.log("fruits_reared");
+    console.log(fruits);
+    console.log("singleList");
+
+    const insects_region = data.filter((insect) => insect.id === species);
+    console.log("insect region");
+    console.log(insects_region);
+
+    const coordinates = insects_region.map((specie) =>
+      specie.insects_regions.map((region) => {
+        const latitude = parseFloat(region.regions.latitude);
+        const longitude = parseFloat(region.regions.longitude);
+        return [longitude, latitude];
+      })
+    );
+    console.log("coordinates");
+    console.log(
+      coordinates.map((c) => {
+        return c;
+      })
+    );
+
+    return (
+      <Grid container spacing={2} marginTop={3}>
+        <Grid item xs={12} md={6} lg={6}>
+          <InsectQueryComponent genus_data={data} />
+          <FruitsReared fruits_reared_data={insects_region} />
+          <RegionsInsect regions_collected_data={insects_region} />
+          Map
+          <OpenLayersMap coordinates={coordinates} />
+        </Grid>
+        <Grid item xs={12} md={6} lg={6}>
+          <InsectPhotos photos_data={insects_region} />
+          {/* <Grid item xs={12} md={6} lg={6}> */}
+        </Grid>
+
+        {/* </Grid> */}
+      </Grid>
+    );
+  }
+}
