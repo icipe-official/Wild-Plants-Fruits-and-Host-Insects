@@ -26,15 +26,42 @@ model fruit_sizes {
 }
 
 model fruit_types {
-  fruit_type_id      Int                  @id @default(autoincrement())
-  type_of_fruit      String               @unique @db.VarChar(50)
-  plants_fruit_types plants_fruit_types[]
+  fruit_type_id          Int                    @id @default(autoincrement())
+  fruit_type_description String?                @db.VarChar
+  type_of_fruit          String                 @unique @db.VarChar(50)
+  fruit_types_glossary   fruit_types_glossary[]
+  plants_fruit_types     plants_fruit_types[]
+}
+
+model fruit_types_glossary {
+  fruit_id    Int
+  photo_id    String      @unique @db.VarChar(10)
+  fruit_types fruit_types @relation(fields: [fruit_id], references: [fruit_type_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([fruit_id, photo_id])
 }
 
 model fruiting_months {
   fruiting_month_id      Int                      @id @default(autoincrement())
   month                  String                   @unique @db.VarChar(10)
   plants_fruiting_months plants_fruiting_months[]
+}
+
+model glossary {
+  glossary_id          Int               @id
+  glossary_type        String?           @db.VarChar(50)
+  glossary_term        String?           @db.VarChar(50)
+  glossary_description String?           @db.VarChar(500)
+  glossary_photos      glossary_photos[]
+}
+
+model glossary_photos {
+  glossary_id   Int
+  photo_id      Int
+  glossary      glossary      @relation(fields: [glossary_id], references: [glossary_id], onDelete: NoAction, onUpdate: NoAction)
+  plants_photos plants_photos @relation(fields: [photo_id], references: [photo_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([photo_id, glossary_id])
 }
 
 model insect_families {
@@ -83,6 +110,7 @@ model insects {
   insect_genera       insect_genera?       @relation(fields: [genus_id], references: [id], onDelete: Cascade)
   insect_orders       insect_orders?       @relation(fields: [order_id], references: [id], onDelete: Cascade)
   insect_sub_families insect_sub_families? @relation(fields: [sub_family_id], references: [id], onDelete: Cascade)
+  insects_coi         insects_coi[]
   insects_regions     insects_regions[]
   plants_insects      plants_insects[]
 }
@@ -90,8 +118,8 @@ model insects {
 model insects_regions {
   insect_id Int
   region_id Int
-  insects   insects @relation(fields: [insect_id], references: [id], onDelete: Cascade)
-  regions   regions @relation(fields: [region_id], references: [id], onDelete: Cascade)
+  insects   insects @relation(fields: [insect_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  regions   regions @relation(fields: [region_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([insect_id, region_id])
 }
@@ -126,6 +154,12 @@ model plant_families {
   plant_genera plant_genera[]
 }
 
+model plant_families_newick {
+  id          Int     @id
+  family_name String? @db.VarChar(50)
+  matk_newick String? @db.VarChar
+}
+
 model plant_genera {
   id             Int            @id @default(autoincrement())
   genus_name     String         @unique @db.VarChar(50)
@@ -134,25 +168,17 @@ model plant_genera {
   plants         plants[]
 }
 
-model plant_photos {
-  plant_id   Int
-  photo_id   Int    @unique
-  photo_name String @unique @db.VarChar(10)
-  plants     plants @relation(fields: [plant_id], references: [id], onDelete: Cascade)
-
-  @@id([plant_id, photo_id])
-}
-
 model plants {
   id                       Int                        @id @default(autoincrement())
-  species_name             String?                    @db.VarChar(110)
+  species_name             String                     @db.VarChar(110)
   leaf_type                String?                    @db.VarChar(50)
   description              String?                    @db.VarChar
   max_latitude             Int?
   min_latitude             Int?
   genus_id                 Int
-  plant_photos             plant_photos[]
-  plant_genera             plant_genera               @relation(fields: [genus_id], references: [id], onDelete: Cascade)
+  rbcl                     String?                    @db.VarChar
+  matk                     String?                    @db.VarChar
+  plant_genera             plant_genera               @relation(fields: [genus_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   plants_fruit_colors      plants_fruit_colors[]
   plants_fruit_shapes      plants_fruit_shapes[]
   plants_fruit_sizes       plants_fruit_sizes[]
@@ -163,6 +189,9 @@ model plants {
   plants_latex             plants_latex[]
   plants_leaf_arrangements plants_leaf_arrangements[]
   plants_leaf_margins      plants_leaf_margins[]
+  plants_matk              plants_matk[]
+  plants_photos            plants_photos[]
+  plants_rbcl              plants_rbcl[]
   plants_regions           plants_regions[]
   plants_shrub_climbings   plants_shrub_climbings[]
   plants_spines_thorns     plants_spines_thorns[]
@@ -173,8 +202,8 @@ model plants {
 model plants_fruit_colors {
   plant_id     Int
   color_id     Int
-  fruit_colors fruit_colors @relation(fields: [color_id], references: [color_id], onDelete: Cascade)
-  plants       plants       @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  fruit_colors fruit_colors @relation(fields: [color_id], references: [color_id], onDelete: NoAction, onUpdate: NoAction)
+  plants       plants       @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, color_id])
 }
@@ -182,8 +211,8 @@ model plants_fruit_colors {
 model plants_fruit_shapes {
   plant_id       Int
   fruit_shape_id Int
-  fruit_shapes   fruit_shapes @relation(fields: [fruit_shape_id], references: [fruit_shape_id], onDelete: Cascade)
-  plants         plants       @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  fruit_shapes   fruit_shapes @relation(fields: [fruit_shape_id], references: [fruit_shape_id], onDelete: NoAction, onUpdate: NoAction)
+  plants         plants       @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, fruit_shape_id])
 }
@@ -191,8 +220,8 @@ model plants_fruit_shapes {
 model plants_fruit_sizes {
   plant_id      Int
   fruit_size_id Int
-  fruit_sizes   fruit_sizes @relation(fields: [fruit_size_id], references: [id], onDelete: Cascade)
-  plants        plants      @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  fruit_sizes   fruit_sizes @relation(fields: [fruit_size_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plants        plants      @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, fruit_size_id])
 }
@@ -200,8 +229,8 @@ model plants_fruit_sizes {
 model plants_fruit_types {
   plant_id      Int
   fruit_type_id Int
-  fruit_types   fruit_types @relation(fields: [fruit_type_id], references: [fruit_type_id], onDelete: Cascade)
-  plants        plants      @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  fruit_types   fruit_types @relation(fields: [fruit_type_id], references: [fruit_type_id], onDelete: NoAction, onUpdate: NoAction)
+  plants        plants      @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, fruit_type_id])
 }
@@ -209,8 +238,8 @@ model plants_fruit_types {
 model plants_fruiting_months {
   plant_id          Int
   fruiting_month_id Int
-  fruiting_months   fruiting_months @relation(fields: [fruiting_month_id], references: [fruiting_month_id], onDelete: Cascade)
-  plants            plants          @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  fruiting_months   fruiting_months @relation(fields: [fruiting_month_id], references: [fruiting_month_id], onDelete: NoAction, onUpdate: NoAction)
+  plants            plants          @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, fruiting_month_id])
 }
@@ -218,8 +247,8 @@ model plants_fruiting_months {
 model plants_insects {
   plant_id  Int
   insect_id Int
-  insects   insects @relation(fields: [insect_id], references: [id], onDelete: Cascade)
-  plants    plants  @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  insects   insects @relation(fields: [insect_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plants    plants  @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, insect_id])
 }
@@ -236,8 +265,8 @@ model plants_k_sectors {
 model plants_latex {
   plant_id       Int
   fruit_latex_id Int
-  latex          latex  @relation(fields: [fruit_latex_id], references: [fruit_latex_id], onDelete: Cascade)
-  plants         plants @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  latex          latex  @relation(fields: [fruit_latex_id], references: [fruit_latex_id], onDelete: NoAction, onUpdate: NoAction)
+  plants         plants @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, fruit_latex_id])
 }
@@ -245,8 +274,8 @@ model plants_latex {
 model plants_leaf_arrangements {
   plant_id            Int
   leaf_arrangement_id Int
-  leaf_arrangements   leaf_arrangements @relation(fields: [leaf_arrangement_id], references: [leaf_arrangement_id], onDelete: Cascade)
-  plants              plants            @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  leaf_arrangements   leaf_arrangements @relation(fields: [leaf_arrangement_id], references: [leaf_arrangement_id], onDelete: NoAction, onUpdate: NoAction)
+  plants              plants            @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, leaf_arrangement_id])
 }
@@ -254,16 +283,36 @@ model plants_leaf_arrangements {
 model plants_leaf_margins {
   plant_id       Int
   leaf_margin_id Int
-  leaf_margins   leaf_margins @relation(fields: [leaf_margin_id], references: [leaf_margin_id], onDelete: Cascade)
-  plants         plants       @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  leaf_margins   leaf_margins @relation(fields: [leaf_margin_id], references: [leaf_margin_id], onDelete: NoAction, onUpdate: NoAction)
+  plants         plants       @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, leaf_margin_id])
+}
+
+model plants_matk {
+  matk_id           Int     @id
+  plant_id          Int?
+  country           String? @db.VarChar
+  genebank_accesion String? @db.VarChar
+  nucleotide        String? @db.VarChar
+  plants            plants? @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model plants_photos {
+  plant_id        Int
+  photo_id        Int               @unique
+  photo_name      String            @unique @db.VarChar(10)
+  glossary_photos glossary_photos[]
+  plants          plants            @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([plant_id, photo_id])
 }
 
 model plants_regions {
   plants_id Int
   region_id Int
-  plants    plants @relation(fields: [plants_id], references: [id], onDelete: Cascade)
+  plants    plants  @relation(fields: [plants_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  regions   regions @relation(fields: [region_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plants_id, region_id])
 }
@@ -271,8 +320,8 @@ model plants_regions {
 model plants_shrub_climbings {
   plant_id        Int
   shrub_id        Int
-  plants          plants          @relation(fields: [plant_id], references: [id], onDelete: Cascade)
-  shrub_climbings shrub_climbings @relation(fields: [shrub_id], references: [id], onDelete: Cascade)
+  plants          plants          @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  shrub_climbings shrub_climbings @relation(fields: [shrub_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, shrub_id])
 }
@@ -280,8 +329,8 @@ model plants_shrub_climbings {
 model plants_spines_thorns {
   plant_id      Int
   thorn_id      Int
-  plants        plants        @relation(fields: [plant_id], references: [id], onDelete: Cascade)
-  spines_thorns spines_thorns @relation(fields: [thorn_id], references: [thorn_id], onDelete: Cascade)
+  plants        plants        @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  spines_thorns spines_thorns @relation(fields: [thorn_id], references: [thorn_id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, thorn_id])
 }
@@ -298,8 +347,8 @@ model plants_ukwf_areas {
 model plants_woody_herbaceous {
   plant_id         Int
   back_id          Int
-  woody_herbaceous woody_herbaceous @relation(fields: [back_id], references: [id], onDelete: Cascade)
-  plants           plants           @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  woody_herbaceous woody_herbaceous @relation(fields: [back_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  plants           plants           @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([plant_id, back_id])
 }
@@ -307,7 +356,10 @@ model plants_woody_herbaceous {
 model regions {
   id              Int               @id @default(autoincrement())
   region          String            @db.VarChar(50)
+  latitude        String            @db.VarChar(20)
+  longitude       String            @db.VarChar(20)
   insects_regions insects_regions[]
+  plants_regions  plants_regions[]
 }
 
 model shrub_climbings {
@@ -332,4 +384,22 @@ model woody_herbaceous {
   id                      Int                       @id @default(autoincrement())
   type_of_stem            String                    @unique @db.VarChar(10)
   plants_woody_herbaceous plants_woody_herbaceous[]
+}
+
+model insects_coi {
+  coi_id            Int      @id
+  insect_id         Int?
+  country           String?  @db.VarChar
+  genebank_accesion String?  @db.VarChar
+  nucleotide        String?  @db.VarChar
+  insects           insects? @relation(fields: [insect_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model plants_rbcl {
+  rbcl_id           Int     @id
+  plant_id          Int?
+  nucleotide        String? @db.VarChar
+  country           String? @db.VarChar
+  genebank_accesion String? @db.VarChar
+  plants            plants? @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
