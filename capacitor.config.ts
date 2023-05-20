@@ -1,12 +1,12 @@
-import { CapacitorConfig } from "@capacitor/cli";
 
+import { CapacitorConfig } from "@capacitor/cli";
 const config: CapacitorConfig = {
   appId: "com.example.app",
   appName: "PlantsFruitsInsects",
   webDir: "out",
   bundledWebRuntime: false,
   server: {
-    url: "http://127.0.0.1:3000",
+    url: "http://192.168.43.93:3000",
     // url: "127.0.0.1:3000",
   },
   plugins: {

@@ -29,21 +29,17 @@
 
 // //pages/api
 
-const {spawn} = require('child_process');
+const { spawn } = require("child_process");
 
 export default async function handler(req, res) {
-    let python = spawn('python', ['./src/python.py']);
-    let dataToSend = '';
-
-    for await (const data of python.stdout){
-      //console.log(data.toString());
-      dataToSend += data.toString()
-    }
-  return res.status(200).json({ message: dataToSend})
+  let python = spawn("python", ["./src/python.py"]);
+  let dataToSend = "";
+  for await (const data of python.stdout) {
+    console.log(data.toString());
+    dataToSend += data.toString();
+  }
+  return res.status(200).json({ message: dataToSend });
 }
-
-
-
 // const { spawn } = require('child_process');
 
 // const sequences = {
@@ -135,4 +131,3 @@ export default async function handler(req, res) {
 //     }
 //   });
 // }
-

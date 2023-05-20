@@ -39,53 +39,89 @@
 //     `Server running at http://localhost:${process.env.PORT || 35705}`
 //   );
 // });
-const { createProxyMiddleware } = require("http-proxy-middleware");
-// import nextConf from "./next.config.mjs";
+// const { createProxyMiddleware } = require("http-proxy-middleware");
+// // import nextConf from "./next.config.mjs";
 
-const express = require("express");
-const http = require("http");
-const https = require("https");
-const fs = require("fs");
-const path = require("path");
-const next = require("next");
+// const express = require("express");
+// const http = require("http");
+// const https = require("https");
+// const fs = require("fs");
+// const path = require("path");
+// const next = require("next");
 
-const ports = {
-  http: 3080,
-  https: 3000,
-};
+// const ports = {
+//   http: 3080,
+//   https: 3000,
+// };
 
-const dev = process.env.NODE_ENV !== "production";
+// const dev = process.env.NODE_ENV !== "production";
+// const app = next({ dev });
+// const handle = app.getRequestHandler();
+// const server = express();
+
+// // const options = {
+// //   key: fs.readFileSync("/home/bonface/key.pem"),
+// //   cert: fs.readFileSync("/home/bonface/cert.pem"),
+// // };
+
+// app.prepare().then(() => {
+//   server.use(
+//     "/plants",
+//     createProxyMiddleware({
+//       target: "https://localhost:3000",
+//       changeOrigin: true,
+//       pathRewrite: {
+//         // rewrite /plants/:id to /:id
+//         "^/plants/": "/",
+//       },
+//     })
+//   );
+
+//   server.all("*", (req, res) => {
+//     return handle(req, res);
+//   });
+
+//   // http.createServer(server).listen(ports.http, () => {
+//   //   console.log(`HTTP Server running on port ${ports.http}`);
+//   // });
+
+//   https.createServer(options, server).listen(ports.http, () => {
+//     console.log(`HTTPS Server running on port ${ports.http}`);
+//   });
+// });
+
+const express = require('express');
+const { Pool } = require('pg');
+const next = require('next');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
+
 const server = express();
 
-const options = {
-  key: fs.readFileSync("/home/bonface/key.pem"),
-  cert: fs.readFileSync("/home/bonface/cert.pem"),
-};
+server.use(
+  '/plants',
+  createProxyMiddleware({
+    target: 'http://localhost:3000', //back end api url
+    changeOrigin: true,
+    pathRewrite: {
+      // rewrite /plants/:id to /:id
+      '^/plants/': '/',
+    },
+  })
+);
+
+server.all('*', (req, res) => {
+  return handle(req, res);
+});
+
+const port = process.env.PORT || 3000;
 
 app.prepare().then(() => {
-  server.use(
-    "/plants",
-    createProxyMiddleware({
-      target: "https://localhost:3000",
-      changeOrigin: true,
-      pathRewrite: {
-        // rewrite /plants/:id to /:id
-        "^/plants/": "/",
-      },
-    })
-  );
-
-  server.all("*", (req, res) => {
-    return handle(req, res);
-  });
-
-  // http.createServer(server).listen(ports.http, () => {
-  //   console.log(`HTTP Server running on port ${ports.http}`);
-  // });
-
-  https.createServer(options, server).listen(ports.https, () => {
-    console.log(`HTTPS Server running on port ${ports.https}`);
+  server.listen(port, '0.0.0.0', (err) => {
+    if (err) throw err;
+    console.log(`> Ready on http://0.0.0.0:${port}`);
   });
 });
