@@ -41,24 +41,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
   const [loaded, setLoaded] = useState(false);
   // const [error, setError] = useState(null);
   // const base_url = "http://localhost:3000";
-  const base_url = "http://192.168.43.92:3000";
-  // By default, plant family will be fetched upon opening the website
-  //use family API to fetch plant families and their id's
-  // useEffect(() => {
-  //   fetch(`${base_url}/api/plants/plantSpecies`)
-  //     .then((res) => res.json())
-  //     .then(familyId
-  //       (result) => {
-  //         setLoaded(true);
-  //         setfami(result);
-  //       },
-  //       (error) => {
-  //         setLoaded(true);
-  //         setError(error);
-  //       }
-  //     );
-  // }, []);
-  // //
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { data, error, isLoading } = useSWR(
     `${base_url}/api/plants/plantSpecies`,
     fetcher
