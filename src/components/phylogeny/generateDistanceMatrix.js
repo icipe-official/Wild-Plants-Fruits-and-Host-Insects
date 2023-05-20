@@ -39,6 +39,8 @@ function CalculateSimilarityMatrix(sequenceDict) {
   
       return similarity;
     }
+
+    //Neighbour Joining Algorithm
     if (sequenceDict) {
       let names = sequenceDict.map((obj) => obj.name); // get sequence names from data array
   

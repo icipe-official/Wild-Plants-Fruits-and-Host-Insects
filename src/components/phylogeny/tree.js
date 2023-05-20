@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 
 import CalculateSimilarityMatrix from "./generateDistanceMatrix";
 import { NeighborJoining } from "./generateDistanceMatrix";
-import CalculateSimilarityMatrixModified from "./modifiedKTurple";
 // export default function Newick() {
 
 export default function Tree() {
@@ -20,7 +19,9 @@ export default function Tree() {
     `${base_url}/api/plants/plantSpecies`,
     fetcher
   );
-
+  // handle input sequence
+  const [fastaInput, setFastaInput] = useState('');
+  const [fastaArray, setFastaArray] = useState([]);
   const data1 = [
     {
       name: "Sequence 1",
@@ -32,7 +33,7 @@ export default function Tree() {
     { name: "Sequence 5", sequence: "ATCGGCTAACTTT" },
   ];
   // console.log(CalculateSimilarityMatrix(data1));
-  var result = CalculateSimilarityMatrixModified(data1);
+  var result = CalculateSimilarityMatrix(data1);
   var newick = NeighborJoining(result.dist_mat, result.names);
   console.log("newick");
   console.log(newick);
@@ -76,7 +77,37 @@ if(data){
     height: '200px',
     overflowY: 'scroll',
   };
-  
+
+  const handleInputChange = (event) => {
+    setFastaInput(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const fastaLines = fastaInput.trim().split('\n');
+    let currentSequenceName = '';
+    let currentSequence = '';
+    const fastaArray = [];
+    for (let line of fastaLines) {
+      if (line.startsWith('>')) {
+        if (currentSequenceName !== '') {
+          fastaArray.push({
+            name: currentSequenceName.slice(1),
+            sequence: currentSequence
+          });
+          currentSequence = '';
+        }
+        currentSequenceName = line;
+      } else {
+        currentSequence += line.trim();
+      }
+    }
+    fastaArray.push({
+      name: currentSequenceName.slice(1),
+      sequence: currentSequence
+    });
+    setFastaArray(fastaArray);
+  };
 
   if (data) {
     const families= new Set(data.map(species=>species.plant_genera.plant_families.family_name));
