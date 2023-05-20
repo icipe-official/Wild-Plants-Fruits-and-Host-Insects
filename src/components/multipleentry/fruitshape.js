@@ -1,7 +1,6 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles"; // custom component  styles
 import Router from "next/router";
-
 import { useState } from "react";
 // custom styless
 const useStyles = makeStyles({
@@ -37,10 +36,10 @@ const useStyles = makeStyles({
     marginBottom: "0.5rem",
   },
 });
-export default function FruitColor({
-  fruit_color_array,
-  handleOnChangeColor,
-  checkedStateColor,
+export default function FruitShape({
+  fruit_shape_array,
+  handleOnChangeFruitShape,
+  checkedStateFruitShape,
 }) {
   const classes = useStyles();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
@@ -48,25 +47,25 @@ export default function FruitColor({
     <Box sx={{ marginLeft: isSmallScreen ? 0 : 2, width: "100%" }}>
       <Box sx={{ marginTop: 3 }}>
         <Typography variant="subtitle1" sx={{ color: "red" }}>
-          Color{" "}
+          Shape{" "}
           {/* <Box
                   sx={{
                     display: "inline-flex",
                     alignItems: "flex-end",
-                    // marginLeft: "4rem",
+                    // marginLeft: "3rem",
                   }}
                 >
-                  {message_fruit_color}
+                  {message_fruit_shape}
                 </Box> */}
         </Typography>
       </Box>
       <Box className={classes.component}>
-        {fruit_color_array.map((spine, index) => (
+        {fruit_shape_array.map((spine, index) => (
           <div
             key={spine}
-            onClick={() => handleOnChangeColor(index)}
+            onClick={() => handleOnChangeFruitShape(index)}
             className={`${classes.item} ${
-              checkedStateColor[index] ? classes.itemChecked : ""
+              checkedStateFruitShape[index] ? classes.itemChecked : ""
             }`}
           >
             {spine}

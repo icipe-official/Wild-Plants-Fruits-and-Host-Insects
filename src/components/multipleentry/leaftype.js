@@ -1,7 +1,6 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles"; // custom component  styles
 import Router from "next/router";
-
 import { useState } from "react";
 // custom styless
 const useStyles = makeStyles({
@@ -37,39 +36,43 @@ const useStyles = makeStyles({
     marginBottom: "0.5rem",
   },
 });
-export default function FruitColor({
-  fruit_color_array,
-  handleOnChangeColor,
-  checkedStateColor,
+
+export default function Leaftype({
+  leaf_type_array,
+  handleOnChangeLeafType,
+  checkedStateLeafType,
 }) {
   const classes = useStyles();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
-    <Box sx={{ marginLeft: isSmallScreen ? 0 : 2, width: "100%" }}>
-      <Box sx={{ marginTop: 3 }}>
-        <Typography variant="subtitle1" sx={{ color: "red" }}>
-          Color{" "}
+    <Box sx={{ width: "100%" }}>
+      <Box>
+        <Typography sx={{ color: "green", fontWeight: "bold" }}>
+          Leaf
+        </Typography>
+        <Typography variant="subtitle1" sx={{ color: "green" }}>
+          Type{" "}
           {/* <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "4rem",
-                  }}
-                >
-                  {message_fruit_color}
-                </Box> */}
+      sx={{
+        display: "inline-flex",
+        alignItems: "flex-end",
+        // marginLeft: "4rem",
+      }}
+    >
+      {message_leaf_type}
+    </Box> */}
         </Typography>
       </Box>
       <Box className={classes.component}>
-        {fruit_color_array.map((spine, index) => (
+        {leaf_type_array.map((type, index) => (
           <div
-            key={spine}
-            onClick={() => handleOnChangeColor(index)}
+            key={type}
+            onClick={() => handleOnChangeLeafType(index)}
             className={`${classes.item} ${
-              checkedStateColor[index] ? classes.itemChecked : ""
+              checkedStateLeafType[index] ? classes.itemChecked : ""
             }`}
           >
-            {spine}
+            {type}
           </div>
         ))}
       </Box>

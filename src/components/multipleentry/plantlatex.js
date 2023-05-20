@@ -1,8 +1,5 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles"; // custom component  styles
-import Router from "next/router";
-
-import { useState } from "react";
 // custom styless
 const useStyles = makeStyles({
   component: {
@@ -37,36 +34,36 @@ const useStyles = makeStyles({
     marginBottom: "0.5rem",
   },
 });
-export default function FruitColor({
-  fruit_color_array,
-  handleOnChangeColor,
-  checkedStateColor,
+export default function Plantlatex({
+  plant_latex_array,
+  handleOnChangePlantLatex,
+  checkedStatePlantLatex,
 }) {
   const classes = useStyles();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <Box sx={{ marginLeft: isSmallScreen ? 0 : 2, width: "100%" }}>
-      <Box sx={{ marginTop: 3 }}>
-        <Typography variant="subtitle1" sx={{ color: "red" }}>
-          Color{" "}
+      <Box sx={{ paddingTop: "1.5rem" }}>
+        <Typography variant="subtitle1" sx={{ color: "maroon" }}>
+          Latex{" "}
           {/* <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "flex-end",
-                    // marginLeft: "4rem",
-                  }}
-                >
-                  {message_fruit_color}
-                </Box> */}
+      sx={{
+        display: "inline-flex",
+        alignItems: "flex-end",
+        // marginLeft: "6rem",
+      }}
+    >
+      {message_plant_latex}
+    </Box> */}
         </Typography>
       </Box>
       <Box className={classes.component}>
-        {fruit_color_array.map((spine, index) => (
+        {plant_latex_array.map((spine, index) => (
           <div
             key={spine}
-            onClick={() => handleOnChangeColor(index)}
+            onClick={() => handleOnChangePlantLatex(index)}
             className={`${classes.item} ${
-              checkedStateColor[index] ? classes.itemChecked : ""
+              checkedStatePlantLatex[index] ? classes.itemChecked : ""
             }`}
           >
             {spine}
