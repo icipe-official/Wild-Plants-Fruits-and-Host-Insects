@@ -1,5 +1,5 @@
 import { makeStyles } from "@mui/styles";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -8,6 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import PlantDescription from "./plantDescriptionCard";
 
 // Define styles using makeStyles function
 const useStyles = makeStyles({
@@ -30,63 +34,45 @@ const useStyles = makeStyles({
  * @param {object} plant - The plant object that contains the name, description, and details of the plant.
  * @returns {JSX.Element} A Card component that displays the name, description, and details of the plant.
  */
-export default function PlantDescriptionMUI({ plants_data }) {
-  // Use the useStyles function to get styles
-  const classes = useStyles();
+export default function PlantDescriptioncomponent({ plants_data }) {
+  const [descriptionData, setdescriptionData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  // const [error, setError] = useState(null);
+  //   const classes = useStyles();
+  // const router = useRouter();
+  // const species = router.query.speciesName;
+  // console.log("species description");
+  // console.log(species);
+  // // useEffect(() => {
+  // //   fetch(`/api/plantsPage/${species}`)
+  // //     .then((res) => res.json())
+  // //     .then(
+  // //       (result) => {
+  // //         setLoaded(true);
+  // //         setdescriptionData(result);
+  // //       },
+  // //       (error) => {
+  // //         setLoaded(true);
+  // //         setError(error);
+  // //       }
+  // //     );
+  // // }, []);
+  // const fetcher = (url) => fetch(url).then((r) => r.json());
+  // const { data, error } = useSWR(`/api/plantsPage/${species}`, fetcher);
+  // // Use the useStyles function to get styles
+  // const classes = useStyles();
   // Use the useState hook to manage state
   const [expanded, setExpanded] = useState(false);
 
   // Define handleExpandClick function to handle button click
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
-  // Return the card component
-  return plants_data.map((specie) => (
-    <>
-      <Box sx={{ marginLeft: 2 }}>Description</Box>
-      <Box sx={{ marginLeft: 2 }}>
-        <Card key={specie.id} className={classes.card}>
-          <CardContent>
-            {/* Display the name of the plant using Typography component */}
-            {/* <Typography variant="h5" component="h2">
-          {plant.name}
-        </Typography> */}
-            {/* Display the description of the plant using Typography component, with styles to truncate text if it exceeds four lines */}
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              style={{
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                display: "-webkit-box",
-                WebkitLineClamp: 4,
-                WebkitBoxOrient: "vertical",
-              }}
-            >
-              {specie.description}
-            </Typography>
-          </CardContent>
-          {/* If expanded state is true, display the details of the plant using CardContent and Typography components */}
-          {expanded && (
-            <CardContent className={classes.expandedContent}>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {specie.description}
-              </Typography>
-            </CardContent>
-          )}
-          <CardActions disableSpacing>
-            {/* Display the "More Details" button using Button component */}
-            <Button
-              className={classes.expandButton}
-              onClick={handleExpandClick}
-            >
-              {expanded ? "Less Details" : "More Details"}
-            </Button>
-          </CardActions>
-        </Card>
-      </Box>
-    </>
-  ));
+  if (data && data.length > 0) {
+    console.log(" data description");
+
+    console.log(data);
+
+    // Return the card component
+    return <PlantDescription plants_data={data} />;
+    // <PlantDescription />;
+  }
 }

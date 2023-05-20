@@ -20,11 +20,15 @@ export default function LeafDetailValues({ leaves_data }) {
   // padding 3 ensures first line is mapped to fruits in the features
 
   return leaves_data.map((leaf, index) => (
-    <Box key={index} sx={{ paddingTop: "1rem", marginRight: "1rem" }}>
-      Leaf
+    <Box
+      key={index}
+      sx={{ paddingTop: "1rem", marginRight: "1rem", marginBottom: 2 }}
+    >
+      <Box sx={{ color: "green" }}>Leaf</Box>
+
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ width: "150px" }}>Type:</Box>
-        <Box sx={{ width: "200px" }}>
+        <Box sx={{ width: "55%" }}>Type:</Box>
+        <Box sx={{ width: "100%" }}>
           <DynamicValueCard
             key={leaf.id + "type"}
             keyName="type"
@@ -33,8 +37,8 @@ export default function LeafDetailValues({ leaves_data }) {
         </Box>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ width: "150px" }}>Margin:</Box>
-        <Box sx={{ width: "200px" }}>
+        <Box sx={{ width: "55%" }}>Margin:</Box>
+        <Box sx={{ width: "100%" }}>
           <DynamicValueCard
             yName="Leaf margin"
             value={leaf.plants_leaf_margins.map(
@@ -44,8 +48,8 @@ export default function LeafDetailValues({ leaves_data }) {
         </Box>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ width: "150px" }}>Arrangement:</Box>
-        <Box sx={{ width: "200px" }}>
+        <Box sx={{ width: "55%" }}>Arrangement:</Box>
+        <Box sx={{ width: "100%" }}>
           <DynamicValueCard
             key={leaf.id + "arrange"}
             keyName="Leaf arrangement"

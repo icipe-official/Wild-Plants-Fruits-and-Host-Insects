@@ -20,10 +20,11 @@ export default function FruitDetailValues({ fruits_data }) {
 
   return fruits_data.map((specie, index) => (
     <Box key={index} sx={{ paddingTop: "1rem", marginRight: "1rem" }}>
-      Leaf
+      <Box sx={{ color: "red" }}>Fruit</Box>
+
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ width: "150px" }}>Type:</Box>
-        <Box sx={{ width: "200px" }}>
+        <Box sx={{ width: "55%" }}>Type:</Box>
+        <Box sx={{ width: "100%" }}>
           <DynamicValueCard
             value={specie.plants_fruit_types.map(
               (fruit) => fruit.fruit_types.type_of_fruit + " "
@@ -32,8 +33,8 @@ export default function FruitDetailValues({ fruits_data }) {
         </Box>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ width: "150px" }}>Color:</Box>
-        <Box sx={{ width: "200px" }}>
+        <Box sx={{ width: "55%" }}>Color:</Box>
+        <Box sx={{ width: "100%" }}>
           <DynamicValueCard
             value={specie.plants_fruit_colors.map(
               (color) => color.fruit_colors.color + " "
@@ -42,8 +43,8 @@ export default function FruitDetailValues({ fruits_data }) {
         </Box>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ width: "150px" }}>Arrangement:</Box>
-        <Box sx={{ width: "200px" }}>
+        <Box sx={{ width: "55%" }}>Shape:</Box>
+        <Box sx={{ width: "100%" }}>
           <DynamicValueCard
             value={specie.plants_fruit_shapes.map(
               (shape) => shape.fruit_shapes.shape + " "
@@ -52,8 +53,8 @@ export default function FruitDetailValues({ fruits_data }) {
         </Box>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ width: "150px" }}>Arrangement:</Box>
-        <Box sx={{ width: "200px" }}>
+        <Box sx={{ width: "55%" }}>Size:</Box>
+        <Box sx={{ width: "100%" }}>
           <DynamicValueCard
             value={specie.plants_fruit_sizes.map(
               (size) => size.fruit_sizes.size + " "
@@ -62,8 +63,8 @@ export default function FruitDetailValues({ fruits_data }) {
         </Box>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ width: "150px" }}>Arrangement:</Box>
-        <Box sx={{ width: "200px" }}>
+        <Box sx={{ width: "55%" }}>Fruiting months:</Box>
+        <Box sx={{ width: "100%" }}>
           <DynamicValueCard
             value={specie.plants_fruiting_months.map(
               (month) => month.fruiting_months.month + " "
