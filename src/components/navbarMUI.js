@@ -1,8 +1,16 @@
-import { CssBaseline, IconButton,Toolbar,Typography, AppBar, useMediaQuery, Box } from "@mui/material";
+import {
+  CssBaseline,
+  IconButton,
+  Toolbar,
+  Typography,
+  AppBar,
+  useMediaQuery,
+  Box,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 /*
 This module defines a mobile-responsive navigation bar using Material-UI components. 
 
@@ -26,10 +34,7 @@ import {
   Container,
   ListItemText,
 } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
-import HomeIcon from '@mui/icons-material/Home';
-import InfoIcon from "@mui/icons-material/Info";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
+import CloseIcon from "@mui/icons-material/Close";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,12 +43,12 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     [theme.breakpoints.up("md")]: {
       width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft:0,
+      marginLeft: 0,
     },
   },
   appBarBackground: {
-    backgroundColor:"#074880",
-    height:"100%"
+    backgroundColor: "#074880",
+    height: "100%",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -51,11 +56,11 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundColor:"#074880"
-  },
+  // toolbar: theme.mixins.toolbar,
+  // drawerPaper: {
+  //   width: drawerWidth,
+  //   backgroundColor: "red",
+  // },
   closeIcon: {
     display: "flex",
     justifyContent: "flex-end",
@@ -71,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-    link: {
+  link: {
     textDecoration: "none",
     color: "yellow",
     fontSize: "14px",
@@ -92,11 +97,11 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
     borderBottom: "1px solid white",
   },
-  cancelicon :{
-    // position: 'absolute',
-    marginLeft: 7,
-    right: 0,
-  }
+  // cancelicon: {
+  //   // position: 'absolute',
+  //   marginLeft: 7,
+  //   right: 0,
+  // },
 }));
 
 export default function TopAppBar() {
@@ -111,122 +116,205 @@ export default function TopAppBar() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-console.log("menuOpen")
+  console.log("menuOpen");
 
-console.log(menuOpen)
-console.log("isSmallScreen")
+  console.log(menuOpen);
+  console.log("isSmallScreen");
 
-console.log(isSmallScreen)
+  console.log(isSmallScreen);
 
-return (
-  <Container>
-  <AppBar position="fixed" className={classes.AppBar}>
-    <CssBaseline />
-    <Toolbar>
-      {isSmallScreen ? (
-        <>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={handleMenuOpen}>
-            <MenuIcon />
-          </IconButton>
-          <Drawer
-            anchor="left"
-            open={menuOpen}
-            onClose={handleMenuClose}
-            >
-            <Box className={classes.appBarBackground}>
-            <Box  style={{ display:"flex",justifyContent:"right" }}>
-              <IconButton onClick={handleMenuClose} sx={{backgroundColor:"white"}}>
-                <CloseIcon className={classes.cancelicon}/>
+  return (
+    <Container>
+      <AppBar position="fixed" className={classes.AppBar}>
+        <CssBaseline />
+        <Toolbar>
+          {isSmallScreen ? (
+            <>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleMenuOpen}
+              >
+                <MenuIcon />
               </IconButton>
-            </Box>            
-            <List>
-              <ListItem ButtonBase>
-              <Link
-            href="/"
-            passHref
-            className={`${classes.link} ${
-              router.pathname === "/" ? classes.activeLink : ""
-            }`}
-          >Home
-          </Link>
-            </ListItem>
-              <ListItem ButtonBase>
-            <Link
-            href="/plants"
-            passHref
-            className={`${classes.link} ${
-              router.pathname === "/plants" ? classes.activeLink : ""
-            }`}>Plants and Fruits data
-          </Link>
-            </ListItem>
-            <ListItem ButtonBase>
-           <Link
-            href="/multipleentry"
-            passHref
-            className={`${classes.link} ${
-              router.pathname === "/multipleentry" ? classes.activeLink : ""
-            }`}>Multiple Entry Key
-            </Link>
-            </ListItem>
-            <ListItem>
-                <Link
-            href="/glossary"
-            passHref
-            className={`${classes.link} ${
-              router.pathname === "/glossary" ? classes.activeLink : ""
-            }`}
-          >
-            Plants and Fruits data
-          </Link> 
-            </ListItem>
-            </List>
-            {/* <IconButton onClick={handleMenuClose} >
+              <Drawer anchor="left" open={menuOpen} onClose={handleMenuClose}>
+                <Box className={classes.appBarBackground}>
+                  <Box
+                    style={{
+                      display: "flex",
+                      justifyContent: "right",
+                      backgroundColor: "#074880",
+                    }}
+                  >
+                    <IconButton
+                      onClick={handleMenuClose}
+                      sx={{ backgroundColor: "white" }}
+                    >
+                      <CloseIcon className={classes.cancelicon} />
+                    </IconButton>
+                  </Box>
+                  <List>
+                    <ListItem ButtonBase>
+                      <Link
+                        href="/"
+                        passHref
+                        className={`  ${classes.link} ${
+                          router.pathname === "/" ? classes.activeLink : ""
+                        }`}
+                        onClick={handleMenuClose}
+                      >
+                        Home
+                      </Link>
+                    </ListItem>
+                    <ListItem ButtonBase>
+                      <Link
+                        href={`/plants/1`}
+                        passHref
+                        className={`${classes.link} ${
+                          router.pathname.startsWith("/plants")
+                            ? classes.activeLink
+                            : ""
+                        }`}
+                        onClick={handleMenuClose}
+                      >
+                        Plants and Fruits data
+                      </Link>
+                    </ListItem>
+                    <ListItem ButtonBase>
+                      <Link
+                        href="/multipleentry"
+                        passHref
+                        className={`${classes.link} ${
+                          router.pathname.startsWith("/multipleentry")
+                            ? classes.activeLink
+                            : ""
+                        }`}
+                        onClick={handleMenuClose}
+                      >
+                        Multiple Entry Key
+                      </Link>
+                    </ListItem>
+                    <ListItem ButtonBase>
+                      <Link
+                        href="/insects"
+                        passHref
+                        className={`${classes.link} ${
+                          router.pathname.startsWith("/plants")
+                            ? classes.activeLink
+                            : ""
+                        }`}
+                        onClick={handleMenuClose}
+                      >
+                        Insects
+                      </Link>
+                    </ListItem>
+                    <ListItem>
+                      <Link
+                        href="/glossary"
+                        passHref
+                        className={`${classes.link} ${
+                          router.pathname === "/glossary"
+                            ? classes.activeLink
+                            : ""
+                        }`}
+                        onClick={handleMenuClose}
+                      >
+                        {" "}
+                        Glossary
+                      </Link>
+                    </ListItem>
+                    <ListItem ButtonBase>
+                      <Link
+                        href="/phylogeny"
+                        passHref
+                        className={`${classes.link} ${
+                          router.pathname.startsWith("/phylogeny")
+                            ? classes.activeLink
+                            : ""
+                        }`}
+                        onClick={handleMenuClose}
+                      >
+                        Phylogeny
+                      </Link>
+                    </ListItem>
+                  </List>
+                  {/* <IconButton onClick={handleMenuClose} >
               <CloseIcon className={classes.cancelicon}/>
             </IconButton> */}
-            </Box>
-          </Drawer>
-        </>
-      ):
-       (
-        <div className={classes.navlinks}>
-          <Link
-            href="/"
-            passHref
-            className={`${classes.link} ${
-              router.pathname === "/" ? classes.activeLink : ""
-            }`}
-          >Home
-          </Link>
-          <Link
-            href="/plants"
-            passHref
-            className={`${classes.link} ${
-              router.pathname === "/plants" ? classes.activeLink : ""
-            }`}>
-            Plants and Fruits data
-          </Link>
-          <Link
-            href="/multipleentry"
-            passHref
-            className={`${classes.link} ${
-              router.pathname === "/multipleentry" ? classes.activeLink : ""
-            }`}>
-            Multiple-Entry Key to Plants
-          </Link>
-          <Link
-            href="/insects"
-            passHref
-            className={`${classes.link} ${
-              router.pathname === "/insects" ? classes.activeLink : ""
-            }`}>
-            Insects
-          </Link>
-          </div>)}
-    </Toolbar>
-    </AppBar>
-    </Container>)
+                </Box>
+              </Drawer>
+            </>
+          ) : (
+            <div className={classes.navlinks}>
+              <Link
+                href="/"
+                passHref
+                className={`${classes.link} ${
+                  router.pathname === "/" ? classes.activeLink : ""
+                }`}
+              >
+                Home
+              </Link>
+              <Link
+                href={`/plants/1`}
+                passHref
+                className={`${classes.link} ${
+                  router.pathname.startsWith("/plants")
+                    ? classes.activeLink
+                    : ""
+                }`}
+              >
+                Plants and Fruits data
+              </Link>
+              <Link
+                href="/multipleentry"
+                passHref
+                className={`${classes.link} ${
+                  router.pathname.startsWith("/multipleentry")
+                    ? classes.activeLink
+                    : ""
+                }`}
+              >
+                Multiple-Entry Key to Plants
+              </Link>
+              <Link
+                href="/insects"
+                passHref
+                className={`${classes.link} ${
+                  router.pathname.startsWith("/insects")
+                    ? classes.activeLink
+                    : ""
+                }`}
+              >
+                Insects
+              </Link>
+              <Link
+                href="/glossary"
+                passHref
+                className={`${classes.link} ${
+                  router.pathname.startsWith("/glossary")
+                    ? classes.activeLink
+                    : ""
+                }`}
+              >
+                Glossary
+              </Link>
+              <Link
+                href="/phylogeny"
+                passHref
+                className={`${classes.link} ${
+                  router.pathname.startsWith("/phylogeny")
+                    ? classes.activeLink
+                    : ""
+                }`}
+              >
+                Phylogeny
+              </Link>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Container>
+  );
 }
