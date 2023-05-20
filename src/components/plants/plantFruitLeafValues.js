@@ -57,7 +57,7 @@ export default function PlantDetailsFeaturesValues() {
 
   // const { data, error, isLoading } = usePlantFeatures(species);
   const { data, error, isLoading } = useSWR(
-    `${base_url}/api/plantsPage/${species}`,
+    `${base_url}/api/plants/plantsPage/${species}`,
     fetcher
     // {
     //   revalidateOnMount: false,
