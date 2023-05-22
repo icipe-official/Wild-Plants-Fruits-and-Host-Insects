@@ -7,7 +7,6 @@ import { makeStyles } from "@mui/styles";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { usePlantFeatures } from "service/plantsService";
 import KsectorValues from "./distribution/KsectorValues";
 import UKWFValues from "./distribution/ukwfareas/ukwfvalues";
 import PlantDescription from "./plantDescriptionCard";
@@ -20,7 +19,6 @@ import { useMediaQuery } from "@mui/material";
 import { TreeView, TreeItem } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { SelectedItemsContext } from "./selectedFamily";
 // import PlantFamilyGenusSpecies from "./FamilyGenusSpecies/PlantGenusFamilySearchbar";
 import { useContext } from "react";
 const useStyles = makeStyles({
@@ -104,7 +102,7 @@ export default function PlantDetailsFeaturesValues() {
           // onStateUpdate={handleStateUpdate}
           /> */}
           {/* <Box sx={{ marginTop: 6 }}>contextValue</Box>; */}{" "}
-          <PlantSpecieFamilyGenus />
+          <PlantSpecieFamilyGenus h />
           <Box>
             {isSmallScreen ? (
               <TreeView
@@ -197,121 +195,3 @@ export default function PlantDetailsFeaturesValues() {
     }
   }
 }
-
-{
-  /* <Container> */
-}
-{
-  /* <QueryResult query={query}/> */
-}
-{
-  /* <SearchbarMUI /> */
-}
-{
-  /* <Box>
-  <PlantSpecieFamilyGenus />
-</Box> */
-}
-{
-  /* <Grid container columns={12}> */
-}
-{
-  /* <Grid xs={12} sm={6} md={5} lg={3}> */
-}
-{
-  /* <FruitDetailsFeaturesValues /> */
-}
-{
-  /* </Grid> */
-}
-{
-  /* <Grid xs={12} sm={6} md={5} lg={3}> */
-}
-{
-  /* <Box> */
-}
-{
-  /* <Box sx={{ fontWeight: "bold", marginTop: 2 }}>Distribution</Box> */
-}
-{
-  /* <KsectorUKWFValues /> */
-}
-{
-  /* <PlantDescriptioncomponent /> */
-}
-{
-  /* <Photostrial /> */
-}
-{
-  /* </Box> */
-}
-{
-  /* </Grid>
-  <Grid lg={3} spacing={1}>
-    <OpenLayersMap />
-  </Grid>
-  <Grid xs={12} sm={6} md={5} lg={3} spacing={1}>
-    <Box>
-      <Box sx={{ marginLeft: 1, marginTop: 2 }}>
-        <Box sx={{ fontWeight: "bold" }}>Insects reared</Box>
-        <Box>
-          <InsectsReared />
-        </Box>
-      </Box>
-    </Box>
-  </Grid> */
-}
-{
-  /* </Grid> */
-}
-{
-  /* </Container> */
-}
-{
-  /* ); */
-}
-// import PlantFeatureKeys from "./Plant/plantFeatureKeys";
-// import LeafFeatureKeys from "./Leaf/leafFeatureKeys";
-// import FruitFeatureKeys from "./Fruit/fruitFeatureKeys";
-// import { Box, useMediaQuery } from "@mui/material";
-// import { makeStyles } from "@mui/styles";
-
-// const useStyles = makeStyles({
-//   root: {
-//     display: 'row',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//   },
-// });
-
-// export default function PlantDetailsFeaturesValues({plants_data}) {
-//   const classes = useStyles();
-//   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-
-//   return (
-//     <Box className={classes.root} sx={{ marginTop: 2 }}>
-//       <Box sx={{ padding: 0.5 }}>
-//         <PlantFeatureKeys />
-//       </Box>
-//       {isSmallScreen ? (
-//         <>
-//           <Box sx={{ padding: 0.5 }}>
-//             <FruitFeatureKeys plants_data={plants_data} />
-//           </Box>
-//           <Box sx={{ padding: 0.5 }}>
-//             <LeafFeatureKeys plants_data={plants_data} />
-//           </Box>
-//         </>
-//       ) : (
-//         <>
-//           <Box sx={{ padding: 0.5 }}>
-//             <LeafFeatureKeys plants_data={plants_data} />
-//           </Box>
-//           <Box sx={{ padding: 0.5 }}>
-//             <FruitFeatureKeys plants_data={plants_data} />
-//           </Box>
-//         </>
-//       )}
-//     </Box>
-//   );
-// }
