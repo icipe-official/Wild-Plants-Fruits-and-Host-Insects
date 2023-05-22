@@ -133,10 +133,10 @@ export default function TreeTrial() {
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
-                  plant.nucleotide;
+                  plant.country;
                 return {
                   name: name,
-                  sequence: plant.genebank_accesion,
+                  sequence: plant.nucleotide,
                 };
               });
             }
@@ -184,10 +184,14 @@ export default function TreeTrial() {
                 return obj.insects_coi.map((insect) => {
                   const name =
                     obj.insect_genera.genus_name +
-                    "_" +
-                    obj.species_name.split(" ")[0] +
-                    "_" +
-                    insect.country;
+                      "_" +
+                      obj.species_name.split(" ")[0] +
+                      "_" +
+                      insect.country +
+                      "_" +
+                      obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
+                    null + "_";
+                  obj.plants_insects[0]?.species_name?.split(" ")[1];
                   return {
                     name: name,
                     sequence: insect.nucleotide,
@@ -231,10 +235,10 @@ export default function TreeTrial() {
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
-                  plant.nucleotide;
+                  plant.country;
                 return {
                   name: name,
-                  sequence: plant.genebank_accesion,
+                  sequence: plant.nucleotide,
                 };
               });
             }
@@ -268,10 +272,14 @@ export default function TreeTrial() {
               return obj.insects_coi.map((insect) => {
                 const name =
                   obj.insect_genera.genus_name +
-                  "_" +
-                  obj.species_name.split(" ")[0] +
-                  "_" +
-                  insect.country;
+                    "_" +
+                    obj.species_name.split(" ")[0] +
+                    "_" +
+                    insect.country +
+                    "_" +
+                    obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
+                  null + +"_";
+                obj.plants_insects[0]?.species_name?.slice(0, 5);
                 return {
                   name: name,
                   sequence: insect.nucleotide,
