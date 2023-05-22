@@ -37,7 +37,7 @@ export default function QueryResult({ query_data }) {
   );
 
   const { data: species_list1, error: specieserror1 } = useSWR(
-    `${base_url}/api/plantsPage/${first}`,
+    `${base_url}/api/plants/plantsPage/${first}`,
     fetcher
   );
   const { data: insectsreared, error: insectserror } = useSWR(
