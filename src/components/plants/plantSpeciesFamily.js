@@ -51,10 +51,10 @@ export default function PlantSpecieFamilyGenus(props) {
   // const { data, error } = useSWR(key, fetcher);
   // const base_url = "http://localhost:3000";
 
-  const base_url = "http://192.168.43.92:3000";
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const { data, error } = useSWR(
-    `${base_url}/api/plantsPage/${species}`,
+    `${base_url}/api/plants/plantsPage/${species}`,
     fetcher
   );
   // fetch(`/api/plantsPage/${species}`)
