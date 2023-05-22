@@ -10,17 +10,19 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     return sequencekmers;
   }
   function replace(kmers) {
-    let replaced_kmers = [];
-    for (let i = 0; i < kmers.length; i++) {
-      let kmer = kmers[i]
-        .replace(/C/g, "Y")
-        .replace(/T/g, "Y")
-        .replace(/A/g, "U")
-        .replace(/G/g, "U");
-      replaced_kmers.push(kmer);
-    }
+    const replaced_kmers = kmers.map((kmer) => {
+      return kmer.replace(/[CTAG]/g, (match) => {
+        if (match === "C" || match === "T") {
+          return "Y";
+        } else if (match === "A" || match === "G") {
+          return "U";
+        }
+      });
+    });
+
     return replaced_kmers;
   }
+
   // count the number of shared kmers
   function CountIntersection(s1, s2, k) {
     let s1_kmers = kmers(s1, k);
