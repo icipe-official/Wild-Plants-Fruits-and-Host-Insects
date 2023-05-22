@@ -25,7 +25,7 @@ export default async function getFamily(req, res) {
         species_name: true,
         max_latitude: true,
         min_latitude: true,
-        description: true,
+        plant_description: true,
         leaf_type: true,
         plant_genera: {
           select: {
