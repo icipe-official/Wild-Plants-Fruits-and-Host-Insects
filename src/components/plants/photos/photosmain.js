@@ -26,7 +26,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
   const toggleExpandImage = () => {
     setIsExpanded(!isExpanded);
   };
-  console.log(" photo");
+  console.log(" photos data");
   console.log(photos_data);
   try {
     if (photos_data) {

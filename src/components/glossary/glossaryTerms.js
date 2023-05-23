@@ -369,7 +369,7 @@ export default function GlossaryAll() {
                     <PhotosComponent
                       photos_data={filtered_examples}
                       selectedIndex={selectedIndex}
-                    />
+                    />s
                   </Box>
                 </Box>
               </Box>
