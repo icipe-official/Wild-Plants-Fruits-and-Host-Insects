@@ -46,7 +46,7 @@ export default function TreeTrial() {
     // const newOrganism = event.target.value;
 
     // Clear the previous data
-    mutate(`${base_url}/api/plants/plantSpecies`, null, false);
+    mutate(`${base_url}/api/plants/species`, null, false);
     mutate(`${base_url}/api/insects/all/coi`, null, false);
 
     // Update the selected organism
@@ -55,7 +55,7 @@ export default function TreeTrial() {
     handleChange(event);
   };
   // Create the URL based on the selected organism
-  const url = `${base_url}/api/${selectedOrganism}/plantSpecies`;
+  const url = `${base_url}/api/${selectedOrganism}/species`;
 
   const { data, error, isLoading } = useSWR(url, fetcher);
   console.log(data);
