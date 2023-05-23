@@ -17,11 +17,7 @@ export default function HomePage() {
       <Box sx={{ marginTop: 5 }}>
         <Image
           //loader={myLoader}
-<<<<<<< HEAD
           src={`${base_path}/home.jpg`}
-=======
-          src="/home.jpg"
->>>>>>> f9e842dc172b57df827eac0fe358d977e42d439c
           alt="Picture of the plant"
           height={400}
           width={500}
