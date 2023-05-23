@@ -30,7 +30,8 @@ export default function InsectQueryComponent({ genus_data }) {
     setSelectedIndex(index);
   };
   const handlebacknavigate = (event) => {
-    const base_url = "http://192.168.43.92:3000";
+    const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+
     Router.push(`${base_url}/insects`);
   };
   if (genus_data) {
