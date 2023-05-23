@@ -4,8 +4,7 @@ import Image from "next/legacy/image";
 import Router from "next/router";
 
 //This component will be receiving data from getstaticprops
-export default function InsectPhotos({ photos_data }) {  
-  const base_path = process.env.NEXT_BASE_PATH;
+export default function InsectPhotos({ photos_data }) {
   const photos = photos_data.map((insect) =>
     insect.insect_photos.map((y) => y.photo_id)
   )[0]; // [0] extract photonames from [[]] object

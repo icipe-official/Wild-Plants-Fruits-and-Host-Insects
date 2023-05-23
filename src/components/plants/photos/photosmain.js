@@ -7,7 +7,6 @@ import Image from "next/image";
 export default function PhotosComponent({ photos_data, selectedIndex }) {
   const [photoData, setphotoData] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const base_path = process.env.NEXT_BASE_PATH;
   //control next and previous image
   const [currentImage, setCurrentImage] = useState(0);
 
