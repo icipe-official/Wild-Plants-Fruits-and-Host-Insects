@@ -4,6 +4,7 @@ import Head from "next/head";
 import { Box, Container } from "@mui/material";
 
 export default function HomePage() {
+  const base_path = process.env.NEXT_BASE_PATH
   return (
     // ntitle of the loaded file to show on nav ar
     <Container style={{ marginTop: 60 }}>
@@ -16,7 +17,7 @@ export default function HomePage() {
       <Box sx={{ marginTop: 5 }}>
         <Image
           //loader={myLoader}
-          src="/photo6.jpg"
+          src={`${base_path}/home.jpg`}
           alt="Picture of the plant"
           height={400}
           width={500}

@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function PhotosComponent({ photos_data, selectedIndex }) {
   const [photoData, setphotoData] = useState([]);
   const [loaded, setLoaded] = useState(false);
-
+  const base_path = process.env.NEXT_BASE_PATH;
   //control next and previous image
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -41,7 +41,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
             {photos.map((specie) => (
               <Box key={specie.id}>
                 <Image
-                  src={`/plants/${specie}`}
+                  src={`${base_path}/plants/${specie}`}
                   alt="Picture of the plant"
                   width={500}
                   height={400}
@@ -55,7 +55,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
         return (
           <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
             <Image
-              src="/plants/noImage.jpg"
+              src={`${base_path}/plants/noImage.jpg`}
               alt="No Image"
               width={500}
               height={400}
@@ -85,7 +85,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
         return (
           <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
             <Image
-              src={`/plants/${photos[currentImage]}`}
+              src={`plants/${photos[currentImage]}`}
               alt="No Image"
               width={500}
               height={400}

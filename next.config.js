@@ -56,6 +56,7 @@ const nextConfig = {
 // next.config.js
 module.exports = nextConfig;
 module.exports = {
+  basePath: '/wpfhi',
   images: {
     unoptimized: true,
   },
