@@ -46,7 +46,7 @@ export default function TreeTrial() {
   const handleOrganismChange = (event) => {
     // const newOrganism = event.target.value;
 
-    // Clear the previous data
+    // Clear the previous data and refetch based on selecetd organism and change api to that of selected organism
     mutate(`${base_url}/api/plants/species`, null, false);
     mutate(`${base_url}/api/insects/all/coi`, null, false);
 
@@ -108,7 +108,9 @@ export default function TreeTrial() {
       if (selectedOrganism === "plants") {
         console.log("kmer at handlechange");
         // if(data){
-        const selectedValue = event.target.value;
+        const selectedValue =
+          (event.target && event.target.value) || "Select family"; // assign default value if target value is not defined
+
         setSelectedFamily(selectedValue);
 
         const filteredData = data.filter(
@@ -168,7 +170,8 @@ export default function TreeTrial() {
         if (selectedOrganism == "insects") {
           console.log("insect kmer at handlechange");
           // if(data){
-          const selectedValue = event.target.value;
+          const selectedValue =
+            (event.target && event.target.value) || "Select family"; // assign default value if target value is not defined
           setSelectedOrder(selectedValue);
 
           const filteredData = data.filter(
@@ -356,9 +359,12 @@ export default function TreeTrial() {
   const handleInputChangefasta = (event) => {
     setFastaInput(event.target.value);
   };
-  //handle input data
+  //handle input fasta sequence
   const handleSubmitfasta = (event) => {
     if (fastaInput) {
+      //remove current family name
+      setSelectedFamily("Select family");
+
       console.log("fasta array");
       console.log(fastaInput);
 
@@ -398,6 +404,8 @@ export default function TreeTrial() {
       setFastaArray(fastaArray);
       console.log("fastaArray");
       if (fastaArray) {
+        setSelectedFamily("Select family");
+
         console.log(fastaArray);
         var result = CalculateSimilarityMatrixModified(fastaArray, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
@@ -405,9 +413,11 @@ export default function TreeTrial() {
         var newick = NeighborJoining(result.dist_mat, result.names);
         console.log("newick");
         setNewickData(newick);
+        setDownload(newick);
       }
     }
     setFastaInput("");
+    setSelectedFamily("");
   };
 
   //handle input of newick
@@ -419,11 +429,16 @@ export default function TreeTrial() {
     event.preventDefault();
 
     if (newickInput) {
+      setSelectedFamily("Select family");
+
       console.log("newick input");
       console.log(newickInput);
       console.log("newick input");
       setNewickData(newickInput);
+      setDownload(newickInput);
     }
+    // delete newick input on submit
+    setNewickInput("");
   };
 
   if (data) {

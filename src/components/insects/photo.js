@@ -74,7 +74,6 @@ export default function InsectPhotos({ photos_data }) {
             Next Image
           </button>
         </Box>
-    
       </Box>
     );
   }

@@ -257,8 +257,8 @@ model plants_fruiting_months {
 model plants_insects {
   plant_id  Int
   insect_id Int
-  insects   insects @relation(fields: [insect_id], references: [id], onDelete: Cascade)
-  plants    plants  @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  insects   insects @relation(fields: [insect_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_insects_regions_regions")
+  plants    plants  @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_plants_insects_plant")
 
   @@id([plant_id, insect_id])
 }

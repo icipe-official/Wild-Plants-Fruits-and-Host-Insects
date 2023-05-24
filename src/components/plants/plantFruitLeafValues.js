@@ -57,9 +57,6 @@ export default function PlantDetailsFeaturesValues() {
   const { data, error, isLoading } = useSWR(
     `${base_url}/api/plants/plantsPage/${species}`,
     fetcher
-    // {
-    //   revalidateOnMount: false,
-    // }
   );
 
   if (error) return <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
