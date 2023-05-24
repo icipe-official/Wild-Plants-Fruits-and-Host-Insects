@@ -90,38 +90,71 @@
 //   });
 // });
 
-const express = require('express');
-const { Pool } = require('pg');
-const next = require('next');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+// const express = require('express');
+// const { Pool } = require('pg');
+// const next = require('next');
+// const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const dev = process.env.NODE_ENV !== 'production';
+// const dev = process.env.NODE_ENV !== 'production';
+// const app = next({ dev });
+// const handle = app.getRequestHandler();
+
+// const server = express();
+
+// server.use(
+//   '/plants',
+//   createProxyMiddleware({
+//     target: 'http://localhost:3000', //back end api url
+//     changeOrigin: true,
+//     pathRewrite: {
+//       // rewrite /plants/:id to /:id
+//       '^/plants/': '/',
+//     },
+//   })
+// );
+
+// server.all('*', (req, res) => {
+//   return handle(req, res);
+// });
+
+// const port = process.env.PORT || 3000;
+
+// app.prepare().then(() => {
+//   server.listen(port, '0.0.0.0', (err) => {
+//     if (err) throw err;
+//     console.log(`> Ready on http://0.0.0.0:${port}`);
+//   });
+// });
+const express = require("express");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+const next = require("next");
+
+const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const server = express();
-
-server.use(
-  '/plants',
-  createProxyMiddleware({
-    target: 'http://localhost:3000', //back end api url
-    changeOrigin: true,
-    pathRewrite: {
-      // rewrite /plants/:id to /:id
-      '^/plants/': '/',
-    },
-  })
-);
-
-server.all('*', (req, res) => {
-  return handle(req, res);
-});
-
-const port = process.env.PORT || 3000;
-
 app.prepare().then(() => {
-  server.listen(port, '0.0.0.0', (err) => {
+  const server = express();
+
+  // server.use(
+  //   "/plants",
+  //   createProxyMiddleware({
+  //     target: process.env.NEXT_PUBLIC_API_BASE_URL,
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       "^/plants/": "/", // rewrite /plants/:id to /:id
+  //     },
+  //   })
+  // );
+
+  server.all("*", (req, res) => {
+    return handle(req, res);
+  });
+
+  const port = process.env.PORT || 3000;
+
+  server.listen(port, (err) => {
     if (err) throw err;
-    console.log(`> Ready on http://0.0.0.0:${port}`);
+    console.log(`> Ready on http://localhost:${port}`);
   });
 });

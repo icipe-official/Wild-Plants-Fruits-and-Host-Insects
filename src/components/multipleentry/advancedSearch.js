@@ -8,7 +8,6 @@ import {
   InputLabel,
   useMediaQuery,
 } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import Router from "next/router";
 import useSWR from "swr";

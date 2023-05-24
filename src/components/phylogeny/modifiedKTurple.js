@@ -1,6 +1,8 @@
 function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
   // const [kmer,Setkmer]=useState(5);
   function kmers(sequence, kmer) {
+    console.log("sequences ready for processing");
+    console.log(sequence);
     // Remove gaps and N's from the sequence
     sequence = sequence.replace(/-/g, "").replace(/N/g, "");
     let sequencekmers = [];
