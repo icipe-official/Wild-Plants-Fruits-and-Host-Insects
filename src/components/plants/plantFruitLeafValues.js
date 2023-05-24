@@ -4,7 +4,7 @@ import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import FruitDetailValues from "./Fruit/fruitDetailValues";
 import { makeStyles } from "@mui/styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import KsectorValues from "./distribution/KsectorValues";
@@ -13,14 +13,14 @@ import PlantDescription from "./plantDescriptionCard";
 import PhotosComponent from "./photos/photosmain";
 import OpenLayersMap from "./distribution/map";
 import InsectsRearedfromPlants from "./insectsRared/insects";
-import PlantFamilyGenusSpecies from "./FamilyGenusSpecies/PlantGenusFamilySearchbar";
+// import PlantFamilyGenusSpecies from "./FamilyGenusSpecies/PlantGenusFamilySearchbar";
 import PlantSpecieFamilyGenus from "./plantSpeciesFamily";
 import { useMediaQuery } from "@mui/material";
 import { TreeView, TreeItem } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // import PlantFamilyGenusSpecies from "./FamilyGenusSpecies/PlantGenusFamilySearchbar";
-import { useContext } from "react";
+// import { useContext } from "react";
 const useStyles = makeStyles({
   root: {
     display: "row",
@@ -50,8 +50,8 @@ export default function PlantDetailsFeaturesValues() {
   const classes = useStyles();
   console.log("species id");
   console.log(species);
-  const contextValue = useContext(PlantFamilyGenusSpecies);
-  console.log("contextValue");
+  // const contextValue = useContext(PlantFamilyGenusSpecies);
+  // console.log("contextValue");
 
   // const { data, error, isLoading } = usePlantFeatures(species);
   const { data, error, isLoading } = useSWR(
@@ -84,9 +84,9 @@ export default function PlantDetailsFeaturesValues() {
       })
     );
     if (data) {
-      console.log("contextValue yyyy");
+      // console.log("contextValue yyyy");
 
-      console.log(contextValue);
+      // console.log(contextValue);
 
       return (
         <Container

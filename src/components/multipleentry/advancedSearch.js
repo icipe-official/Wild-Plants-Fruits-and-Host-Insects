@@ -125,7 +125,6 @@ export default function QuerySelectAdvancedSearch() {
   // const base_url = "http://localhost:3000";
 
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
-
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR(
     `${base_url}/api/multipleEntry/allmultipleQuery`,
