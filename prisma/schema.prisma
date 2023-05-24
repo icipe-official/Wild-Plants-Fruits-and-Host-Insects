@@ -87,6 +87,7 @@ model insect_photos {
   insect_id Int
   photo_id  String  @unique @db.VarChar(10)
   sex       String? @db.VarChar(30)
+  insects   insects @relation(fields: [insect_id], references: [id], onDelete: Cascade)
 
   @@id([insect_id, photo_id])
 }
@@ -105,11 +106,13 @@ model insects {
   sub_family_id       Int?
   family_id           Int?
   order_id            Int?
+  insect_photos       insect_photos[]
   insect_families     insect_families?     @relation(fields: [family_id], references: [id], onDelete: Cascade)
   insect_genera       insect_genera?       @relation(fields: [genus_id], references: [id], onDelete: Cascade)
   insect_orders       insect_orders?       @relation(fields: [order_id], references: [id], onDelete: Cascade)
   insect_sub_families insect_sub_families? @relation(fields: [sub_family_id], references: [id], onDelete: Cascade)
   insects_coi         insects_coi[]
+  insects_regions     insects_regions[]
   plants_insects      plants_insects[]
 }
 
@@ -125,6 +128,7 @@ model insects_coi {
 model insects_regions {
   insect_id Int
   region_id Int
+  insects   insects @relation(fields: [insect_id], references: [id], onDelete: Cascade)
   regions   regions @relation(fields: [region_id], references: [id], onDelete: Cascade)
 
   @@id([insect_id, region_id])
