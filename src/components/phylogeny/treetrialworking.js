@@ -47,7 +47,7 @@ export default function TreeTrial() {
     // const newOrganism = event.target.value;
 
     // Clear the previous data
-    mutate(`${base_url}/api/plants/plantSpecies`, null, false);
+    mutate(`${base_url}/api/plants/species`, null, false);
     mutate(`${base_url}/api/insects/all/coi`, null, false);
 
     // Update the selected organism
@@ -56,17 +56,17 @@ export default function TreeTrial() {
     handleChange(event);
   };
   // Create the URL based on the selected organism
-  const url = `${base_url}/api/${selectedOrganism}/plantSpecies`;
+  const url = `${base_url}/api/${selectedOrganism}/species`;
 
   const { data, error, isLoading } = useSWR(url, fetcher);
   console.log(data);
   const [newickData, setNewickData] = useState(
-    "((A:0.1,B:0.2)80:0.3,(C:0.4,D:0.5)95:0.6)90;"
-    // "(Avicennia-marina-country_unknown49:0.0000022752,((((((((((((((((((((((((((((((((((((((((((((((((((((((Avicennia-marina-country_unknown50:0.0000000000,Avicennia-marina-country_unknown91:0.0000000000):0.0000000000,Avicennia-marina-country_unknown84:0.0000000000):0.0000000000,Avicennia-marina-country_unknown61:0.0000000000):0.0000000000,Avicennia-marina-country_unknown66:0.0000000000):0.0000000000,Avicennia-marina-country_unknown62:0.0000000000):0.0000000000,Avicennia-marina-country_unknown63:0.0000000000):0.0000000000,Avicennia-marina-country_unknown53:0.0000000000):0.0000000000,Avicennia-marina-country_unknown57:0.0000000000):0.0000000000,Avicennia-marina-country_unknown81:0.0000000000):0.0000000000,Avicennia-marina-country_unknown92:0.0000000000):0.0000000000,Avicennia-marina-country_unknown54:0.0000000000):0.0000000000,Avicennia-marina-country_unknown77:0.0000000000):0.0000000000,Avicennia-marina-country_unknown59:0.0000000000):0.0000000000,Avicennia-marina-country_unknown70:0.0000000000):0.0000000000,Avicennia-marina-country_unknown90:0.0000000000):0.0000000000,Avicennia-marina-country_unknown72:0.0000000000):0.0000000000,Avicennia-marina-country_unknown104:0.0000000000):0.0000000000,Avicennia-marina-country_unknown60:0.0000000000):0.0000000000,Avicennia-marina-country_unknown95:0.0000000000):0.0000000000,Avicennia-marina-country_unknown93:0.0000000000):0.0000000000,Avicennia-marina-country_unknown55:0.0000000000):0.0000000000,Avicennia-marina-country_unknown105:0.0000000000):0.0000000000,Avicennia-marina-country_unknown96:0.0000000000):0.0000000000,Avicennia-marina-country_unknown52:0.0000000000):0.0000000000,Avicennia-marina-country_unknown76:0.0000000000):0.0000000000,Avicennia-marina-country_unknown74:0.0000000000):0.0000000000,Avicennia-marina-country_unknown69:0.0000000000):0.0000000000,Avicennia-marina-country_unknown83:0.0000000000):0.0000000000,Avicennia-marina-country_unknown89:0.0000000000):0.0000000000,Avicennia-marina-country_unknown97:0.0000000000):0.0000000000,Avicennia-marina-country_unknown79:0.0000000000):0.0000000000,Avicennia-marina-country_unknown67:0.0000000000):0.0000000000,Avicennia-marina-country_unknown73:0.0000000000):0.0000000000,Avicennia-marina-country_unknown94:0.0000000000):0.0000000000,Avicennia-marina-country_unknown86:0.0000000000):0.0000000000,Avicennia-marina-country_unknown68:0.0000000000):0.0000000000,Avicennia-marina-country_unknown88:0.0000000000):0.0000000000,Avicennia-marina-country_unknown75:0.0000000000):0.0000000000,Avicennia-marina-country_unknown82:0.0000000000):0.0000000000,Avicennia-marina-country_unknown98:0.0000000000):0.0000000000,Avicennia-marina-country_unknown80:0.0000000000):0.0000000000,Avicennia-marina-country_unknown87:0.0000000000):0.0000000000,Avicennia-marina-country_unknown71:0.0000000000):0.0000000000,Avicennia-marina-country_unknown56:0.0000000000):0.0000000000,Avicennia-marina-country_unknown99:0.0000000000):0.0000000000,Avicennia-marina-country_unknown58:0.0000000000):0.0000000000,Avicennia-marina-country_unknown78:0.0000000000):0.0000000000,Avicennia-marina-country_unknown106:0.0000000000):0.0000000000,Avicennia-marina-country_unknown100:0.0000000000):0.0000010000,Avicennia-marina-country_unknown51:0.0000010000)52:0.0000010000,(Avicennia-marina-country_unknown85:0.0090560338,Avicennia-marina-country_unknown102:0.0011562542)68:0.0011507546)74:0.0006551628,Avicennia-marina-country_unknown101:0.0000010000)54:0.0000010000,Avicennia-marina-India65:0.0000010000)56:0.0000010000,Avicennia-marina-India64:0.0054971285)71:0.0014232247,Avicennia-marina-India103:0.0011484884)"
+    "((Avicennia_marina_India:2.5945481885695,Avicennia_marina_India:2.421634775175007):1.1444710519935573,((((((Avicennia_marina_India:10.442779113449433,Avicennia_marina_India:10.039623934933584):9.024870676155427,Avicennia_marina_India:8.651805348156174):7.728809363806545,Avicennia_marina_India:7.421956114418514):6.4343228505276695,Avicennia_marina_India:6.193599414325327):5.0925923673062075,Avicennia_marina_India:4.903811288091093):3.7965310549573257,Avicennia_marina_South Africa:3.673962054353434):1.1444710519935573):0.5722355259967786"
   );
-  const [selectedFamily, setSelectedFamily] = useState("Malvaceae");
+  // "((A:0.1,B:0.2)80:0.3,(C:0.4,D:0.5)95:0.6)90;"
+  const [selectedFamily, setSelectedFamily] = useState("Acanthaceae");
   const [kmer, setkmer] = useState(9);
-  const [filteredFamily, setfilteredFamily] = useState("Malvaceae");
+  const [filteredFamily, setfilteredFamily] = useState("Acanthaceae");
   const [selecteorder, setSelectedOrder] = useState("Braconidae");
   const [filteredOrder, setFilteredOrder] = useState("Braconidae");
   const [download, setDownload] = useState([]);
@@ -129,21 +129,27 @@ export default function TreeTrial() {
           .map((obj) => {
             if (obj.plants_matk.length > 0) {
               return obj.plants_matk.map((plant) => {
-                const name =
-                  obj.plant_genera.genus_name +
-                  "_" +
-                  obj.species_name.split(" ")[0] +
-                  "_" +
-                  plant.country;
-                return {
-                  name: name,
-                  sequence: plant.nucleotide,
-                };
+                if (plant.nucleotide !== null) {
+                  const name =
+                    obj.plant_genera.genus_name +
+                    "_" +
+                    obj.species_name.split(" ")[0] +
+                    "_" +
+                    plant.country;
+                  return {
+                    name: name,
+                    sequence: plant.nucleotide,
+                  };
+                  //avoid processing any undefined values if there is no sequence
+                } else {
+                  return null;
+                }
               });
             }
           })
           .filter(Boolean)
-          .flat(); // returns one array from nested arrays
+          .flat()
+          .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values
         console.log("sequences");
         console.log(sequences);
         var result = CalculateSimilarityMatrixModified(sequences, kmer);
@@ -183,27 +189,36 @@ export default function TreeTrial() {
             .map((obj) => {
               if (obj.insects_coi.length > 0) {
                 return obj.insects_coi.map((insect) => {
-                  const name =
-                    obj.insect_genera.genus_name +
-                      "_" +
-                      obj.species_name.split(" ")[0] +
-                      "_" +
-                      insect.country +
-                      "_" +
-                      obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
-                    null + "_";
-                  obj.plants_insects[0]?.species_name?.split(" ")[1];
-                  return {
-                    name: name,
-                    sequence: insect.nucleotide,
-                  };
+                  //check if there is nucleotide sequence
+                  if (insect.nucleotide !== null) {
+                    const name =
+                      obj.insect_genera.genus_name +
+                        "_" +
+                        obj.species_name.split(" ")[0] +
+                        "_" +
+                        insect.country +
+                        "_" +
+                        obj.plants_insects[0]?.plants.plant_genera
+                          ?.genus_name ?? null + "_";
+                    obj.plants_insects[0]?.species_name?.split(" ")[1];
+                    return {
+                      name: name,
+                      sequence: insect.nucleotide,
+                    };
+                    //avoid processing any undefined values if there is no sequence
+                  } else {
+                    return null;
+                  }
                 });
+              } else {
+                return null;
               }
             })
             .filter(Boolean)
-            .flat(); // returns one array from nested arrays
+            .flat()
+            .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values
           console.log("insect sequences");
-          console.log(sequences);
+          console.log(sequences.filter((value) => value !== null));
           var result = CalculateSimilarityMatrixModified(sequences, kmer);
           // var result = CalculateSimilarityMatrix(sequences);
 
@@ -217,7 +232,8 @@ export default function TreeTrial() {
           console.log(kmer);
         }
       }
-    } else {
+    } //option 2 when genus is selected
+    else {
       if (selectedOrganism == "plants") {
         const filteredData = data.filter(
           (dat) =>
@@ -231,23 +247,32 @@ export default function TreeTrial() {
           .map((obj) => {
             if (obj.plants_matk.length > 0) {
               return obj.plants_matk.map((plant) => {
-                const name =
-                  obj.plant_genera.genus_name +
-                  "_" +
-                  obj.species_name.split(" ")[0] +
-                  "_" +
-                  plant.country;
-                return {
-                  name: name,
-                  sequence: plant.nucleotide,
-                };
+                if (plant.nucleotide !== null) {
+                  console.log("plant has null nucleotide");
+                  const name =
+                    obj.plant_genera.genus_name +
+                    "_" +
+                    obj.species_name.split(" ")[0] +
+                    "_" +
+                    plant.country;
+                  return {
+                    name: name,
+                    sequence: plant.nucleotide,
+                  };
+                }
+                // avoid processing any undefine
+                else {
+                  return null;
+                }
               });
             }
           })
           .filter(Boolean)
-          .flat(); // retuns one array from the nested arrays
+          .flat()
+          .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values
         console.log("plant sequences");
         console.log(sequences);
+
         var result = CalculateSimilarityMatrixModified(sequences, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
 
@@ -271,25 +296,31 @@ export default function TreeTrial() {
           .map((obj) => {
             if (obj.insects_coi.length > 0) {
               return obj.insects_coi.map((insect) => {
-                const name =
-                  obj.insect_genera.genus_name +
-                    "_" +
-                    obj.species_name.split(" ")[0] +
-                    "_" +
-                    insect.country +
-                    "_" +
-                    obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
-                  null + +"_";
-                obj.plants_insects[0]?.species_name?.slice(0, 5);
-                return {
-                  name: name,
-                  sequence: insect.nucleotide,
-                };
+                if (insect.nucleotide !== null) {
+                  const name =
+                    obj.insect_genera.genus_name +
+                      "_" +
+                      obj.species_name.split(" ")[0] +
+                      "_" +
+                      insect.country +
+                      "_" +
+                      obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
+                    null + +"_";
+                  obj.plants_insects[0]?.species_name?.slice(0, 5);
+                  return {
+                    name: name,
+                    sequence: insect.nucleotide,
+                  };
+                  //avoid processing any undefined values if there is no sequence
+                } else {
+                  return null;
+                }
               });
             }
           })
           .filter(Boolean)
-          .flat(); // retuns one array from the nested arrays
+          .flat()
+          .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values
         console.log("insect sequences");
         console.log(sequences);
         var result = CalculateSimilarityMatrixModified(sequences, kmer);

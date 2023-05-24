@@ -39,6 +39,20 @@ export default async function handle(req, res) {
               order_name: true,
             },
           },
+          plants_insects: {
+            select: {
+              plants: {
+                select: {
+                  species_name: true,
+                  plant_genera: {
+                    select: {
+                      genus_name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
           insects_coi: {
             select: {
               nucleotide: true,

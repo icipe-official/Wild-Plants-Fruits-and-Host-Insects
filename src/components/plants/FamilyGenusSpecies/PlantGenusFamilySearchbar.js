@@ -43,7 +43,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
   // const base_url = "http://localhost:3000";
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { data, error, isLoading } = useSWR(
-    `${base_url}/api/plants/plantSpecies`,
+    `${base_url}/api/plants/species`,
     fetcher
     // {
     //   revalidateOnMount: false,
