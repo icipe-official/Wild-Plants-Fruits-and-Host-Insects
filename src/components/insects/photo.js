@@ -5,6 +5,7 @@ import Router from "next/router";
 
 //This component will be receiving data from getstaticprops
 export default function InsectPhotos({ photos_data }) {
+  const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
   const photos = photos_data.map((insect) =>
     insect.insect_photos.map((y) => y.photo_id)
   )[0]; // [0] extract photonames from [[]] object
@@ -25,7 +26,7 @@ export default function InsectPhotos({ photos_data }) {
           <Box key={specie.id}>
             <Box key={specie.id}>
               <Image
-                src={`${photos[0]}.jpg`}
+                src={`${base_path}/insects/${photos[0]}.jpg`}
                 alt="Picture of the insect"
                 width={500}
                 height={400}
@@ -40,7 +41,7 @@ export default function InsectPhotos({ photos_data }) {
     return (
       <Box sx={{ marginTop: 8, marginLeft: 2, paddingBottom: 2 }}>
         <Image
-          src={`noImage.jpg`}
+          src={`${base_path}/noImage.jpg`}
           alt="No Image"
           width={500}
           height={400}
@@ -59,7 +60,7 @@ export default function InsectPhotos({ photos_data }) {
     return (
       <Box sx={{ marginTop: 8, marginLeft: 2, paddingBottom: 2 }}>
         <Image
-          src={`${photos[open]}.jpg`}
+          src={`${base_path}/insects/${photos[open]}.jpg`}
           alt="No Image"
           width={500}
           height={400}

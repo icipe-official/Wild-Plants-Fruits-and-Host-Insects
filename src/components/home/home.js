@@ -4,7 +4,7 @@ import Head from "next/head";
 import { Box, Container } from "@mui/material";
 
 export default function HomePage() {
-  const base_path = process.env.NEXT_BASE_PATH
+  const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
   return (
     // ntitle of the loaded file to show on nav ar
     <Container style={{ marginTop: 60 }}>

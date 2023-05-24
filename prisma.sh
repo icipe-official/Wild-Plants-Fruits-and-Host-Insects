@@ -1,4 +1,4 @@
-#!/bin/bas
+#!/bin/bash
 npm i --save-dev prisma@latest --force 
 npm i @prisma/client@latest --force
 npx prisma init
