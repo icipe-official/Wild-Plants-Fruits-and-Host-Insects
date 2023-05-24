@@ -25,7 +25,7 @@ export default function InsectPhotos({ photos_data }) {
           <Box key={specie.id}>
             <Box key={specie.id}>
               <Image
-                src={`/insects/${photos[0]}.jpg`}
+                src={`/insectPhotos/${photos[0]}.jpg`}
                 alt="Picture of the insect"
                 width={500}
                 height={400}
@@ -40,7 +40,7 @@ export default function InsectPhotos({ photos_data }) {
     return (
       <Box sx={{ marginTop: 8, marginLeft: 2, paddingBottom: 2 }}>
         <Image
-          src="/plants/noImage.jpg"
+          src="/plantPhotos/noImage.jpg"
           alt="No Image"
           width={500}
           height={400}
@@ -59,7 +59,7 @@ export default function InsectPhotos({ photos_data }) {
     return (
       <Box sx={{ marginTop: 8, marginLeft: 2, paddingBottom: 2 }}>
         <Image
-          src={`/insects/${photos[open]}.jpg`}
+          src={`/insectPhotos/${photos[open]}.jpg`}
           alt="No Image"
           width={500}
           height={400}
@@ -73,7 +73,6 @@ export default function InsectPhotos({ photos_data }) {
             Next Image
           </button>
         </Box>
-    
       </Box>
     );
   }

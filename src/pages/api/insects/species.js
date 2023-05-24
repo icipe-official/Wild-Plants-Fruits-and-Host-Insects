@@ -47,6 +47,11 @@ export default async function handle(req, res) {
                   plant_genera: {
                     select: {
                       genus_name: true,
+                      plant_families: {
+                        select: {
+                          family_name: true,
+                        },
+                      },
                     },
                   },
                 },
