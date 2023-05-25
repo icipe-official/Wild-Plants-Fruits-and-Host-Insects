@@ -128,6 +128,7 @@ export default function TreeTrial() {
 
         const sequences = Object.values(filteredData)
           .map((obj) => {
+            let counter = 1; // Initialize the counter variable
             if (obj.plants_matk.length > 0) {
               return obj.plants_matk.map((plant) => {
                 if (plant.nucleotide !== null) {
@@ -136,12 +137,16 @@ export default function TreeTrial() {
                     "_" +
                     obj.species_name.split(" ")[0] +
                     "_" +
-                    plant.country.replace(/ /g, "-"); // if country has space in its name
+                    plant.country.replace(/ /g, "-") +
+                    "_" +
+                    counter; // Append the counter to the name
+
+                  counter++; // Increment the counter for the next occurrence
+
                   return {
                     name: name,
                     sequence: plant.nucleotide.replace(/ /g, "-"),
                   };
-                  //avoid processing any undefined values if there is no sequence
                 } else {
                   return null;
                 }
@@ -150,7 +155,7 @@ export default function TreeTrial() {
           })
           .filter(Boolean)
           .flat()
-          .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values also remove gaps
+          .filter((value) => value !== null);
         console.log("sequences on click family");
         console.log(sequences);
         var result = CalculateSimilarityMatrixModified(sequences, kmer);
@@ -189,6 +194,7 @@ export default function TreeTrial() {
 
           const sequences = Object.values(filteredData)
             .map((obj) => {
+              let counter = 1;
               if (obj.insects_coi.length > 0) {
                 return obj.insects_coi.map((insect) => {
                   //check if there is nucleotide sequence
@@ -198,7 +204,10 @@ export default function TreeTrial() {
                       "_" +
                       obj.species_name.split(" ")[0] +
                       "_" +
-                      insect.country.replace(/-/g, ""); // if country has space in its name
+                      insect.country.replace(/-/g, "") +
+                      counter; // Append the counter to the name
+
+                    counter++; // Increment the counter for the next occurrence; // if country has space in its name
 
                     "_" +
                       obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
@@ -207,7 +216,7 @@ export default function TreeTrial() {
                     return {
                       name: name,
 
-                      sequence: plant.nucleotide.replace(/ /g, "-"),
+                      sequence: insect.nucleotide.replace(/ /g, "-"),
                     };
                     //avoid processing any undefined values if there is no sequence
                   } else {
@@ -221,6 +230,7 @@ export default function TreeTrial() {
             .filter(Boolean)
             .flat()
             .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values
+
           console.log("insect sequences");
           console.log(sequences.filter((value) => value !== null));
           var result = CalculateSimilarityMatrixModified(sequences, kmer);
@@ -249,24 +259,26 @@ export default function TreeTrial() {
         //dictionary of sequences and name
         const sequences = Object.values(filteredData)
           .map((obj) => {
+            let counter = 1; // Initialize the counter variable
             if (obj.plants_matk.length > 0) {
               return obj.plants_matk.map((plant) => {
                 if (plant.nucleotide !== null) {
-                  console.log("plant has null nucleotide");
                   const name =
                     obj.plant_genera.genus_name +
                     "_" +
                     obj.species_name.split(" ")[0] +
                     "_" +
-                    plant.country.replace(/ /g, "-"); // if country has space in its name
+                    plant.country.replace(/ /g, "-") +
+                    "_" +
+                    counter; // Append the counter to the name
+
+                  counter++; // Increment the counter for the next occurrence
 
                   return {
                     name: name,
-                    sequence: plant.nucleotide.replace(/-/g, ""),
+                    sequence: plant.nucleotide.replace(/ /g, "-"),
                   };
-                }
-                // avoid processing any undefine
-                else {
+                } else {
                   return null;
                 }
               });
@@ -274,7 +286,7 @@ export default function TreeTrial() {
           })
           .filter(Boolean)
           .flat()
-          .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values
+          .filter((value) => value !== null);
         console.log("plant sequences");
         console.log(sequences);
 
@@ -299,6 +311,7 @@ export default function TreeTrial() {
         //dictionary of sequences and name
         const sequences = Object.values(filteredData)
           .map((obj) => {
+            let counter = 1;
             if (obj.insects_coi.length > 0) {
               return obj.insects_coi.map((insect) => {
                 if (insect.nucleotide !== null) {
@@ -307,7 +320,10 @@ export default function TreeTrial() {
                     "_" +
                     obj.species_name.split(" ")[0] +
                     "_" +
-                    insect.country.replace(/ /g, "-"); // if country has space in its name
+                    insect.country.replace(/ /g, "-") +
+                    counter; // Append the counter to the name
+
+                  counter++; // Increment the counter for the next occurrence; // if country has space in its name
 
                   "_" +
                     obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
