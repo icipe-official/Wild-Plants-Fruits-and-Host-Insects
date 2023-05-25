@@ -470,7 +470,7 @@ export default function TreeTrial() {
             species.plant_genera.plant_families.family_name &&
             species.plants_matk.length > 0
         );
-
+      // obtain families only with matk sequences, get the set of the kmers, convert to list [...]
       const families_list = [
         ...new Set(
           families.map(
