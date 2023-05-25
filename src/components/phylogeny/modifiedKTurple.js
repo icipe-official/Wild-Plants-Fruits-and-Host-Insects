@@ -1,16 +1,38 @@
 function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
   // const [kmer,Setkmer]=useState(5);
+  // function kmers(sequence, kmer) {
+  //   console.log("sequences ready for processing");
+  //   console.log(sequence);
+  //   // Remove gaps and N's from the sequence
+  //   sequence = sequence.replace(/-/g, "").replace(/N/g, "");
+  //   let sequencekmers = [];
+  //   for (let v = 0; v < sequence.length - kmer + 1; v++) {
+  //     sequencekmers.push(sequence.slice(v, v + kmer));
+  //   }
+  //   return sequencekmers;
+  // }
   function kmers(sequence, kmer) {
-    console.log("sequences ready for processing");
+    console.log("foward sequence");
     console.log(sequence);
+
     // Remove gaps and N's from the sequence
     sequence = sequence.replace(/-/g, "").replace(/N/g, "");
-    let sequencekmers = [];
+    let sequenceKmers = [];
     for (let v = 0; v < sequence.length - kmer + 1; v++) {
-      sequencekmers.push(sequence.slice(v, v + kmer));
+      sequenceKmers.push(sequence.slice(v, v + kmer));
     }
-    return sequencekmers;
+
+    // Generate kmers for the reverse of the original sequence
+    const reverseSequence = sequence.split("").reverse().join("");
+    for (let v = 0; v < reverseSequence.length - kmer + 1; v++) {
+      sequenceKmers.push(reverseSequence.slice(v, v + kmer));
+    }
+    console.log("reverseSequence");
+
+    console.log(reverseSequence);
+    return sequenceKmers;
   }
+
   function replace(kmers) {
     const replaced_kmers = kmers.map((kmer) => {
       return kmer.replace(/[CTAG]/g, (match) => {
