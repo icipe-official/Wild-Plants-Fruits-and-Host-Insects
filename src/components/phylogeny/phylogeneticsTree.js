@@ -472,11 +472,115 @@ export default function TreeTrial() {
     // delete newick input on submit
     setNewickInput("");
   };
-  //check if small secreen
-  // Check if the screen size is small
-  function isScreenSmall() {
-    return window.innerWidth <= 20; // Adjust the threshold (768) according to your definition of "small"
-  }
+  //handle uploding newick
+  const handleSubmitFile = (event) => {
+    setSelectedFamily("");
+
+    event.preventDefault(); // Prevent form submission
+
+    // Access the selected file from the file input element
+    const selectedFile =
+      event.target.querySelector('input[type="file"]').files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      // Set up the FileReader onload event handler
+      reader.onload = (e) => {
+        const fileContents = e.target.result;
+        // Use the file contents as needed
+        console.log("File contents:", fileContents);
+        setNewickData(fileContents);
+      };
+
+      // Clear the file input value
+      event.target.querySelector('input[type="file"]').value = "";
+
+      // Read the file as text
+      reader.readAsText(selectedFile);
+    }
+  };
+
+  const handleSubmiFastatFile = (event) => {
+    event.preventDefault(); // Prevent form submission
+
+    // Access the selected file from the file input element
+    const selectedFile =
+      event.target.querySelector('input[type="file"]').files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      // Set up the FileReader onload event handler
+      reader.onload = (e) => {
+        const fileContents = e.target.result;
+        // set inputfasta to file contents
+        console.log("File contents:", fileContents);
+        // setFastaInput(fileContents);
+      };
+
+      // Clear the file input value
+      // event.target.querySelector('input[type="file"]').value = "";
+
+      // Read the file as text
+      reader.readAsText(selectedFile);
+      setSelectedFamily("Select family");
+
+      console.log("fasta array");
+      console.log(fastaInput);
+
+      setNewickData("");
+      // event.preventDefault();
+      const fastaLines = fastaInput.trim().split("\n");
+      let currentSequenceName = "";
+      let currentSequence = "";
+      const fastaArray = [];
+      for (let line of fastaLines) {
+        if (line.startsWith(">")) {
+          if (currentSequenceName !== "") {
+            console.log("currentSequenceName");
+
+            console.log(
+              currentSequenceName.slice(1).split(" ").slice(0, 2).join("-")
+            );
+            fastaArray.push({
+              name: currentSequenceName
+                .slice(1)
+                .split(" ")
+                .slice(0, 2)
+                .join("-"),
+              sequence: currentSequence,
+            });
+            currentSequence = "";
+          }
+          currentSequenceName = line;
+        } else {
+          currentSequence += line.trim();
+        }
+      }
+      fastaArray.push({
+        name: currentSequenceName.slice(1).split(" ").slice(0, 2).join("-"),
+        sequence: currentSequence,
+      });
+      setFastaArray(fastaArray);
+      console.log("fastaArray");
+      if (fastaArray) {
+        setSelectedFamily("Select family");
+
+        console.log(fastaArray);
+        var result = CalculateSimilarityMatrixModified(fastaArray, kmer);
+        // var result = CalculateSimilarityMatrix(sequences);
+
+        var newick = NeighborJoining(result.dist_mat, result.names);
+        console.log("newick");
+        setNewickData(newick);
+        setDownload(newick);
+      }
+    }
+    setFastaInput("");
+    setSelectedFamily("");
+  };
+  //conditional rendering with data
   if (data) {
     if (selectedOrganism === "plants") {
       let families =
@@ -500,111 +604,6 @@ export default function TreeTrial() {
       const filteredData = data.filter(
         (dat) => dat.plant_genera.plant_families.family_name === selectedFamily
       );
-      //handle uploding newick
-      const handleSubmitFile = (event) => {
-        event.preventDefault(); // Prevent form submission
-
-        // Access the selected file from the file input element
-        const selectedFile =
-          event.target.querySelector('input[type="file"]').files[0];
-
-        if (selectedFile) {
-          const reader = new FileReader();
-
-          // Set up the FileReader onload event handler
-          reader.onload = (e) => {
-            const fileContents = e.target.result;
-            // Use the file contents as needed
-            console.log("File contents:", fileContents);
-            setNewickData(fileContents);
-          };
-
-          // Clear the file input value
-          // event.target.querySelector('input[type="file"]').value = "";
-
-          // Read the file as text
-          reader.readAsText(selectedFile);
-        }
-      };
-      const handleSubmiFastatFile = (event) => {
-        event.preventDefault(); // Prevent form submission
-
-        // Access the selected file from the file input element
-        const selectedFile =
-          event.target.querySelector('input[type="file"]').files[0];
-
-        if (selectedFile) {
-          const reader = new FileReader();
-
-          // Set up the FileReader onload event handler
-          reader.onload = (e) => {
-            const fileContents = e.target.result;
-            // set inputfasta to file contents
-            console.log("File contents:", fileContents);
-            // setFastaInput(fileContents);
-          };
-
-          // Clear the file input value
-          // event.target.querySelector('input[type="file"]').value = "";
-
-          // Read the file as text
-          reader.readAsText(selectedFile);
-          setSelectedFamily("Select family");
-
-          console.log("fasta array");
-          console.log(fastaInput);
-
-          setNewickData("");
-          // event.preventDefault();
-          const fastaLines = fastaInput.trim().split("\n");
-          let currentSequenceName = "";
-          let currentSequence = "";
-          const fastaArray = [];
-          for (let line of fastaLines) {
-            if (line.startsWith(">")) {
-              if (currentSequenceName !== "") {
-                console.log("currentSequenceName");
-
-                console.log(
-                  currentSequenceName.slice(1).split(" ").slice(0, 2).join("-")
-                );
-                fastaArray.push({
-                  name: currentSequenceName
-                    .slice(1)
-                    .split(" ")
-                    .slice(0, 2)
-                    .join("-"),
-                  sequence: currentSequence,
-                });
-                currentSequence = "";
-              }
-              currentSequenceName = line;
-            } else {
-              currentSequence += line.trim();
-            }
-          }
-          fastaArray.push({
-            name: currentSequenceName.slice(1).split(" ").slice(0, 2).join("-"),
-            sequence: currentSequence,
-          });
-          setFastaArray(fastaArray);
-          console.log("fastaArray");
-          if (fastaArray) {
-            setSelectedFamily("Select family");
-
-            console.log(fastaArray);
-            var result = CalculateSimilarityMatrixModified(fastaArray, kmer);
-            // var result = CalculateSimilarityMatrix(sequences);
-
-            var newick = NeighborJoining(result.dist_mat, result.names);
-            console.log("newick");
-            setNewickData(newick);
-            setDownload(newick);
-          }
-        }
-        setFastaInput("");
-        setSelectedFamily("");
-      };
 
       return (
         <Container sx={{ marginTop: 10 }}>
@@ -710,7 +709,7 @@ export default function TreeTrial() {
                       {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
                     </TreeItem>
 
-                    <TreeItem nodeId="5" label="Paste fasta Sequence">
+                    <TreeItem nodeId="30" label="Paste fasta Sequence">
                       <Box sx={{ marginLeft: 2 }}>
                         <form onSubmit={handleSubmitfasta}>
                           <label>
