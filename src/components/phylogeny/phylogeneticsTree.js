@@ -139,7 +139,7 @@ export default function TreeTrial() {
                     plant.country;
                   return {
                     name: name,
-                    sequence: plant.nucleotide,
+                    sequence: plant.nucleotide.replace(/-/g, ""),
                   };
                   //avoid processing any undefined values if there is no sequence
                 } else {
@@ -150,8 +150,8 @@ export default function TreeTrial() {
           })
           .filter(Boolean)
           .flat()
-          .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values
-        console.log("sequences");
+          .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values also remove gaps
+        console.log("sequences on click family");
         console.log(sequences);
         var result = CalculateSimilarityMatrixModified(sequences, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
@@ -205,7 +205,7 @@ export default function TreeTrial() {
                     obj.plants_insects[0]?.species_name?.split(" ")[1];
                     return {
                       name: name,
-                      sequence: insect.nucleotide,
+                      sequence: plant.nucleotide.replace(/-/g, ""),
                     };
                     //avoid processing any undefined values if there is no sequence
                   } else {
@@ -259,7 +259,7 @@ export default function TreeTrial() {
                     plant.country;
                   return {
                     name: name,
-                    sequence: plant.nucleotide,
+                    sequence: plant.nucleotide.replace(/-/g, ""),
                   };
                 }
                 // avoid processing any undefine
@@ -311,7 +311,8 @@ export default function TreeTrial() {
                   obj.plants_insects[0]?.species_name?.slice(0, 5);
                   return {
                     name: name,
-                    sequence: insect.nucleotide,
+                    //remove gap characters
+                    sequence: plant.nucleotide.replace(/-/g, ""),
                   };
                   //avoid processing any undefined values if there is no sequence
                 } else {
@@ -415,7 +416,7 @@ export default function TreeTrial() {
         setDownload(newick);
       }
     }
-    setFastaInput("");
+    // setFastaInput("");
     setSelectedFamily("");
   };
 
