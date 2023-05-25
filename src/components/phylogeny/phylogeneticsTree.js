@@ -332,7 +332,7 @@ export default function TreeTrial() {
                   return {
                     name: name,
                     //remove gap characters
-                    sequence: plant.nucleotide.replace(/-/g, ""),
+                    sequence: insect.nucleotide.replace(/-/g, ""),
                   };
                   //avoid processing any undefined values if there is no sequence
                 } else {
@@ -463,10 +463,21 @@ export default function TreeTrial() {
 
   if (data) {
     if (selectedOrganism === "plants") {
-      let families = new Set(
-        data.map((species) => species.plant_genera.plant_families.family_name)
-      );
-      const families_list = [...families]; // Convert set to array
+      let families =
+        //return only families wth atleas two matk sequences
+        data.filter(
+          (species) =>
+            species.plant_genera.plant_families.family_name &&
+            species.plants_matk.length > 0
+        );
+
+      const families_list = [
+        ...new Set(
+          families.map(
+            (family) => family.plant_genera.plant_families.family_name
+          )
+        ),
+      ]; // Convert set to array
       console.log("familes");
 
       console.log(families);
