@@ -145,7 +145,7 @@ export default function TreeTrial() {
 
                   return {
                     name: name,
-                    sequence: plant.nucleotide.replace(/ /g, "-"),
+                    sequence: plant.nucleotide.replace(/-/g, ""),
                   };
                 } else {
                   return null;
@@ -204,7 +204,7 @@ export default function TreeTrial() {
                       "_" +
                       obj.species_name.split(" ")[0] +
                       "_" +
-                      insect.country.replace(/-/g, "") +
+                      insect.country.replace(/ /g, "") +
                       counter; // Append the counter to the name
 
                     counter++; // Increment the counter for the next occurrence; // if country has space in its name
@@ -216,7 +216,7 @@ export default function TreeTrial() {
                     return {
                       name: name,
 
-                      sequence: insect.nucleotide.replace(/ /g, "-"),
+                      sequence: insect.nucleotide.replace(/-/g, ""),
                     };
                     //avoid processing any undefined values if there is no sequence
                   } else {
@@ -276,7 +276,7 @@ export default function TreeTrial() {
 
                   return {
                     name: name,
-                    sequence: plant.nucleotide.replace(/ /g, "-"),
+                    sequence: plant.nucleotide.replace(/-/g, ""),
                   };
                 } else {
                   return null;
