@@ -46,6 +46,13 @@ export default async function handle(req, res) {
             },
           },
         },
+        orderBy: {
+          plant_genera: {
+            plant_families: {
+              family_name: "asc",
+            },
+          },
+        },
       });
       return res.json(species);
     } catch (error) {
