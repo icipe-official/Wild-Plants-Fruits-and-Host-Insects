@@ -810,107 +810,174 @@ export default function TreeTrial() {
         console.log(filteredData);
         return (
           <Container sx={{ marginTop: 10 }}>
-            {/* <ConverttoFasta></ConverttoFasta> */}
-            <Box sx={{ display: "flex" }}>
-              <Box>
-                <FormControl>
-                  <InputLabel> select organism</InputLabel>
-                  <Select
-                    value={selectedOrganism}
-                    onChange={handleOrganismChange}
-                  >
-                    <MenuItem value="plants">Plants</MenuItem>
-                    <MenuItem value="insects">Insects</MenuItem>
-                  </Select>
-                </FormControl>
+            <Box sx={{ display: isSmallScreen ? "row" : "flex" }}>
+              <Box sx={{ display: "flex" }}>
+                <Box>
+                  <FormControl>
+                    <InputLabel>select organism</InputLabel>
+                    <Select
+                      value={selectedOrganism}
+                      onChange={handleOrganismChange}
+                    >
+                      <MenuItem value="plants">Plants</MenuItem>
+                      <MenuItem value="insects">Insects</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+                <Box sx={{ marginLeft: 2 }}>
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel>Select Family</InputLabel>
+                    <Select
+                      value={selecteorder}
+                      onChange={(event) => handleChange(event)}
+                      label="orders"
+                      //   IconComponent={ArrowDropDown}
+                    >
+                      {orders_list.map((order, index) => (
+                        <MenuItem key={index} value={order}>
+                          {order}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+                {/* </Box> */}
+                <Box sx={{ marginLeft: 3 }}>
+                  {" "}
+                  {/* kmer */}
+                  <FormControl>
+                    <InputLabel>Kmer</InputLabel>
+                    <Select value={kmer} onChange={handleChangekmer}>
+                      <MenuItem value={4}>4</MenuItem>
+                      <MenuItem value={5}>5</MenuItem>
+                      <MenuItem value={6}>6</MenuItem>
+                      <MenuItem value={7}>7</MenuItem>
+                      <MenuItem value={8}>8</MenuItem>
+                      <MenuItem value={9}>9</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
               </Box>
-              <Box sx={{ marginLeft: 2 }}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel>Select order</InputLabel>
-                  <Select
-                    value={selecteorder}
-                    onChange={(event) => handleChange(event)}
-                    label="orders"
-                    //   IconComponent={ArrowDropDown}
-                  >
-                    {orders_list.map((order, index) => (
-                      <MenuItem key={index} value={order}>
-                        {order}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-              {/* </Box> */}
-              <Box sx={{ marginLeft: 3 }}>
-                {" "}
-                kmer
-                <FormControl>
-                  <InputLabel>Integer</InputLabel>
-                  <Select value={kmer} onChange={handleChangekmer}>
-                    <MenuItem value={4}>4</MenuItem>
-                    <MenuItem value={5}>5</MenuItem>
-                    <MenuItem value={6}>6</MenuItem>
-                    <MenuItem value={7}>7</MenuItem>
-                    <MenuItem value={8}>8</MenuItem>
-                    <MenuItem value={9}>9</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              {/* <Box sx={{marginLeft:2}}>          <FastaToDict/>
+              <Box sx={{ display: "flex" }}>
+                {/* <Box sx={{marginLeft:2}}>          <FastaToDict/>
 </Box> */}
-              <Box sx={{ marginLeft: 2 }}>
-                <form onSubmit={handleSubmitfasta}>
-                  <label>
-                    <textarea
-                      value={fastaInput}
-                      onChange={handleInputChangefasta}
-                      placeholder="Enter FASTA sequence"
-                      autoFocus
-                    ></textarea>
-                  </label>
-                  <br />
-                  <button type="submit">Submit</button>
-                </form>
-              </Box>
-              <Box sx={{ marginLeft: 2 }}>
-                <TreeView
-                  className={classes.root}
-                  defaultCollapseIcon={<ExpandMoreIcon />}
-                  defaultExpandIcon={<ChevronRightIcon />}
-                  selected={selectedNode}
-                  onNodeSelect={handleNodeSelect}
-                >
-                  <TreeItem nodeId="1" label="Download">
-                    <TreeItem nodeId="2" label="Sequences in fasta format">
-                      <SequenceDownload
-                        data={download}
-                        selectdFamily={selecteorder}
-                        kmer={kmer}
-                      />
+                <Box sx={{ marginLeft: isSmallScreen ? 0 : 2 }}>
+                  <TreeView
+                    className={classes.root}
+                    defaultCollapseIcon={<ExpandMoreIcon />}
+                    defaultExpandIcon={<ChevronRightIcon />}
+                    selected={selectedNode}
+                    onNodeSelect={handleNodeSelect}
+                  >
+                    <TreeItem nodeId="1" label="Download">
+                      <TreeItem nodeId="2" label="Sequences in fasta format">
+                        <SequenceDownload
+                          data={download}
+                          selectdFamily={selectedFamily}
+                          kmer={kmer}
+                        />
 
-                      {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
-                    </TreeItem>
+                        {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
+                      </TreeItem>
 
-                    <TreeItem nodeId="5" label="Newick file">
-                      <NewickDownload newick={newickData} data={filteredData} />
+                      <TreeItem nodeId="5" label="Newick file">
+                        <NewickDownload
+                          newick={newickData}
+                          data={filteredData}
+                        />
+                      </TreeItem>
                     </TreeItem>
-                  </TreeItem>
-                </TreeView>
-              </Box>
-              <Box sx={{ marginLeft: 2 }}>
-                <form onSubmit={handleSubmitnewick}>
-                  <label>
-                    <textarea
-                      value={newickInput}
-                      onChange={handleInputChangenewick}
-                      placeholder="Enter newick sequence"
-                      autoFocus
-                    ></textarea>
-                  </label>
-                  <br />
-                  <button type="submit">Submit</button>
-                </form>
+                  </TreeView>
+                </Box>
+                <Box sx={{ marginLeft: 2 }}>
+                  <TreeView
+                    className={classes.root}
+                    defaultCollapseIcon={<ExpandMoreIcon />}
+                    defaultExpandIcon={<ChevronRightIcon />}
+                    selected={selectedNode}
+                    onNodeSelect={handleNodeSelect}
+                  >
+                    <TreeItem nodeId="9" label="Paste file">
+                      <TreeItem nodeId="10" label="Paste newick">
+                        <form onSubmit={handleSubmitnewick}>
+                          <label>
+                            <textarea
+                              value={newickInput}
+                              onChange={handleInputChangenewick}
+                              placeholder="Enter newick sequence"
+                              autoFocus
+                            ></textarea>
+                          </label>
+                          <br />
+                          <button type="submit">Submit</button>
+                        </form>
+                        {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
+                      </TreeItem>
+
+                      <TreeItem nodeId="30" label="Paste fasta Sequence">
+                        <Box sx={{ marginLeft: 2 }}>
+                          <form onSubmit={handleSubmitfasta}>
+                            <label>
+                              <textarea
+                                value={fastaInput}
+                                onChange={handleInputChangefasta}
+                                placeholder="Enter FASTA sequence"
+                                autoFocus
+                              ></textarea>
+                            </label>
+                            <br />
+                            <button type="submit">Submit</button>
+                          </form>
+                        </Box>
+                      </TreeItem>
+                      {/* <TreeItem nodeId="11" label="Upload Fasta file">
+                    <form onSubmit={handleSubmiFastatFile}>
+                      <label>
+                        Upload File:
+                        <input type="file" onChange={handleInputChangefasta} />
+                      </label>
+                      <br />
+                      <button type="submit">Submit</button>
+                    </form>
+                  </TreeItem> */}
+                    </TreeItem>
+                  </TreeView>
+                </Box>
+                <Box sx={{ marginLeft: 2 }}>
+                  <TreeView
+                    className={classes.root}
+                    defaultCollapseIcon={<ExpandMoreIcon />}
+                    defaultExpandIcon={<ChevronRightIcon />}
+                    selected={selectedNode}
+                    onNodeSelect={handleNodeSelect}
+                  >
+                    <TreeItem nodeId="20" label="Upload file">
+                      <TreeItem nodeId="21" label="Upload Newick file">
+                        <form onSubmit={handleSubmitFile}>
+                          <label>
+                            Upload File:
+                            <input
+                              type="file"
+                              onChange={handleInputChangenewick}
+                            />
+                          </label>
+                          <br />
+                          <button type="submit">Submit</button>
+                        </form>
+                      </TreeItem>
+                      {/* <TreeItem nodeId="11" label="Upload Fasta file">
+                    <form onSubmit={handleSubmiFastatFile}>
+                      <label>
+                        Upload File:
+                        <input type="file" onChange={handleInputChangefasta} />
+                      </label>
+                      <br />
+                      <button type="submit">Submit</button>
+                    </form>
+                  </TreeItem> */}
+                    </TreeItem>
+                  </TreeView>
+                </Box>
               </Box>
             </Box>{" "}
             <Box>
