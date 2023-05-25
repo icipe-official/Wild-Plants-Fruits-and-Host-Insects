@@ -136,10 +136,10 @@ export default function TreeTrial() {
                     "_" +
                     obj.species_name.split(" ")[0] +
                     "_" +
-                    plant.country;
+                    plant.country.replace(/ /g, "-"); // if country has space in its name
                   return {
                     name: name,
-                    sequence: plant.nucleotide.replace(/-/g, ""),
+                    sequence: plant.nucleotide.replace(/ /g, "-"),
                   };
                   //avoid processing any undefined values if there is no sequence
                 } else {
@@ -195,17 +195,19 @@ export default function TreeTrial() {
                   if (insect.nucleotide !== null) {
                     const name =
                       obj.insect_genera.genus_name +
-                        "_" +
-                        obj.species_name.split(" ")[0] +
-                        "_" +
-                        insect.country +
-                        "_" +
-                        obj.plants_insects[0]?.plants.plant_genera
-                          ?.genus_name ?? null + "_";
+                      "_" +
+                      obj.species_name.split(" ")[0] +
+                      "_" +
+                      insect.country.replace(/-/g, ""); // if country has space in its name
+
+                    "_" +
+                      obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
+                      null + "_";
                     obj.plants_insects[0]?.species_name?.split(" ")[1];
                     return {
                       name: name,
-                      sequence: plant.nucleotide.replace(/-/g, ""),
+
+                      sequence: plant.nucleotide.replace(/ /g, "-"),
                     };
                     //avoid processing any undefined values if there is no sequence
                   } else {
@@ -256,7 +258,8 @@ export default function TreeTrial() {
                     "_" +
                     obj.species_name.split(" ")[0] +
                     "_" +
-                    plant.country;
+                    plant.country.replace(/ /g, "-"); // if country has space in its name
+
                   return {
                     name: name,
                     sequence: plant.nucleotide.replace(/-/g, ""),
@@ -301,12 +304,13 @@ export default function TreeTrial() {
                 if (insect.nucleotide !== null) {
                   const name =
                     obj.insect_genera.genus_name +
-                      "_" +
-                      obj.species_name.split(" ")[0] +
-                      "_" +
-                      insect.country +
-                      "_" +
-                      obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
+                    "_" +
+                    obj.species_name.split(" ")[0] +
+                    "_" +
+                    insect.country.replace(/ /g, "-"); // if country has space in its name
+
+                  "_" +
+                    obj.plants_insects[0]?.plants.plant_genera?.genus_name ??
                     null + +"_";
                   obj.plants_insects[0]?.species_name?.slice(0, 5);
                   return {
@@ -416,7 +420,7 @@ export default function TreeTrial() {
         setDownload(newick);
       }
     }
-    // setFastaInput("");
+    setFastaInput("");
     setSelectedFamily("");
   };
 
