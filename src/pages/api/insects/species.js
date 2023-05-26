@@ -23,6 +23,7 @@ export default async function handle(req, res) {
           NOT: [
             { insect_families: { family_name: "Tortricidae" } },
             { insect_families: { family_name: "Tephritidae" } },
+            { insect_families: { family_name: "Lycaenidae" } },
           ],
         },
         select: {
