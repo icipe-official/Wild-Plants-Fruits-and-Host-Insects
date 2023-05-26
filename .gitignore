@@ -4,3 +4,4 @@ node_modules
 public/plants
 public/insects
 prisma
+KNHC_database_new.sql
