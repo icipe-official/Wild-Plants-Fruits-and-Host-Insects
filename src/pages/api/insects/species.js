@@ -19,6 +19,11 @@ export default async function handle(req, res) {
               },
             },
           },
+          //exclude these families for now
+          NOT: [
+            { insect_families: { family_name: "Tortricidae" } },
+            { insect_families: { family_name: "Tephritidae" } },
+          ],
         },
         select: {
           species_name: true,
