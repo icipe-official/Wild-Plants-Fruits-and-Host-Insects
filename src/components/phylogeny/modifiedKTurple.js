@@ -1,16 +1,38 @@
 function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
   // const [kmer,Setkmer]=useState(5);
+  // function kmers(sequence, kmer) {
+  //   console.log("sequences ready for processing");
+  //   console.log(sequence);
+  //   // Remove gaps and N's from the sequence
+  //   sequence = sequence.replace(/-/g, "").replace(/N/g, "");
+  //   let sequencekmers = [];
+  //   for (let v = 0; v < sequence.length - kmer + 1; v++) {
+  //     sequencekmers.push(sequence.slice(v, v + kmer));
+  //   }
+  //   return sequencekmers;
+  // }
   function kmers(sequence, kmer) {
-    console.log("sequences ready for processing");
+    console.log("foward sequence");
     console.log(sequence);
+
     // Remove gaps and N's from the sequence
     sequence = sequence.replace(/-/g, "").replace(/N/g, "");
-    let sequencekmers = [];
+    let sequenceKmers = [];
     for (let v = 0; v < sequence.length - kmer + 1; v++) {
-      sequencekmers.push(sequence.slice(v, v + kmer));
+      sequenceKmers.push(sequence.slice(v, v + kmer));
     }
-    return sequencekmers;
+
+    // Generate kmers for the reverse of the original sequence
+    const reverseSequence = sequence.split("").reverse().join("");
+    for (let v = 0; v < reverseSequence.length - kmer + 1; v++) {
+      sequenceKmers.push(reverseSequence.slice(v, v + kmer));
+    }
+    console.log("reverseSequence");
+
+    console.log(reverseSequence);
+    return sequenceKmers;
   }
+
   function replace(kmers) {
     const replaced_kmers = kmers.map((kmer) => {
       return kmer.replace(/[CTAG]/g, (match) => {
@@ -32,24 +54,27 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     const set1 = new Set(s1_kmers);
     const set2 = new Set(s2_kmers);
 
-    //   console.log("s2_kmers")
+    console.log("s1_kmers");
 
-    //   console.log(s2_kmers)
-
+    console.log(set1);
+    s2_kmers;
+    console.log(set2);
     //       // Get unique kmers
     const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
     console.log("unique1");
 
-    // console.log(unique1)
+    console.log(unique1);
     let unique1_replaced = replace(unique1);
     // console.log("unique1_replaced")
 
     console.log(unique1_replaced);
     const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
+    console.log("unique2");
+    console.log(unique2);
 
     let unique2_replaced = replace(unique2);
     console.log("unique2_replaced");
-    // console.log(unique2_replaced)
+    console.log(unique2_replaced);
 
     //         // Add new shared kmers
     let s1_ktuples = new Set([...s1_kmers].concat(unique1_replaced));
@@ -59,9 +84,9 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     //   let s2_ktuples_arr = Array.from(s2_ktuples);
     console.log("new kmers");
 
-    // console.log(s1_ktuples)
+    console.log(s1_ktuples);
     console.log("s1_ktuples 2");
-    // console.log(s1_ktuples)
+    console.log(s2_ktuples);
 
     const intersection = new Set(
       [...s1_ktuples].filter((x) => s2_ktuples.has(x))
