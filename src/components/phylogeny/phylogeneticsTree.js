@@ -109,7 +109,7 @@ export default function TreeTrial() {
   //handle new set kmer
   useEffect(() => {
     if (data) {
-      console.log("selectedFamily changed to:", selectedFamily);
+      // console.log("selectedFamily changed to:", selectedFamily);
       handleChange();
     }
   }, [selectedFamily, kmer]);
@@ -136,7 +136,7 @@ export default function TreeTrial() {
         setfilteredFamily(filteredData);
         // const filteredData = data.filter(dat=>dat.plant_genera.plant_families.family_name===selectedFamily);
         console.log("filteredData");
-        console.log(filteredData);
+        // console.log(filteredData);
 
         const sequences = Object.values(filteredData)
           .map((obj) => {
@@ -169,7 +169,7 @@ export default function TreeTrial() {
           .flat()
           .filter((value) => value !== null);
         console.log("sequences on click family");
-        console.log(sequences);
+        // console.log(sequences);
         var result = CalculateSimilarityMatrixModified(sequences, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
 
@@ -180,7 +180,7 @@ export default function TreeTrial() {
         setDownload(sequences);
         console.log(" after main handle change");
 
-        console.log(kmer);
+        // console.log(kmer);
         // setkmer(5)
       } else {
         if (selectedOrganism == "insects") {
@@ -202,7 +202,7 @@ export default function TreeTrial() {
           setFilteredOrder(filteredData);
           // const filteredData = data.filter(dat=>dat.plant_genera.plant_families.family_name===selectedFamily);
           console.log("insect filteredData");
-          console.log(filteredData);
+          // console.log(filteredData);
 
           const sequences = Object.values(filteredData)
             .map((obj) => {
@@ -244,7 +244,7 @@ export default function TreeTrial() {
             .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values
 
           console.log("insect sequences");
-          console.log(sequences.filter((value) => value !== null));
+          // console.log(sequences.filter((value) => value !== null));
           var result = CalculateSimilarityMatrixModified(sequences, kmer);
           // var result = CalculateSimilarityMatrix(sequences);
 
@@ -255,7 +255,7 @@ export default function TreeTrial() {
           setDownload(sequences);
           console.log(" after main handle change");
 
-          console.log(kmer);
+          // console.log(kmer);
         }
       }
     } //option 2 when genus is selected
@@ -267,7 +267,7 @@ export default function TreeTrial() {
         );
 
         console.log("filteredData");
-        console.log(filteredData);
+        // console.log(filteredData);
         //dictionary of sequences and name
         const sequences = Object.values(filteredData)
           .map((obj) => {
@@ -300,7 +300,7 @@ export default function TreeTrial() {
           .flat()
           .filter((value) => value !== null);
         console.log("plant sequences");
-        console.log(sequences);
+        // console.log(sequences);
 
         var result = CalculateSimilarityMatrixModified(sequences, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
@@ -308,18 +308,18 @@ export default function TreeTrial() {
         var newick = NeighborJoining(result.dist_mat, result.names);
         console.log("plant newick");
         setNewickData(newick);
-        setDownload(sequences);
+        // setDownload(sequences);
         // setSelectedFamily(selectedValue)
       } else if (selectedOrganism === "insects") {
         console.log("insect selecteorder");
 
-        console.log(selecteorder);
+        // console.log(selecteorder);
         const filteredData = data.filter(
           (dat) => dat.insect_families.family_name === selecteorder
         );
 
         console.log("insect filteredData on selecting insect order");
-        console.log(filteredData);
+        // console.log(filteredData);
         //dictionary of sequences and name
         const sequences = Object.values(filteredData)
           .map((obj) => {
@@ -357,7 +357,7 @@ export default function TreeTrial() {
           .flat()
           .filter((value) => value !== null); // retuns one array from the nested arrays and remove null values
         console.log("insect sequences");
-        console.log(sequences);
+        // console.log(sequences);
         var result = CalculateSimilarityMatrixModified(sequences, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
 
@@ -398,7 +398,7 @@ export default function TreeTrial() {
       setSelectedFamily("Select family");
 
       console.log("fasta array");
-      console.log(fastaInput);
+      // console.log(fastaInput);
 
       setNewickData("");
       event.preventDefault();
@@ -438,7 +438,7 @@ export default function TreeTrial() {
       if (fastaArray) {
         setSelectedFamily("Select family");
 
-        console.log(fastaArray);
+        // console.log(fastaArray);
         var result = CalculateSimilarityMatrixModified(fastaArray, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
 
@@ -464,7 +464,7 @@ export default function TreeTrial() {
       setSelectedFamily("Select family");
 
       console.log("newick input");
-      console.log(newickInput);
+      // console.log(newickInput);
       console.log("newick input");
       setNewickData(newickInput);
       setDownload(newickInput);
@@ -527,7 +527,7 @@ export default function TreeTrial() {
       setSelectedFamily("Select family");
 
       console.log("fasta array");
-      console.log(fastaInput);
+      // console.log(fastaInput);
 
       setNewickData("");
       // event.preventDefault();
@@ -567,7 +567,7 @@ export default function TreeTrial() {
       if (fastaArray) {
         setSelectedFamily("Select family");
 
-        console.log(fastaArray);
+        // console.log(fastaArray);
         var result = CalculateSimilarityMatrixModified(fastaArray, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
 
@@ -600,7 +600,7 @@ export default function TreeTrial() {
       ]; // Convert set to array
       console.log("familes");
 
-      console.log(families);
+      // console.log(families);
       const filteredData = data.filter(
         (dat) => dat.plant_genera.plant_families.family_name === selectedFamily
       );
@@ -646,6 +646,8 @@ export default function TreeTrial() {
                 <FormControl>
                   <InputLabel>Kmer</InputLabel>
                   <Select value={kmer} onChange={handleChangekmer}>
+                    <MenuItem value={3}>3</MenuItem>
+
                     <MenuItem value={4}>4</MenuItem>
                     <MenuItem value={5}>5</MenuItem>
                     <MenuItem value={6}>6</MenuItem>
@@ -801,13 +803,13 @@ export default function TreeTrial() {
         const orders_list = [...orders]; // Convert set to array
         console.log("orders");
 
-        console.log(orders);
+        // console.log(orders);
         const filteredData = data.filter(
           (dat) => dat.insect_orders.order_name == selecteorder
         );
         console.log("insect filteredData");
 
-        console.log(filteredData);
+        // console.log(filteredData);
         return (
           <Container sx={{ marginTop: 10 }}>
             <Box sx={{ display: isSmallScreen ? "row" : "flex" }}>
@@ -848,6 +850,8 @@ export default function TreeTrial() {
                   <FormControl>
                     <InputLabel>Kmer</InputLabel>
                     <Select value={kmer} onChange={handleChangekmer}>
+                      <MenuItem value={3}>3</MenuItem>
+
                       <MenuItem value={4}>4</MenuItem>
                       <MenuItem value={5}>5</MenuItem>
                       <MenuItem value={6}>6</MenuItem>
@@ -873,7 +877,7 @@ export default function TreeTrial() {
                       <TreeItem nodeId="2" label="Sequences in fasta format">
                         <SequenceDownload
                           data={download}
-                          selectdFamily={selectedFamily}
+                          selectdFamily={selecteorder}
                           kmer={kmer}
                         />
 
