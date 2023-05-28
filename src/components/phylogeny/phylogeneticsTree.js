@@ -388,11 +388,16 @@ export default function TreeTrial() {
     setkmer(newKmer);
     handleChange();
   };
-  const handleInputChangefasta = (event) => {
-    setFastaInput(event.target.value);
+  const handleSubmitfasta = (event) => {
+    event.preventDefault();
+
+    // setFastaInput(event.target.value);
+    // handleSubmitfasta(event);
+    handleInputChangefasta(event);
   };
   //handle input fasta sequence
-  const handleSubmitfasta = (event) => {
+  const handleInputChangefasta = (event) => {
+    setFastaInput(event.target.value);
     if (fastaInput) {
       //remove current family name
       setSelectedFamily("Select family");
@@ -401,7 +406,6 @@ export default function TreeTrial() {
       // console.log(fastaInput);
 
       setNewickData("");
-      event.preventDefault();
       const fastaLines = fastaInput.trim().split("\n");
       let currentSequenceName = "";
       let currentSequence = "";
@@ -448,7 +452,7 @@ export default function TreeTrial() {
         setDownload(newick);
       }
     }
-    setFastaInput("");
+    // setFastaInput("");
     setSelectedFamily("");
   };
 
@@ -470,15 +474,9 @@ export default function TreeTrial() {
   //handle input data
   const handleSubmitnewick = (event) => {
     event.preventDefault();
+    // setNewickData(event.target.value);
 
-    setSelectedFamily("Select family");
-
-    console.log("newick input");
-    // console.log(newickInput);
-    console.log("newick input");
-    setNewickData(newickInput);
-    setDownload(newickInput);
-
+    handleInputChangenewick(event);
     // delete newick input on submit
     setNewickInput("");
   };
