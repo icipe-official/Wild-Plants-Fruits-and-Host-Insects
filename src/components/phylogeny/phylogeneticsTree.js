@@ -454,24 +454,35 @@ export default function TreeTrial() {
 
   //handle input of newick
   const handleInputChangenewick = (event) => {
+    event.preventDefault();
     setNewickInput(event.target.value);
+
+    // setSelectedFamily("Select family");
+
+    console.log("newick input");
+    // console.log(newickInput);
+    console.log("newick input");
+    setNewickData(newickInput);
+    setDownload(newickInput);
+
+    // delete newick input on sub
   };
   //handle input data
   const handleSubmitnewick = (event) => {
     event.preventDefault();
 
-    if (newickInput) {
-      setSelectedFamily("Select family");
+    setSelectedFamily("Select family");
 
-      console.log("newick input");
-      // console.log(newickInput);
-      console.log("newick input");
-      setNewickData(newickInput);
-      setDownload(newickInput);
-    }
+    console.log("newick input");
+    // console.log(newickInput);
+    console.log("newick input");
+    setNewickData(newickInput);
+    setDownload(newickInput);
+
     // delete newick input on submit
     setNewickInput("");
   };
+
   //handle uploding newick
   const handleSubmitFile = (event) => {
     setSelectedFamily("");
