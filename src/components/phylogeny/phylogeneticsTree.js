@@ -30,6 +30,7 @@ import { makeStyles } from "@mui/styles";
 import { kMaxLength } from "buffer";
 // export default function Newick() {
 import FastaToDict from "./inputsequence";
+import { Download } from "@mui/icons-material";
 const useStyles = makeStyles({
   root: {
     display: "row",
@@ -89,6 +90,9 @@ export default function TreeTrial() {
 
   //control drop down tree for download
   const [selectedNode, setSelectedNode] = useState(null);
+
+  //handle user added sequences
+  const [userSequences, setUserSequences] = useState(false);
 
   const handleNodeSelect = (event, nodeId) => {
     setSelectedNode(nodeId);
@@ -394,6 +398,7 @@ export default function TreeTrial() {
     // setFastaInput(event.target.value);
     // handleSubmitfasta(event);
     handleInputChangefasta(event);
+    // setFastaInput("");
   };
   //handle input fasta sequence
   const handleInputChangefasta = (event) => {
@@ -451,8 +456,32 @@ export default function TreeTrial() {
         setNewickData(newick);
         setDownload(newick);
       }
+    } else {
+      if (fastaArray && userSequences) {
+        setSelectedFamily("Select family");
+
+        // console.log(fastaArray);
+        //add suser sequences to existing sequences
+        var result = CalculateSimilarityMatrixModified(
+          [...fastaArray, ...Download],
+          kmer
+        );
+        console.log("user plus existing sequences");
+        console.log("Download");
+
+        console.log(Download);
+        console.log("fastaArray");
+
+        console.log(fastaArray);
+
+        // var result = CalculateSimilarityMatrix(sequences);
+
+        var newick = NeighborJoining(result.dist_mat, result.names);
+        console.log("newick");
+        setNewickData(newick);
+        setDownload(newick);
+      }
     }
-    // setFastaInput("");
     setSelectedFamily("");
   };
 
@@ -663,10 +692,35 @@ export default function TreeTrial() {
                     <MenuItem value={7}>7</MenuItem>
                     <MenuItem value={8}>8</MenuItem>
                     <MenuItem value={9}>9</MenuItem>
+                    <MenuItem value={10}>10</MenuItem>
+                    <MenuItem value={11}>11</MenuItem>
+
+                    <MenuItem value={12}>12</MenuItem>
+                    <MenuItem value={13}>13</MenuItem>
+
+                    <MenuItem value={15}>15</MenuItem>
+                    <MenuItem value={16}>16</MenuItem>
+
+                    <MenuItem value={17}>19</MenuItem>
+                    <MenuItem value={19}>19</MenuItem>
+
+                    <MenuItem value={20}>20</MenuItem>
+                    <MenuItem value={25}>25</MenuItem>
+                    <MenuItem value={28}>28</MenuItem>
+                    <MenuItem value={30}>30</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
             </Box>
+            {/* <form onSubmit={handleSubmitfasta}>
+              <input
+                type="text"
+                value={fastaInput}
+                onChange={(event) => handleInputChangefasta()}
+                // Add any necessary attributes or styles to the input field
+              />
+              <button type="submit">Add Sequence</button>
+            </form> */}
             <Box sx={{ display: "flex" }}>
               {/* <Box sx={{marginLeft:2}}>          <FastaToDict/>
 </Box> */}
