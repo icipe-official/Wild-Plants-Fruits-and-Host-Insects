@@ -28,10 +28,60 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
       sequenceKmers.push(reverseSequence.slice(v, v + kmer));
     }
     console.log("reverseSequence");
-
     console.log(reverseSequence);
+
+    //complementary sequence
+    function complement(sequence) {
+      const complementMap = {
+        A: "T",
+        T: "A",
+        C: "G",
+        G: "C",
+      };
+
+      let complementSequence = "";
+
+      for (let i = 0; i < sequence.length; i++) {
+        const base = sequence[i];
+        const complementBase = complementMap[base];
+        complementSequence += complementBase;
+      }
+
+      return complementSequence;
+    }
+    // Generate kmers for the complementary of the original sequence
+    const complementary = complement(sequence);
+    for (let v = 0; v < complementary.length - kmer + 1; v++) {
+      sequenceKmers.push(complementary.slice(v, v + kmer));
+    }
+    console.log("complementary");
+
+    // console.log(complementary);
+    // console.log(reverseSequence);
+
+    const reverseSequencecomp = sequence.split("").reverse().join("");
+    for (let v = 0; v < reverseSequencecomp.length - kmer + 1; v++) {
+      // sequenceKmers.push(reverseSequencecomp.slice(v, v + kmer));
+    }
+    console.log("reverseSequence");
+
     return sequenceKmers;
   }
+
+  // grouping of purines and pyrimidine
+  // function replace(kmers) {
+  //   const replaced_kmers = kmers.map((kmer) => {
+  //     return kmer.replace(/[99]/g, (match) => {
+  //       if (match === "C" || match === "T") {
+  //         return "Y";
+  //       } else if (match === "7" || match === "0") {
+  //         return "U";
+  //       }
+  //     });
+  //   });
+
+  //   return replaced_kmers;
+  // }
 
   function replace(kmers) {
     const replaced_kmers = kmers.map((kmer) => {
@@ -57,7 +107,9 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     console.log("s1_kmers");
 
     console.log(set1);
-    s2_kmers;
+    console.log("s2_kmers");
+
+    // s2_kmers;
     console.log(set2);
     //       // Get unique kmers
     const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
@@ -65,7 +117,7 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
 
     console.log(unique1);
     let unique1_replaced = replace(unique1);
-    // console.log("unique1_replaced")
+    console.log("unique1_replaced");
 
     console.log(unique1_replaced);
     const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
@@ -84,18 +136,18 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     //   let s2_ktuples_arr = Array.from(s2_ktuples);
     console.log("new kmers");
 
-    console.log(s1_ktuples);
+    // console.log(s1_ktuples);
     console.log("s1_ktuples 2");
-    console.log(s2_ktuples);
+    // console.log(s2_ktuples);
 
     const intersection = new Set(
       [...s1_ktuples].filter((x) => s2_ktuples.has(x))
     );
 
-    //       console.log("intersection new");
+    console.log("intersection counttttt");
+    console.log(intersection.size);
+    console.log("intersection");
     console.log(intersection);
-    //       // console.log(s2_kmers);
-    //       // console.log(intersection.length);
 
     return intersection.size;
   }
@@ -105,20 +157,177 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     let s1_kmers = kmers(s1, k);
     let s2_kmers = kmers(s2, k);
     let union = [...new Set([...s1_kmers, ...s2_kmers])];
-    // console.log("union.length");
-    // console.log(union.length);
+    console.log("union.length");
+    console.log(union.length);
+    console.log("union");
+
+    console.log(union);
+
     return union.length;
   }
 
   // account for the length of sequence
   // get similarity
-  function Sequencesimilarity(s1, s2, k) {
-    console.log("Sequence similarity");
-    const similarity = CountIntersection(s1, s2, k) / CountUnion(s1, s2, k);
-    // console.log(similarity);
+  // function Sequencesimilarity(s1, s2, k) {
+  //   console.log("Sequence similarity");
+  //   const similarity =
+  //     (CountUnion(s1, s2, k) - CountIntersection(s1, s2, k)) /
+  //     CountUnion(s1, s2, k);
+  //   // console.log(similarity);
 
-    return similarity;
+  //   return similarity;
+  // }
+  // function Sequencesimilarity(s1, s2, k) {
+  //   const s1_kmers = kmers(s1, k);
+  //   const s2_kmers = kmers(s2, k);
+
+  //   const set1 = new Set(s1_kmers);
+  //   const set2 = new Set(s2_kmers);
+
+  //   console.log("s1_kmers");
+
+  //   console.log(set1);
+  //   console.log("s2_kmers");
+
+  //   // s2_kmers;
+  //   console.log(set2);
+  //   //       // Get unique kmers
+  //   const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
+  //   console.log("unique1");
+
+  //   console.log(unique1);
+  //   let unique1_replaced = replace(unique1);
+  //   console.log("unique1_replaced");
+
+  //   console.log(unique1_replaced);
+  //   const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
+  //   console.log("unique2");
+  //   console.log(unique2);
+
+  //   let unique2_replaced = replace(unique2);
+  //   console.log("unique2_replaced");
+  //   console.log(unique2_replaced);
+
+  //   //         // Add new shared kmers
+  //   let s1_ktuples = new Set([...s1_kmers].concat(unique1_replaced));
+  //   let s2_ktuples = new Set([...s2_kmers].concat(unique2_replaced));
+
+  //   // Count the occurrences of each k-mer in sequence s1 and s2
+  //   const countS1 = countKmers(s1_ktuples);
+  //   const countS2 = countKmers(s2_ktuples);
+
+  //   let d2 = 0;
+
+  //   // Iterate over each unique k-mer
+  //   for (const kmer of new Set([...s1_kmers, ...s2_kmers])) {
+  //     const count1 = countS1[kmer] || 0; // Count of kmer in s1, default to 0 if not found
+  //     const count2 = countS2[kmer] || 0; // Count of kmer in s2, default to 0 if not found
+
+  //     // Calculate the contribution of this k-mer to the D2 dissimilarity
+  //     const contribution = count1 * count2;
+  //     d2 += contribution;
+  //   }
+
+  //   // Calculate the sum of squared counts for s1 and s2
+  //   const sumSqS1 = Object.values(countS1).reduce(
+  //     (sum, count) => sum + count ** 2,
+  //     0
+  //   );
+  //   const sumSqS2 = Object.values(countS2).reduce(
+  //     (sum, count) => sum + count ** 2,
+  //     0
+  //   );
+
+  //   // Calculate the cosine similarity
+  //   const cosine = d2 / (Math.sqrt(sumSqS1) * Math.sqrt(sumSqS2));
+
+  //   // Scale the similarity to the range [0, 1]
+  //   const similarity = (cosine + 1) / 2;
+
+  //   return similarity;
+  // }
+  // // Helper function to count the occurrences of each k-mer in an array
+  // function countKmers(kmers) {
+  //   const count = {};
+  //   for (const kmer of kmers) {
+  //     count[kmer] = (count[kmer] || 0) + 1;
+  //   }
+  //   return count;
+  // }
+  function SequencesimilarityD2stra(s1, s2, k, m) {
+    const s1_kmers = kmers(s1, k);
+    const s2_kmers = kmers(s2, k);
+
+    const set1 = new Set(s1_kmers);
+    const set2 = new Set(s2_kmers);
+
+    // Get unique kmers
+    // const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
+    // const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
+
+    const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
+    console.log("unique1");
+
+    console.log(unique1);
+    let unique1_replaced = replace(unique1);
+    console.log("unique1_replaced");
+
+    console.log(unique1_replaced);
+    const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
+    console.log("unique2");
+    console.log(unique2);
+
+    let unique2_replaced = replace(unique2);
+    console.log("unique2_replaced");
+    console.log(unique2_replaced);
+
+    //         // Add new shared kmers
+    let s1_ktuples = new Set([...s1_kmers].concat(unique1_replaced));
+    let s2_ktuples = new Set([...s2_kmers].concat(unique2_replaced));
+
+    // Count the occurrences of each k-mer in sequence s1 and s2
+    const countS1 = countKmers(s1_ktuples);
+    const countS2 = countKmers(s2_ktuples);
+
+    let dotProduct = 0;
+    let sumSqS1 = 0;
+    let sumSqS2 = 0;
+
+    // Iterate over each unique k-mer
+    for (const kmer of new Set([...s1_ktuples, ...s2_ktuples])) {
+      const count1 = countS1[kmer] || 0; // Count of kmer in s1, default to 0 if not found
+      const count2 = countS2[kmer] || 0; // Count of kmer in s2, default to 0 if not found
+
+      // Calculate the dot product of counts
+      dotProduct += count1 * count2;
+
+      // Calculate the sum of squared counts for s1 and s2
+      sumSqS1 += count1 ** 2;
+      sumSqS2 += count2 ** 2;
+    }
+
+    // Calculate the cosine similarity
+    const cosineSimilarity =
+      dotProduct / (Math.sqrt(sumSqS1) * Math.sqrt(sumSqS2));
+
+    // Calculate the D2Star dissimilarity
+    const tmpXD2Star = Math.sqrt(sumSqS1);
+    const tmpYD2Star = Math.sqrt(sumSqS2);
+    const resultD2Star =
+      0.5 * (1 - cosineSimilarity / (tmpXD2Star * tmpYD2Star));
+
+    return resultD2Star;
   }
+
+  // Helper function to count the occurrences of each k-mer in an array
+  function countKmers(kmers) {
+    const count = {};
+    for (const kmer of kmers) {
+      count[kmer] = (count[kmer] || 0) + 1;
+    }
+    return count;
+  }
+
   if (sequenceDict) {
     let names = sequenceDict.map((obj) => obj.name); // get sequence names from data array
 
@@ -134,8 +343,8 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
       for (let h = g + 1; h < n; h++) {
         let s1 = sequenceDict[g].sequence;
         let s2 = sequenceDict[h].sequence;
-        let sim = Sequencesimilarity(s1, s2, k);
-        let dist = 1 / (sim + Epilson);
+        let sim = SequencesimilarityD2stra(s1, s2, k);
+        let dist = sim;
         dist_mat[g][h] = dist;
         dist_mat[h][g] = dist;
       }
@@ -148,7 +357,7 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     };
     console.log("dist_mat");
 
-    console.log(dist_mat);
+    // console.log(dist_mat);
     return result;
   }
 }
