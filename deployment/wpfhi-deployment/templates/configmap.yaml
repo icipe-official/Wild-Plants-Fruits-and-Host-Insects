@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.client.app }}
+  namespace: {{ .Release.namespace }}
+  labels:
+    app: {{ .Values.client.app }}
+    project: {{ .Values.project }}
+data:
+  NEXT_PUBLIC_API_BASE_URL: {{ .Values.client.config.nextPublicApiBaseUrl }}
+  DATABASE_URL: {{ .Values.client.config.databaseUrl }}
+  NEXT_PUBLIC_BASE_PATH: {{ .Values.client.config.nextPublicBasePath }}

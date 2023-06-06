@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.client.app }}
+  namespace: {{ .Release.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  labels:
+    app: {{ .Values.client.app }}
+    project: {{ .Values.project }}
+spec:
+  {{- with .Values.ingressClassName }}
+  ingressClassName: {{ . }}
+  {{- end}}
+  rules:
+  {{- if eq .Values.client.ingress.useDomain "true" }}
+  - host: {{ .Values.client.ingress.host }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: {{ .Values.client.app }}
+            port: 
+              number: {{ .Values.client.service.port }}
+  {{- else }}
+  - http:
+        paths:
+          - path: {{ .Values.client.ingress.path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.client.app }}
+                port:
+                  number: {{ .Values.client.service.port }}
+  {{- end}}

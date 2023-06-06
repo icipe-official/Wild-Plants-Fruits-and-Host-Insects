@@ -1,0 +1,11 @@
+node_modules
+.env
+*.sql
+*.md
+android
+deployment
+scripts
+*.sh
+package-lock.json
+capacitor.config.ts
+.gitignore
