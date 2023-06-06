@@ -113,8 +113,6 @@ const useStyles = makeStyles((theme) => ({
     height: "10px",
   },
 }));
-import Link from "next/link";
-import { connect } from "react-redux";
 
 export default function HymenopteraBraconidaeComponent({ other_diptera_data }) {
   //   const [uniqueColeopteraData, setUniqueColeopteraData] = useState([]);

@@ -1,18 +1,5 @@
 import { Container, Box, Grid } from "@mui/material";
-import {
-  ButtonBase,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  useMediaQuery,
-  AppBar,
-  CssBaseline,
-  Toolbar,
-  IconButton,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
+import { useMediaQuery } from "@mui/material";
 
 import { useState } from "react";
 // import Order from "../src/components/insects/dipteraTephritidae";
@@ -23,7 +10,6 @@ import ColeopteraComponent from "components/insects/coleoptera";
 import HymenopteraBraconidaeComponent from "components/insects/hymenopterabraconidae";
 import HymenopterahymenopteraIchneumonoidae from "components/insects/hymenopteraichmonidae";
 import OtherHymenopteracomponent from "components/insects/otherhymenoptera";
-import { Button } from "react-admin";
 import { makeStyles } from "@mui/styles";
 import { TreeView, TreeItem } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
