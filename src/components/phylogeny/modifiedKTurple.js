@@ -282,8 +282,8 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     console.log(unique2_replaced);
 
     //         // Add new shared kmers
-    let s1_ktuples = new Set([...s1_kmers].concat(unique1_replaced));
-    let s2_ktuples = new Set([...s2_kmers].concat(unique2_replaced));
+    let s1_ktuples = s1_kmers.concat(unique1_replaced);
+    let s2_ktuples = s2_kmers.concat(unique2_replaced);
 
     // Count the occurrences of each k-mer in sequence s1 and s2
     const countS1 = countKmers(s1_ktuples);
@@ -297,7 +297,6 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     for (const kmer of new Set([...s1_ktuples, ...s2_ktuples])) {
       const count1 = countS1[kmer] || 0; // Count of kmer in s1, default to 0 if not found
       const count2 = countS2[kmer] || 0; // Count of kmer in s2, default to 0 if not found
-
       // Calculate the dot product of counts
       dotProduct += count1 * count2;
 
