@@ -1,6 +1,6 @@
 FROM node:16.19.1-alpine
 
-RUN addgroup -S appgroup && adduser -S app -G appgroup
+# RUN addgroup -S appgroup && adduser -S app -G appgroup
 
 ARG NEXT_PUBLIC_API_BASE_URL=NEXT_PUBLIC_API_BASE_URL
 ENV NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
@@ -15,6 +15,6 @@ RUN npm install --force
 RUN npm run build
 
 EXPOSE 3000
-USER app
+# USER app
 
 CMD [ "npm","run","start" ]
