@@ -128,7 +128,7 @@ export default function PlantDetailsFeaturesValues() {
                   <KsectorValues k_sector_data={data} />
                 </TreeItem>
                 <TreeItem nodeId="12" label="Map">
-                  <OpenLayersMap location_data={data} />
+                  <OpenLayersMap coordinates={coordinates} />
                 </TreeItem>
 
                 <TreeItem nodeId="15" label="Image">
@@ -161,7 +161,7 @@ export default function PlantDetailsFeaturesValues() {
                 <Grid xs={12} sm={6} md={5} lg={4}>
                   <Box sx={{ marginLeft: 0 }}>
                     <Box sx={{ fontWeight: "bold", marginTop: 2 }}>
-                      Distribution
+                      Regions collected
                     </Box>
                     <OpenLayersMap coordinates={coordinates} />
 
