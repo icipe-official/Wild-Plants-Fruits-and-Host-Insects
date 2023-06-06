@@ -3,7 +3,7 @@
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { connect } from "react-redux";
+
 import useSWR from "swr";
 import RegionsInsect from "./regeons";
 import { useRouter } from "next/router";
