@@ -25,7 +25,7 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     // Generate kmers for the reverse of the original sequence
     const reverseSequence = sequence.split("").reverse().join("");
     for (let v = 0; v < reverseSequence.length - kmer + 1; v++) {
-      sequenceKmers.push(reverseSequence.slice(v, v + kmer));
+      // sequenceKmers.push(reverseSequence.slice(v, v + kmer));
     }
     console.log("reverseSequence");
     console.log(reverseSequence);
@@ -52,7 +52,7 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     // Generate kmers for the complementary of the original sequence
     const complementary = complement(sequence);
     for (let v = 0; v < complementary.length - kmer + 1; v++) {
-      sequenceKmers.push(complementary.slice(v, v + kmer));
+      // sequenceKmers.push(complementary.slice(v, v + kmer));
     }
     console.log("complementary");
 
@@ -69,26 +69,12 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
   }
 
   // grouping of purines and pyrimidine
-  // function replace(kmers) {
-  //   const replaced_kmers = kmers.map((kmer) => {
-  //     return kmer.replace(/[99]/g, (match) => {
-  //       if (match === "C" || match === "T") {
-  //         return "Y";
-  //       } else if (match === "7" || match === "0") {
-  //         return "U";
-  //       }
-  //     });
-  //   });
-
-  //   return replaced_kmers;
-  // }
-
   function replace(kmers) {
     const replaced_kmers = kmers.map((kmer) => {
-      return kmer.replace(/[CTAG]/g, (match) => {
-        if (match === "C" || match === "T") {
+      return kmer.replace(/[99]/g, (match) => {
+        if (match === "7" || match === "8") {
           return "Y";
-        } else if (match === "A" || match === "G") {
+        } else if (match === "7" || match === "0") {
           return "U";
         }
       });
@@ -96,6 +82,20 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
 
     return replaced_kmers;
   }
+
+  // function replace(kmers) {
+  //   const replaced_kmers = kmers.map((kmer) => {
+  //     return kmer.replace(/[CTAG]/g, (match) => {
+  //       if (match === "C" || match === "T") {
+  //         return "Y";
+  //       } else if (match === "A" || match === "G") {
+  //         return "U";
+  //       }
+  //     });
+  //   });
+
+  //   return replaced_kmers;
+  // }
 
   // count the number of shared kmers
   function CountIntersection(s1, s2, k) {
@@ -264,26 +264,27 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     // Get unique kmers
     // const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
     // const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
+    // const shared1 = s1_kmers.filter((kmer) => s2_kmers.includes(kmer));
+    // const shared2 = s2_kmers.filter((kmer) => s1_kmers.includes(kmer));
+    // const const_trial_set = new Set(shared1);
+    // const const_trial_set2 = new Set(shared2);
+
+    // console.log("trial shared kmers");
+    // console.log(shared1);
+    // console.log(const_trial_set);
+    // console.log(shared2);
+    // console.log(const_trial_set2);
 
     const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
     console.log("unique1");
 
     console.log(unique1);
-    let unique1_replaced = replace(unique1);
-    console.log("unique1_replaced");
 
-    console.log(unique1_replaced);
     const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
-    console.log("unique2");
-    console.log(unique2);
-
-    let unique2_replaced = replace(unique2);
-    console.log("unique2_replaced");
-    console.log(unique2_replaced);
 
     //         // Add new shared kmers
-    let s1_ktuples = s1_kmers.concat(unique1_replaced);
-    let s2_ktuples = s2_kmers.concat(unique2_replaced);
+    let s1_ktuples = s1_kmers.concat(unique1);
+    let s2_ktuples = s2_kmers.concat(unique2);
 
     // Count the occurrences of each k-mer in sequence s1 and s2
     const countS1 = countKmers(s1_ktuples);
@@ -318,6 +319,46 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     return resultD2Star;
   }
 
+  function minHashSimilarity(s1, s2, k, m) {
+    // Generate MinHash signatures for s1 and s2
+    const sig1 = generateMinHashSignature(s1, k, m);
+    const sig2 = generateMinHashSignature(s2, k, m);
+
+    // Count the number of matching positions between the signatures
+    let matchingPositions = 0;
+    for (let i = 0; i < m; i++) {
+      if (sig1[i] === sig2[i]) {
+        matchingPositions++;
+      }
+    }
+
+    // Calculate the MinHash similarity estimate
+    const minHashSimilarity = matchingPositions / m;
+
+    return minHashSimilarity;
+  }
+
+  function generateMinHashSignature(sequence, k, m) {
+    // Generate k-mers from the sequence
+    const kMers = kmers(sequence, k);
+
+    // Initialize an array to store the MinHash signature
+    const signature = new Array(m).fill(Infinity);
+
+    // Apply MinHash to each k-mer
+    for (const kMer of kMers) {
+      const hash = hashFunction(kMer); // Replace hashFunction with an appropriate hash function
+
+      // Update the signature with the minimum hash value
+      for (let i = 0; i < m; i++) {
+        const hashValue = hash(i); // Apply the hash function to get the hash value
+        signature[i] = Math.min(signature[i], hashValue);
+      }
+    }
+
+    return signature;
+  }
+
   // Helper function to count the occurrences of each k-mer in an array
   function countKmers(kmers) {
     const count = {};
@@ -325,6 +366,22 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
       count[kmer] = (count[kmer] || 0) + 1;
     }
     return count;
+  }
+  function hashFunction(value) {
+    // Convert the value to a string
+    const str = String(value);
+
+    // Apply the hashCode function to get the hash value
+    let hash = 0;
+    if (str.length === 0) {
+      return hash;
+    }
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash; // Convert to a 32-bit integer
+    }
+    return hash;
   }
 
   if (sequenceDict) {
@@ -362,7 +419,7 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
 }
 
 // finf minimum distance
-function findMinimum(dist_mat) {
+function findMinimum(dist_mat, matrix) {
   var minimum = Infinity;
   var minimum_k, minimum_j;
   for (var k = 0; k < dist_mat.length; k++) {
