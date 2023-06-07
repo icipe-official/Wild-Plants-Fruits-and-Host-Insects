@@ -1,6 +1,7 @@
 import useSWR, { mutate } from "swr";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
+import { Optimalkmer } from "./modifiedKTurple";
 // import useMediaQuery from "@mui/material";
 import {
   Box,
@@ -21,8 +22,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // import CalculateSimilarityMatrix from "./generateDistanceMatrix";
 // import { NeighborJoining } from "./generateDistanceMatrix";
 
-import CalculateSimilarityMatrix from "./generateDistanceMatrix";
-import { NeighborJoining } from "./generateDistanceMatrix";
+import { NeighborJoining } from "./modifiedKTurple";
 import CalculateSimilarityMatrixModified from "./modifiedKTurple";
 import ConverttoFasta from "./inputsequence";
 import { makeStyles } from "@mui/styles";
@@ -305,6 +305,8 @@ export default function TreeTrial() {
           .filter((value) => value !== null);
         console.log("plant sequences");
         // console.log(sequences);
+        console.log("optimal kmer");
+        Optimalkmer(sequences);
 
         var result = CalculateSimilarityMatrixModified(sequences, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
@@ -619,6 +621,42 @@ export default function TreeTrial() {
     setSelectedFamily("");
   };
   //conditional rendering with data
+  if (error)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
+      </Container>
+    );
+
+  if (isLoading)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 12 }}>Loading...</Box>
+        {/* Footer goes here */}
+      </Container>
+    );
   if (data) {
     if (selectedOrganism === "plants") {
       let families =
@@ -631,9 +669,9 @@ export default function TreeTrial() {
       // obtain families only with matk sequences, get the set of the kmers, convert to list [...]
       const families_list = [
         ...new Set(
-          families.map(
-            (family) => family.plant_genera.plant_families.family_name
-          )
+          families
+            .map((family) => family.plant_genera.plant_families.family_name)
+            .sort()
         ),
       ]; // Convert set to array
       console.log("familes");
@@ -708,6 +746,13 @@ export default function TreeTrial() {
                     <MenuItem value={25}>25</MenuItem>
                     <MenuItem value={28}>28</MenuItem>
                     <MenuItem value={30}>30</MenuItem>
+                    <MenuItem value={35}>35</MenuItem>
+                    <MenuItem value={40}>40</MenuItem>
+                    <MenuItem value={45}>45</MenuItem>
+                    <MenuItem value={47}>47</MenuItem>
+                    <MenuItem value={48}>48</MenuItem>
+
+                    <MenuItem value={50}>50</MenuItem>
                   </Select>
                 </FormControl>
               </Box>

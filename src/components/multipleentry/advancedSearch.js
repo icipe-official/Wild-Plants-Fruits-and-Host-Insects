@@ -126,12 +126,47 @@ export default function QuerySelectAdvancedSearch() {
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data, error } = useSWR(
+  const { data, error, isLoading } = useSWR(
     `${base_url}/api/multipleEntry/allmultipleQuery`,
     fetcher
   );
+  if (error)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
+      </Container>
+    );
 
-  console.log(data);
+  if (isLoading)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 12 }}>Loading...</Box>
+        {/* Footer goes here */}
+      </Container>
+    );
+  // console.log(data);
   if (data) {
     // fetch(`/api/plantsPage/${species}`)
     // if (error) return <div>Failed to load</div>;

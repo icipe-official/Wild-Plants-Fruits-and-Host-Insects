@@ -100,44 +100,6 @@ export default function GlossaryAll() {
     )}`,
     fetcher
   );
-  // if (fruit_typerror) return <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
-  // if (fruit_isloading) return <Box sx={{ marginTop: 6 }}> Loading...</Box>;
-  // const [showPhotos, setShowPhotos] = useState(false);
-  // const [selectedType, setSelectedType] = useState(null);
-  // const router = useRouter();
-
-  // // const [example, setExample] = useState(null);
-
-  // // function handleClick(type) {
-  // //   setSelectedType(type);
-  // //   setShowPhotos(true);
-  // //   setQuery((prevQueryInfo) => ({
-  // //     ...prevQueryInfo,
-  // //     fruit_types: type.type_of_fruit,
-  // //   })); //setting state in dictionary
-  // //   console.log("query");
-  // //   console.log(query);
-  // // }
-  // //handle click of the plant
-  // function handleClick(type) {
-  //   const term = router.query.glossary_term;
-  //   setSelectedType(type);
-  //   console.log("type");
-
-  //   console.log(type);
-  //   setShowPhotos(true);
-  //   setQuery((prevQueryInfo) => ({
-  //     ...prevQueryInfo,
-  //     fruit_types: type.type_of_fruit,
-  //   }));
-  //   console.log("example");
-
-  //   console.log(example);
-  // }
-
-  // useEffect(() => {
-  //   console.log("query: ", JSON.stringify(query));
-  // }, [query]);
 
   const router = useRouter();
   const [showPhotos, setShowPhotos] = useState(false);
@@ -197,39 +159,47 @@ export default function GlossaryAll() {
       }
     }
   }, [glossary, glossaryTerm]);
-  // useEffect(() => {
-  //   if (glossary) {
-  //     const filteredGlossary = glossary.filter(
-  //       (g) => g.glossary_type === glossaryTerm
-  //     );
-
-  //     if (filteredGlossary) {
-  //       handleClick(filteredGlossary);
-  //       console.log("showPhotos");
-  //       console.log(showPhotos);
-  //     }
-  //     if (selectedType && example && glossary && filterdspecies) {
-  //       const glossaryPhotoIds = selectedType.photo_id;
-  //       console.log("glossaryPhotoIds");
-
-  //       console.log(glossaryPhotoIds);
-  //       const filteredSpeciesList = example.filter((species) => {
-  //         const photoIds = species.plants_photos.map((photo) => photo.id);
-  //         return photoIds.every((id) => glossaryPhotoIds.includes(id));
-  //       });
-  //       console.log("filteredSpeciesList");
-  //       setFiltrerdsepcies(filteredSpeciesList);
-
-  //       console.log(filteredSpeciesList);
-  //     }
-  //   }
-  // }, [glossary]);
-  // );
 
   function handleClose() {
     setSelectedType(null);
     setShowPhotos(false);
   }
+  if (fruit_typerror)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
+      </Container>
+    );
+
+  if (fruit_isloading)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 12 }}>Loading...</Box>
+        {/* Footer goes here */}
+      </Container>
+    );
 
   if (glossary && example) {
     console.log("glossary");
@@ -369,7 +339,8 @@ export default function GlossaryAll() {
                     <PhotosComponent
                       photos_data={filtered_examples}
                       selectedIndex={selectedIndex}
-                    />s
+                    />
+                    s
                   </Box>
                 </Box>
               </Box>
