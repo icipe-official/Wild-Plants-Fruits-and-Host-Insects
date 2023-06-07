@@ -13,13 +13,10 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // import CalculateSimilarityMatrix from "./generateDistanceMatrix";
 // import { NeighborJoining } from "./generateDistanceMatrix";
 
-import CalculateSimilarityMatrix from "./generateDistanceMatrix";
-import { NeighborJoining } from "./generateDistanceMatrix";
+import { NeighborJoining } from "./modifiedKTurple";
 import CalculateSimilarityMatrixModified from "./modifiedKTurple";
-import ConverttoFasta from "./inputsequence";
 import { makeStyles } from "@mui/styles";
 
-import { kMaxLength } from "buffer";
 // export default function Newick() {
 import FastaToDict from "./inputsequence";
 import { inspect } from "util";
