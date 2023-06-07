@@ -14,8 +14,4 @@ client:
   ingress:
     useDomain: "false"
     host: wpfhi.icipe.org
-    path: /wpfhi/
-  config:
-    nextPublicApiBaseUrl: X
-    databaseUrl: X
-    nextPublicBasePath: X
+    path: /wpfhi

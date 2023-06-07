@@ -20,9 +20,6 @@ spec:
         imagePullPolicy: {{ .Values.client.deployment.imagePullPolicy }}
         ports:
         - containerPort: 3000
-        envFrom:
-        - configMapRef:
-            name: {{ .Values.client.app }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
       - name: {{ . }}

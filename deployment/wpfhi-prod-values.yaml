@@ -3,7 +3,3 @@ imagePullSecrets: registry-credentials
 client:
   deployment:
     image: "51.140.225.217/wpfhi/app"
-  config:
-    nextPublicApiBaseUrl: "https://51.140.225.217/wpfhi"
-    databaseUrl: postgresql://wpfhi_admin:wpfhi2023@default.postgres.svc.cluster.local:5432/wpfhi
-    nextPublicBasePath: /wpfhi
