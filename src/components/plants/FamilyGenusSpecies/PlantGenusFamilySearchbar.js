@@ -66,8 +66,17 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
     const filteredgenus = data.filter((genus) => {
       return genus.plant_genera.plant_families.family_name == e.target.value;
     });
+    const sortedgenus = filteredgenus.sort((a, b) => {
+      if (a.genus < b.genus) {
+        return -1;
+      }
+      if (a.genus > b.genus) {
+        return 1;
+      }
+      return 0;
+    });
     // setLoaded(true);
-    setFamilyData(filteredgenus);
+    setFamilyData(sortedgenus);
     console.log("filtered genus after clicking");
 
     console.log(filteredgenus);
@@ -167,7 +176,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
       ...new Set(
         data.map((species) => species.plant_genera.plant_families.family_name)
       ),
-    ];
+    ].sort();
     const genus = [
       ...new Set(familyData.map((species) => species.plant_genera.genus_name)),
     ];
