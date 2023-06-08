@@ -60,7 +60,24 @@ export default function PlantDetailsFeaturesValues() {
     fetcher
   );
 
-  if (error) return <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
+  if (error)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
+      </Container>
+    );
+
   if (isLoading)
     return (
       <Container
