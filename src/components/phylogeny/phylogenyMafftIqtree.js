@@ -1,6 +1,5 @@
 import useSWR, { mutate } from "swr";
 import { useEffect, useState } from "react";
-import Mafft from "components/phylogeny/mafft";
 import { useRef } from "react";
 // import useMediaQuery from "@mui/material";
 import {
@@ -57,15 +56,25 @@ export default function PhylogenyMafft() {
   // Event handler for updating the selected organism
   const handleOrganismChange = (event) => {
     // const newOrganism = event.target.value;
-
     // Clear the previous data and refetch based on selecetd organism and change api to that of selected organism
+    //use the same name for api end points to
     mutate(`${base_url}/api/plants/species`, null, false);
     mutate(`${base_url}/api/insects/all/coi`, null, false);
 
     // Update the selected organism
     setSelectedOrganism(event.target.value);
+    if (event.target.value == "plants") {
+      setSelectedFamily("Vitaceae");
+      setNewickData(
+        "(Ampelocissus_africana_Mozambique_1:0.0076511049,(Cissus_integrifolia_Mozambique_1:0.0132548046,(Cissus_quadrangularis_Mozambique_1:0.0147342047,Cissus_rotundifolia_Mozambique_1:0.0034078082):0.0299014435):0.0119872426,((Cissus_integrifolia_Mozambique_2:0.0134894000,(Cissus_rotundifolia_Kenya_2:0.0000011601,Cissus_rotundifolia_Kenya_3:0.0000011601):0.0375793170):0.0075169886,(((Cyphostemma_cyphopetalum_Kenya_1:0.0000011601,((Cyphostemma_cyphopetalum_Kenya_2:0.0000011601,Cyphostemma_cyphopetalum_Kenya_3:0.0000011601):0.0000011601,Cyphostemma_cyphopetalum_Kenya_4:0.0000011601):0.0000011601):0.0057296080,(((Cyphostemma_serpens_Kenya_1:0.0000011601,Cyphostemma_serpens_Kenya_4:0.0000011601):0.0000011601,Cyphostemma_serpens_Kenya_3:0.0000011601):0.0000020490,Cyphostemma_serpens_Kenya_2:0.0000011601):0.0040926788):0.0304514307,((Rhoicissus_revoilii_South-Africa_1:0.0000011601,Rhoicissus_tridentata_South-Africa_1:0.0013107851):0.0000011601,Rhoicissus_revoilii_Mozambique_2:0.0000011601):0.0123113785):0.0055539448):1.1318167895);s"
+      );
+      handleChange(event);
+    } else {
+      setSelectedOrder("Braconidae");
+    }
     // setfilteredFamily("")
     handleChange(event);
+    // setNewickData("");
   };
   // Create the URL based on the selected organism
   const url = `${base_url}/api/${selectedOrganism}/species`;
@@ -76,7 +85,7 @@ export default function PhylogenyMafft() {
     "(Ampelocissus_africana_Mozambique_1:0.0076511049,(Cissus_integrifolia_Mozambique_1:0.0132548046,(Cissus_quadrangularis_Mozambique_1:0.0147342047,Cissus_rotundifolia_Mozambique_1:0.0034078082):0.0299014435):0.0119872426,((Cissus_integrifolia_Mozambique_2:0.0134894000,(Cissus_rotundifolia_Kenya_2:0.0000011601,Cissus_rotundifolia_Kenya_3:0.0000011601):0.0375793170):0.0075169886,(((Cyphostemma_cyphopetalum_Kenya_1:0.0000011601,((Cyphostemma_cyphopetalum_Kenya_2:0.0000011601,Cyphostemma_cyphopetalum_Kenya_3:0.0000011601):0.0000011601,Cyphostemma_cyphopetalum_Kenya_4:0.0000011601):0.0000011601):0.0057296080,(((Cyphostemma_serpens_Kenya_1:0.0000011601,Cyphostemma_serpens_Kenya_4:0.0000011601):0.0000011601,Cyphostemma_serpens_Kenya_3:0.0000011601):0.0000020490,Cyphostemma_serpens_Kenya_2:0.0000011601):0.0040926788):0.0304514307,((Rhoicissus_revoilii_South-Africa_1:0.0000011601,Rhoicissus_tridentata_South-Africa_1:0.0013107851):0.0000011601,Rhoicissus_revoilii_Mozambique_2:0.0000011601):0.0123113785):0.0055539448):1.1318167895);s"
   );
   // "((A:0.1,B:0.2)80:0.3,(C:0.4,D:0.5)95:0.6)90;"
-  const [selectedFamily, setSelectedFamily] = useState("Acanthaceae");
+  const [selectedFamily, setSelectedFamily] = useState("Vitaceae");
   const [kmer, setkmer] = useState(9);
   const [filteredFamily, setfilteredFamily] = useState("Acanthaceae");
   const [selecteorder, setSelectedOrder] = useState("Braconidae");
@@ -122,26 +131,14 @@ export default function PhylogenyMafft() {
     if (event) {
       if (selectedOrganism === "plants") {
         console.log("kmer at handlechange");
-        // if(data){
         const selectedValue =
-          (event.target && event.target.value) || "Select family"; // assign default value if target value is not defined
-
+          (event.target && event.target.value) || "Select family";
         setSelectedFamily(selectedValue);
-
         const filteredData = data.filter(
           (dat) => dat.plant_genera.plant_families.family_name === selectedValue
         );
-
-        // const selectedValue = event.target.value;
-        // console.log("selectedValue");
-        // console.log(selectedValue);
-
         setSelectedFamily(selectedValue);
         setfilteredFamily(filteredData);
-        // const filteredData = data.filter(dat=>dat.plant_genera.plant_families.family_name===selectedFamily);
-        console.log("filteredData");
-        // console.log(filteredData);
-
         const sequences = filteredData.reduce((result, obj) => {
           let counter = 1;
           if (obj.plants_matk.length > 0) {
@@ -155,33 +152,23 @@ export default function PhylogenyMafft() {
                   plant.country.replace(/ /g, "-") +
                   "_" +
                   counter;
-
                 counter++;
-
-                result[name] = plant.nucleotide.replace(/-/g, "");
+                result[namereplace(/\s/g, "")] = plant.nucleotide.replace(
+                  /-/g,
+                  ""
+                );
               }
             });
           }
           return result;
         }, {});
-
         console.log("plant sequences format");
         console.log(sequences);
-
         console.log("sequences on click family");
         console.log(sequences);
-
-        //pass the sequence to mafft at the back end
-
-        // var result = CalculateSimilarityMatrixModified(sequences, kmer);
-        // var result = CalculateSimilarityMatrix(sequences);
-
-        console.log("plant newick from mafttttttttttt");
-
         const requestBody = {
           sequences: sequences,
         };
-
         fetch("http://localhost:3000/api/phylogeny", {
           method: "POST",
           headers: {
@@ -203,155 +190,17 @@ export default function PhylogenyMafft() {
           .catch((error) => {
             console.error(error);
           });
-        // const newick = await Mafft(sequences);
-        // console.log(newick);
-        // setNewickData(newick);
-        setSelectedFamily(selectedValue);
-        setDownload(sequences);
-        console.log(" after main handle change");
-
-        // console.log(kmer);
-        // setkmer(5)
-      } else {
-        if (selectedOrganism == "insects") {
-          console.log("insect kmer at handlechange");
-          // if(data){
-          const selectedValue =
-            (event.target && event.target.value) || "Select family"; // assign default value if target value is not defined
-          setSelectedOrder(selectedValue);
-
-          const filteredData = data.filter(
-            (dat) => dat.insect_families.family_name === selectedValue
-          );
-
-          // const selectedValue = event.target.value;
-          // console.log("selectedValue");
-          // console.log(selectedValue);
-
-          setSelectedOrder(selectedValue);
-          setFilteredOrder(filteredData);
-          setNewickData("");
-          // const filteredData = data.filter(dat=>dat.plant_genera.plant_families.family_name===selectedFamily);
-          console.log("insect filteredData");
-          // console.log(filteredData);
-          const sequences = filteredData.reduce((result, obj) => {
-            let counter = 1;
-            if (obj.insects_coi.length > 0) {
-              obj.insects_coi.forEach((insect) => {
-                if (insect.nucleotide !== null) {
-                  const name =
-                    obj.insect_genera.genus_name +
-                    "_" +
-                    obj.species_name.split(" ")[0] +
-                    "_" +
-                    insect.country.replace(/ /g, "-") +
-                    "_" +
-                    counter;
-
-                  counter++;
-
-                  result[name] = insect.nucleotide.replace(/-/g, "");
-                }
-              });
-            }
-            return result;
-          }, {});
-          // console.log("insect sequences");
-          // // var newick = NeighborJoining(result.dist_mat, result.names);
-          // console.log("newick");
-          // setNewickData(newick);
-          // setSelectedOrder(selectedValue);
-          // setDownload(sequences);
-          // console.log(" after main handle change");
-
-          // console.log(kmer);
-        }
-      }
-    } //option 2 when genus is selected
-    else {
-      if (selectedOrganism == "plants") {
-        const filteredData = data.filter(
-          (dat) =>
-            dat.plant_genera.plant_families.family_name === selectedFamily
-        );
-
-        console.log("filteredData");
-        // console.log(filteredData);
-        //dictionary of sequences and name
-        const sequences = filteredData.reduce((result, obj) => {
-          let counter = 1;
-          if (obj.plants_matk.length > 0) {
-            obj.plants_matk.forEach((plant) => {
-              if (plant.nucleotide !== null) {
-                const name =
-                  obj.plant_genera.genus_name +
-                  "_" +
-                  obj.species_name.split(" ")[0] +
-                  "_" +
-                  plant.country.replace(/ /g, "-") +
-                  "_" +
-                  counter;
-
-                counter++;
-
-                result[name] = plant.nucleotide.replace(/-/g, "");
-              }
-            });
-          }
-          return result;
-        }, {});
-
-        console.log("plant sequences format");
-        console.log(sequences);
-
-        console.log("plant sequences format");
-        console.log(sequences);
-        //send the API request to the API back end
-        console.log("plant newick from mafttttttttttt");
-        const requestBody = {
-          sequences: sequences,
-        };
-
-        fetch("http://localhost:3000/api/phylogeny", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Error: " + response.status);
-            }
-            return response.json();
-          })
-          .then((data) => {
-            const newick = data.newick;
-            setNewickData(newick);
-            console.log(data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-        // const newick = await Mafft(sequences);
-
-        // console.log(newick);
-
-        console.log("plant newick");
-        // setNewickData(newick);
-        // setDownload(sequences);
-        // setSelectedFamily(selectedValue)
       } else if (selectedOrganism === "insects") {
-        console.log("insect selecteorder");
-
-        // console.log(selecteorder);
+        console.log("insect kmer at handlechange");
+        const selectedValue =
+          (event.target && event.target.value) || "Select family";
+        setSelectedOrder(selectedValue);
         const filteredData = data.filter(
-          (dat) => dat.insect_families.family_name === selecteorder
+          (dat) => dat.insect_families.family_name === selectedValue
         );
-
-        console.log("insect filteredData on selecting insect order");
-        // console.log(filteredData);
-        //dictionary of sequences and name
+        setSelectedOrder(selectedValue);
+        setFilteredOrder(filteredData);
+        console.log("insect filteredData");
         const sequences = filteredData.reduce((result, obj) => {
           let counter = 1;
           if (obj.insects_coi.length > 0) {
@@ -362,24 +211,21 @@ export default function PhylogenyMafft() {
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
-                  insect.country.replace(/ /g, "-") +
-                  "_" +
+                  insect.country?.replace(/ /g, "") +
                   counter;
-
                 counter++;
-
-                result[name] = insect.nucleotide.replace(/-/g, "");
+                result[name.replace(/\s/g, "")] = insect.nucleotide.replace(
+                  /-/g,
+                  ""
+                );
               }
             });
           }
           return result;
         }, {});
-
-        //send API request to generate tree for selected plant family
         const requestBody = {
           sequences: sequences,
         };
-        //send request to API to generate the phylogenetics treee
         fetch("http://localhost:3000/api/phylogeny", {
           method: "POST",
           headers: {
@@ -401,44 +247,121 @@ export default function PhylogenyMafft() {
           .catch((error) => {
             console.error(error);
           });
-        // const newick = await Mafft(sequences);
-
-        // console.log(newick);
-
-        // var newick = NeighborJoining(result.dist_mat, result.names);
-        console.log("newick");
-        // setNewickData(newick);
-        // setSelectedOrder(selectedValue);
-        setDownload(sequences);
-        console.log(" after main handle change");
-
-        console.log("insect sequences");
-        // console.log(sequences);
-        // var result = CalculateSimilarityMatrixModified(sequences, kmer);
-        // var result = CalculateSimilarityMatrix(sequences);
-
-        // var newick = NeighborJoining(result.dist_mat, result.names);
-        console.log("insect newick");
-        // setNewickData(newick);
-        setDownload(sequences);
+      }
+    } else {
+      if (selectedOrganism === "plants") {
+        const filteredData = data.filter(
+          (dat) =>
+            dat.plant_genera.plant_families.family_name === selectedFamily
+        );
+        console.log("filteredData");
+        const sequences = filteredData.reduce((result, obj) => {
+          let counter = 1;
+          if (obj.plants_matk.length > 0) {
+            obj.plants_matk.forEach((plant) => {
+              if (plant.nucleotide !== null) {
+                const name =
+                  obj.plant_genera.genus_name +
+                  "_" +
+                  obj.species_name.split(" ")[0] +
+                  "_" +
+                  plant.country.replace(/ /g, "-") +
+                  "_" +
+                  counter;
+                counter++;
+                result[namereplace(/\s/g, "")] = plant.nucleotide.replace(
+                  /-/g,
+                  ""
+                );
+              }
+            });
+          }
+          return result;
+        }, {});
+        console.log("plant sequences format");
+        console.log(sequences);
+        console.log("plant sequences format");
+        console.log(sequences);
+        const requestBody = {
+          sequences: sequences,
+        };
+        fetch("http://localhost:3000/api/phylogeny", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error: " + response.status);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const newick = data.newick;
+            setNewickData(newick);
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else if (selectedOrganism === "insects") {
+        console.log("insect selecteorder");
+        const filteredData = data.filter(
+          (dat) => dat.insect_families.family_name === selecteorder
+        );
+        console.log("insect filteredData on selecting insect order");
+        const sequences = filteredData.reduce((result, obj) => {
+          let counter = 1;
+          if (obj.insects_coi.length > 0) {
+            obj.insects_coi.forEach((insect) => {
+              if (insect.nucleotide !== null) {
+                const name =
+                  obj.insect_genera.genus_name +
+                  "_" +
+                  obj.species_name.split(" ")[0] +
+                  "_" +
+                  insect.country?.replace(/ /g, "") +
+                  counter;
+                counter++;
+                result[name.replace(/\s/g, "")] = insect.nucleotide.replace(
+                  /-/g,
+                  ""
+                );
+              }
+            });
+          }
+          return result;
+        }, {});
+        const requestBody = {
+          sequences: sequences,
+        };
+        fetch("http://localhost:3000/api/phylogeny", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error: " + response.status);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const newick = data.newick;
+            setNewickData(newick);
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
     }
   }
 
-  //selection of kmer
-
-  //  const handleChangekmer= (event) => {
-  //   setkmer(event.target.value);
-  //   console.log("Selected integer: " + event.target.value);
-  //   console.log("kmer before selecting")
-
-  //   console.log(kmer)
-  //   handleChange()
-  //   console.log("kmer after selecting kmer")
-
-  //   console.log(kmer)
-
-  // };
   const handleChangekmer = (event) => {
     const newKmer = event.target.value;
     setkmer(newKmer);
@@ -467,7 +390,6 @@ export default function PhylogenyMafft() {
       let currentSequenceName = "";
       let currentSequence = "";
       const fastaArray = [];
-
       for (let line of fastaLines) {
         if (line.startsWith(">")) {
           if (currentSequenceName !== "") {
@@ -583,6 +505,8 @@ export default function PhylogenyMafft() {
     setNewickInput(event.target.value);
 
     // setSelectedFamily("Select family");
+    setSelectedFamily("Select family");
+    setSelectedOrder("Select order");
 
     console.log("newick input");
     // console.log(newickInput);
@@ -712,6 +636,9 @@ export default function PhylogenyMafft() {
   };
   //conditional rendering with data
   if (data) {
+    // setIsLoadingData(false); // Set loading state to false
+    // ...
+
     if (selectedOrganism === "plants") {
       let families =
         //return only families wth atleas two matk sequences
@@ -721,7 +648,7 @@ export default function PhylogenyMafft() {
             species.plants_matk.length > 0
         );
       // obtain families only with matk sequences, get the set of the kmers, convert to list [...]
-      const families_list = [
+      var families_list = [
         ...new Set(
           families
             .map((family) => family.plant_genera.plant_families.family_name)
@@ -731,370 +658,197 @@ export default function PhylogenyMafft() {
       console.log("familes");
 
       // console.log(families);
-      const filteredData = data.filter(
+      var filteredData = data.filter(
         (dat) => dat.plant_genera.plant_families.family_name === selectedFamily
       );
+    } else {
+      //render insects phylogeny
+      console.log("insects");
+      if (selectedOrganism === "insects") {
+        var orders = new Set(
+          data.map((species) => species.insect_families.family_name)
+        );
 
-      return (
-        <Container sx={{ marginTop: 10 }}>
-          {/* <ConverttoFasta></ConverttoFasta> */}
-          <Box sx={{ display: isSmallScreen ? "row" : "flex" }}>
-            <Box sx={{ display: "flex" }}>
-              <Box>
-                <FormControl>
-                  <InputLabel>select organism</InputLabel>
-                  <Select
-                    value={selectedOrganism}
-                    onChange={handleOrganismChange}
-                  >
-                    <MenuItem value="plants">Plants</MenuItem>
-                    <MenuItem value="insects">Insects</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              <Box sx={{ marginLeft: 2 }}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel>Select family</InputLabel>
-                  <Select
-                    value={selectedFamily}
-                    onChange={(event) => handleChange(event)}
-                    label="Families"
-                    //   IconComponent={ArrowDropDown}
-                  >
-                    {families_list.map((family, index) => (
-                      <MenuItem key={index} value={family}>
-                        {family}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
+        var insect_orders_list = [...orders]; // Convert set to array
+        console.log("orders");
+
+        // console.log(orders);
+        var insectFilteredData = data.filter(
+          (dat) => dat.insect_orders.order_name == selecteorder
+        );
+        console.log("insect filteredData");
+        var insect_famililes = data.filter(
+          (entry) =>
+            entry.plants_insects.length > 0 &&
+            entry.insect_orders.order_name === "Lepidoptera"
+        );
+        console.log("plants_famililes");
+
+        // console.log(filteredData);
+      }
+    }
+    return (
+      <Container sx={{ marginTop: 10 }}>
+        {/* <ConverttoFasta></ConverttoFasta> */}
+        <Box sx={{ display: isSmallScreen ? "row" : "flex" }}>
+          <Box sx={{ display: "flex" }}>
+            <Box>
+              <FormControl>
+                <InputLabel>select organism</InputLabel>
+                <Select
+                  value={selectedOrganism}
+                  onChange={handleOrganismChange}
+                >
+                  <MenuItem value="plants">Plants</MenuItem>
+                  <MenuItem value="insects">Insects</MenuItem>
+                </Select>
+              </FormControl>
             </Box>
-            <Box sx={{ display: "flex" }}>
-              {/* <Box sx={{marginLeft:2}}>          <FastaToDict/>
+            <Box sx={{ marginLeft: 2 }}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel>Select family</InputLabel>
+                <Select
+                  value={
+                    selectedOrganism === "plants"
+                      ? selectedFamily
+                      : selecteorder
+                  }
+                  onChange={(event) => handleChange(event)}
+                  label="Families"
+                  //   IconComponent={ArrowDropDown}
+                >
+                  {selectedOrganism === "plants"
+                    ? families_list.map((family, index) => (
+                        <MenuItem key={index} value={family}>
+                          {family}
+                        </MenuItem>
+                      ))
+                    : insect_orders_list.map((order, index) => (
+                        <MenuItem key={index} value={order}>
+                          {order}
+                        </MenuItem>
+                      ))}
+                </Select>
+              </FormControl>
+            </Box>
+          </Box>
+          <Box sx={{ display: "flex" }}>
+            {/* <Box sx={{marginLeft:2}}>          <FastaToDict/>
 </Box> */}
-              <Box sx={{ marginLeft: isSmallScreen ? 0 : 2 }}>
-                <TreeView
-                  className={classes.root}
-                  defaultCollapseIcon={<ExpandMoreIcon />}
-                  defaultExpandIcon={<ChevronRightIcon />}
-                  selected={selectedNode}
-                  onNodeSelect={handleNodeSelect}
-                >
-                  <TreeItem nodeId="1" label="Download">
-                    <TreeItem nodeId="2" label="Sequences in fasta format">
-                      <SequenceDownload
-                        data={download}
-                        selectdFamily={selectedFamily}
-                        kmer={kmer}
-                      />
+            <Box sx={{ marginLeft: isSmallScreen ? 0 : 2 }}>
+              <TreeView
+                className={classes.root}
+                defaultCollapseIcon={<ExpandMoreIcon />}
+                defaultExpandIcon={<ChevronRightIcon />}
+                selected={selectedNode}
+                onNodeSelect={handleNodeSelect}
+              >
+                <TreeItem nodeId="1" label="Download">
+                  <TreeItem nodeId="2" label="Sequences in fasta format">
+                    <SequenceDownload
+                      data={download}
+                      selectdFamily={selectedFamily}
+                      kmer={kmer}
+                    />
 
-                      {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
-                    </TreeItem>
-
-                    <TreeItem nodeId="5" label="Newick file">
-                      <NewickDownload newick={newickData} data={filteredData} />
-                    </TreeItem>
+                    {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
                   </TreeItem>
-                </TreeView>
-              </Box>
-              <Box sx={{ marginLeft: 2 }}>
-                <TreeView
-                  className={classes.root}
-                  defaultCollapseIcon={<ExpandMoreIcon />}
-                  defaultExpandIcon={<ChevronRightIcon />}
-                  selected={selectedNode}
-                  onNodeSelect={handleNodeSelect}
-                >
-                  <TreeItem nodeId="9" label="Paste file">
-                    <TreeItem nodeId="10" label="Paste newick">
-                      <form onSubmit={handleSubmitnewick}>
+
+                  <TreeItem nodeId="5" label="Newick file">
+                    <NewickDownload
+                      newick={newickData}
+                      data={
+                        selectedOrganism === "plants"
+                          ? filteredData
+                          : insectFilteredData
+                      }
+                    />
+                  </TreeItem>
+                </TreeItem>
+              </TreeView>
+            </Box>
+            <Box sx={{ marginLeft: 2 }}>
+              <TreeView
+                className={classes.root}
+                defaultCollapseIcon={<ExpandMoreIcon />}
+                defaultExpandIcon={<ChevronRightIcon />}
+                selected={selectedNode}
+                onNodeSelect={handleNodeSelect}
+              >
+                <TreeItem nodeId="9" label="Paste file">
+                  <TreeItem nodeId="10" label="Paste newick">
+                    <form onSubmit={handleSubmitnewick}>
+                      <label>
+                        <textarea
+                          value={newickInput}
+                          onChange={handleInputChangenewick}
+                          placeholder="Enter newick sequence"
+                          autoFocus
+                        ></textarea>
+                      </label>
+                      <br />
+                      <button type="submit">Submit</button>
+                    </form>
+                    {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
+                  </TreeItem>
+
+                  <TreeItem nodeId="30" label="Paste fasta Sequence">
+                    <Box sx={{ marginLeft: 2 }}>
+                      <form onSubmit={handleSubmitfasta}>
                         <label>
                           <textarea
-                            value={newickInput}
-                            onChange={handleInputChangenewick}
-                            placeholder="Enter newick sequence"
+                            value={fastaInput}
+                            onChange={handleInputChangefasta}
+                            placeholder="Enter FASTA sequence"
                             autoFocus
                           ></textarea>
                         </label>
                         <br />
                         <button type="submit">Submit</button>
                       </form>
-                      {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
-                    </TreeItem>
-
-                    <TreeItem nodeId="30" label="Paste fasta Sequence">
-                      <Box sx={{ marginLeft: 2 }}>
-                        <form onSubmit={handleSubmitfasta}>
-                          <label>
-                            <textarea
-                              value={fastaInput}
-                              onChange={handleInputChangefasta}
-                              placeholder="Enter FASTA sequence"
-                              autoFocus
-                            ></textarea>
-                          </label>
-                          <br />
-                          <button type="submit">Submit</button>
-                        </form>
-                      </Box>
-                    </TreeItem>
-                    {/* <TreeItem nodeId="11" label="Upload Fasta file">
-                    <form onSubmit={handleSubmiFastatFile}>
-                      <label>
-                        Upload File:
-                        <input type="file" onChange={handleInputChangefasta} />
-                      </label>
-                      <br />
-                      <button type="submit">Submit</button>
-                    </form>
-                  </TreeItem> */}
+                    </Box>
                   </TreeItem>
-                </TreeView>
-              </Box>
-              <Box sx={{ marginLeft: 2 }}>
-                <TreeView
-                  className={classes.root}
-                  defaultCollapseIcon={<ExpandMoreIcon />}
-                  defaultExpandIcon={<ChevronRightIcon />}
-                  selected={selectedNode}
-                  onNodeSelect={handleNodeSelect}
-                >
-                  <TreeItem nodeId="20" label="Upload file">
-                    <TreeItem nodeId="21" label="Upload Newick file">
-                      <form onSubmit={handleSubmitFile}>
-                        <label>
-                          Upload File:
-                          <input
-                            type="file"
-                            onChange={handleInputChangenewick}
-                          />
-                        </label>
-                        <br />
-                        <button type="submit">Submit</button>
-                      </form>
-                    </TreeItem>
-                    {/* <TreeItem nodeId="11" label="Upload Fasta file">
-                    <form onSubmit={handleSubmiFastatFile}>
-                      <label>
-                        Upload File:
-                        <input type="file" onChange={handleInputChangefasta} />
-                      </label>
-                      <br />
-                      <button type="submit">Submit</button>
-                    </form>
-                  </TreeItem> */}
-                  </TreeItem>
-                </TreeView>
-              </Box>
+                </TreeItem>
+              </TreeView>
             </Box>
-          </Box>{" "}
-          <Box>
-            <iframe
-              ref={iframeRef}
-              src={`/phylotree.html?newickData=${newickData}`}
-              style={{
-                position: "relative",
-                top: 3,
-                left: 2,
-                width: "100%", // Set a fixed width
-                height: "100vh", // Set a fixed height
-              }}
-            />
+            <Box sx={{ marginLeft: 2 }}>
+              <TreeView
+                className={classes.root}
+                defaultCollapseIcon={<ExpandMoreIcon />}
+                defaultExpandIcon={<ChevronRightIcon />}
+                selected={selectedNode}
+                onNodeSelect={handleNodeSelect}
+              >
+                <TreeItem nodeId="20" label="Upload file">
+                  <TreeItem nodeId="21" label="Upload Newick file">
+                    <form onSubmit={handleSubmitFile}>
+                      <label>
+                        Upload File:
+                        <input type="file" onChange={handleInputChangenewick} />
+                      </label>
+                      <br />
+                      <button type="submit">Submit</button>
+                    </form>
+                  </TreeItem>
+                </TreeItem>
+              </TreeView>
+            </Box>
           </Box>
-        </Container>
-      );
-    } else {
-      //render insects phylogeny
-      console.log("insects");
-      if (selectedOrganism === "insects") {
-        const orders = new Set(
-          data.map((species) => species.insect_families.family_name)
-        );
-
-        const orders_list = [...orders]; // Convert set to array
-        console.log("orders");
-
-        // console.log(orders);
-        const filteredData = data.filter(
-          (dat) => dat.insect_orders.order_name == selecteorder
-        );
-        console.log("insect filteredData");
-
-        // console.log(filteredData);
-        return (
-          <Container sx={{ marginTop: 10 }}>
-            <Box sx={{ display: isSmallScreen ? "row" : "flex" }}>
-              <Box sx={{ display: "flex" }}>
-                <Box>
-                  <FormControl>
-                    <InputLabel>select organism</InputLabel>
-                    <Select
-                      value={selectedOrganism}
-                      onChange={handleOrganismChange}
-                    >
-                      <MenuItem value="plants">Plants</MenuItem>
-                      <MenuItem value="insects">Insects</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-                <Box sx={{ marginLeft: 2 }}>
-                  <FormControl fullWidth variant="outlined">
-                    <InputLabel>Select Family</InputLabel>
-                    <Select
-                      value={selecteorder}
-                      onChange={(event) => handleChange(event)}
-                      label="orders"
-                      //   IconComponent={ArrowDropDown}
-                    >
-                      {orders_list.map((order, index) => (
-                        <MenuItem key={index} value={order}>
-                          {order}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Box>
-                {/* </Box> */}
-              </Box>
-              <Box sx={{ display: "flex" }}>
-                {/* <Box sx={{marginLeft:2}}>          <FastaToDict/>
-</Box> */}
-                <Box sx={{ marginLeft: isSmallScreen ? 0 : 2 }}>
-                  <TreeView
-                    className={classes.root}
-                    defaultCollapseIcon={<ExpandMoreIcon />}
-                    defaultExpandIcon={<ChevronRightIcon />}
-                    selected={selectedNode}
-                    onNodeSelect={handleNodeSelect}
-                  >
-                    <TreeItem nodeId="1" label="Download">
-                      <TreeItem nodeId="2" label="Sequences in fasta format">
-                        <SequenceDownload
-                          data={download}
-                          selectdFamily={selecteorder}
-                          kmer={kmer}
-                        />
-
-                        {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
-                      </TreeItem>
-
-                      <TreeItem nodeId="5" label="Newick file">
-                        <NewickDownload
-                          newick={newickData}
-                          data={filteredData}
-                        />
-                      </TreeItem>
-                    </TreeItem>
-                  </TreeView>
-                </Box>
-                <Box sx={{ marginLeft: 2 }}>
-                  <TreeView
-                    className={classes.root}
-                    defaultCollapseIcon={<ExpandMoreIcon />}
-                    defaultExpandIcon={<ChevronRightIcon />}
-                    selected={selectedNode}
-                    onNodeSelect={handleNodeSelect}
-                  >
-                    <TreeItem nodeId="9" label="Paste file">
-                      <TreeItem nodeId="10" label="Paste newick">
-                        <form onSubmit={handleSubmitnewick}>
-                          <label>
-                            <textarea
-                              value={newickInput}
-                              onChange={handleInputChangenewick}
-                              placeholder="Enter newick sequence"
-                              autoFocus
-                            ></textarea>
-                          </label>
-                          <br />
-                          <button type="submit">Submit</button>
-                        </form>
-                        {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
-                      </TreeItem>
-
-                      <TreeItem nodeId="30" label="Paste fasta Sequence">
-                        <Box sx={{ marginLeft: 2 }}>
-                          <form onSubmit={handleSubmitfasta}>
-                            <label>
-                              <textarea
-                                value={fastaInput}
-                                onChange={handleInputChangefasta}
-                                placeholder="Enter FASTA sequence"
-                                autoFocus
-                              ></textarea>
-                            </label>
-                            <br />
-                            <button type="submit">Submit</button>
-                          </form>
-                        </Box>
-                      </TreeItem>
-                      {/* <TreeItem nodeId="11" label="Upload Fasta file">
-                    <form onSubmit={handleSubmiFastatFile}>
-                      <label>
-                        Upload File:
-                        <input type="file" onChange={handleInputChangefasta} />
-                      </label>
-                      <br />
-                      <button type="submit">Submit</button>
-                    </form>
-                  </TreeItem> */}
-                    </TreeItem>
-                  </TreeView>
-                </Box>
-                <Box sx={{ marginLeft: 2 }}>
-                  <TreeView
-                    className={classes.root}
-                    defaultCollapseIcon={<ExpandMoreIcon />}
-                    defaultExpandIcon={<ChevronRightIcon />}
-                    selected={selectedNode}
-                    onNodeSelect={handleNodeSelect}
-                  >
-                    <TreeItem nodeId="20" label="Upload file">
-                      <TreeItem nodeId="21" label="Upload Newick file">
-                        <form onSubmit={handleSubmitFile}>
-                          <label>
-                            Upload File:
-                            <input
-                              type="file"
-                              onChange={handleInputChangenewick}
-                            />
-                          </label>
-                          <br />
-                          <button type="submit">Submit</button>
-                        </form>
-                      </TreeItem>
-                      {/* <TreeItem nodeId="11" label="Upload Fasta file">
-                    <form onSubmit={handleSubmiFastatFile}>
-                      <label>
-                        Upload File:
-                        <input type="file" onChange={handleInputChangefasta} />
-                      </label>
-                      <br />
-                      <button type="submit">Submit</button>
-                    </form>
-                  </TreeItem> */}
-                    </TreeItem>
-                  </TreeView>
-                </Box>
-              </Box>
-            </Box>{" "}
-            <Box>
-              <iframe
-                ref={iframeRef}
-                src={`/phylotree.html?newickData=${newickData}`}
-                style={{
-                  position: "relative",
-                  top: 3,
-                  left: 2,
-                  width: "100%", // Set a fixed width
-                  height: "100vh", // Set a fixed height
-                }}
-              />
-            </Box>
-          </Container>
-        );
-      }
-    }
+        </Box>{" "}
+        <Box>
+          <iframe
+            ref={iframeRef}
+            src={`/phylotree.html?newickData=${newickData}`}
+            style={{
+              position: "relative",
+              top: 3,
+              left: 2,
+              width: "100%", // Set a fixed width
+              height: "100vh", // Set a fixed height
+            }}
+          />
+        </Box>
+      </Container>
+    );
   }
 }
