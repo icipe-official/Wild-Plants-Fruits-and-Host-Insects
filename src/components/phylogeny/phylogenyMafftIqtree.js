@@ -153,10 +153,9 @@ export default function PhylogenyMafft() {
                   "_" +
                   counter;
                 counter++;
-                result[name.replace(/\s/g, "")] = plant.nucleotide.replace(
-                  /-/g,
-                  ""
-                );
+                result[name.replace(/\s/g, "")] = plant.nucleotide
+                  .replace(/-/g, "")
+                  .replace(/N/g, "");
               }
             });
           }
@@ -216,10 +215,9 @@ export default function PhylogenyMafft() {
                   insect.country?.replace(/ /g, "") +
                   counter;
                 counter++;
-                result[name.replace(/\s/g, "")] = insect.nucleotide.replace(
-                  /-/g,
-                  ""
-                );
+                result[name.replace(/\s/g, "")] = insect.nucleotide
+                  .replace(/-/g, "")
+                  .replace(/N/g, "");
               }
             });
           }
@@ -273,10 +271,9 @@ export default function PhylogenyMafft() {
                   "_" +
                   counter;
                 counter++;
-                result[name.replace(/\s/g, "")] = plant.nucleotide.replace(
-                  /-/g,
-                  ""
-                );
+                result[name.replace(/\s/g, "")] = plant.nucleotide
+                  .replace(/-/g, "")
+                  .replace(/N/g, "");
               }
             });
           }
@@ -331,10 +328,9 @@ export default function PhylogenyMafft() {
                   insect.country?.replace(/ /g, "") +
                   counter;
                 counter++;
-                result[name.replace(/\s/g, "")] = insect.nucleotide.replace(
-                  /-/g,
-                  ""
-                );
+                result[name.replace(/\s/g, "")] = insect.nucleotide
+                  .replace(/-/g, "")
+                  .replace(/N/g, "");
               }
             });
           }
@@ -642,6 +638,42 @@ export default function PhylogenyMafft() {
     setFastaInput("");
     setSelectedFamily("");
   };
+  if (isLoading)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 12 }}>Loading...</Box>
+        {/* Footer goes here */}
+      </Container>
+    );
+  if (error)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 12 }}>Failed to load...</Box>
+        {/* Footer goes here */}
+      </Container>
+    );
   //conditional rendering with data
   if (data) {
     // setIsLoadingData(false); // Set loading state to false
