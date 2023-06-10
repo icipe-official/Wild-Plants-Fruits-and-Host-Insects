@@ -34,7 +34,10 @@ export default function PlantsInsectsPhylogeny() {
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
-  const { data, error } = useSWR(`${base_url}/api/insects/species`, fetcher);
+  const { data, error, isLoading } = useSWR(
+    `${base_url}/api/insects/species`,
+    fetcher
+  );
 
   console.log(data);
   const [newickData, setNewickData] = useState("");
@@ -150,6 +153,9 @@ export default function PlantsInsectsPhylogeny() {
   const handleInputChangefasta = (event) => {
     setFastaInput(event.target.value);
   };
+  if (isLoading) {
+    return <Container sx={{ height: "100%" }}>Loading</Container>;
+  }
 
   if (data) {
     //render insects phylogeny
