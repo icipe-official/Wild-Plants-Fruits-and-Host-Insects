@@ -153,7 +153,7 @@ export default function PhylogenyMafft() {
                   "_" +
                   counter;
                 counter++;
-                result[namereplace(/\s/g, "")] = plant.nucleotide.replace(
+                result[name.replace(/\s/g, "")] = plant.nucleotide.replace(
                   /-/g,
                   ""
                 );
@@ -162,6 +162,8 @@ export default function PhylogenyMafft() {
           }
           return result;
         }, {});
+        setDownload(sequences);
+
         console.log("plant sequences format");
         console.log(sequences);
         console.log("sequences on click family");
@@ -223,6 +225,8 @@ export default function PhylogenyMafft() {
           }
           return result;
         }, {});
+        setDownload(sequences);
+
         const requestBody = {
           sequences: sequences,
         };
@@ -269,7 +273,7 @@ export default function PhylogenyMafft() {
                   "_" +
                   counter;
                 counter++;
-                result[namereplace(/\s/g, "")] = plant.nucleotide.replace(
+                result[name.replace(/\s/g, "")] = plant.nucleotide.replace(
                   /-/g,
                   ""
                 );
@@ -278,6 +282,8 @@ export default function PhylogenyMafft() {
           }
           return result;
         }, {});
+        setDownload(sequences);
+
         console.log("plant sequences format");
         console.log(sequences);
         console.log("plant sequences format");
@@ -334,6 +340,8 @@ export default function PhylogenyMafft() {
           }
           return result;
         }, {});
+        setDownload(sequences);
+
         const requestBody = {
           sequences: sequences,
         };
