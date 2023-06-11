@@ -59,7 +59,7 @@ export default function PhylogenyMafft() {
     // Clear the previous data and refetch based on selecetd organism and change api to that of selected organism
     //use the same name for api end points to
     mutate(`${base_url}/api/plants/species`, null, false);
-    mutate(`${base_url}/api/insects/all/coi`, null, false);
+    mutate(`${base_url}/api/insects/species`, null, false);
 
     // Update the selected organism
     setSelectedOrganism(event.target.value);
@@ -252,6 +252,8 @@ export default function PhylogenyMafft() {
       }
     } else {
       if (selectedOrganism === "plants") {
+        setNewickData("");
+
         const filteredData = data.filter(
           (dat) =>
             dat.plant_genera.plant_families.family_name === selectedFamily
@@ -310,6 +312,8 @@ export default function PhylogenyMafft() {
             console.error(error);
           });
       } else if (selectedOrganism === "insects") {
+        setNewickData("");
+
         console.log("insect selecteorder");
         const filteredData = data.filter(
           (dat) => dat.insect_families.family_name === selecteorder
@@ -876,17 +880,30 @@ export default function PhylogenyMafft() {
           </Box>
         </Box>{" "}
         <Box>
-          <iframe
-            ref={iframeRef}
-            src={`/phylotree.html?newickData=${newickData}`}
-            style={{
-              position: "relative",
-              top: 3,
-              left: 2,
-              width: "100%", // Set a fixed width
-              height: "100vh", // Set a fixed height
-            }}
-          />
+          {newickData ? (
+            <iframe
+              ref={iframeRef}
+              src={`/phylotree.html?newickData=${newickData}`}
+              style={{
+                position: "relative",
+                top: 3,
+                left: 2,
+                width: "100%", // Set a fixed width
+                height: "100vh", // Set a fixed height
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+              }}
+            >
+              <p>Constructing phylogenetics tree....</p>
+            </div>
+          )}
         </Box>
       </Container>
     );
