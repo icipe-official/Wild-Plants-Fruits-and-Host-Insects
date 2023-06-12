@@ -689,7 +689,7 @@ export default function PhylogenyMafft() {
         data.filter(
           (species) =>
             species.plant_genera.plant_families.family_name &&
-            species.plants_matk.length > 0
+            species.plants_matk.length > 3
         );
       // obtain families only with matk sequences, get the set of the kmers, convert to list [...]
       var families_list = [
