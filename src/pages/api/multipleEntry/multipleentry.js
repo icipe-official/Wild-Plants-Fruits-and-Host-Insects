@@ -1,4 +1,4 @@
-import prisma from "../../../../lib/prisma";
+import prisma from "../../../lib/prisma";
 import NextCors from "nextjs-cors";
 // const [query,setQuery]=useState({'plant_types':[],'plant_thorns':[],'plant_latex':[],'fruit_types':[],'fruit_colors':[],
 // 'fruit_sizes':[],'fruit_shapes':[],'leaf_types':[],'leaf_margins':[],'leaf_arrangements':[]})

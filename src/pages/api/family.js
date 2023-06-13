@@ -1,20 +1,18 @@
-import express from 'express'
+import express from "express";
 // const express = require('express')
-import prisma from '../../../lib/prisma';
+import prisma from "../../lib/prisma";
 const app = express();
 // instance of prisma client
 // middlewares
 app.use(express.json());
-app.get('/', async (req, res) => {
-    const posts = await prisma.families.findMany();
+app.get("/", async (req, res) => {
+  const posts = await prisma.families.findMany();
 
-    return res.status(200).json({ success: true, posts });
-  });
-  app.listen(3000, () => {
-    console.log(`Listening to 3000`);
-  });
-
-  
+  return res.status(200).json({ success: true, posts });
+});
+app.listen(3000, () => {
+  console.log(`Listening to 3000`);
+});
 
 //     const g = req.body;
 //     console.log(g)
@@ -41,4 +39,3 @@ app.get('/', async (req, res) => {
 //       }
 //     });
 // }
-  

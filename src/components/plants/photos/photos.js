@@ -3,13 +3,11 @@ import { useState, useEffect } from "react";
 // import Image from "next/legacy/image";
 import Image from "next/image";
 
-import styles from "./photos.module.css";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 //This component will be receiving data from getstaticprops
 export default function Photos({ photo_data }) {
   const [photoData, setphotoData] = useState([]);
-  const [loaded, setLoaded] = useState(false);
   // const [error, setError] = useState(null);
 
   // console.log("photos");

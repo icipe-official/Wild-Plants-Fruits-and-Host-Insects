@@ -6,12 +6,18 @@ export default function SequenceDownload({ data, selectdFamily, kmer }) {
   if (data) {
     const handleDownload = () => {
       // Convert the data into a string in FASTA format
-      const fastaString = data
-        .map((seq) => {
-          const header = `>${seq.name}\n`;
-          return header + seq.sequence;
-        })
-        .join("\n");
+      // Convert sequences to FASTA format
+      let fastaString = "";
+      Object.entries(data).forEach(([name, sequence]) => {
+        fastaString += `>${name}\n${sequence}\n`;
+      });
+
+      // const fastaString = data
+      //   .map((seq) => {
+      //     const header = `>${seq.name}\n`;
+      //     return header + seq.sequence;
+      //   })
+      //   .join("\n");
 
       // Create a new Blob object with the converted data and specify the MIME type
       const blob = new Blob([fastaString], { type: "text/plain" });

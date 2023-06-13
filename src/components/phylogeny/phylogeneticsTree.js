@@ -1,7 +1,6 @@
 import useSWR, { mutate } from "swr";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
-import { Optimalkmer } from "./modifiedKTurple";
 // import useMediaQuery from "@mui/material";
 import {
   Box,
@@ -73,7 +72,7 @@ export default function TreeTrial() {
   const { data, error, isLoading } = useSWR(url, fetcher);
   console.log(data);
   const [newickData, setNewickData] = useState(
-    "((Avicennia_marina_India:2.5945481885695,Avicennia_marina_India:2.421634775175007):1.1444710519935573,((((((Avicennia_marina_India:10.442779113449433,Avicennia_marina_India:10.039623934933584):9.024870676155427,Avicennia_marina_India:8.651805348156174):7.728809363806545,Avicennia_marina_India:7.421956114418514):6.4343228505276695,Avicennia_marina_India:6.193599414325327):5.0925923673062075,Avicennia_marina_India:4.903811288091093):3.7965310549573257,Avicennia_marina_South Africa:3.673962054353434):1.1444710519935573):0.5722355259967786"
+    "(Ampelocissus_africana_Mozambique_1:0.0076511049,(Cissus_integrifolia_Mozambique_1:0.0132548046,(Cissus_quadrangularis_Mozambique_1:0.0147342047,Cissus_rotundifolia_Mozambique_1:0.0034078082):0.0299014435):0.0119872426,((Cissus_integrifolia_Mozambique_2:0.0134894000,(Cissus_rotundifolia_Kenya_2:0.0000011601,Cissus_rotundifolia_Kenya_3:0.0000011601):0.0375793170):0.0075169886,(((Cyphostemma_cyphopetalum_Kenya_1:0.0000011601,((Cyphostemma_cyphopetalum_Kenya_2:0.0000011601,Cyphostemma_cyphopetalum_Kenya_3:0.0000011601):0.0000011601,Cyphostemma_cyphopetalum_Kenya_4:0.0000011601):0.0000011601):0.0057296080,(((Cyphostemma_serpens_Kenya_1:0.0000011601,Cyphostemma_serpens_Kenya_4:0.0000011601):0.0000011601,Cyphostemma_serpens_Kenya_3:0.0000011601):0.0000020490,Cyphostemma_serpens_Kenya_2:0.0000011601):0.0040926788):0.0304514307,((Rhoicissus_revoilii_South-Africa_1:0.0000011601,Rhoicissus_tridentata_South-Africa_1:0.0013107851):0.0000011601,Rhoicissus_revoilii_Mozambique_2:0.0000011601):0.0123113785):0.0055539448):1.1318167895);"
   );
   // "((A:0.1,B:0.2)80:0.3,(C:0.4,D:0.5)95:0.6)90;"
   const [selectedFamily, setSelectedFamily] = useState("Acanthaceae");
@@ -305,8 +304,6 @@ export default function TreeTrial() {
           .filter((value) => value !== null);
         console.log("plant sequences");
         // console.log(sequences);
-        console.log("optimal kmer");
-        Optimalkmer(sequences);
 
         var result = CalculateSimilarityMatrixModified(sequences, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
@@ -621,42 +618,6 @@ export default function TreeTrial() {
     setSelectedFamily("");
   };
   //conditional rendering with data
-  if (error)
-    return (
-      <Container
-        sx={{
-          backgroundColor: "lightbrown",
-          overflowY: "scroll",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: "100%",
-          paddingBottom: "65%", // Adjust this value to create space for the footer
-        }}
-      >
-        {/* Content goes here */}
-        <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
-      </Container>
-    );
-
-  if (isLoading)
-    return (
-      <Container
-        sx={{
-          backgroundColor: "lightbrown",
-          overflowY: "scroll",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: "100%",
-          paddingBottom: "65%", // Adjust this value to create space for the footer
-        }}
-      >
-        {/* Content goes here */}
-        <Box sx={{ marginTop: 12 }}>Loading...</Box>
-        {/* Footer goes here */}
-      </Container>
-    );
   if (data) {
     if (selectedOrganism === "plants") {
       let families =

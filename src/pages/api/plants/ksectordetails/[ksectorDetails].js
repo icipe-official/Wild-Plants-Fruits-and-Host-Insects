@@ -7,33 +7,33 @@
  * @throws {Error} If there is an error retrieving data from the database.
  */
 
-import prisma from "../../../../../lib/prisma"
+import prisma from "../../../../lib/prisma";
 // API for plant  fruit details
-export default async function getKsectorDetails(req, res){
-    const {ksectorDetails}=req.query
-    try{
-        //Fetch data from database
-        // console.log(params);
-        const plant = await prisma.plants.findMany({
-            where:{
-                species_name:ksectorDetails //this name must be similatr to  dynamic file name
+export default async function getKsectorDetails(req, res) {
+  const { ksectorDetails } = req.query;
+  try {
+    //Fetch data from database
+    // console.log(params);
+    const plant = await prisma.plants.findMany({
+      where: {
+        species_name: ksectorDetails, //this name must be similatr to  dynamic file name
+      },
+      select: {
+        plants_k_sectors: {
+          select: {
+            k_sector_id: true,
+            k_sectors: {
+              select: {
+                sector: true,
+              },
             },
-            select: {
-                plants_k_sectors:{
-                    select:{
-                        k_sector_id:true,
-                        k_sectors:{
-                            select:{
-                                sector:true
-                            }
-                        }
-                    }
-                },
-            }
-        })
-        // console.log(tms);
-        res.json(plant)
-    } catch(e){
-        console.error(e)
-    }
+          },
+        },
+      },
+    });
+    // console.log(tms);
+    res.json(plant);
+  } catch (e) {
+    console.error(e);
+  }
 }

@@ -1,4 +1,4 @@
-import prisma from "../../../../../lib/prisma";
+import prisma from "../../../../lib/prisma";
 // API for plant  fruit details
 export default async function getUKWFDetails(req, res) {
   const { ukwfDetails } = req.query;
