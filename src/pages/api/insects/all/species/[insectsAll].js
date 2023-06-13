@@ -1,5 +1,5 @@
 import { query } from "express";
-import prisma from "../../../../../../lib/prisma";
+import prisma from "../../../../../lib/prisma";
 import NextCors from "nextjs-cors";
 // API for Coleoptera details
 export default async function getInsectdeatils(req, res) {

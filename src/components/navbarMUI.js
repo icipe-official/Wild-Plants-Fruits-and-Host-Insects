@@ -2,7 +2,6 @@ import {
   CssBaseline,
   IconButton,
   Toolbar,
-  Typography,
   AppBar,
   useMediaQuery,
   Box,
@@ -26,14 +25,7 @@ When the screen size is small, the links are displayed vertically (in a column),
 This is achieved by changing the `flexDirection` property of the `navlinks` CSS class.
 */
 import React, { useState } from "react";
-import {
-  ButtonBase,
-  Drawer,
-  List,
-  ListItem,
-  Container,
-  ListItemText,
-} from "@mui/material";
+import { Drawer, List, ListItem, Container } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({

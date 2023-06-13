@@ -16,7 +16,7 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     console.log(sequence);
 
     // Remove gaps and N's from the sequence
-    sequence = sequence.replace(/-/g, "").replace(/N/g, "");
+    // sequence = sequence.replace(/-/g, "").replace(/N/g, "");
     let sequenceKmers = [];
     for (let v = 0; v < sequence.length - kmer + 1; v++) {
       sequenceKmers.push(sequence.slice(v, v + kmer));

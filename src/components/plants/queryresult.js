@@ -50,6 +50,43 @@ export default function QueryResult({ query_data }) {
       setFirst(species_list[0].id); // pass the id of the species
     }
   }, [species_list]);
+  const isLoading = !insectsreared && !insectserror;
+  if (specieserror)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
+      </Container>
+    );
+
+  if (isLoading)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 12 }}>Loading...</Box>
+        {/* Footer goes here */}
+      </Container>
+    );
   if (species_list1 && species_list.length > 0 && insectsreared) {
     //https://stackoverflow.com/questions/66666983/calling-multiple-endpoints-using-nextjs-and-the-swr-library
     console.log("first sepcies client side");

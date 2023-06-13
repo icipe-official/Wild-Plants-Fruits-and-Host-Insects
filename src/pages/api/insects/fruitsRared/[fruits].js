@@ -1,4 +1,4 @@
-import prisma from "../../../../../lib/prisma";
+import prisma from "../../../../lib/prisma";
 // API for Coleoptera details
 export default async function getInsects(req, res) {
   try {

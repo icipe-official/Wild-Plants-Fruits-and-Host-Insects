@@ -1,4 +1,4 @@
-import prisma from "../../../../../lib/prisma";
+import prisma from "../../../../lib/prisma";
 import NextCors from "nextjs-cors";
 // API for plant fruit details
 export default async function getColeoptera(req, res) {
@@ -52,7 +52,7 @@ export default async function getColeoptera(req, res) {
         insect_genera: {
           select: {
             genus_name: true,
-            id:true
+            id: true,
           },
         },
       },

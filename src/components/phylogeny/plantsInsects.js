@@ -369,7 +369,7 @@ export default function PhylogenyMafftPlantsInsects() {
 
   async function handleChange(event) {
     if (selectedOrganism === "plants") {
-      setNewickData(" ");
+      setNewickData("");
       console.log("filterd data");
       const plantsfilteredData = data.filter(
         (dat) => dat.plants_matk.length > 0 && dat.plants_insects.length > 0

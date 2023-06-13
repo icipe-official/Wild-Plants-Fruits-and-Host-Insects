@@ -139,28 +139,71 @@ export default function PhylogenyMafft() {
         );
         setSelectedFamily(selectedValue);
         setfilteredFamily(filteredData);
+        // const sequences = filteredData.reduce((result, obj) => {
+        //   // let counter = 1;
+        //   if (obj.plants_matk.length > 0) {
+        //     obj.plants_matk.forEach((plant) => {
+        //       //account for minimum length of matk
+        //       if (
+        //         (plant.nucleotide !== null) &
+        //         (plant.nucleotide?.length >= 600)
+        //       ) {
+        //         const name =
+        //           obj.plant_genera.genus_name +
+        //           "_" +
+        //           obj.species_name.split(" ")[0] +
+        //           "_" +
+        //           plant.country.replace(/ /g, "-");
+
+        //         result[name.replace(/\s/g, "")] = plant.nucleotide
+        //           .replace(/-/g, "")
+        //           .replace(/N/g, "");
+        //       }
+        //     });
+        //   }
+        //   return result;
+        // }, {});
+        // const uniqueNames = new Set(Object.keys(sequences));
         const sequences = filteredData.reduce((result, obj) => {
-          let counter = 1;
           if (obj.plants_matk.length > 0) {
             obj.plants_matk.forEach((plant) => {
-              if (plant.nucleotide !== null) {
+              if (plant.nucleotide !== null && plant.nucleotide.length >= 600) {
                 const name =
                   obj.plant_genera.genus_name +
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
                   plant.country.replace(/ /g, "-") +
-                  "_" +
-                  counter;
-                counter++;
-                result[name.replace(/\s/g, "")] = plant.nucleotide
+                  "_";
+                plant.genebank_accession;
+
+                const cleanedSequence = plant.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
+
+                // Extract the species name from the name string
+                const speciesName = obj.species_name.split(" ")[0];
+
+                // Check if the species name already exists in the result
+                const existingSpecies = Object.keys(result).find((key) =>
+                  key.includes(speciesName)
+                );
+
+                // If the species name exists, do not add the sequence
+                if (existingSpecies) {
+                  return result;
+                }
+
+                // Add the sequence with the original long name
+                result[name] = cleanedSequence;
               }
             });
           }
           return result;
         }, {});
+
+        const uniqueSequences = Object.values(sequences);
+
         setDownload(sequences);
 
         console.log("plant sequences format");
@@ -206,15 +249,19 @@ export default function PhylogenyMafft() {
           let counter = 1;
           if (obj.insects_coi.length > 0) {
             obj.insects_coi.forEach((insect) => {
-              if (insect.nucleotide !== null) {
+              //account for minimum lenth of coi 658 bp
+              if (
+                (insect.nucleotide !== null) &
+                (insect.nucleotide?.lenth >= 658)
+              ) {
                 const name =
                   obj.insect_genera.genus_name +
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
                   insect.country?.replace(/ /g, "") +
-                  counter;
-                counter++;
+                  "_" +
+                  insect.genebank_accession;
                 result[name.replace(/\s/g, "")] = insect.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
@@ -223,7 +270,8 @@ export default function PhylogenyMafft() {
           }
           return result;
         }, {});
-        setDownload(sequences);
+        const sequencesSet = new Set(Object.values(sequences));
+        setDownload(sequencesSet);
 
         const requestBody = {
           sequences: sequences,
@@ -260,28 +308,47 @@ export default function PhylogenyMafft() {
         );
         console.log("filteredData");
         const sequences = filteredData.reduce((result, obj) => {
-          let counter = 1;
           if (obj.plants_matk.length > 0) {
             obj.plants_matk.forEach((plant) => {
-              if (plant.nucleotide !== null) {
+              //retain only sequnces with matk lentho >=600
+              if (plant.nucleotide !== null && plant.nucleotide.length >= 600) {
                 const name =
                   obj.plant_genera.genus_name +
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
                   plant.country.replace(/ /g, "-") +
-                  "_" +
-                  counter;
-                counter++;
-                result[name.replace(/\s/g, "")] = plant.nucleotide
+                  "_";
+                plant.genebank_accession;
+
+                const cleanedSequence = plant.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
+
+                // Extract the species name from the name string
+                const speciesName = obj.species_name.split(" ")[0];
+
+                // Check if the species name already exists in the result
+                const existingSpecies = Object.keys(result).find((key) =>
+                  key.includes(speciesName)
+                );
+
+                // If the species name exists, do not add the sequence
+                if (existingSpecies) {
+                  return result;
+                }
+
+                // Add the sequence with the original long name
+                result[name] = cleanedSequence;
               }
             });
           }
           return result;
         }, {});
-        setDownload(sequences);
+
+        const uniqueSequences = Object.values(sequences);
+
+        setDownload(uniqueSequences);
 
         console.log("plant sequences format");
         console.log(sequences);
@@ -320,18 +387,22 @@ export default function PhylogenyMafft() {
         );
         console.log("insect filteredData on selecting insect order");
         const sequences = filteredData.reduce((result, obj) => {
-          let counter = 1;
-          if (obj.insects_coi.length > 0) {
+          // let counter = 1;
+          if (
+            obj.insects_coi.length > 0 //standard length of COI sequences in animals
+          ) {
             obj.insects_coi.forEach((insect) => {
-              if (insect.nucleotide !== null) {
+              if ((insect.nucleotide !== null) & (insect.nucleotide >= 658)) {
                 const name =
                   obj.insect_genera.genus_name +
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
                   insect.country?.replace(/ /g, "") +
-                  counter;
-                counter++;
+                  "_" +
+                  insect.genebank_accession;
+                // counter;
+                // counter++;
                 result[name.replace(/\s/g, "")] = insect.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
@@ -340,6 +411,7 @@ export default function PhylogenyMafft() {
           }
           return result;
         }, {});
+        const sequencesSet = new Set(Object.values(sequences));
         setDownload(sequences);
 
         const requestBody = {
@@ -745,6 +817,11 @@ export default function PhylogenyMafft() {
                 >
                   <MenuItem value="plants">Plants</MenuItem>
                   <MenuItem value="insects">Insects</MenuItem>
+                  <MenuItem value="insects-plants">
+                    <a href="http://localhost:3000/phylogeny/plantsInsects">
+                      Insect-Plants
+                    </a>
+                  </MenuItem>
                 </Select>
               </FormControl>
             </Box>
