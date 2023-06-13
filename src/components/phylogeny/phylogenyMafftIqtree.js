@@ -213,7 +213,7 @@ export default function PhylogenyMafft() {
         const requestBody = {
           sequences: sequences,
         };
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -276,7 +276,7 @@ export default function PhylogenyMafft() {
         const requestBody = {
           sequences: sequences,
         };
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -357,7 +357,7 @@ export default function PhylogenyMafft() {
         const requestBody = {
           sequences: sequences,
         };
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -417,7 +417,7 @@ export default function PhylogenyMafft() {
         const requestBody = {
           sequences: sequences,
         };
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -513,7 +513,7 @@ export default function PhylogenyMafft() {
           sequences: fastaObject,
         };
 
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

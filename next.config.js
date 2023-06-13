@@ -28,9 +28,6 @@ const nextConfig = {
       },
     ];
   },
-  server: {
-    host: "0.0.0.0",
-  },
   basePath: '/wpfhi',
   images: {
     unoptimized: true,

@@ -32,4 +32,4 @@ RUN npm run build
 
 EXPOSE 3000
 
-CMD [ "npm","run","start-s" ]
+CMD [ "npm","run","start-2" ]
