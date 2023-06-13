@@ -1,255 +1,5 @@
-// import useSWR, { mutate } from "swr";
-// import { useEffect, useState } from "react";
-// import { useRef } from "react";
-// // import useMediaQuery from "@mui/material";
-// import {
-//   Box,
-//   FormControl,
-//   InputLabel,
-//   MenuItem,
-//   Select,
-//   useMediaQuery,
-// } from "@mui/material";
-// import { useRouter } from "next/router";
-// import { Container } from "@mui/material";
-// import SequenceDownload from "./download";
-// import NewickDownload from "./downloadnewick";
-// import { TreeView, TreeItem } from "@mui/lab";
-// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-// import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-// // import DistancematrixToNewick from "./neigbourjoining";
-// // import CalculateSimilarityMatrix from "./generateDistanceMatrix";
-// // import { NeighborJoining } from "./generateDistanceMatrix";
-
-// import { makeStyles } from "@mui/styles";
-
-// import { kMaxLength } from "buffer";
-// // export default function Newick() {
-// import FastaToDict from "./inputsequence";
-// import { Download } from "@mui/icons-material";
-// const useStyles = makeStyles({
-//   root: {
-//     display: "row",
-//   },
-// });
-
-// const fetcher = (url) => fetch(url).then((r) => r.json());
-
-// export default function PhylogenyMafftPlantsInsects() {
-//   const classes = useStyles();
-//   const [selectedOrganism, setSelectedOrganism] = useState("plants");
-//   // const base_url = "http://localhost:3000";
-//   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-
-//   // const fetcher = (url) => fetch(url).then((r) => r.json());
-
-//   // Create the URL based on the selected organism
-//   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-//   const fetcher = (url) => fetch(url).then((r) => r.json());
-//   const { data, error, isLoading } = useSWR(
-//     `${base_url}/api/insects/species`,
-//     fetcher
-//   );
-//   console.log(data);
-//   const [newickData, setNewickData] = useState(
-//     "(Ampelocissus_africana_Mozambique_1:0.0076511049,(Cissus_integrifolia_Mozambique_1:0.0132548046,(Cissus_quadrangularis_Mozambique_1:0.0147342047,Cissus_rotundifolia_Mozambique_1:0.0034078082):0.0299014435):0.0119872426,((Cissus_integrifolia_Mozambique_2:0.0134894000,(Cissus_rotundifolia_Kenya_2:0.0000011601,Cissus_rotundifolia_Kenya_3:0.0000011601):0.0375793170):0.0075169886,(((Cyphostemma_cyphopetalum_Kenya_1:0.0000011601,((Cyphostemma_cyphopetalum_Kenya_2:0.0000011601,Cyphostemma_cyphopetalum_Kenya_3:0.0000011601):0.0000011601,Cyphostemma_cyphopetalum_Kenya_4:0.0000011601):0.0000011601):0.0057296080,(((Cyphostemma_serpens_Kenya_1:0.0000011601,Cyphostemma_serpens_Kenya_4:0.0000011601):0.0000011601,Cyphostemma_serpens_Kenya_3:0.0000011601):0.0000020490,Cyphostemma_serpens_Kenya_2:0.0000011601):0.0040926788):0.0304514307,((Rhoicissus_revoilii_South-Africa_1:0.0000011601,Rhoicissus_tridentata_South-Africa_1:0.0013107851):0.0000011601,Rhoicissus_revoilii_Mozambique_2:0.0000011601):0.0123113785):0.0055539448):1.1318167895);s"
-//   );
-//   // "((A:0.1,B:0.2)80:0.3,(C:0.4,D:0.5)95:0.6)90;"
-//   const [selectedFamily, setSelectedFamily] = useState("Vitaceae");
-//   const [kmer, setkmer] = useState(9);
-//   const [filteredFamily, setfilteredFamily] = useState("Acanthaceae");
-//   const [selecteorder, setSelectedOrder] = useState("Coleoptera");
-//   const [filteredOrder, setFilteredOrder] = useState("Coleoptera");
-//   const [download, setDownload] = useState([]);
-
-//   //handle input sequences
-//   const [fastaInput, setFastaInput] = useState("");
-//   const [fastaArray, setFastaArray] = useState([]);
-//   const [newickInput, setNewickInput] = useState("");
-
-//   //control drop down tree for download
-//   const [selectedNode, setSelectedNode] = useState(null);
-
-//   //handle user added sequences
-//   const [userSequences, setUserSequences] = useState(false);
-
-//   const handleNodeSelect = (event, nodeId) => {
-//     setSelectedNode(nodeId);
-//   };
-//   //change view if small screen variable
-//   const iframeRef = useRef(null);
-//   const router = useRouter();
-//   useEffect(() => {
-//     if (newickData && iframeRef.current) {
-//       // Wait for the iframe to load
-//       iframeRef.current.addEventListener("load", () => {
-//         // Send data to the iframe
-//         iframeRef.current.contentWindow.postMessage({ newickData }, "*");
-//       });
-//     }
-//   }, [newickData]);
-
-//   //handle new set kmer
-//   useEffect(() => {
-//     if (data) {
-//       // console.log("selectedFamily changed to:", selectedFamily);
-//       handleChange();
-//     }
-//   }, [selectedFamily, kmer]);
-
-//   async function handleChange(event) {
-//     // console.log("kmer at handlechange");
-//     // const filteredData = data.filter(
-//     //   (entry) =>
-//     //     entry.plants_insects.length > 0 &&
-//     //     entry.insect_orders.order_name === filteredOrder
-//     // );
-//     setFilteredOrder(event.target.value);
-//     const sequences = data.reduce((result, obj) => {
-//       let counter = 1;
-//       if (obj.insects_coi.length > 0) {
-//         obj.insects_coi.forEach((insect) => {
-//           if (insect.nucleotide !== null) {
-//             const name =
-//               obj.insect_genera.genus_name +
-//               "_" +
-//               obj.species_name.split(" ")[0] +
-//               "_" +
-//               obj.plants_insects.map(
-//                 (plant) =>
-//                   plant.plants.plant_genera.plant_families.family_name +
-//                   "_F_" +
-//                   plant.plants.plant_genera.genus_name +
-//                   "-" +
-//                   plant.plants.species_name +
-//                   " | "
-//               );
-//             counter;
-//             counter++;
-//             result[name.replace(/\s/g, "")] = insect.nucleotide.replace(
-//               /-/g,
-//               ""
-//             );
-//           }
-//         });
-//       }
-//       return result;
-//     }, {});
-//     console.log("plant sequences format");
-//     console.log(sequences);
-//     console.log("sequences on click family");
-//     console.log(sequences);
-//     const requestBody = {
-//       sequences: sequences,
-//     };
-//     fetch("http://localhost:3000/api/phylogeny", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(requestBody),
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Error: " + response.status);
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         const newick = data.newick;
-//         setNewickData(newick);
-//         console.log(data);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   }
-//   if (data) {
-//     //render insects phylogeny
-//     const orders = new Set(
-//       data.map((species) => species.insect_families.family_name)
-//     );
-
-//     const insect_orders_list = [...orders]; // Convert set to array
-//     console.log("orders");
-
-//     // console.log(orders);
-//     const insectFilteredData = data.filter(
-//       (dat) => dat.insect_orders.order_name == selecteorder
-//     );
-//     console.log("insect filteredData");
-//     const insect_famililes = data.filter(
-//       (entry) =>
-//         entry.plants_insects.length > 0 &&
-//         entry.insect_orders.order_name === "Lepidoptera"
-//     );
-//     console.log("plants_famililes");
-
-//     // console.log(filteredData);
-
-//     return (
-//       <Container sx={{ marginTop: 10 }}>
-//         {/* <ConverttoFasta></ConverttoFasta> */}
-//         <Box sx={{ display: isSmallScreen ? "row" : "flex" }}>
-//           <Box sx={{ display: "flex" }}>
-//             <Box>
-//               <FormControl>
-//                 <InputLabel>select order</InputLabel>
-//                 <Select
-//                   value={filteredOrder}
-//                   onChange={(event) => handleChange(event)}
-//                 >
-//                   <MenuItem value="Lepidoptera">Lepidoptera</MenuItem>
-//                   <MenuItem value="Coleoptera">Coleoptera</MenuItem>
-//                   <MenuItem value="Hymenoptera">Hymenoptera</MenuItem>
-//                   <MenuItem value="Diptera">Diptera</MenuItem>
-//                 </Select>
-//               </FormControl>
-//             </Box>
-//             <Box sx={{ marginLeft: 2 }}>
-//               <FormControl fullWidth variant="outlined">
-//                 <InputLabel>Select family</InputLabel>
-//                 <Select
-//                   value={
-//                     selectedOrganism === "plants"
-//                       ? selectedFamily
-//                       : selecteorder
-//                   }
-//                   onChange={(event) => handleChange(event)}
-//                   label="Families"
-//                   //   IconComponent={ArrowDropDown}
-//                 >
-//                   {insect_orders_list.map((order, index) => (
-//                     <MenuItem key={index} value={order}>
-//                       {order}
-//                     </MenuItem>
-//                   ))}
-//                 </Select>
-//               </FormControl>
-//             </Box>
-//           </Box>
-//         </Box>{" "}
-//         <Box>
-//           <iframe
-//             ref={iframeRef}
-//             src={`/phylotree.html?newickData=${newickData}`}
-//             style={{
-//               position: "relative",
-//               top: 3,
-//               left: 2,
-//               width: "100%", // Set a fixed width
-//               height: "100vh", // Set a fixed height
-//             }}
-//           />
-//         </Box>
-//       </Container>
-//     );
-//   }
-// }
 import useSWR, { mutate } from "swr";
-import { useEffect, useState } from "react";
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 // import useMediaQuery from "@mui/material";
 import {
   Box,
@@ -261,8 +11,6 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { Container } from "@mui/material";
-import SequenceDownload from "./download";
-import NewickDownload from "./downloadnewick";
 import { TreeView, TreeItem } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -272,13 +20,14 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 // import { NeighborJoining } from "./modifiedKTurple";
 // import CalculateSimilarityMatrixModified from "./modifiedKTurple";
-import ConverttoFasta from "./inputsequence";
 import { makeStyles } from "@mui/styles";
 
-import { kMaxLength } from "buffer";
 // export default function Newick() {
-import FastaToDict from "./inputsequence";
 import { Download } from "@mui/icons-material";
+
+import NewickDownload from "./downloadnewick";
+import SequenceDownload from "./download";
+
 const useStyles = makeStyles({
   root: {
     display: "row",
@@ -303,6 +52,18 @@ export default function PhylogenyMafftPlantsInsects() {
 
   // When the selected organism changes, clear the previous data
   // Event handler for updating the selected organism
+  // Create the URL based on the selected organism
+  const url = `${base_url}/api/${selectedOrganism}/species`;
+
+  const { data, error, isLoading } = useSWR(url, fetcher);
+  console.log(data);
+  const [newickData, setNewickData] = useState("");
+  const [download, setDownload] = useState([]);
+
+  // handle input sequences
+  const [fastaInput, setFastaInput] = useState("");
+  const [fastaArray, setFastaArray] = useState([]);
+  const [newickInput, setNewickInput] = useState("");
   const handleOrganismChange = (event) => {
     setNewickData("");
     // const newSelectedOrganism = event.target.value;
@@ -310,8 +71,9 @@ export default function PhylogenyMafftPlantsInsects() {
 
     console.log(selectedOrganism);
     // const newOrganism = event.target.value;
-    // Clear the previous data and refetch based on selecetd organism and change api to that of selected organism
-    //use the same name for api end points to
+    // Clear the previous data and refetch based on selecetd organism and change api
+    // to that of selected organism
+    // use the same name for api end points to
     mutate(`${base_url}/api/plants/species`, null, false);
     mutate(`${base_url}/api/insects/all/coi`, null, false);
 
@@ -321,29 +83,16 @@ export default function PhylogenyMafftPlantsInsects() {
     handleChange(event);
     // setNewickData("");
   };
-  // Create the URL based on the selected organism
-  const url = `${base_url}/api/${selectedOrganism}/species`;
-
-  const { data, error, isLoading } = useSWR(url, fetcher);
-  console.log(data);
-  const [newickData, setNewickData] = useState("insects");
-  const [download, setDownload] = useState([]);
-
-  //handle input sequences
-  const [fastaInput, setFastaInput] = useState("");
-  const [fastaArray, setFastaArray] = useState([]);
-  const [newickInput, setNewickInput] = useState("");
-
-  //control drop down tree for download
+  // control drop down tree for download
   const [selectedNode, setSelectedNode] = useState(null);
 
-  //handle user added sequences
+  // handle user added sequences
   const [userSequences, setUserSequences] = useState(false);
 
   const handleNodeSelect = (event, nodeId) => {
     setSelectedNode(nodeId);
   };
-  //change view if small screen variable
+  // change view if small screen variable
   const iframeRef = useRef(null);
   const router = useRouter();
   useEffect(() => {
@@ -381,25 +130,20 @@ export default function PhylogenyMafftPlantsInsects() {
         if (obj.plants_matk.length > 0) {
           obj.plants_matk.forEach((plant) => {
             if (plant.nucleotide !== null) {
-              const name =
-                obj.plant_genera.genus_name +
-                "_" +
-                obj.species_name.split(" ")[0] +
-                "_" +
-                obj.plants_insects
-                  .map(
-                    (insect) =>
-                      insect.insects.insect_orders.order_name +
-                      "_F_" +
-                      insect.insects.insect_genera.genus_name +
-                      "-" +
-                      insect.insects.species_name
-                        .split(" ")[0]
-                        .replace(/./g, "")
-                        .replace(/\s/g, "")
-                        .replace(/[.?]/g, "")
-                  )
-                  .join(""); // Join the generated name fragments without any separator
+              const name = `${obj.plant_genera.genus_name}_${
+                obj.species_name.split(" ")[0]
+              }_${obj.plants_insects
+                .map(
+                  (insect) =>
+                    `${insect.insects.insect_orders.order_name}_F_${
+                      insect.insects.insect_genera.genus_name
+                    }-${insect.insects.species_name
+                      .split(" ")[0]
+                      .replace(/./g, "")
+                      .replace(/\s/g, "")
+                      .replace(/[.?]/g, "")}`
+                )
+                .join("")}`; // Join the generated name fragments without any separator
               counter;
               counter++;
               result[
@@ -417,7 +161,7 @@ export default function PhylogenyMafftPlantsInsects() {
       console.log("sequences on click family");
       console.log(sequences);
       const requestBody = {
-        sequences: sequences,
+        sequences,
       };
       fetch("http://localhost:3000/api/phylogeny", {
         method: "POST",
@@ -428,12 +172,12 @@ export default function PhylogenyMafftPlantsInsects() {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Error: " + response.status);
+            throw new Error(`Error: ${response.status}`);
           }
           return response.json();
         })
         .then((data) => {
-          const newick = data.newick;
+          const { newick } = data;
           setNewickData(newick);
           console.log(data);
         })
@@ -454,20 +198,16 @@ export default function PhylogenyMafftPlantsInsects() {
         if (obj.insects_coi.length > 0) {
           obj.insects_coi.forEach((insect) => {
             if (insect.nucleotide !== null) {
-              const name =
-                obj.insect_genera.genus_name +
-                "_" +
-                obj.species_name.split(" ")[0] +
-                "_" +
-                obj.plants_insects.map(
-                  (plant) =>
-                    plant.plants.plant_genera.plant_families.family_name +
-                    "_F_" +
-                    plant.plants.plant_genera.genus_name +
-                    "-" +
-                    plant.plants.species_name.split(" ")[0].replace(/./g, "") +
-                    "|"
-                );
+              const name = `${obj.insect_genera.genus_name}_${
+                obj.species_name.split(" ")[0]
+              }_${obj.plants_insects.map(
+                (plant) =>
+                  `${plant.plants.plant_genera.plant_families.family_name}_F_${
+                    plant.plants.plant_genera.genus_name
+                  }-${plant.plants.species_name
+                    .split(" ")[0]
+                    .replace(/./g, "")}|`
+              )}`;
               counter;
               counter++;
               result[name.replace(/\s/g, "")] = insect.nucleotide
@@ -484,7 +224,7 @@ export default function PhylogenyMafftPlantsInsects() {
       console.log(sequences);
 
       const requestBody = {
-        sequences: sequences,
+        sequences,
       };
       fetch("http://localhost:3000/api/phylogeny", {
         method: "POST",
@@ -495,12 +235,12 @@ export default function PhylogenyMafftPlantsInsects() {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Error: " + response.status);
+            throw new Error(`Error: ${response.status}`);
           }
           return response.json();
         })
         .then((data) => {
-          const newick = data.newick;
+          const { newick } = data;
           setNewickData(newick);
           console.log(data);
         })
@@ -523,11 +263,11 @@ export default function PhylogenyMafftPlantsInsects() {
     handleInputChangefasta(event);
     // setFastaInput("");
   };
-  //handle input fasta sequence
+  // handle input fasta sequence
   const handleInputChangefasta = (event) => {
     setFastaInput(event.target.value);
     if (fastaInput) {
-      //remove current family name
+      // remove current family name
 
       console.log("fasta array");
       // console.log(fastaInput);
@@ -537,7 +277,7 @@ export default function PhylogenyMafftPlantsInsects() {
       let currentSequenceName = "";
       let currentSequence = "";
       const fastaArray = [];
-      for (let line of fastaLines) {
+      for (const line of fastaLines) {
         if (line.startsWith(">")) {
           if (currentSequenceName !== "") {
             fastaArray.push({
@@ -562,14 +302,14 @@ export default function PhylogenyMafftPlantsInsects() {
       });
 
       const fastaObject = {};
-      for (let entry of fastaArray) {
+      for (const entry of fastaArray) {
         fastaObject[entry.name] = entry.sequence;
       }
       setFastaArray(fastaObject);
       console.log("fastaArray");
       if (fastaArray) {
         setSelectedFamily("Select family");
-        //retrieve the data from back end API
+        // retrieve the data from back end API
         console.log("input  sequences format");
         console.log(fastaArray);
 
@@ -580,7 +320,7 @@ export default function PhylogenyMafftPlantsInsects() {
           sequences: fastaObject,
         };
 
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -589,12 +329,12 @@ export default function PhylogenyMafftPlantsInsects() {
         })
           .then((response) => {
             if (!response.ok) {
-              throw new Error("Error: " + response.status);
+              throw new Error(`Error: ${response.status}`);
             }
             return response.json();
           })
           .then((data) => {
-            const newick = data.newick;
+            const { newick } = data;
             setNewickData(newick);
             console.log(data);
           })
@@ -617,36 +357,34 @@ export default function PhylogenyMafftPlantsInsects() {
         setNewickData(newick);
         setDownload(newick);
       }
-    } else {
-      if (fastaArray && userSequences) {
-        setSelectedFamily("Select family");
+    } else if (fastaArray && userSequences) {
+      setSelectedFamily("Select family");
 
-        // console.log(fastaArray);
-        //add suser sequences to existing sequences
-        var result = CalculateSimilarityMatrixModified(
-          [...fastaArray, ...Download],
-          kmer
-        );
-        console.log("user plus existing sequences");
-        console.log("Download");
+      // console.log(fastaArray);
+      // add suser sequences to existing sequences
+      const result = CalculateSimilarityMatrixModified(
+        [...fastaArray, ...Download],
+        kmer
+      );
+      console.log("user plus existing sequences");
+      console.log("Download");
 
-        console.log(Download);
-        console.log("fastaArray");
+      console.log(Download);
+      console.log("fastaArray");
 
-        console.log(fastaArray);
+      console.log(fastaArray);
 
-        // var result = CalculateSimilarityMatrix(sequences);
+      // var result = CalculateSimilarityMatrix(sequences);
 
-        var newick = NeighborJoining(result.dist_mat, result.names);
-        console.log("newick");
-        setNewickData(newick);
-        setDownload(newick);
-      }
+      var newick = NeighborJoining(result.dist_mat, result.names);
+      console.log("newick");
+      setNewickData(newick);
+      setDownload(newick);
     }
     setSelectedFamily("");
   };
 
-  //handle input of newick
+  // handle input of newick
   const handleInputChangenewick = (event) => {
     event.preventDefault();
     setNewickInput(event.target.value);
@@ -663,7 +401,7 @@ export default function PhylogenyMafftPlantsInsects() {
 
     // delete newick input on sub
   };
-  //handle input data
+  // handle input data
   const handleSubmitnewick = (event) => {
     event.preventDefault();
     // setNewickData(event.target.value);
@@ -673,7 +411,7 @@ export default function PhylogenyMafftPlantsInsects() {
     setNewickInput("");
   };
 
-  //handle uploding newick
+  // handle uploding newick
   const handleSubmitFile = (event) => {
     setSelectedFamily("");
 
@@ -736,7 +474,7 @@ export default function PhylogenyMafftPlantsInsects() {
       let currentSequenceName = "";
       let currentSequence = "";
       const fastaArray = [];
-      for (let line of fastaLines) {
+      for (const line of fastaLines) {
         if (line.startsWith(">")) {
           if (currentSequenceName !== "") {
             console.log("currentSequenceName");
@@ -767,10 +505,10 @@ export default function PhylogenyMafftPlantsInsects() {
       console.log("fastaArray");
       if (fastaArray) {
         // console.log(fastaArray);
-        var result = CalculateSimilarityMatrixModified(fastaArray, kmer);
+        const result = CalculateSimilarityMatrixModified(fastaArray, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
 
-        var newick = NeighborJoining(result.dist_mat, result.names);
+        const newick = NeighborJoining(result.dist_mat, result.names);
         console.log("newick");
         setNewickData(newick);
         setDownload(newick);
@@ -778,8 +516,8 @@ export default function PhylogenyMafftPlantsInsects() {
     }
     setFastaInput("");
   };
-  //conditional rendering with data
-  if (isLoading)
+  // conditional rendering with data
+  if (isLoading) {
     return (
       <Container
         sx={{
@@ -797,21 +535,22 @@ export default function PhylogenyMafftPlantsInsects() {
         {/* Footer goes here */}
       </Container>
     );
+  }
 
   if (data) {
     // setIsLoadingData(false); // Set loading state to false
     // ...
 
     if (selectedOrganism === "plants") {
-      let families =
-        //return only families wth atleas two matk sequences
+      const families =
+        // return only families wth atleas two matk sequences
         data.filter(
           (species) =>
             species.plant_genera.plant_families.family_name &&
             species.plants_matk.length > 0
         );
       // obtain families only with matk sequences, get the set of the kmers, convert to list [...]
-      var families_list = [
+      const families_list = [
         ...new Set(
           families
             .map((family) => family.plant_genera.plant_families.family_name)
@@ -823,14 +562,14 @@ export default function PhylogenyMafftPlantsInsects() {
       // console.log(families);
       var filteredData = data.filter((dat) => dat.plants_insects.length > 0);
     } else {
-      //render insects phylogeny
+      // render insects phylogeny
       console.log("insects");
       if (selectedOrganism === "insects") {
-        var orders = new Set(
+        const orders = new Set(
           data.map((species) => species.insect_families.family_name)
         );
 
-        var insect_orders_list = [...orders]; // Convert set to array
+        const insect_orders_list = [...orders]; // Convert set to array
         console.log("orders");
 
         // console.log(orders);
@@ -838,7 +577,7 @@ export default function PhylogenyMafftPlantsInsects() {
           (dat) => dat.plants_insects.length > 0
         );
         console.log("insect filteredData");
-        var insect_famililes = data.filter(
+        const insect_famililes = data.filter(
           (entry) =>
             entry.plants_insects.length > 0 &&
             entry.insect_orders.order_name === "Lepidoptera"
@@ -916,7 +655,7 @@ export default function PhylogenyMafftPlantsInsects() {
                           onChange={handleInputChangenewick}
                           placeholder="Enter newick sequence"
                           autoFocus
-                        ></textarea>
+                        />
                       </label>
                       <br />
                       <button type="submit">Submit</button>
@@ -933,7 +672,7 @@ export default function PhylogenyMafftPlantsInsects() {
                             onChange={handleInputChangefasta}
                             placeholder="Enter FASTA sequence"
                             autoFocus
-                          ></textarea>
+                          />
                         </label>
                         <br />
                         <button type="submit">Submit</button>

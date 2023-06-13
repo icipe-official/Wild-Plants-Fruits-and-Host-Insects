@@ -17,19 +17,10 @@ import NewickDownload from "./downloadnewick";
 import { TreeView, TreeItem } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-// import DistancematrixToNewick from "./neigbourjoining";
-// import CalculateSimilarityMatrix from "./generateDistanceMatrix";
-// import { NeighborJoining } from "./generateDistanceMatrix";
-
-// import { NeighborJoining } from "./modifiedKTurple";
-// import CalculateSimilarityMatrixModified from "./modifiedKTurple";
 import ConverttoFasta from "./inputsequence";
 import { makeStyles } from "@mui/styles";
 
-import { kMaxLength } from "buffer";
-// export default function Newick() {
 import FastaToDict from "./inputsequence";
-import { Download } from "@mui/icons-material";
 const useStyles = makeStyles({
   root: {
     display: "row",
@@ -139,31 +130,6 @@ export default function PhylogenyMafft() {
         );
         setSelectedFamily(selectedValue);
         setfilteredFamily(filteredData);
-        // const sequences = filteredData.reduce((result, obj) => {
-        //   // let counter = 1;
-        //   if (obj.plants_matk.length > 0) {
-        //     obj.plants_matk.forEach((plant) => {
-        //       //account for minimum length of matk
-        //       if (
-        //         (plant.nucleotide !== null) &
-        //         (plant.nucleotide?.length >= 600)
-        //       ) {
-        //         const name =
-        //           obj.plant_genera.genus_name +
-        //           "_" +
-        //           obj.species_name.split(" ")[0] +
-        //           "_" +
-        //           plant.country.replace(/ /g, "-");
-
-        //         result[name.replace(/\s/g, "")] = plant.nucleotide
-        //           .replace(/-/g, "")
-        //           .replace(/N/g, "");
-        //       }
-        //     });
-        //   }
-        //   return result;
-        // }, {});
-        // const uniqueNames = new Set(Object.keys(sequences));
         const sequences = filteredData.reduce((result, obj) => {
           if (obj.plants_matk.length > 0) {
             obj.plants_matk.forEach((plant) => {
@@ -213,7 +179,7 @@ export default function PhylogenyMafft() {
         const requestBody = {
           sequences: sequences,
         };
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch("{$base_url}/api/phylogeny", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -276,7 +242,8 @@ export default function PhylogenyMafft() {
         const requestBody = {
           sequences: sequences,
         };
-        fetch("http://localhost:3000/api/phylogeny", {
+
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -357,7 +324,7 @@ export default function PhylogenyMafft() {
         const requestBody = {
           sequences: sequences,
         };
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -417,7 +384,7 @@ export default function PhylogenyMafft() {
         const requestBody = {
           sequences: sequences,
         };
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -513,7 +480,7 @@ export default function PhylogenyMafft() {
           sequences: fastaObject,
         };
 
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
