@@ -6,7 +6,7 @@
 // The query results are then returned as a JSON response to the client.
 // Try catch block is used to catch the error during get request
 
-import prisma from "../../../../lib/prisma";
+import prisma from "../../../lib/prisma";
 import NextCors from "nextjs-cors";
 export default async function handle(req, res) {
   // Run the cors middleware
@@ -25,7 +25,7 @@ export default async function handle(req, res) {
           id: true,
           species_name: true,
           genus_id: true,
-          matk: true,
+          // matk: true,
           plant_genera: {
             select: {
               genus_name: true,
@@ -40,12 +40,20 @@ export default async function handle(req, res) {
           },
           plants_matk: {
             select: {
+              matk_id: true,
               nucleotide: true,
               country: true,
               genebank_accession: true,
             },
           },
         },
+        // orderBy: {
+        //   plant_genera: {
+        //     plant_families: {
+        //       family_name: "asc",
+        //     },
+        //   },
+        // },
       });
       return res.json(species);
     } catch (error) {

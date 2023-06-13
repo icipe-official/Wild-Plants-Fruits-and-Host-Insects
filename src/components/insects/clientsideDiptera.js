@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { Box, Button, Menu, MenuItem, IconButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  Menu,
+  MenuItem,
+  IconButton,
+  Container,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Router from "next/router";
 import useSWR from "swr";
@@ -230,6 +237,43 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
   console.log(firstThreeGenera);
   //   console.log(selectedGenus);
   //   const classes = useStyles();
+
+  if (error)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
+      </Container>
+    );
+
+  if (isLoading)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 12 }}>Loading...</Box>
+        {/* Footer goes here */}
+      </Container>
+    );
   if (data) {
     return (
       <Box>

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useState, useEffect } from "react";
 // import Image from "next/legacy/image";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 //This component will be receiving data from getstaticprops
 export default function PhotosComponent({ photos_data, selectedIndex }) {

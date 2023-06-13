@@ -20,7 +20,8 @@ import { TreeView, TreeItem } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // import PlantFamilyGenusSpecies from "./FamilyGenusSpecies/PlantGenusFamilySearchbar";
-// import { useContext } from "react";
+import { useContext } from "react";
+import Footer from "components/footer/footer";
 const useStyles = makeStyles({
   root: {
     display: "row",
@@ -59,9 +60,42 @@ export default function PlantDetailsFeaturesValues() {
     fetcher
   );
 
-  if (error) return <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
-  if (isLoading) return <Box sx={{ marginTop: 6 }}> Loading...</Box>;
+  if (error)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
+      </Container>
+    );
 
+  if (isLoading)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "lightbrown",
+          overflowY: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          paddingBottom: "65%", // Adjust this value to create space for the footer
+        }}
+      >
+        {/* Content goes here */}
+        <Box sx={{ marginTop: 12 }}>Loading...</Box>
+        {/* Footer goes here */}
+      </Container>
+    );
   // console.log("plantsData client side");
   // console.log(plantsData);
 
