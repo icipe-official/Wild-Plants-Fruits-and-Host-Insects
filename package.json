@@ -6,6 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "node server.js",
+    "start-2": "next start",
     "lint": "next lint",
     "serve": "serve out",
     "export": "next export",
