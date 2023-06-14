@@ -57,7 +57,7 @@ export default function PhylogenyMafft() {
     if (event.target.value == "plants") {
       setSelectedFamily("Vitaceae");
       setNewickData(
-        "(Ampelocissus_africana_Mozambique_1:0.0076511049,(Cissus_integrifolia_Mozambique_1:0.0132548046,(Cissus_quadrangularis_Mozambique_1:0.0147342047,Cissus_rotundifolia_Mozambique_1:0.0034078082):0.0299014435):0.0119872426,((Cissus_integrifolia_Mozambique_2:0.0134894000,(Cissus_rotundifolia_Kenya_2:0.0000011601,Cissus_rotundifolia_Kenya_3:0.0000011601):0.0375793170):0.0075169886,(((Cyphostemma_cyphopetalum_Kenya_1:0.0000011601,((Cyphostemma_cyphopetalum_Kenya_2:0.0000011601,Cyphostemma_cyphopetalum_Kenya_3:0.0000011601):0.0000011601,Cyphostemma_cyphopetalum_Kenya_4:0.0000011601):0.0000011601):0.0057296080,(((Cyphostemma_serpens_Kenya_1:0.0000011601,Cyphostemma_serpens_Kenya_4:0.0000011601):0.0000011601,Cyphostemma_serpens_Kenya_3:0.0000011601):0.0000020490,Cyphostemma_serpens_Kenya_2:0.0000011601):0.0040926788):0.0304514307,((Rhoicissus_revoilii_South-Africa_1:0.0000011601,Rhoicissus_tridentata_South-Africa_1:0.0013107851):0.0000011601,Rhoicissus_revoilii_Mozambique_2:0.0000011601):0.0123113785):0.0055539448):1.1318167895);s"
+        "(Ampelocissus_africana_Mozambique_:0.0039187367,(Cissus_integrifolia_Mozambique_:0.0132064363,(Cissus_quadrangularis_Mozambique_:0.0146331552,Cissus_rotundifolia_Mozambique_:0.0036917100):0.0299076794):0.0157319219,((Cyphostemma_cyphopetalum_Kenya_:0.0057039644,Cyphostemma_serpens_Kenya_:0.0043207604):0.0141042702,(Rhoicissus_revoilii_South-Africa_:0.0000021033,Rhoicissus_tridentata_South-Africa_:0.0013102368):0.0293948893):1.1077382777);"
       );
       handleChange(event);
     } else {
@@ -71,9 +71,9 @@ export default function PhylogenyMafft() {
   const url = `${base_url}/api/${selectedOrganism}/species`;
 
   const { data, error, isLoading } = useSWR(url, fetcher);
-  console.log(data);
+  // console.log(data);
   const [newickData, setNewickData] = useState(
-    "(Ampelocissus_africana_Mozambique_1:0.0076511049,(Cissus_integrifolia_Mozambique_1:0.0132548046,(Cissus_quadrangularis_Mozambique_1:0.0147342047,Cissus_rotundifolia_Mozambique_1:0.0034078082):0.0299014435):0.0119872426,((Cissus_integrifolia_Mozambique_2:0.0134894000,(Cissus_rotundifolia_Kenya_2:0.0000011601,Cissus_rotundifolia_Kenya_3:0.0000011601):0.0375793170):0.0075169886,(((Cyphostemma_cyphopetalum_Kenya_1:0.0000011601,((Cyphostemma_cyphopetalum_Kenya_2:0.0000011601,Cyphostemma_cyphopetalum_Kenya_3:0.0000011601):0.0000011601,Cyphostemma_cyphopetalum_Kenya_4:0.0000011601):0.0000011601):0.0057296080,(((Cyphostemma_serpens_Kenya_1:0.0000011601,Cyphostemma_serpens_Kenya_4:0.0000011601):0.0000011601,Cyphostemma_serpens_Kenya_3:0.0000011601):0.0000020490,Cyphostemma_serpens_Kenya_2:0.0000011601):0.0040926788):0.0304514307,((Rhoicissus_revoilii_South-Africa_1:0.0000011601,Rhoicissus_tridentata_South-Africa_1:0.0013107851):0.0000011601,Rhoicissus_revoilii_Mozambique_2:0.0000011601):0.0123113785):0.0055539448):1.1318167895);s"
+    "(Ampelocissus_africana_Mozambique_:0.0039187367,(Cissus_integrifolia_Mozambique_:0.0132064363,(Cissus_quadrangularis_Mozambique_:0.0146331552,Cissus_rotundifolia_Mozambique_:0.0036917100):0.0299076794):0.0157319219,((Cyphostemma_cyphopetalum_Kenya_:0.0057039644,Cyphostemma_serpens_Kenya_:0.0043207604):0.0141042702,(Rhoicissus_revoilii_South-Africa_:0.0000021033,Rhoicissus_tridentata_South-Africa_:0.0013102368):0.0293948893):1.1077382777);"
   );
   // "((A:0.1,B:0.2)80:0.3,(C:0.4,D:0.5)95:0.6)90;"
   const [selectedFamily, setSelectedFamily] = useState("Vitaceae");
@@ -121,7 +121,7 @@ export default function PhylogenyMafft() {
   async function handleChange(event) {
     if (event) {
       if (selectedOrganism === "plants") {
-        console.log("kmer at handlechange");
+        // console.log("kmer at handlechange");
         const selectedValue =
           (event.target && event.target.value) || "Select family";
         setSelectedFamily(selectedValue);
@@ -139,9 +139,9 @@ export default function PhylogenyMafft() {
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
-                  plant.country.replace(/ /g, "-") +
-                  "_";
-                plant.genebank_accession;
+                  // plant.country.replace(/ /g, "-") +
+                  // "_";
+                  plant.genebank_accession;
 
                 const cleanedSequence = plant.nucleotide
                   .replace(/-/g, "")
@@ -172,14 +172,15 @@ export default function PhylogenyMafft() {
 
         setDownload(sequences);
 
-        console.log("plant sequences format");
-        console.log(sequences);
-        console.log("sequences on click family");
-        console.log(sequences);
+        // console.log("plant sequences format");
+        // console.log(sequences);
+        // console.log("sequences on click family");
+        // console.log(sequences);
         const requestBody = {
           sequences: sequences,
         };
-        fetch("{$base_url}/api/phylogeny", {
+
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -195,13 +196,13 @@ export default function PhylogenyMafft() {
           .then((data) => {
             const newick = data.newick;
             setNewickData(newick);
-            console.log(data);
+            // console.log(data);
           })
           .catch((error) => {
             console.error(error);
           });
       } else if (selectedOrganism === "insects") {
-        console.log("insect kmer at handlechange");
+        // console.log("insect kmer at handlechange");
         const selectedValue =
           (event.target && event.target.value) || "Select family";
         setSelectedOrder(selectedValue);
@@ -210,7 +211,7 @@ export default function PhylogenyMafft() {
         );
         setSelectedOrder(selectedValue);
         setFilteredOrder(filteredData);
-        console.log("insect filteredData");
+        // console.log("insect filteredData");
         const sequences = filteredData.reduce((result, obj) => {
           let counter = 1;
           if (obj.insects_coi.length > 0) {
@@ -225,8 +226,8 @@ export default function PhylogenyMafft() {
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
-                  insect.country?.replace(/ /g, "") +
-                  "_" +
+                  // insect.country?.replace(/ /g, "") +
+                  // "_" +
                   insect.genebank_accession;
                 result[name.replace(/\s/g, "")] = insect.nucleotide
                   .replace(/-/g, "")
@@ -259,7 +260,7 @@ export default function PhylogenyMafft() {
           .then((data) => {
             const newick = data.newick;
             setNewickData(newick);
-            console.log(data);
+            // console.log(data);
           })
           .catch((error) => {
             console.error(error);
@@ -273,7 +274,7 @@ export default function PhylogenyMafft() {
           (dat) =>
             dat.plant_genera.plant_families.family_name === selectedFamily
         );
-        console.log("filteredData");
+        // console.log("filteredData");
         const sequences = filteredData.reduce((result, obj) => {
           if (obj.plants_matk.length > 0) {
             obj.plants_matk.forEach((plant) => {
@@ -284,9 +285,9 @@ export default function PhylogenyMafft() {
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
-                  plant.country.replace(/ /g, "-") +
-                  "_";
-                plant.genebank_accession;
+                  // plant.country.replace(/ /g, "-") +
+                  // "_";
+                  plant.genebank_accession;
 
                 const cleanedSequence = plant.nucleotide
                   .replace(/-/g, "")
@@ -317,10 +318,10 @@ export default function PhylogenyMafft() {
 
         setDownload(uniqueSequences);
 
-        console.log("plant sequences format");
-        console.log(sequences);
-        console.log("plant sequences format");
-        console.log(sequences);
+        // console.log("plant sequences format");
+        // console.log(sequences);
+        // console.log("plant sequences format");
+        // console.log(sequences);
         const requestBody = {
           sequences: sequences,
         };
@@ -340,7 +341,7 @@ export default function PhylogenyMafft() {
           .then((data) => {
             const newick = data.newick;
             setNewickData(newick);
-            console.log(data);
+            // console.log(data);
           })
           .catch((error) => {
             console.error(error);
@@ -348,11 +349,11 @@ export default function PhylogenyMafft() {
       } else if (selectedOrganism === "insects") {
         setNewickData("");
 
-        console.log("insect selecteorder");
+        // console.log("insect selecteorder");
         const filteredData = data.filter(
           (dat) => dat.insect_families.family_name === selecteorder
         );
-        console.log("insect filteredData on selecting insect order");
+        // console.log("insect filteredData on selecting insect order");
         const sequences = filteredData.reduce((result, obj) => {
           // let counter = 1;
           if (
@@ -365,8 +366,8 @@ export default function PhylogenyMafft() {
                   "_" +
                   obj.species_name.split(" ")[0] +
                   "_" +
-                  insect.country?.replace(/ /g, "") +
-                  "_" +
+                  // insect.country?.replace(/ /g, "") +
+                  // "_" +
                   insect.genebank_accession;
                 // counter;
                 // counter++;
@@ -400,7 +401,7 @@ export default function PhylogenyMafft() {
           .then((data) => {
             const newick = data.newick;
             setNewickData(newick);
-            console.log(data);
+            // console.log(data);
           })
           .catch((error) => {
             console.error(error);
@@ -429,7 +430,7 @@ export default function PhylogenyMafft() {
       //remove current family name
       setSelectedFamily("Select family");
 
-      console.log("fasta array");
+      // console.log("fasta array");
       // console.log(fastaInput);
 
       setNewickData("");
@@ -466,21 +467,21 @@ export default function PhylogenyMafft() {
         fastaObject[entry.name] = entry.sequence;
       }
       setFastaArray(fastaObject);
-      console.log("fastaArray");
+      // console.log("fastaArray");
       if (fastaArray) {
         setSelectedFamily("Select family");
         //retrieve the data from back end API
-        console.log("input  sequences format");
-        console.log(fastaArray);
+        // console.log("input  sequences format");
+        // console.log(fastaArray);
 
         // var result = CalculateSimilarityMatrixModified(sequences, kmer);
         // var result = CalculateSimilarityMatrix(sequences);
-        console.log("plant newick from mafttttttttttt");
+        // console.log("plant newick from mafttttttttttt");
         const requestBody = {
           sequences: fastaObject,
         };
 
-        fetch(`${base_url}/api/phylogeny`, {
+        fetch("http://localhost:3000/api/phylogeny", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -496,16 +497,16 @@ export default function PhylogenyMafft() {
           .then((data) => {
             const newick = data.newick;
             setNewickData(newick);
-            console.log(data);
+            // console.log(data);
           })
           .catch((error) => {
             console.error(error);
           });
         // const newick = await Mafft(sequences);
 
-        console.log(newick);
+        // console.log(newick);
 
-        console.log("plant newick");
+        // console.log("plant newick");
         // setNewickData(newick);
 
         // console.log(fastaArray);
@@ -513,7 +514,7 @@ export default function PhylogenyMafft() {
         // var result = CalculateSimilarityMatrix(sequences);
 
         // var newick = NeighborJoining(result.dist_mat, result.names);
-        console.log("newick");
+        // console.log("newick");
         setNewickData(newick);
         setDownload(newick);
       }
@@ -527,18 +528,18 @@ export default function PhylogenyMafft() {
           [...fastaArray, ...Download],
           kmer
         );
-        console.log("user plus existing sequences");
-        console.log("Download");
+        // console.log("user plus existing sequences");
+        // console.log("Download");
 
-        console.log(Download);
-        console.log("fastaArray");
+        // console.log(Download);
+        // console.log("fastaArray");
 
-        console.log(fastaArray);
+        // console.log(fastaArray);
 
         // var result = CalculateSimilarityMatrix(sequences);
 
         var newick = NeighborJoining(result.dist_mat, result.names);
-        console.log("newick");
+        // console.log("newick");
         setNewickData(newick);
         setDownload(newick);
       }
@@ -555,9 +556,9 @@ export default function PhylogenyMafft() {
     setSelectedFamily("Select family");
     setSelectedOrder("Select order");
 
-    console.log("newick input");
-    // console.log(newickInput);
-    console.log("newick input");
+    // console.log("newick input");
+    // // console.log(newickInput);
+    // console.log("newick input");
     setNewickData(newickInput);
     setDownload(newickInput);
 
@@ -590,7 +591,7 @@ export default function PhylogenyMafft() {
       reader.onload = (e) => {
         const fileContents = e.target.result;
         // Use the file contents as needed
-        console.log("File contents:", fileContents);
+        // console.log("File contents:", fileContents);
         setNewickData(fileContents);
       };
 
@@ -616,7 +617,7 @@ export default function PhylogenyMafft() {
       reader.onload = (e) => {
         const fileContents = e.target.result;
         // set inputfasta to file contents
-        console.log("File contents:", fileContents);
+        // console.log("File contents:", fileContents);
         // setFastaInput(fileContents);
       };
 
@@ -627,7 +628,7 @@ export default function PhylogenyMafft() {
       reader.readAsText(selectedFile);
       setSelectedFamily("Select family");
 
-      console.log("fasta array");
+      // console.log("fasta array");
       // console.log(fastaInput);
 
       setNewickData("");
@@ -639,11 +640,11 @@ export default function PhylogenyMafft() {
       for (let line of fastaLines) {
         if (line.startsWith(">")) {
           if (currentSequenceName !== "") {
-            console.log("currentSequenceName");
+            // console.log("currentSequenceName");
 
-            console.log(
-              currentSequenceName.slice(1).split(" ").slice(0, 2).join("-")
-            );
+            // console.log(
+            //   currentSequenceName.slice(1).split(" ").slice(0, 2).join("-")
+            // );
             fastaArray.push({
               name: currentSequenceName
                 .slice(1)
@@ -664,7 +665,7 @@ export default function PhylogenyMafft() {
         sequence: currentSequence,
       });
       setFastaArray(fastaArray);
-      console.log("fastaArray");
+      // console.log("fastaArray");
       if (fastaArray) {
         setSelectedFamily("Select family");
 
@@ -673,7 +674,7 @@ export default function PhylogenyMafft() {
         // var result = CalculateSimilarityMatrix(sequences);
 
         var newick = NeighborJoining(result.dist_mat, result.names);
-        console.log("newick");
+        // console.log("newick");
         setNewickData(newick);
         setDownload(newick);
       }
@@ -738,7 +739,7 @@ export default function PhylogenyMafft() {
             .sort()
         ),
       ]; // Convert set to array
-      console.log("familes");
+      // console.log("familes");
 
       // console.log(families);
       var filteredData = data.filter(
@@ -746,26 +747,26 @@ export default function PhylogenyMafft() {
       );
     } else {
       //render insects phylogeny
-      console.log("insects");
+      // console.log("insects");
       if (selectedOrganism === "insects") {
         var orders = new Set(
           data.map((species) => species.insect_families.family_name)
         );
 
         var insect_orders_list = [...orders]; // Convert set to array
-        console.log("orders");
+        // console.log("orders");
 
         // console.log(orders);
         var insectFilteredData = data.filter(
           (dat) => dat.insect_orders.order_name == selecteorder
         );
-        console.log("insect filteredData");
+        // console.log("insect filteredData");
         var insect_famililes = data.filter(
           (entry) =>
             entry.plants_insects.length > 0 &&
             entry.insect_orders.order_name === "Lepidoptera"
         );
-        console.log("plants_famililes");
+        // console.log("plants_famililes");
 
         // console.log(filteredData);
       }
