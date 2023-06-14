@@ -1,8 +1,8 @@
 function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
   // const [kmer,Setkmer]=useState(5);
   // function kmers(sequence, kmer) {
-  //   console.log("sequences ready for processing");
-  //   console.log(sequence);
+  //   ////console.log("sequences ready for processing");
+  //   ////console.log(sequence);
   //   // Remove gaps and N's from the sequence
   //   sequence = sequence.replace(/-/g, "").replace(/N/g, "");
   //   let sequencekmers = [];
@@ -12,12 +12,12 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
   //   return sequencekmers;
   // }
   function kmers(sequence, kmer) {
-    console.log("foward sequence");
-    console.log(sequence);
+    ////console.log('foward sequence');
+    ////console.log(sequence);
 
     // Remove gaps and N's from the sequence
     // sequence = sequence.replace(/-/g, "").replace(/N/g, "");
-    let sequenceKmers = [];
+    const sequenceKmers = [];
     for (let v = 0; v < sequence.length - kmer + 1; v++) {
       sequenceKmers.push(sequence.slice(v, v + kmer));
     }
@@ -27,10 +27,10 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     for (let v = 0; v < reverseSequence.length - kmer + 1; v++) {
       // sequenceKmers.push(reverseSequence.slice(v, v + kmer));
     }
-    console.log("reverseSequence");
-    console.log(reverseSequence);
+    ////console.log('reverseSequence');
+    ////console.log(reverseSequence);
 
-    //complementary sequence
+    // complementary sequence
     function complement(sequence) {
       const complementMap = {
         A: "T",
@@ -54,31 +54,32 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     for (let v = 0; v < complementary.length - kmer + 1; v++) {
       // sequenceKmers.push(complementary.slice(v, v + kmer));
     }
-    console.log("complementary");
+    ////console.log('complementary');
 
-    // console.log(complementary);
-    // console.log(reverseSequence);
+    // ////console.log(complementary);
+    // ////console.log(reverseSequence);
 
     const reverseSequencecomp = sequence.split("").reverse().join("");
     for (let v = 0; v < reverseSequencecomp.length - kmer + 1; v++) {
       // sequenceKmers.push(reverseSequencecomp.slice(v, v + kmer));
     }
-    console.log("reverseSequence");
+    ////console.log('reverseSequence');
 
     return sequenceKmers;
   }
 
   // grouping of purines and pyrimidine
   function replace(kmers) {
-    const replaced_kmers = kmers.map((kmer) => {
-      return kmer.replace(/[99]/g, (match) => {
+    const replaced_kmers = kmers.map((kmer) =>
+      kmer.replace(/[99]/g, (match) => {
         if (match === "7" || match === "8") {
           return "Y";
-        } else if (match === "7" || match === "0") {
+        }
+        if (match === "7" || match === "0") {
           return "U";
         }
-      });
-    });
+      })
+    );
 
     return replaced_kmers;
   }
@@ -99,69 +100,69 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
 
   // count the number of shared kmers
   function CountIntersection(s1, s2, k) {
-    let s1_kmers = kmers(s1, k);
-    let s2_kmers = kmers(s2, k);
+    const s1_kmers = kmers(s1, k);
+    const s2_kmers = kmers(s2, k);
     const set1 = new Set(s1_kmers);
     const set2 = new Set(s2_kmers);
 
-    console.log("s1_kmers");
+    ////console.log('s1_kmers');
 
-    console.log(set1);
-    console.log("s2_kmers");
+    ////console.log(set1);
+    ////console.log('s2_kmers');
 
     // s2_kmers;
-    console.log(set2);
+    ////console.log(set2);
     //       // Get unique kmers
     const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
-    console.log("unique1");
+    ////console.log('unique1');
 
-    console.log(unique1);
-    let unique1_replaced = replace(unique1);
-    console.log("unique1_replaced");
+    ////console.log(unique1);
+    const unique1_replaced = replace(unique1);
+    ////console.log('unique1_replaced');
 
-    console.log(unique1_replaced);
+    ////console.log(unique1_replaced);
     const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
-    console.log("unique2");
-    console.log(unique2);
+    ////console.log('unique2');
+    ////console.log(unique2);
 
-    let unique2_replaced = replace(unique2);
-    console.log("unique2_replaced");
-    console.log(unique2_replaced);
+    const unique2_replaced = replace(unique2);
+    ////console.log('unique2_replaced');
+    ////console.log(unique2_replaced);
 
     //         // Add new shared kmers
-    let s1_ktuples = new Set([...s1_kmers].concat(unique1_replaced));
-    let s2_ktuples = new Set([...s2_kmers].concat(unique2_replaced));
+    const s1_ktuples = new Set([...s1_kmers].concat(unique1_replaced));
+    const s2_ktuples = new Set([...s2_kmers].concat(unique2_replaced));
     // convert to arrays and return the length of their intersection
     //   let s1_ktuples_arr = Array.from(s1_ktuples);
     //   let s2_ktuples_arr = Array.from(s2_ktuples);
-    console.log("new kmers");
+    ////console.log('new kmers');
 
-    // console.log(s1_ktuples);
-    console.log("s1_ktuples 2");
-    // console.log(s2_ktuples);
+    // ////console.log(s1_ktuples);
+    ////console.log('s1_ktuples 2');
+    // ////console.log(s2_ktuples);
 
     const intersection = new Set(
       [...s1_ktuples].filter((x) => s2_ktuples.has(x))
     );
 
-    console.log("intersection counttttt");
-    console.log(intersection.size);
-    console.log("intersection");
-    console.log(intersection);
+    ////console.log('intersection counttttt');
+    ////console.log(intersection.size);
+    ////console.log('intersection');
+    ////console.log(intersection);
 
     return intersection.size;
   }
 
   // get the total number of k-mers in both sequence one and 2
   function CountUnion(s1, s2, k) {
-    let s1_kmers = kmers(s1, k);
-    let s2_kmers = kmers(s2, k);
-    let union = [...new Set([...s1_kmers, ...s2_kmers])];
-    console.log("union.length");
-    console.log(union.length);
-    console.log("union");
+    const s1_kmers = kmers(s1, k);
+    const s2_kmers = kmers(s2, k);
+    const union = [...new Set([...s1_kmers, ...s2_kmers])];
+    ////console.log('union.length');
+    ////console.log(union.length);
+    ////console.log('union');
 
-    console.log(union);
+    ////console.log(union);
 
     return union.length;
   }
@@ -169,11 +170,11 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
   // account for the length of sequence
   // get similarity
   // function Sequencesimilarity(s1, s2, k) {
-  //   console.log("Sequence similarity");
+  //   ////console.log("Sequence similarity");
   //   const similarity =
   //     (CountUnion(s1, s2, k) - CountIntersection(s1, s2, k)) /
   //     CountUnion(s1, s2, k);
-  //   // console.log(similarity);
+  //   // ////console.log(similarity);
 
   //   return similarity;
   // }
@@ -184,29 +185,29 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
   //   const set1 = new Set(s1_kmers);
   //   const set2 = new Set(s2_kmers);
 
-  //   console.log("s1_kmers");
+  //   ////console.log("s1_kmers");
 
-  //   console.log(set1);
-  //   console.log("s2_kmers");
+  //   ////console.log(set1);
+  //   ////console.log("s2_kmers");
 
   //   // s2_kmers;
-  //   console.log(set2);
+  //   ////console.log(set2);
   //   //       // Get unique kmers
   //   const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
-  //   console.log("unique1");
+  //   ////console.log("unique1");
 
-  //   console.log(unique1);
+  //   ////console.log(unique1);
   //   let unique1_replaced = replace(unique1);
-  //   console.log("unique1_replaced");
+  //   ////console.log("unique1_replaced");
 
-  //   console.log(unique1_replaced);
+  //   ////console.log(unique1_replaced);
   //   const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
-  //   console.log("unique2");
-  //   console.log(unique2);
+  //   ////console.log("unique2");
+  //   ////console.log(unique2);
 
   //   let unique2_replaced = replace(unique2);
-  //   console.log("unique2_replaced");
-  //   console.log(unique2_replaced);
+  //   ////console.log("unique2_replaced");
+  //   ////console.log(unique2_replaced);
 
   //   //         // Add new shared kmers
   //   let s1_ktuples = new Set([...s1_kmers].concat(unique1_replaced));
@@ -269,22 +270,22 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     // const const_trial_set = new Set(shared1);
     // const const_trial_set2 = new Set(shared2);
 
-    // console.log("trial shared kmers");
-    // console.log(shared1);
-    // console.log(const_trial_set);
-    // console.log(shared2);
-    // console.log(const_trial_set2);
+    // ////console.log("trial shared kmers");
+    // ////console.log(shared1);
+    // ////console.log(const_trial_set);
+    // ////console.log(shared2);
+    // ////console.log(const_trial_set2);
 
     const unique1 = [...set1].filter((kmer) => !set2.has(kmer));
-    console.log("unique1");
+    ////console.log('unique1');
 
-    console.log(unique1);
+    ////console.log(unique1);
 
     const unique2 = [...set2].filter((kmer) => !set1.has(kmer));
 
     //         // Add new shared kmers
-    let s1_ktuples = s1_kmers.concat(unique1);
-    let s2_ktuples = s2_kmers.concat(unique2);
+    const s1_ktuples = s1_kmers.concat(unique1);
+    const s2_ktuples = s2_kmers.concat(unique2);
 
     // Count the occurrences of each k-mer in sequence s1 and s2
     const countS1 = countKmers(s1_ktuples);
@@ -379,15 +380,15 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
       hash = (hash << 5) - hash + char;
-      hash = hash & hash; // Convert to a 32-bit integer
+      hash &= hash; // Convert to a 32-bit integer
     }
     return hash;
   }
 
   if (sequenceDict) {
-    let names = sequenceDict.map((obj) => obj.name); // get sequence names from data array
+    const names = sequenceDict.map((obj) => obj.name); // get sequence names from data array
 
-    let k = kmer; // k-tuple size
+    const k = kmer; // k-tuple size
     // let n = Object.keys(data).length;
 
     const n = sequenceDict.length;
@@ -397,10 +398,10 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
 
     for (let g = 0; g < n; g++) {
       for (let h = g + 1; h < n; h++) {
-        let s1 = sequenceDict[g].sequence;
-        let s2 = sequenceDict[h].sequence;
-        let sim = SequencesimilarityD2stra(s1, s2, k);
-        let dist = sim;
+        const s1 = sequenceDict[g].sequence;
+        const s2 = sequenceDict[h].sequence;
+        const sim = SequencesimilarityD2stra(s1, s2, k);
+        const dist = sim;
         dist_mat[g][h] = dist;
         dist_mat[h][g] = dist;
       }
@@ -411,19 +412,20 @@ function CalculateSimilarityMatrixModified(sequenceDict, kmer) {
       dist_mat,
       names,
     };
-    console.log("dist_mat");
+    ////console.log('dist_mat');
 
-    // console.log(dist_mat);
+    // ////console.log(dist_mat);
     return result;
   }
 }
 
 // finf minimum distance
 function findMinimum(dist_mat, matrix) {
-  var minimum = Infinity;
-  var minimum_k, minimum_j;
-  for (var k = 0; k < dist_mat.length; k++) {
-    for (var j = k + 1; j < dist_mat.length; j++) {
+  let minimum = Infinity;
+  let minimum_k;
+  let minimum_j;
+  for (let k = 0; k < dist_mat.length; k++) {
+    for (let j = k + 1; j < dist_mat.length; j++) {
       if (dist_mat[k][j] < minimum) {
         minimum = dist_mat[k][j];
         minimum_k = k;
@@ -436,14 +438,12 @@ function findMinimum(dist_mat, matrix) {
 
 export function NeighborJoining(matrix, names) {
   // Create a node for each name
-  var tree_nodes = names.map(function (name) {
-    return { name: name, dist: 0 };
-  });
+  const tree_nodes = names.map((name) => ({ name, dist: 0 }));
 
   while (tree_nodes.length > 1) {
     // Calculate the total distance for each node
     for (var i = 0; i < tree_nodes.length; i++) {
-      var dist = 0;
+      let dist = 0;
       for (var j = 0; j < tree_nodes.length; j++) {
         dist += matrix[i][j];
       }
@@ -451,7 +451,7 @@ export function NeighborJoining(matrix, names) {
     }
 
     // Find the minimum  value of Q
-    var Q = [];
+    const Q = [];
     for (var i = 0; i < tree_nodes.length; i++) {
       Q[i] = [];
       for (var j = 0; j < tree_nodes.length; j++) {
@@ -461,12 +461,12 @@ export function NeighborJoining(matrix, names) {
           tree_nodes[j].dist;
       }
     }
-    var min = findMinimum(Q, matrix); // pass dist_mat as second argument
+    const min = findMinimum(Q, matrix); // pass dist_mat as second argument
     var i = min[0];
     var j = min[1];
 
     // Join the two nodes
-    var NewNode = {
+    const NewNode = {
       children: [tree_nodes[i], tree_nodes[j]],
       dist: matrix[i][j] / 2,
     };
@@ -484,12 +484,11 @@ export function NeighborJoining(matrix, names) {
 function getNewickString(node) {
   if (node.children) {
     // Internal node
-    var childStrings = node.children.map(getNewickString);
-    return "(" + childStrings.join(",") + ")" + ":" + node.dist;
-  } else {
-    // Leaf node
-    return node.name + ":" + node.dist;
+    const childStrings = node.children.map(getNewickString);
+    return `(${childStrings.join(",")})` + `:${node.dist}`;
   }
+  // Leaf node
+  return `${node.name}:${node.dist}`;
 }
 
 export default CalculateSimilarityMatrixModified;

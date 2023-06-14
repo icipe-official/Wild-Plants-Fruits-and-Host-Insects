@@ -12,7 +12,7 @@ export default function Mafft({ sequenceList }) {
         }
 
         const requestBody = {
-          sequences: sequences,
+          sequences,
         };
 
         try {
@@ -25,13 +25,13 @@ export default function Mafft({ sequenceList }) {
           });
 
           if (!response.ok) {
-            throw new Error("Error: " + response.status);
+            throw new Error(`Error: ${response.status}`);
           }
 
           const data = await response.json();
-          const newick = data.newick;
+          const { newick } = data;
           setNewick(newick);
-          console.log(data);
+          ////console.log(data);
         } catch (error) {
           console.error(error);
         }

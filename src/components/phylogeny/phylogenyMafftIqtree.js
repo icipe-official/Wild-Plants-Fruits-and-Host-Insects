@@ -57,7 +57,7 @@ export default function PhylogenyMafft() {
     if (event.target.value == "plants") {
       setSelectedFamily("Vitaceae");
       setNewickData(
-        "(Ampelocissus_africana_Mozambique_:0.0039187367,(Cissus_integrifolia_Mozambique_:0.0132064363,(Cissus_quadrangularis_Mozambique_:0.0146331552,Cissus_rotundifolia_Mozambique_:0.0036917100):0.0299076794):0.0157319219,((Cyphostemma_cyphopetalum_Kenya_:0.0057039644,Cyphostemma_serpens_Kenya_:0.0043207604):0.0141042702,(Rhoicissus_revoilii_South-Africa_:0.0000021033,Rhoicissus_tridentata_South-Africa_:0.0013102368):0.0293948893):1.1077382777);"
+        "(Ampelocissus_africana_null:0.0039124972,(Cissus_integrifolia_null:0.0132058218,(Cissus_quadrangularis_null:0.0146331522,Cissus_rotundifolia_null:0.0036917100):0.0299080725):0.0157408839,((Cyphostemma_cyphopetalum_KR734863:0.0057039644,Cyphostemma_serpens_KR734797:0.0043207604):0.0141255109,(Rhoicissus_revoilii_JF270915:0.0000021033,Rhoicissus_tridentata_JF270917:0.0013102368):0.0293761562):1.1077291944);"
       );
       handleChange(event);
     } else {
@@ -73,7 +73,7 @@ export default function PhylogenyMafft() {
   const { data, error, isLoading } = useSWR(url, fetcher);
   // console.log(data);
   const [newickData, setNewickData] = useState(
-    "(Ampelocissus_africana_Mozambique_:0.0039187367,(Cissus_integrifolia_Mozambique_:0.0132064363,(Cissus_quadrangularis_Mozambique_:0.0146331552,Cissus_rotundifolia_Mozambique_:0.0036917100):0.0299076794):0.0157319219,((Cyphostemma_cyphopetalum_Kenya_:0.0057039644,Cyphostemma_serpens_Kenya_:0.0043207604):0.0141042702,(Rhoicissus_revoilii_South-Africa_:0.0000021033,Rhoicissus_tridentata_South-Africa_:0.0013102368):0.0293948893):1.1077382777);"
+    "(Ampelocissus_africana_null:0.0039124972,(Cissus_integrifolia_null:0.0132058218,(Cissus_quadrangularis_null:0.0146331522,Cissus_rotundifolia_null:0.0036917100):0.0299080725):0.0157408839,((Cyphostemma_cyphopetalum_KR734863:0.0057039644,Cyphostemma_serpens_KR734797:0.0043207604):0.0141255109,(Rhoicissus_revoilii_JF270915:0.0000021033,Rhoicissus_tridentata_JF270917:0.0013102368):0.0293761562):1.1077291944);"
   );
   // "((A:0.1,B:0.2)80:0.3,(C:0.4,D:0.5)95:0.6)90;"
   const [selectedFamily, setSelectedFamily] = useState("Vitaceae");
@@ -148,7 +148,7 @@ export default function PhylogenyMafft() {
                   .replace(/N/g, "");
 
                 // Extract the species name from the name string
-                const speciesName = obj.species_name.split(" ")[0];
+                const speciesName = obj.species_name;
 
                 // Check if the species name already exists in the result
                 const existingSpecies = Object.keys(result).find((key) =>
@@ -434,6 +434,7 @@ export default function PhylogenyMafft() {
       // console.log(fastaInput);
 
       setNewickData("");
+
       const fastaLines = fastaInput.trim().split("\n");
       let currentSequenceName = "";
       let currentSequence = "";
@@ -456,6 +457,9 @@ export default function PhylogenyMafft() {
           currentSequence += line.trim();
         }
       }
+      // if (currentSequence.length > 2000) {
+      //   return "Sequence length should not exceed 2000 bp.";
+      // }
 
       fastaArray.push({
         name: currentSequenceName.slice(1).split(" ").slice(0, 2).join("-"),

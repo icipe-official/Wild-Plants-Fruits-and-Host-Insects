@@ -1,11 +1,11 @@
-import { spawn } from 'child_process';
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
+import { spawn } from "node:child_process";
+import fs from "fs";
+import path from "path";
+import os from "os";
 
 export default async function handler(req, res) {
   const { sequences } = req.body; // Assuming sequences are sent in the request body
-  console.log(sequences);
+  ////console.log(sequences);
   // const sequences = {
   //   "Abutilon hirtum":
   //     "AAGTGTTGGATTCAAAGCCGGTGTTAAAGATTATAAATTGACTTATTACACTCCTGACTATGAAACCAAAGATACTGATATCTTGGCAGCGTTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAGGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTATGGACTGACGGGCTTACCAGTCTTGATCGTTACAAAGGTCGATGCTACGGCCTTGAGCCCGTTGCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTTTTTGGGTTCAAGGCCCTGCGCGCTCTACGTTTGGAGGATTTGCGAATCCCTACTGCTTATACTAAAACTTTCCAAGGACCGCCTCATGGCATCCAGGTTGAAAGAGATAAATTGAACAAGTATGGCCGCCCCCTATTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAGAATTACGGTAGAGCAGTTTATGAATGTCTT",
@@ -15,27 +15,28 @@ export default async function handler(req, res) {
   // };
 
   // Convert sequences to FASTA format
-  let fasta = '';
+  let fasta = "";
   Object.entries(sequences).forEach(([name, sequence]) => {
     fasta += `>${name}\n${sequence}\n`;
   });
 
-  const pythonScriptPath = 'src/python.py';
-  const pythonProcess = spawn('python3', [pythonScriptPath]);
+  const pythonScriptPath = "src/python.py";
+  const pythonProcess = spawn("python3", [pythonScriptPath]);
 
-  let newick = '';
-  let errorOutput = '';
+  let newick = "";
+  let errorOutput = "";
 
-  pythonProcess.stdout.on('data', (data) => {
+  pythonProcess.stdout.on("data", (data) => {
     newick += data;
   });
 
-  pythonProcess.stderr.on('data', (data) => {
+  pythonProcess.stderr.on("data", (data) => {
     errorOutput += data;
   });
 
-  pythonProcess.on('close', (code) => {
+  pythonProcess.on("close", (code) => {
     if (code !== 0) {
+      console.error(`Error ${code}:${errorOutput}`);
       res.status(500).json({
         message: `Alignment failed with code ${code}`,
         error: errorOutput,

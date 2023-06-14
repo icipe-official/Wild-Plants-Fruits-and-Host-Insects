@@ -156,14 +156,14 @@ export default function PhylogenyMafftPlantsInsects() {
       }, {});
 
       setDownload(sequences);
-      console.log("plant sequences format");
-      console.log(sequences);
-      console.log("sequences on click family");
-      console.log(sequences);
+      // console.log("plant sequences format");
+      // console.log(sequences);
+      // console.log("sequences on click family");
+      // console.log(sequences);
       const requestBody = {
         sequences,
       };
-      fetch("http://localhost:3000/api/phylogeny", {
+      fetch(`${base_url}/api/phylogeny`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -198,35 +198,32 @@ export default function PhylogenyMafftPlantsInsects() {
         if (obj.insects_coi.length > 0) {
           obj.insects_coi.forEach((insect) => {
             if (insect.nucleotide !== null) {
-              const name = `${obj.insect_genera.genus_name}_${
+              const name = `${obj.insect_genera.genus_name}>${
                 obj.species_name.split(" ")[0]
               }_${obj.plants_insects.map(
                 (plant) =>
                   `${plant.plants.plant_genera.plant_families.family_name}_F_${
                     plant.plants.plant_genera.genus_name
-                  }-${plant.plants.species_name
-                    .split(" ")[0]
-                    .replace(/./g, "")}|`
+                  }_${plant.plants.species_name.split(" ")[0]}|`
               )}`;
-              counter;
-              counter++;
-              result[name.replace(/\s/g, "")] = insect.nucleotide
-                .replace(/-/g, "")
-                .replace(/N/g, "");
+
+              result[
+                name.replace(/\s/g, "").replace(/\n/g, "").replace(/-/g, "")
+              ] = insect.nucleotide.replace(/-/g, "").replace(/N/g, "");
             }
           });
         }
         return result;
       }, {});
       setDownload(sequences);
-      console.log("insect sequncesssss");
+      // console.log("insect sequncesssss");
 
-      console.log(sequences);
+      // console.log(sequences);
 
       const requestBody = {
         sequences,
       };
-      fetch("http://localhost:3000/api/phylogeny", {
+      fetch(`${base_url}/api/phylogeny`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -728,7 +725,7 @@ export default function PhylogenyMafftPlantsInsects() {
                 height: "100vh",
               }}
             >
-              <p>Constructing phylogenetics tree...</p>
+              <p>Please wait Constructing phylogenetics tree...</p>
             </Box>
           )}
         </Box>
