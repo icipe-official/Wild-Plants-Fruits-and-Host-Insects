@@ -2,34 +2,8 @@ import { Box } from "@mui/material";
 import DynamicValueCard from "../dynamicvaluecard";
 // import FruitDetails from "../fruitdetailsMUI";
 // import PlantFeatureKeys from "./plantFeatures";
-//This component will be receiving data from getstaticprops
+// This component will be receiving data from getstaticprops
 export default function PlantDetailValues({ plants_data }) {
-  console.log("plants_data");
-  console.log(plants_data.map((specie) => specie));
-  console.log("stem type");
-  console.log(
-    plants_data.map((specie) =>
-      specie.plants_shrub_climbings.map(
-        (type) => type.shrub_climbings.tree_type
-      )
-    )
-  );
-
-  console.log("spines, thorns, priddes");
-
-  console.log(
-    plants_data.map((specie) =>
-      specie.plants_spines_thorns.map((spine) => spine.spines_thorns)
-    )
-  );
-  console.log("spines_thorns_pridedes");
-  console.log(
-    plants_data.map((specie) =>
-      specie.plants_spines_thorns.map((fruit) => fruit)
-    )
-  );
-  //.map(family => family.name)));
-
   return plants_data.map((specie, index) => (
     <Box key={index} sx={{ paddingTop: "1rem", marginRight: "1rem" }}>
       <Box sx={{ color: "maroon" }}>Plant</Box>
@@ -40,7 +14,7 @@ export default function PlantDetailValues({ plants_data }) {
           <DynamicValueCard
             keyName="Type"
             value={specie.plants_shrub_climbings.map(
-              (type) => type.shrub_climbings.tree_type + " "
+              (type) => `${type.shrub_climbings.tree_type} `
             )}
           />
         </Box>

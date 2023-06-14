@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from "react";
-import "ol/ol.css";
-import { Map, View } from "ol";
-import TileLayer from "ol/layer/Tile";
-import OSM from "ol/source/OSM";
-import VectorLayer from "ol/layer/Vector";
-import VectorSource from "ol/source/Vector";
-import Point from "ol/geom/Point";
-import Feature from "ol/Feature";
-import { fromLonLat } from "ol/proj";
+import React, { useEffect, useRef } from 'react';
+import 'ol/ol.css';
+import { Map, View } from 'ol';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import Point from 'ol/geom/Point';
+import Feature from 'ol/Feature';
+import { fromLonLat } from 'ol/proj';
 
 export default function OpenLayersMap() {
   const mapRef = useRef(null);
@@ -52,5 +52,5 @@ export default function OpenLayersMap() {
     };
   }, []);
 
-  return <div ref={mapRef} style={{ width: "100%", height: "800px" }} />;
+  return <div ref={mapRef} style={{ width: '100%', height: '800px' }} />;
 }

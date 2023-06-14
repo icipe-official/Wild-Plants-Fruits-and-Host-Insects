@@ -359,7 +359,7 @@
       };
       console.log("new_level");
 
-      console.log(new_level);
+      // console.log(new_level);
       let the_parent = clade_stack[clade_stack.length - 1];
 
       if (!("children" in the_parent)) {
@@ -1830,7 +1830,7 @@
     const i_names = !this.internalNames(); //did the margic {{{{}}}}
     console.log("node internal names");
 
-    console.log(node);
+    // console.log(node);
 
     if (i_names) {
       // console.log(i_names);

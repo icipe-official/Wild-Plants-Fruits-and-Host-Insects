@@ -96,5 +96,5 @@ var matrix = [
     
     // Generate the Newick string for the constructed tree
     var newick = generateNewick(root);
-    console.log(newick);
+    ////console.log(newick);
 }
