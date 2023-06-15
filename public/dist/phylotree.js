@@ -357,7 +357,7 @@
       let new_level = {
         name: null,
       };
-      console.log("new_level");
+      // console.log("new_level");
 
       // console.log(new_level);
       let the_parent = clade_stack[clade_stack.length - 1];
@@ -555,9 +555,9 @@
     if (clade_stack.length != 1) {
       return generateError(nwk_str.length - 1);
     }
-    console.log(tree_json);
+    // console.log(tree_json);
 
-    console.log(tree_json);
+    // console.log(tree_json);
     return {
       json: tree_json,
       error: null,
@@ -1835,20 +1835,20 @@
     if (i_names) {
       // console.log(i_names);
       if (typeof i_names === "function") {
-        console.log("i_names function");
+        // console.log("i_names function");
 
-        console.log(i_names);
+        // console.log(i_names);
 
         return i_names(node);
       }
       if (i_names !== "root") {
-        console.log(i_names);
+        // console.log(i_names);
         return i_names;
       }
     }
-    console.log("this .internal nodes");
+    // console.log("this .internal nodes");
 
-    console.log(node);
+    // console.log(node);
     // console.log("i_names function");
 
     // console.log(i_names);
@@ -1950,18 +1950,18 @@
     _node = _node.data;
 
     if (isLeafNode(_node)) {
-      console.log(" leaf");
-      console.log(_node.name);
+      // console.log(" leaf");
+      // console.log(_node.name);
 
       return _node.name;
     } else {
-      console.log(" internal node");
-      console.log(_node);
+      // console.log(" internal node");
+      // console.log(_node);
     }
 
     if (this.showInternalName(_node)) {
-      console.log("node");
-      console.log(_node);
+      // console.log("node");
+      // console.log(_node);
       if (_node.name !== "root") {
         // avoid he root from the boostrap
         return _node.name;
@@ -2416,7 +2416,7 @@
     d3PhylotreeSvgTranslate: d3PhylotreeSvgTranslate,
     d3PhylotreeSvgRotate: d3PhylotreeSvgRotate,
   });
-
+  //modify for hyperlinks
   let d3_layout_phylotree_context_menu_id = "d3_layout_phylotree_context_menu";
 
   function nodeDropdownMenu(node, container, phylotree, options, event) {
@@ -2529,7 +2529,7 @@
               this.modifySelection(this.phylotree.pathToRoot(node));
             });
 
-          if (options["reroot"] || options["hide"]) {
+          if (options["details"] || options["reroot"] || options["hide"]) {
             menu_object.append("div").attr("class", "dropdown-divider");
           }
         }
@@ -2561,6 +2561,24 @@
             });
         }
       }
+      // Code for details page option...
+      menu_object
+        .append("a")
+        .attr("class", "dropdown-item")
+        .attr("tabindex", "-1")
+        .text("Details page")
+        .on("click", (d) => {
+          console.log("dddd");
+
+          console.log(node.data.name.split("_")[2]);
+          menu_object.style("display", "none");
+          // Get the ID of the plant
+          const plantId = node.data.name.split("_")[2]; //get the id from the newick terminal node name
+          // Generate the URL for the details page
+          const detailsPageURL = `/plants/${plantId}`; // Replace '/plant' with the appropriate route path for your Next.js application
+          // Navigate to the details page using window.location
+          window.top.location.href = detailsPageURL;
+        });
 
       if (hasHiddenNodes(node)) {
         menu_object
