@@ -17,10 +17,12 @@ export default function  Searchbar() {
     const [speciesData,setSpeciesData]=useState([])
     const [loaded,setLoaded]=useState(false)
     const [error,setError]=useState(null)
+
+    const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
     useEffect(() => {
         // fetch api
                 fetch(
-                    '/api/family'
+                    `${base_url}/api/family`
                 )
                     .then((res) => res.json())
                     .then(

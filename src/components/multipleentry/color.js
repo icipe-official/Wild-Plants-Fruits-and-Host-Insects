@@ -35,10 +35,11 @@ const handleOnChange = (position) => {
   // loop over selected values and append to the list for query
   
 }
+const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 const handleData = (query) => {
   //fetch genus based on genus selected
     fetch(
-        '/api/plants/prisma_api/multipleEntry/multipleEntryTrial?'+{query}
+        `${base_url}/api/plants/prisma_api/multipleEntry/multipleEntryTrial?`+{query}
     )
         .then((res) => res.json())
         .then((result) => 

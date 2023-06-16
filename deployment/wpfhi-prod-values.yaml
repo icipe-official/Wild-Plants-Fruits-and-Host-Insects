@@ -3,3 +3,6 @@ imagePullSecrets: registry-credentials
 client:
   deployment:
     image: "51.140.225.217/wpfhi/app"
+  ingress:
+      useHost: "true"
+      host: test-dmmg.icipe.org

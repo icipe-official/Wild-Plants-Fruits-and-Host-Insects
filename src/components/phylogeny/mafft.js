@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Mafft({ sequenceList }) {
   const [newick, setNewick] = useState(null);
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +17,7 @@ export default function Mafft({ sequenceList }) {
         };
 
         try {
-          const response = await fetch("http://localhost:3000/api/phylogeny", {
+          const response = await fetch(`${base_url}/api/phylogeny`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -48,8 +48,9 @@ export default function Lepidoptera({ lepidoptera_data }) {
   // }, []);
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { data, error } = useSWR(
-    `/api/plants/insectsReared/Lepidoptera/${species}`,
+    `${base_url}/api/plants/insectsReared/Lepidoptera/${species}`,
     fetcher
   );
 

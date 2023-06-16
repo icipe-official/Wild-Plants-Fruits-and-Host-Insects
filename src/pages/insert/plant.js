@@ -60,7 +60,8 @@ const InsertForm = () => {
 
     try {
       // Send POST request to your API endpoint
-      const response = await axios.post("/api/plants/insert", data);
+      const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await axios.post(`${base_url}/api/plants/insert`, data);
       console.log(response.data);
     } catch (error) {
       console.error(error);

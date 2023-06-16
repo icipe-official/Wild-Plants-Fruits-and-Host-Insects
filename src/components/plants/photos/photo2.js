@@ -26,7 +26,8 @@ export default function Photostrial({ photos_data }) {
   // }, []);
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
-  const { data, error } = useSWR(`/api/plantsPage/${species}`, fetcher);
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const { data, error } = useSWR(`${base_url}/api/plantsPage/${species}`, fetcher);
 
   // fetch(`/api/plantsPage/${species}`)
   // if (error) return <div>Failed to load</div>;

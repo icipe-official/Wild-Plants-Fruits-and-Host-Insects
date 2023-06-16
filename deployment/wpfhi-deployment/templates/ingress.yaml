@@ -12,13 +12,23 @@ spec:
   {{- with .Values.ingressClassName }}
   ingressClassName: {{ . }}
   {{- end}}
+  {{- if eq .Values.client.ingress.useTls "true" }}
+  tls:
+  {{- if eq .Values.client.ingress.useHost "true"  }}
+  - hosts: 
+    - {{ .Values.client.ingress.host }}
+    secretName: {{ .Values.client.ingress.tls }}
+  {{- else}}
+  - secretName: {{ .Values.client.ingress.tls }}
+  {{- end}}
+  {{- end}}
   rules:
-  {{- if eq .Values.client.ingress.useDomain "true" }}
+  {{- if eq .Values.client.ingress.useHost "true" }}
   - host: {{ .Values.client.ingress.host }}
     http:
       paths:
       - pathType: Prefix
-        path: /
+        path: {{ .Values.client.ingress.path }}
         backend:
           service:
             name: {{ .Values.client.app }}

@@ -41,7 +41,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
             {photos.map((specie) => (
               <Box key={specie.id}>
                 <Image
-                  src={`${base_path}/plants/${specie}`}
+                  src={`${base_path}/photos/plants/${specie}`}
                   alt="Picture of the plant"
                   width={500}
                   height={400}
@@ -85,7 +85,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
         return (
           <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
             <Image
-              src={`${base_path}/plants/${photos[currentImage]}`}
+              src={`${base_path}/photos/plants/${photos[currentImage]}`}
               alt="No Image"
               width={500}
               height={400}

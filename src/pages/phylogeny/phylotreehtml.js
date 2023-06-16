@@ -17,6 +17,8 @@ import { Box } from "@mui/material";
 
 import { useEffect } from "react";
 
+const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
+
 export default function MyComponent() {
   useEffect(() => {
     document.body.style.margin = "0";
@@ -26,7 +28,7 @@ export default function MyComponent() {
   return (
     <div>
       <iframe
-        src="/phylotree.html"
+        src={`${base_path}/phylotree.html`}
         style={{
           position: "absolute",
           top: 0,

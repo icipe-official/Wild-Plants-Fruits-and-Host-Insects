@@ -94,10 +94,11 @@ const handleOnChangeColor = (position) => {
 
   const handleData = () => {
     const i=JSON.stringify(query)
+    const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
     //fetch genus based on genus selected
     // convert Query to JSON string
       fetch(
-          'api/plants/prisma_api/multipleEntry/multipletrial?filters='+i
+          `${base_url}/api/plants/prisma_api/multipleEntry/multipletrial?filters=`+i
 
       )
           .then((res) => res.json())

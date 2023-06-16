@@ -12,7 +12,9 @@ import { NeighborJoining } from "./generateDistanceMatrix";
 // export default function Newick() {
 
 export default function Tree() {
-  const base_url = "http://localhost:3000";
+  // const base_url = "http://localhost:3000";
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error, isLoading } = useSWR(
@@ -178,7 +180,7 @@ if(data){
         /> */}
           <iframe
             ref={iframeRef}
-            src={`/phylotree.html?newickData=${newickData}`}
+            src={`${base_path}/phylotree.html?newickData=${newickData}`}
             style={{
               position: "relative",
               top: 3,

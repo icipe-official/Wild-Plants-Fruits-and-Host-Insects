@@ -70,7 +70,7 @@
 // The query results are then returned as a JSON response to the client.
 // Try catch block is used to catch the error during get request
 
-import prisma from "../../../../lib/prisma";
+import prisma from "../../../lib/prisma";
 import NextCors from "nextjs-cors";
 export default async function handle(req, res) {
   // Run the cors middleware

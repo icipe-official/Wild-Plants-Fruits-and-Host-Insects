@@ -48,8 +48,9 @@ export default function OtherDiptera() {
   // }, []);
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { data, error } = useSWR(
-    `/api/plants/insectsReared/OtherDiptera/${species}`,
+    `${base_url}/api/plants/insectsReared/OtherDiptera/${species}`,
     fetcher
   );
 

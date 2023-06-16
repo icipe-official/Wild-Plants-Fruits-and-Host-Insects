@@ -26,7 +26,7 @@ export default function InsectPhotos({ photos_data }) {
           <Box key={specie.id}>
             <Box key={specie.id}>
               <Image
-                src={`${base_path}/insects/${photos[0]}.jpg`}
+                src={`${base_path}/photos/insects/${photos[0]}.jpg`}
                 alt="Picture of the insect"
                 width={500}
                 height={400}
@@ -60,7 +60,7 @@ export default function InsectPhotos({ photos_data }) {
     return (
       <Box sx={{ marginTop: 8, marginLeft: 2, paddingBottom: 2 }}>
         <Image
-          src={`${base_path}/insects/${photos[open]}.jpg`}
+          src={`${base_path}/photos/insects/${photos[open]}.jpg`}
           alt="No Image"
           width={500}
           height={400}

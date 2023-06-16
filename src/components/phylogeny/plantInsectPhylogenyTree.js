@@ -32,6 +32,7 @@ export default function PlantsInsectsPhylogeny() {
 
   // const fetcher = (url) => fetch(url).then((r) => r.json());
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
   const { data, error, isLoading } = useSWR(
@@ -263,7 +264,7 @@ export default function PlantsInsectsPhylogeny() {
         <Box>
           <iframe
             ref={iframeRef}
-            src={`/phylotree.html?newickData=${newickData}`}
+            src={`${base_path}/phylotree.html?newickData=${newickData}`}
             style={{
               position: "relative",
               top: 3,

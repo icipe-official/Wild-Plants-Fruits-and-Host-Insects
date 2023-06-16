@@ -22,13 +22,13 @@ export default function Species() {
 
 
 
-
+   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 
     useEffect(() => {
 // fetch api
         fetch(
-            '/api/species'
+            `${base_url}/api/species`
         )
             .then((res) => res.json())
             .then(

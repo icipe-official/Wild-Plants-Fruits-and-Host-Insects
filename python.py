@@ -8,6 +8,8 @@ import shutil
 import sys
 
 def construct_phylogenetic_tree(sequences):
+    if not sequences:
+        return ""
     # Use MAFFT to align the sequences
     mafft_cline = MafftCommandline(input="-", auto=True)
     stdout, stderr = mafft_cline(stdin=sequences)
@@ -28,7 +30,7 @@ def construct_phylogenetic_tree(sequences):
             f.write(f">{seq_id}\n{sequence}\n")
 
     # Run IQ-TREE to construct the phylogenetic tree
-    iqtree_command = f"iqtree2 -s {temp_file_path}"
+    iqtree_command = f"iqtree -s {temp_file_path}"
     # subprocess.run(iqtree_command, shell=True)
     # supress standard output
     subprocess.run(iqtree_command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

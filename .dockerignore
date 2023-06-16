@@ -9,3 +9,6 @@ scripts
 package-lock.json
 capacitor.config.ts
 .gitignore
+venv
+*Dockerfile
+public/photos/*

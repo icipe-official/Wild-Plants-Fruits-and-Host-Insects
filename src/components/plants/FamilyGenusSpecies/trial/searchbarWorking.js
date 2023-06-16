@@ -18,10 +18,12 @@ export default function  Searchbar(family) {
     const [speciesData,setSpeciesData]=useState([])
     const [loaded,setLoaded]=useState(false)
     const [error,setError]=useState(null)
+
+    const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
     useEffect(() => {
         // fetch family names api
                 fetch(
-                    '/api/plants/prisma_api/family'
+                    `${base_url}/api/plants/prisma_api/family`
                 )
                     .then((res) => res.json()) 
                     .then(
@@ -46,7 +48,7 @@ console.log(familyId)
     const OnFamilyChange = (e) => {
       //fetch genus based on genus selected
         fetch(
-            '/api/plants/prisma_api/genus'
+            `${base_url}/api/plants/prisma_api/genus`
         )
             .then((res) => res.json())
             .then(
@@ -78,7 +80,7 @@ console.log(familyId)
     const OnGenusChange = (e) => {
             // fetch species names based on family and genus selected
                     fetch(
-                        '/api/plants/prisma_api/plantSpecies'
+                        `${base_url}/api/plants/prisma_api/plantSpecies`
                     )
                         .then((res) => res.json())
                         .then(

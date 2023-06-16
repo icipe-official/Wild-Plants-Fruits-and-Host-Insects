@@ -38,7 +38,9 @@ export default function Photos({ photo_data }) {
   // }, []);
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
-  const { data, error } = useSWR(`/api/plantsPage/${species}`, fetcher);
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
+  const { data, error } = useSWR(`${base_url}/api/plantsPage/${species}`, fetcher);
 
   // fetch(`/api/plantsPage/${species}`)
   // if (error) return <div>Failed to load</div>;
@@ -66,7 +68,7 @@ export default function Photos({ photo_data }) {
               {specie.map((photo) => (
                 <Box key={photo.id}>
                   <Image
-                    src={`/plantPhotos/${photo.photo_name}`}
+                    src={`${base_path}/photos/plantPhotos/${photo.photo_name}`}
                     alt="Picture of the plant"
                     width={500}
                     height={400}
@@ -82,7 +84,7 @@ export default function Photos({ photo_data }) {
       return (
         <Box sx={{ marginTop: "1rem", marginLeft: 2, paddingBottom: 2 }}>
           <Image
-            src="/plantPhotos/noImage.jpg"
+            src={`${base_path}/plantPhotos/noImage.jpg`}
             alt="No Image"
             width={500}
             height={400}
@@ -101,7 +103,7 @@ export default function Photos({ photo_data }) {
       return (
         <Box sx={{ marginTop: "1rem", marginLeft: 2, paddingBottom: 2 }}>
           <Image
-            src={`/plants/${photos[open]}`}
+            src={`${base_path}/photos/plants/${photos[open]}`}
             alt="No Image"
             width={500}
             height={400}

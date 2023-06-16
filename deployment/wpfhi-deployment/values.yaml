@@ -2,6 +2,7 @@ project: wpfhi
 ingressClassName: nginx
 
 imagePullSecrets:
+pvc: wpfhi
 
 client:
   app: wpfhi-app
@@ -12,6 +13,8 @@ client:
   service:
     port: 3000
   ingress:
-    useDomain: "false"
+    useHost: "false"
     host: wpfhi.icipe.org
     path: /wpfhi
+    useTls: "false"
+    tls: wpfhi-selfsigned-ca

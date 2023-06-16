@@ -1,4 +1,4 @@
-import { spawn } from "child_process";
+import { spawn } from "node:child_process";
 import fs from "fs";
 import path from "path";
 import os from "os";
@@ -20,10 +20,7 @@ export default async function handler(req, res) {
     fasta += `>${name}\n${sequence}\n`;
   });
 
-
-
-  const pythonScriptPath =  path.join(__dirname,"lib/python.py");
-  const pythonProcess = spawn("python3", [pythonScriptPath]);
+  const pythonProcess = spawn("python3", ["python.py"]);
 
   let newick = "";
   let errorOutput = "";
@@ -38,6 +35,7 @@ export default async function handler(req, res) {
 
   pythonProcess.on("close", (code) => {
     if (code !== 0) {
+      console.error(`Error ${code}: ${errorOutput}`)
       res.status(500).json({
         message: `Alignment failed with code ${code}`,
         error: errorOutput,

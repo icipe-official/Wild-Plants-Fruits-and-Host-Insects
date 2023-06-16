@@ -295,6 +295,7 @@ export default function PhylogenyMafftPlantsInsects() {
 
   // const fetcher = (url) => fetch(url).then((r) => r.json());
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
   const fetcher = async (url) => {
     const response = await fetch(url);
     const data = await response.json();
@@ -419,7 +420,7 @@ export default function PhylogenyMafftPlantsInsects() {
       const requestBody = {
         sequences: sequences,
       };
-      fetch("http://localhost:3000/api/phylogeny", {
+      fetch(`${base_url}/api/phylogeny`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -486,7 +487,7 @@ export default function PhylogenyMafftPlantsInsects() {
       const requestBody = {
         sequences: sequences,
       };
-      fetch("http://localhost:3000/api/phylogeny", {
+      fetch(`${base_url}/api/phylogeny`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -580,7 +581,7 @@ export default function PhylogenyMafftPlantsInsects() {
           sequences: fastaObject,
         };
 
-        fetch("http://localhost:3000/api/phylogeny", {
+        fetch(`${base_url}/api/phylogeny`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -971,7 +972,7 @@ export default function PhylogenyMafftPlantsInsects() {
           {newickData ? (
             <iframe
               ref={iframeRef}
-              src={`/phylotree.html?newickData=${newickData}`}
+              src={`${base_path}/phylotree.html?newickData=${newickData}`}
               style={{
                 position: "relative",
                 top: 3,

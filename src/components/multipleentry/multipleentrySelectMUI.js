@@ -93,8 +93,9 @@ export default function QuerySelect() {
   const [uniqueColeopteraData, setUniqueColeopteraData] = useState([]);
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
+  const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { data, error } = useSWR(
-    "/api/multipleEntry/allmultipleQuery",
+    `${base_url}/api/multipleEntry/allmultipleQuery`,
     fetcher
   );
   console.log(data);

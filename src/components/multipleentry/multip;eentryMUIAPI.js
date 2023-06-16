@@ -98,9 +98,10 @@ const handleData = () => {
     }
     else{
     const i=JSON.stringify(query)
+    const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
     //fetch genus based on genus selected
     // convert Query to JSON string
-      fetch(`api/plants/prisma_api/multipleEntry/multipleentryAPIstandard?colors=${query.colors}&size=${query.sizes}`
+      fetch(`${base_url}/api/plants/prisma_api/multipleEntry/multipleentryAPIstandard?colors=${query.colors}&size=${query.sizes}`
 
       )
           .then((res) => res.json())
