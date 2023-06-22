@@ -2448,6 +2448,49 @@
         !options["show-menu"]
       )
         return;
+      // Get the ID of the plant modified
+      const plantInsectId = node.data.name.split("_")[2]; // Get the ID from the newick terminal node name
+      // const InsectId = node.data.name.split("_")[2]; // Get the ID from the newick terminal node name
+      const Insectgenus = node.data.name.split("_")[3]; // Get the ID from the newick terminal node name
+
+      // Check if the second position is inatger and third position is not intger guide navigation to plaants page
+      //else allow navigation to insects page
+      if (!isNaN(parseInt(plantInsectId)) && isNaN(parseInt(Insectgenus))) {
+        menu_object
+          .append("a")
+          .attr("class", "dropdown-item")
+          .attr("tabindex", "-1")
+          .text("Plant details page")
+          .on("click", (d) => {
+            console.log("dddd");
+            console.log(plantInsectId);
+            menu_object.style("display", "none");
+
+            // Generate the URL for the details page
+            const detailsPageURL = `/plants/${plantInsectId}`; // Replace '/plant' with the appropriate route path for your Next.js application
+
+            // Navigate to the details page using window.location
+            window.top.location.href = detailsPageURL;
+          });
+      }
+      if (!isNaN(parseInt(plantInsectId)) && !isNaN(parseInt(Insectgenus))) {
+        menu_object
+          .append("a")
+          .attr("class", "dropdown-item")
+          .attr("tabindex", "-1")
+          .text("Insect details page")
+          .on("click", (d) => {
+            console.log("dddd");
+            console.log(plantInsectId);
+            menu_object.style("display", "none");
+
+            // Generate the URL for the details page for insects
+            const detailsPageURL = `/insects/${Insectgenus}?genus=${Insectgenus}&species=${plantInsectId}`;
+            // Navigate to the details page using window.location
+            window.top.location.href = detailsPageURL;
+          });
+      }
+
       if (!isLeafNode(node)) {
         if (options["collapsible"]) {
           menu_object
@@ -2548,6 +2591,8 @@
         }
 
         if (options["hide"]) {
+          // Color branches with similar genus names the same
+
           menu_object
             .append("a")
             .attr("class", "dropdown-item")
@@ -2561,24 +2606,6 @@
             });
         }
       }
-      // Code for details page option...
-      menu_object
-        .append("a")
-        .attr("class", "dropdown-item")
-        .attr("tabindex", "-1")
-        .text("Details page")
-        .on("click", (d) => {
-          console.log("dddd");
-
-          console.log(node.data.name.split("_")[2]);
-          menu_object.style("display", "none");
-          // Get the ID of the plant
-          const plantId = node.data.name.split("_")[2]; //get the id from the newick terminal node name
-          // Generate the URL for the details page
-          const detailsPageURL = `/plants/${plantId}`; // Replace '/plant' with the appropriate route path for your Next.js application
-          // Navigate to the details page using window.location
-          window.top.location.href = detailsPageURL;
-        });
 
       if (hasHiddenNodes(node)) {
         menu_object

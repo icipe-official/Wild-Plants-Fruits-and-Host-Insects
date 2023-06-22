@@ -12,12 +12,12 @@ export default function FruitsReared({ fruits_reared_data }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   // const base_url = "http://localhost:3000";
 
-  console.log(fruits_reared_data);
+  ////console.log(fruits_reared_data);
   const fruits = fruits_reared_data.map((fruit) =>
     fruit.plants_insects.map((specie) => specie.plants)
-  )[0]; //[0] extract the first object
-  console.log("fruits reatred Fruits functionsl component");
-  console.log(fruits);
+  )[0]; // [0] extract the first object
+  ////console.log('fruits reatred Fruits functionsl component');
+  ////console.log(fruits);
 
   const handleItemClick = (index) => {
     setSelectedIndex(index);
@@ -25,7 +25,8 @@ export default function FruitsReared({ fruits_reared_data }) {
   return (
     <Box sx={{ paddingBottom: "1rem" }}>
       <Box sx={{ marginTop: "1rem", fontWeight: "bold" }}>
-        {fruits.length} Fruits from which the insect was reared. click for details
+        {fruits.length} Fruits from which the insect was reared. click for
+        details
       </Box>
       <Box
         sx={{
@@ -56,7 +57,7 @@ export default function FruitsReared({ fruits_reared_data }) {
             </Link>
           </Box>
         ))}
-        <Box></Box>
+        <Box />
       </Box>
     </Box>
   );

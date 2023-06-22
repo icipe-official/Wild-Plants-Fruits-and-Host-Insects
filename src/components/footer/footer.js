@@ -63,7 +63,12 @@ export default function Footer() {
             Natural History Collections of wild Plants, Fruits, and Host insects
             in Kenya
           </Typography>
-          <Box display="flex" justifyContent="center" marginTop={2}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            marginTop={2}
+            marginBottom={2}
+          >
             <button
               onClick={handleDownload}
               disabled={isDownloading || error}

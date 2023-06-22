@@ -150,20 +150,20 @@ export default function HymenopterahymenopteraIchneumonoidae({
             (item) => item.insect_genera.genus_name
           )
         )
-      ).map((name) => {
-        return data.hymenopteraIchneumonoidae.find(
+      ).map((name) =>
+        data.hymenopteraIchneumonoidae.find(
           (item) => item.insect_genera.genus_name === name
-        );
-      });
+        )
+      );
       setunique_hymenopterabraconidae(unique_hymenopterabraconidae);
     }
   }, [data]);
 
   const classes = useStyles();
-  console.log("unique__lepidoptera");
-  // console.log(uniqueColeopteraData);
+  ////console.log('unique__lepidoptera');
+  // ////console.log(uniqueColeopteraData);
 
-  //obtain frst four genus nanmes
+  // obtain frst four genus nanmes
 
   const unique_hymenopteraIchneumonoidae_data = Array.from(
     new Set(
@@ -171,16 +171,16 @@ export default function HymenopterahymenopteraIchneumonoidae({
         (item) => item.insect_sub_families.sub_family_name
       )
     )
-  ).map((name) => {
-    return unique_hymenopteraIchneumonoidae.find(
+  ).map((name) =>
+    unique_hymenopteraIchneumonoidae.find(
       (item) => item.insect_sub_families.sub_family_name === name
-    );
-  });
+    )
+  );
 
-  console.log("unique__coleoptera data");
+  ////console.log('unique__coleoptera data');
 
-  console.log(unique_hymenopteraIchneumonoidae);
-  //handle family click
+  ////console.log(unique_hymenopteraIchneumonoidae);
+  // handle family click
   const [selectedFamily, setSelectedFamily] = useState(null);
   const [selectedSubFamily, setSelectedSubFamily] = useState(null);
 
@@ -188,9 +188,9 @@ export default function HymenopterahymenopteraIchneumonoidae({
     (genus) => genus.insect_families.family_name === selectedFamily
   );
 
-  //pass the status to the insect details page
+  // pass the status to the insect details page
   // on click, the selected genus name will be passed to getserverside prop function
-  //handle genus click
+  // handle genus click
   const handleClick = (genus) => {
     Router.push({
       pathname: `/insects/${genus.insect_genera.id}`,
@@ -202,7 +202,7 @@ export default function HymenopterahymenopteraIchneumonoidae({
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
-  //handle subfamily click event
+  // handle subfamily click event
   const handleSubFamilyClick = (event, subfamily) => {
     setSelectedSubFamily(subfamily);
     setAnchorEl(event.currentTarget);

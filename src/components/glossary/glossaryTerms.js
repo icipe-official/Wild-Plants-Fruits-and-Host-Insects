@@ -80,7 +80,7 @@ export default function GlossaryAll() {
 
   //   const router = useRouter();
   //   const species = router.query.species;
-  //   console.log(species);
+  //   ////console.log(species);
   // const { data, error, isLoading } = usePlantFeatures(species);
   // const { data, error, isLoading } = useSWR(
   //   `${baseUrl}/api/multipleEntry/allmultipleQuery`,
@@ -130,12 +130,12 @@ export default function GlossaryAll() {
   //handle on click event of the image
   function handleClick(type) {
     if (type.glossary_term) {
-      console.log("type on click");
-      console.log(type);
-      console.log(showPhotos);
-      console.log("example");
+      ////console.log("type on click");
+      ////console.log(type);
+      ////console.log(showPhotos);
+      ////console.log("example");
 
-      console.log(example);
+      ////console.log(example);
 
       setSelectedType(type);
       setShowPhotos(true);
@@ -202,46 +202,46 @@ export default function GlossaryAll() {
     );
 
   if (glossary && example) {
-    console.log("glossary");
-    console.log(glossary);
-    console.log(glossary);
+    ////console.log("glossary");
+    ////console.log(glossary);
+    ////console.log(glossary);
 
-    // console.log("example");
+    // ////console.log("example");
 
-    // console.log(example);
+    // ////console.log(example);
 
-    // console.log(
+    // ////console.log(
     //   fruit_type.fruit_types
     //     .filter((t) => Boolean(t.fruit_type_description))
     //     .map((t) => t.fruit_type_description)
 
     // const photos = example;
-    console.log("example");
+    ////console.log("example");
     // get plant species with photos
     const filtered_examples = example.filter((specie) => {
-      console.log(" of the example");
+      ////console.log(" of the example");
 
-      // console.log(specie);
+      // ////console.log(specie);
       if (specie.plants_photos.length > 0) {
         return specie;
       }
     });
-    console.log("example");
+    ////console.log("example");
 
-    console.log(example.map((sp) => sp.plants_photos).length > 0);
+    ////console.log(example.map((sp) => sp.plants_photos).length > 0);
 
-    console.log("filtered_examples");
+    ////console.log("filtered_examples");
 
-    console.log(filtered_examples);
-    console.log("photos");
-    console.log(filtered_examples.map((photo) => photo.plants_photos));
+    ////console.log(filtered_examples);
+    ////console.log("photos");
+    ////console.log(filtered_examples.map((photo) => photo.plants_photos));
     // \\use the selected index status to get the specific photls
     const photos = filtered_examples.map((photo) => photo.plants_photos)[
       selectedIndex
     ];
-    console.log("individual photos");
+    ////console.log("individual photos");
 
-    console.log(photos);
+    ////console.log(photos);
     //handle clicking of example species
 
     return (
@@ -382,14 +382,14 @@ export default function GlossaryAll() {
         )}
       </Container>
     );
-    // // console.log(data);
-    // console.log("data.fruit_types.map(type)=>type.fruit_types_glossary");
+    // // ////console.log(data);
+    // ////console.log("data.fruit_types.map(type)=>type.fruit_types_glossary");
     // const photos = data.fruit_types.map((type) =>
     //   type.fruit_types_glossary.map((photo) => photo.photo_id)
     // );
-    // console.log("photos");
+    // ////console.log("photos");
 
-    // console.log(photos);
+    // ////console.log(photos);
     // return (
     //   <Container sx={{ marginBottom: 2, marginTop: 7 }}>
     //     <Box sx={{ fontWeight: "bold" }}>Alphabetical</Box>
