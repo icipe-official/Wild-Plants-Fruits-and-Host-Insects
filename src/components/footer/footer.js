@@ -12,9 +12,15 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     bottom: 0,
     left: 0,
+    [theme.breakpoints.up("sm")]: {
+      position: "relative",
+      width: "auto",
+      marginTop: theme.spacing(4),
+    },
   },
   content: {
-    marginBottom: theme.spacing(10), // Adjust the value to accommodate the footer height
+    marginBottom: theme.spacing(8), // Adjust the value to accommodate the footer height
+    paddingBottom: theme.spacing(8), // Add padding bottom to create space for the footer
   },
 }));
 
@@ -66,8 +72,8 @@ export default function Footer() {
           <Box
             display="flex"
             justifyContent="center"
-            marginTop={2}
-            marginBottom={2}
+            // marginTop={2}
+            // marginBottom={2}
           >
             <button
               onClick={handleDownload}
