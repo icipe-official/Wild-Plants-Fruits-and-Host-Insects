@@ -251,32 +251,19 @@ export default function GlossaryAll() {
         {glossary
           .filter((t) => Boolean(t.glossary_description))
           .map((type) => (
-            //   <Grid container alignItems="center">
-            //     <Grid item xs={true}>
-            //       <DynamicValueCard
-            //         value={
-            //           type.type_of_fruit +
-            //           " (fruit type): " +
-            //           type.fruit_type_description
-            //         }
-            //       />
-            //     </Grid>
-            //     <Grid item>
-            //       <Button onClick={() => handleClick(type)}>Photos</Button>
-            //     </Grid>
-            //   </Grid>
             <Grid container alignItems="center">
               <Grid item xs={true}>
                 <div className={classes.dynamicValueCard}>
                   <DynamicValueCard
                     value={
-                      type.glossary_term +
+                      type.glossary_term.replace(/_/g, " ") +
                       " (" +
-                      type.glossary_type +
+                      type.glossary_type.replace(/_/g, " ") +
                       "): " +
                       type.glossary_description
                     }
                   />
+
                   {/* </Box> */}
                 </div>
               </Grid>
@@ -303,7 +290,7 @@ export default function GlossaryAll() {
               backgroundColor: "lightgrey",
               padding: "1rem",
               maxHeight: "60vh",
-              maxWidth: "30%",
+              maxWidth: "75vw", // Adjusted maxWidth to occupy around 3/4 of the screen
               overflowY: "auto",
               marginTop: 2,
             }}

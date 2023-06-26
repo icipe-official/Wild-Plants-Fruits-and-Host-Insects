@@ -1,117 +1,146 @@
-import { Box } from "@mui/material";
-import { useState, useEffect } from "react";
-// import Image from "next/legacy/image";
+import { Box, Button, Modal } from "@mui/material";
+import { useState } from "react";
 import Image from "next/legacy/image";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+import { ZoomOut } from "@mui/icons-material";
 
-//This component will be receiving data from getstaticprops
 export default function PhotosComponent({ photos_data, selectedIndex }) {
-  const [photoData, setphotoData] = useState([]);
-  const [loaded, setLoaded] = useState(false);
+  const photos = photos_data[selectedIndex].plants_photos.map(
+    (p) => p.photo_name
+  );
+  const imagePaths = photos.map((specie) => `/plantPhotos/${specie}`);
 
-  //control next and previous image
+  const [showImage, setShowImage] = useState({
+    showModal: false,
+    isFullScreen: false,
+  });
+
   const [currentImage, setCurrentImage] = useState(0);
 
-  // const [error, setError] = useState(null);
-
-  // console.log("photos");
-  // console.log(photos);
-  const [showImage, setShowImage] = useState({
-    showImageNow: true,
-    showImageId: null,
-  });
-  const [open, setOpen] = useState(0);
-
-  //manfe view of image on exapnde state
-  const [isExpanded, setIsExpanded] = useState(false);
-  const toggleExpandImage = () => {
-    setIsExpanded(!isExpanded);
+  const closeModal = () => {
+    setShowImage({
+      showModal: false,
+      isFullScreen: false,
+    });
   };
-  console.log(" photos data");
-  console.log(photos_data);
-  try {
-    if (photos_data) {
-      const photos = photos_data
-        .map((plant) => plant.plants_photos)
-        [selectedIndex].map((p) => p.photo_name);
-      console.log(photos);
-      //check if length of photos is more than one
-      if (photos.length === 1) {
-        return (
-          <Box sx={{ marginTop: "1rem", marginLeft: 0 }}>
-            {photos.map((specie) => (
-              <Box key={specie.id}>
-                <Image
-                  src={`/plantPhotos/${specie}`}
-                  alt="Picture of the plant"
-                  width={500}
-                  height={400}
-                  layout="responsive"
-                />
-              </Box>
-            ))}
-          </Box>
-        );
-      } else if (photos.length === 0) {
-        return (
-          <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
-            <Image
-              src="/plantPhotos/noImage.jpg"
-              alt="No Image"
-              width={500}
-              height={400}
-              layout="responsive"
-            />
-          </Box>
-        );
-      } else {
-        const previousImage = () => {
-          setCurrentImage(
-            currentImage === 0 ? photos.length - 1 : currentImage - 1
-          );
-        };
 
-        const nextImage = () => {
-          setCurrentImage(
-            currentImage === photos.length - 1 ? 0 : currentImage + 1
-          );
-        };
-        const OpenImage = (open) => {
-          if (open === photos.length - 1) {
-            setOpen(0);
-          } else {
-            setOpen(open + 1);
-          }
-        };
-        return (
-          <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
-            <Image
-              src={`/plantPhotos/${photos[currentImage]}`}
-              alt="No Image"
-              width={500}
-              height={400}
-              layout="responsive"
-            />
-            <span>
-              {currentImage + 1}/{photos.length}
-            </span>
-            <Box>
-              <button onClick={previousImage} className="ground">
-                &lt;
-              </button>
-              <button onClick={nextImage} className="ground">
-                &gt;
-              </button>
-            </Box>
-          </Box>
-        );
-      }
+  const toggleModal = () => {
+    if (showImage.isFullScreen) {
+      setShowImage((prevState) => ({
+        isFullScreen: false,
+      }));
+    } else {
+      setShowImage((prevState) => ({
+        showModal: !prevState.showModal,
+        isFullScreen: true,
+      }));
     }
-  } catch (error) {
-    console.error("Error:", error);
-    return (
-      <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
-        <span>No photos found</span>
-      </Box>
+  };
+
+  const previousImage = () => {
+    setCurrentImage((prevImage) =>
+      prevImage === 0 ? photos.length - 1 : prevImage - 1
     );
-  }
+  };
+
+  const nextImage = () => {
+    setCurrentImage((prevImage) =>
+      prevImage === photos.length - 1 ? 0 : prevImage + 1
+    );
+  };
+
+  const OpenImage = () => {
+    setCurrentImage((prevImage) =>
+      prevImage === photos.length - 1 ? 0 : prevImage + 1
+    );
+  };
+
+  return (
+    <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
+      <Box
+        sx={{
+          position: "relative",
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "flex-start",
+        }}
+      >
+        <Button
+          variant="contained"
+          onClick={toggleModal}
+          startIcon={<ZoomInIcon />}
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            zIndex: 1,
+            color: "black",
+            backgroundColor: "transparent",
+          }}
+        />
+        <Image
+          src={imagePaths[currentImage]}
+          alt="No Image"
+          width={500}
+          height={400}
+        />
+      </Box>
+      <span>
+        {currentImage + 1}/{photos.length}
+      </span>
+
+      <Modal
+        open={showImage.showModal}
+        onClose={toggleModal}
+        aria-labelledby="image-modal"
+        aria-describedby="image-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Image
+            src={imagePaths[currentImage]}
+            alt="No Image"
+            width={showImage.isFullScreen ? 900 : 600}
+            height={showImage.isFullScreen ? 600 : 400}
+          />
+          {showImage.isFullScreen && (
+            <Button
+              variant="contained"
+              onClick={closeModal}
+              startIcon={<ZoomInIcon />}
+              style={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                zIndex: 1,
+                color: "black",
+                backgroundColor: "transparent",
+              }}
+            />
+          )}
+        </Box>
+      </Modal>
+
+      {!showImage.isFullScreen && (
+        <Box>
+          <button onClick={previousImage} className="ground">
+            &lt;
+          </button>
+          <button onClick={nextImage} className="ground">
+            &gt;
+          </button>
+        </Box>
+      )}
+    </Box>
+  );
 }
