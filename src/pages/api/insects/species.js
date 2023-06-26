@@ -1,5 +1,5 @@
-import prisma from "../../../lib/prisma";
 import NextCors from "nextjs-cors";
+import prisma from "../../../lib/prisma";
 
 export default async function handle(req, res) {
   await NextCors(req, res, {
@@ -19,7 +19,13 @@ export default async function handle(req, res) {
               },
             },
           },
-          //exclude these families for now
+          insect_genera: {
+            genus_name: {
+              not: null,
+            },
+          },
+
+          // exclude these families for now
           // NOT: [
           //   { insect_families: { family_name: "Tortricidae" } },
           //   { insect_families: { family_name: "Tephritidae" } },
@@ -27,19 +33,19 @@ export default async function handle(req, res) {
           // ],
         },
         select: {
+          id: true,
           species_name: true,
           insect_genera: {
             select: {
+              id: true,
               genus_name: true,
             },
           },
-
           insect_families: {
             select: {
               family_name: true,
             },
           },
-
           insect_orders: {
             select: {
               order_name: true,

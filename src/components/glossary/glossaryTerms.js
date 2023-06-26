@@ -6,6 +6,7 @@ import {
   Grid,
   IconButton,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import Glossary from "components/glossary/glossary";
 import { Box } from "@mui/system";
@@ -159,6 +160,7 @@ export default function GlossaryAll() {
       }
     }
   }, [glossary, glossaryTerm]);
+  const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
 
   function handleClose() {
     setSelectedType(null);
@@ -173,7 +175,7 @@ export default function GlossaryAll() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          height: "100%",
+          height: isSmallScreen ? "100%" : "80%",
           paddingBottom: "65%", // Adjust this value to create space for the footer
         }}
       >

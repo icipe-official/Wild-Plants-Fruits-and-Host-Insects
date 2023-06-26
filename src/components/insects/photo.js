@@ -1,15 +1,12 @@
 import { Box, Button, Modal } from "@mui/material";
 import { useState } from "react";
 import Image from "next/legacy/image";
-import Router from "next/router";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
-import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 
 export default function InsectPhotos({ photos_data }) {
-  const photos = photos_data.map((insect) =>
-    insect.insect_photos.map((y) => y.photo_id)
-  )[0]; // [0] extract photonames from [[]] object
+  const photos = photos_data[0]?.insect_photos.map((y) => y.photo_id) || [];
+  const hasPhotos = photos.length > 0;
+  const showNextImage = hasPhotos && photos.length > 1;
 
   const [showImage, setShowImage] = useState({
     showModal: false,
@@ -26,19 +23,14 @@ export default function InsectPhotos({ photos_data }) {
   };
 
   const toggleModal = () => {
-    if (showImage.isFullScreen) {
-      setShowImage((prevState) => ({
-        isFullScreen: false,
-      }));
-    } else {
-      setShowImage((prevState) => ({
-        showModal: !prevState.showModal,
-        isFullScreen: true,
-      }));
-    }
+    setShowImage((prevState) => ({
+      ...prevState,
+      showModal: !prevState.showModal,
+      isFullScreen: !prevState.isFullScreen,
+    }));
   };
 
-  const OpenImage = (open) => {
+  const openImage = (open) => {
     if (open === photos.length - 1) {
       setOpen(0);
     } else {
@@ -48,35 +40,51 @@ export default function InsectPhotos({ photos_data }) {
 
   return (
     <Box sx={{ marginTop: 8, marginLeft: 2, paddingBottom: 2 }}>
-      <Box
-        sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "flex-start",
-        }}
-      >
-        <Button
-          variant="contained"
-          onClick={toggleModal}
-          startIcon={<ZoomInIcon />}
+      {hasPhotos ? (
+        <Box
           sx={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            zIndex: 1,
+            position: "relative",
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "flex-start",
           }}
-        />
-        <Image
-          src={`/insectPhotos/${photos[open]}.jpg`}
-          alt="No Image"
-          width={500}
-          height={400}
-        />
-      </Box>
-      <span>
-        {open + 1}/{photos.length}
-      </span>
+        >
+          <Button
+            variant="contained"
+            onClick={toggleModal}
+            startIcon={<ZoomInIcon />}
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              zIndex: 1,
+              color: "black",
+              backgroundColor: "transparent",
+            }}
+          />
+          <Image
+            src={`/insectPhotos/${photos[open]}.jpg`}
+            alt="No Image"
+            width={500}
+            height={400}
+          />
+        </Box>
+      ) : (
+        <Box>
+          <Image
+            src="/plantPhotos/noImage.jpg"
+            alt="No Image"
+            width={500}
+            height={400}
+          />
+        </Box>
+      )}
+
+      {showNextImage && (
+        <span>
+          {open + 1}/{photos.length}
+        </span>
+      )}
 
       <Modal
         open={showImage.showModal}
@@ -101,25 +109,28 @@ export default function InsectPhotos({ photos_data }) {
             width={showImage.isFullScreen ? 800 : 600}
             height={showImage.isFullScreen ? 600 : 400}
           />
+
           {showImage.isFullScreen && (
             <Button
               variant="contained"
               onClick={closeModal}
               startIcon={<ZoomInIcon />}
-              sx={{
+              style={{
                 position: "absolute",
                 top: 0,
                 right: 0,
                 zIndex: 1,
+                color: "black",
+                backgroundColor: "transparent",
               }}
             />
           )}
         </Box>
       </Modal>
 
-      {!showImage.isFullScreen && (
+      {showNextImage && (
         <Box>
-          <Button onClick={() => OpenImage(open)} className="ground">
+          <Button onClick={() => openImage(open)} className="ground">
             Next Image
           </Button>
         </Box>

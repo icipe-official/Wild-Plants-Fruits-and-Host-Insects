@@ -4,12 +4,13 @@ import Image from "next/legacy/image";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import { ZoomOut } from "@mui/icons-material";
-
 export default function PhotosComponent({ photos_data, selectedIndex }) {
   const photos = photos_data[selectedIndex].plants_photos.map(
     (p) => p.photo_name
   );
   const imagePaths = photos.map((specie) => `/plantPhotos/${specie}`);
+  const hasImages = photos.length > 0;
+  const showIndicator = hasImages && photos.length > 1;
 
   const [showImage, setShowImage] = useState({
     showModal: false,
@@ -50,11 +51,21 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
     );
   };
 
-  const OpenImage = () => {
-    setCurrentImage((prevImage) =>
-      prevImage === photos.length - 1 ? 0 : prevImage + 1
-    );
-  };
+  const imageComponent = hasImages ? (
+    <Image
+      src={imagePaths[currentImage]}
+      alt="No Image"
+      width={500}
+      height={400}
+    />
+  ) : (
+    <Image
+      src="/plantPhotos/noImage.jpg"
+      alt="No Image"
+      width={500}
+      height={400}
+    />
+  );
 
   return (
     <Box sx={{ marginTop: "1rem", paddingBottom: 2 }}>
@@ -66,29 +77,28 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
           alignItems: "flex-start",
         }}
       >
-        <Button
-          variant="contained"
-          onClick={toggleModal}
-          startIcon={<ZoomInIcon />}
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            zIndex: 1,
-            color: "black",
-            backgroundColor: "transparent",
-          }}
-        />
-        <Image
-          src={imagePaths[currentImage]}
-          alt="No Image"
-          width={500}
-          height={400}
-        />
+        {imageComponent}
+        {hasImages && (
+          <Button
+            variant="contained"
+            onClick={toggleModal}
+            startIcon={<ZoomInIcon />}
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              zIndex: 1,
+              color: "black",
+              backgroundColor: "transparent",
+            }}
+          />
+        )}
       </Box>
-      <span>
-        {currentImage + 1}/{photos.length}
-      </span>
+      {showIndicator && (
+        <span>
+          {currentImage + 1}/{photos.length}
+        </span>
+      )}
 
       <Modal
         open={showImage.showModal}
@@ -107,12 +117,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
             p: 4,
           }}
         >
-          <Image
-            src={imagePaths[currentImage]}
-            alt="No Image"
-            width={showImage.isFullScreen ? 900 : 600}
-            height={showImage.isFullScreen ? 600 : 400}
-          />
+          {imageComponent}
           {showImage.isFullScreen && (
             <Button
               variant="contained"
@@ -131,7 +136,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
         </Box>
       </Modal>
 
-      {!showImage.isFullScreen && (
+      {showIndicator && !showImage.isFullScreen && (
         <Box>
           <button onClick={previousImage} className="ground">
             &lt;
