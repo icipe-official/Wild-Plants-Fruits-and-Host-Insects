@@ -117,11 +117,10 @@ export default function PlantFirstPage({ props }) {
             </Grid>
             <Grid item xs={12} sm={6} md={5} lg={4}>
               <Box sx={{ marginLeft: 0 }}>
+                <PhotosComponent photos_data={data} selectedIndex={0} />
                 <Box sx={{ fontWeight: "bold", marginTop: 2 }}>
                   Regions collected
                 </Box>
-                <PhotosComponent photos_data={data} selectedIndex={0} />
-
                 <OpenLayersMap coordinates={coordinates} />
               </Box>
             </Grid>
