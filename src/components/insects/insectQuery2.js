@@ -91,7 +91,6 @@ export default function InsectQuery2() {
         </Grid>
         <Grid item xs={12} md={6} lg={6}>
           <InsectPhotos photos_data={insects_region} />
-          {/* <Grid item xs={12} md={6} lg={6}> */}
         </Grid>
 
         {/* </Grid> */}
