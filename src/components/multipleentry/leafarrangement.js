@@ -42,6 +42,12 @@ export default function Leafarrangement({
   handleOnChangeLeafArrangement,
   checkedStateLeafArrangement,
 }) {
+  function handleDoubleClick(type) {
+    Router.push({
+      pathname: "/glossary/allterms",
+      query: { glossary_term: type.toLowerCase() },
+    });
+  }
   const classes = useStyles();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
@@ -61,15 +67,16 @@ export default function Leafarrangement({
         </Typography>
       </Box>
       <Box className={classes.component1}>
-        {leaf_arrangement_array.map((spine, index) => (
+        {leaf_arrangement_array.map((leaf, index) => (
           <div
-            key={spine}
+            key={leaf}
             onClick={() => handleOnChangeLeafArrangement(index)}
+            onDoubleClick={() => handleDoubleClick(leaf)}
             className={`${classes.item} ${
               checkedStateLeafArrangement[index] ? classes.itemChecked : ""
             }`}
           >
-            {spine}
+            {leaf}
           </div>
         ))}
       </Box>

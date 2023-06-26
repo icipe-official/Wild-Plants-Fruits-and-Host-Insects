@@ -42,6 +42,12 @@ export default function Leaftype({
   handleOnChangeLeafType,
   checkedStateLeafType,
 }) {
+  function handleDoubleClick(type) {
+    Router.push({
+      pathname: "/glossary/allterms",
+      query: { glossary_term: type.toLowerCase() },
+    });
+  }
   const classes = useStyles();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
@@ -68,6 +74,7 @@ export default function Leaftype({
           <div
             key={type}
             onClick={() => handleOnChangeLeafType(index)}
+            onDoubleClick={() => handleDoubleClick(type)}
             className={`${classes.item} ${
               checkedStateLeafType[index] ? classes.itemChecked : ""
             }`}
