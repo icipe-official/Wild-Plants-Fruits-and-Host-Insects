@@ -33,7 +33,11 @@ export default function LeafDetailValues({ leaves_data }) {
           <DynamicValueCard
             key={`${leaf.id}type`}
             keyName="type"
-            value={leaf.leaf_type}
+            value={
+              Array.isArray(leaf.leaf_type)
+                ? leaf.leaf_type.join(" or ")
+                : leaf.leaf_type
+            }
           />
         </Box>
       </Box>
@@ -41,10 +45,17 @@ export default function LeafDetailValues({ leaves_data }) {
         <Box sx={{ width: "55%" }}>Margin:</Box>
         <Box sx={{ width: "100%" }}>
           <DynamicValueCard
-            yName="Leaf margin"
-            value={leaf.plants_leaf_margins.map(
-              (margin) => `${margin.leaf_margins.type_of_leaf_margin} `
-            )}
+            keyName="Leaf margin"
+            value={leaf.plants_leaf_margins.map((margin, index) => {
+              const value = `${margin.leaf_margins.type_of_leaf_margin}`;
+              const isLastValue = index === leaf.plants_leaf_margins.length - 1;
+              const separator = isLastValue
+                ? ""
+                : index === leaf.plants_leaf_margins.length - 2
+                ? " or "
+                : ", ";
+              return value + separator;
+            })}
           />
         </Box>
       </Box>
@@ -54,9 +65,17 @@ export default function LeafDetailValues({ leaves_data }) {
           <DynamicValueCard
             key={`${leaf.id}arrange`}
             keyName="Leaf arrangement"
-            value={leaf.plants_leaf_arrangements.map(
-              (arrangement) => `${arrangement.leaf_arrangements.arrangement} `
-            )}
+            value={leaf.plants_leaf_arrangements.map((arrangement, index) => {
+              const value = `${arrangement.leaf_arrangements.arrangement}`;
+              const isLastValue =
+                index === leaf.plants_leaf_arrangements.length - 1;
+              const separator = isLastValue
+                ? ""
+                : index === leaf.plants_leaf_arrangements.length - 2
+                ? " or "
+                : ", ";
+              return value + separator;
+            })}
           />
         </Box>
       </Box>

@@ -11,78 +11,67 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import InsectsReared from "./insectsreared";
+
 export default function InsectsRearedfromPlants() {
   const [coleopteraData, setcoleopteraData] = useState([]);
   const [loaded, setLoaded] = useState(false);
   // const [error, setError] = useState(null);
+
   //   const classes = useStyles();
   const router = useRouter();
+
   // Set the default species to "abutilum hirtum"
-  const species = router.query.species;
-  // const species = router.query.speciesName;
-  console.log("species");
-  console.log(species);
-  // useEffect(() => {
-  //   fetch(`/api/plants/insectsReared/coleoptera/${species}`)
-  //     .then((res) => res.json())
-  //     .then(
-  //       (result) => {
-  //         setLoaded(true);
-  //         setcoleopteraData(result);
-  //       },
-  //       (error) => {
-  //         setLoaded(true);
-  //         setError(error);
-  //       }
-  //     );
-  // }, []);
+  const { species } = router.query;
+
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
   // const base_url = "http://localhost:3000";
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
-
+  //make species id to be one for the plant index page
   const { data, error } = useSWR(
-    `${base_url}/api/plants/Allinsectsreared/${species}`,
+    `${base_url}/api/plants/Allinsectsreared/${
+      typeof species !== "undefined" ? species : 1
+    }`,
     fetcher
   );
 
   // fetch(`/api/plantsPage/${species}`)
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
-  console.log("coleoptera_data client side");
-  //coleoptera data
+  ////console.log('coleoptera_data client side');
+  // coleoptera data
   const coleopteraOrders = data.filter(
     (insect) => insect.insect_orders.order_name == "Coleoptera"
   );
-  console.log("coleopteraOrders");
+  ////console.log('coleopteraOrders');
 
-  console.log(coleopteraOrders);
-  //lepidoptera
+  ////console.log(coleopteraOrders);
+  // lepidoptera
   const lepidopteraOrders = data.filter(
     (insect) => insect.insect_orders.order_name == "Lepidoptera"
   );
-  console.log("lepidopteraOrders");
+  ////console.log('lepidopteraOrders');
 
-  console.log(lepidopteraOrders);
-  //Diptera tehritideae
+  ////console.log(lepidopteraOrders);
+  // Diptera tehritideae
   const diptertephritidaeOrders = data.filter(
     (insect) =>
       insect.insect_orders.order_name === "Diptera" &&
       insect.insect_families.family_name === "Tephritidae"
   );
-  console.log("lepidopteraOrders");
+  ////console.log('lepidopteraOrders');
 
-  console.log(lepidopteraOrders);
-  //Other Diptera
+  ////console.log(lepidopteraOrders);
+  // Other Diptera
   const otherdipteraOrders = data.filter(
     (insect) =>
       insect.insect_orders.order_name === "Diptera" &&
       insect.insect_families.family_name !== "Tephritidae"
   );
-  console.log("lepidopteraOrders");
+  ////console.log('lepidopteraOrders');
 
-  console.log(otherdipteraOrders);
-  //Hymenoptera (Braconidae: Opina)
+  ////console.log(otherdipteraOrders);
+  // Hymenoptera (Braconidae: Opina)
   const hymenopteraBraconidae = data.filter(
     (insect) =>
       insect.insect_orders.order_name === "Hymenoptera" &&
@@ -90,7 +79,7 @@ export default function InsectsRearedfromPlants() {
   );
 
   // other hymenoptera
-  //Hymenoptera (Braconidae: Opina)
+  // Hymenoptera (Braconidae: Opina)
   const otherhymenopteraBraconidae = data.filter(
     (insect) =>
       insect.insect_orders.order_name === "Hymenoptera" &&

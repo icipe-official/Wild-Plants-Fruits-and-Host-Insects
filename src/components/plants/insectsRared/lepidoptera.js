@@ -7,9 +7,9 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { makeStyles } from "@mui/styles";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+
 const useStyles = makeStyles({
   table: {
     width: "100%",
@@ -22,30 +22,9 @@ const useStyles = makeStyles({
 
 export default function Lepidoptera({ lepidoptera_data }) {
   const classes = useStyles();
-  const [lepidopteraData, setLepidopteraData] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  // const [error, setError] = useState(null);
-  //   const classes = useStyles();
   const router = useRouter();
-  // const species = router.query.speciesName;
-  // Set the default species to "abutilum hirtum"
   const species = router.query.speciesName;
-  console.log("species");
-  console.log(species);
-  // useEffect(() => {
-  //   fetch(`/api/plants/insectsReared/lepidoptera/${species}`)
-  //     .then((res) => res.json())
-  //     .then(
-  //       (result) => {
-  //         setLoaded(true);
-  //         setLepidopteraData(result);
-  //       },
-  //       (error) => {
-  //         setLoaded(true);
-  //         setError(error);
-  //       }
-  //     );
-  // }, []);
+
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
   const { data, error } = useSWR(
@@ -53,11 +32,8 @@ export default function Lepidoptera({ lepidoptera_data }) {
     fetcher
   );
 
-  // fetch(`/api/plantsPage/${species}`)
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
-  console.log("lepidopteraData client side");
-  console.log(data);
 
   return (
     <Box sx={{ marginTop: 2, width: "100%" }}>
@@ -71,7 +47,7 @@ export default function Lepidoptera({ lepidoptera_data }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data?.map((lep) => (
+          {data.map((lep) => (
             <TableRow key={lep.id}>
               <TableCell key={lep.id} className={classes.cell}>
                 {lep.insect_families.family_name}

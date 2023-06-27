@@ -7,9 +7,9 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { makeStyles } from "@mui/styles";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+
 const useStyles = makeStyles({
   table: {
     width: "100%",
@@ -22,30 +22,9 @@ const useStyles = makeStyles({
 
 export default function OtherDiptera() {
   const classes = useStyles();
-  // const [otherDipteraData, setOtherDiptera] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  // const [error, setError] = useState(null);
-  //   const classes = useStyles();
   const router = useRouter();
-  // const species = router.query.speciesName;
-  // Set the default species to "abutilum hirtum"
   const species = router.query.speciesName;
-  console.log("species");
-  console.log(species);
-  // useEffect(() => {
-  //   fetch(`/api/plants/insectsReared/OtherDiptera/${species}`)
-  //     .then((res) => res.json())
-  //     .then(
-  //       (result) => {
-  //         setLoaded(true);
-  //         setOtherDiptera(result);
-  //       },
-  //       (error) => {
-  //         setLoaded(true);
-  //         setError(error);
-  //       }
-  //     );
-  // }, []);
+
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
   const { data, error } = useSWR(
@@ -53,11 +32,8 @@ export default function OtherDiptera() {
     fetcher
   );
 
-  // fetch(`/api/plantsPage/${species}`)
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
-  console.log("otherDiptera client side");
-  console.log(data);
 
   return (
     <Box sx={{ marginTop: 2, width: "100%" }}>
@@ -71,7 +47,7 @@ export default function OtherDiptera() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data?.map((otherdip) => (
+          {data.map((otherdip) => (
             <TableRow key={otherdip.id}>
               <TableCell key={otherdip.id} className={classes.cell}>
                 {otherdip.insect_families.family_name}

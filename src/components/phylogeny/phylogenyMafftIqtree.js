@@ -4,6 +4,7 @@ import { useRef } from "react";
 // import useMediaQuery from "@mui/material";
 import {
   Box,
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -17,15 +18,8 @@ import NewickDownload from "./downloadnewick";
 import { TreeView, TreeItem } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-// import DistancematrixToNewick from "./neigbourjoining";
-// import CalculateSimilarityMatrix from "./generateDistanceMatrix";
-// import { NeighborJoining } from "./generateDistanceMatrix";
-
-// import { NeighborJoining } from "./modifiedKTurple";
-// import CalculateSimilarityMatrixModified from "./modifiedKTurple";
 import ConverttoFasta from "./inputsequence";
 import { makeStyles } from "@mui/styles";
-
 import { kMaxLength } from "buffer";
 // export default function Newick() {
 import FastaToDict from "./inputsequence";
@@ -42,7 +36,7 @@ export default function PhylogenyMafft() {
   const classes = useStyles();
   const [selectedOrganism, setSelectedOrganism] = useState("plants");
   // const base_url = "http://localhost:3000";
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
   // const fetcher = (url) => fetch(url).then((r) => r.json());
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -55,41 +49,44 @@ export default function PhylogenyMafft() {
   // When the selected organism changes, clear the previous data
   // Event handler for updating the selected organism
   const handleOrganismChange = (event) => {
+    setSelectedOrganism(event.target.value);
     // const newOrganism = event.target.value;
     // Clear the previous data and refetch based on selecetd organism and change api to that of selected organism
     //use the same name for api end points to
     mutate(`${base_url}/api/plants/species`, null, false);
     mutate(`${base_url}/api/insects/species`, null, false);
-
     // Update the selected organism
-    setSelectedOrganism(event.target.value);
-    if (event.target.value == "plants") {
-      setSelectedFamily("Rubiaceae");
-      setNewickData(
-        "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
-      );
-      handleChange(event);
-    } else {
-      // setNewickData("");
 
-      setSelectedOrder("Crambidae");
-    }
-    // setfilteredFamily("")
     handleChange(event);
-    // setNewickData("");
   };
   // Create the URL based on the selected organism
   const url = `${base_url}/api/${selectedOrganism}/species`;
 
   const { data, error, isLoading } = useSWR(url, fetcher);
   console.log(data);
-  const [newickData, setNewickData] = useState(
-    selectedOrganism == "plants"
-      ? "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
-      : "(Prochoristis_calamochroa_114_27_Kenya:0.1139837560,(Agrotera_citrina_169_38_Madagascar:0.0732521976,((Prophantis_smaragdina_174_43_Gabon:0.0184805568,(Prophantis_smaragdina_174_43_Nigeria:0.0015805799,Prophantis_smaragdina_174_43_Kenya:0.0032386464):0.0074933936):0.0320380735,Thliptoceras_xanthomeralis_176_45_Kenya:0.0413457803):0.0160464841):0.0127449598,(Dolicharthria_lanceolalis_171_40_Gabon:0.0773303343,(Palpita_unionalis_172_41_Australia:0.0016392439,(Palpita_unionalis_172_41_Madagascar:0.0148288273,(((Palpita_unionalis_172_41_SouthAfrica:0.0000000000,Palpita_unionalis_172_41_Nigeria:0.0000000000):0.0000010000,Palpita_unionalis_172_41_Tanzania:0.0000010000):0.0000010000,Palpita_unionalis_172_41_Kenya:0.0000010000):0.0069885280):0.0045338320):0.0581120885):0.0153516732);"
-  );
+  // const [newickData, setNewickData] = useState(
+  //   selectedOrganism == "plants"
+  //     ? "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
+  //     : "(Prochoristis_calamochroa_114_27_Kenya:0.1139837560,(Agrotera_citrina_169_38_Madagascar:0.0732521976,((Prophantis_smaragdina_174_43_Gabon:0.0184805568,(Prophantis_smaragdina_174_43_Nigeria:0.0015805799,Prophantis_smaragdina_174_43_Kenya:0.0032386464):0.0074933936):0.0320380735,Thliptoceras_xanthomeralis_176_45_Kenya:0.0413457803):0.0160464841):0.0127449598,(Dolicharthria_lanceolalis_171_40_Gabon:0.0773303343,(Palpita_unionalis_172_41_Australia:0.0016392439,(Palpita_unionalis_172_41_Madagascar:0.0148288273,(((Palpita_unionalis_172_41_SouthAfrica:0.0000000000,Palpita_unionalis_172_41_Nigeria:0.0000000000):0.0000010000,Palpita_unionalis_172_41_Tanzania:0.0000010000):0.0000010000,Palpita_unionalis_172_41_Kenya:0.0000010000):0.0069885280):0.0045338320):0.0581120885):0.0153516732);"
+  // );
+  // const router = useRouter();
+  const [newickData, setNewickData] = useState("");
+
   // "((A:0.1,B:0.2)80:0.3,(C:0.4,D:0.5)95:0.6)90;"
-  const [selectedFamily, setSelectedFamily] = useState("Vitaceae");
+  //check if router has plantFamily
+  const router = useRouter();
+
+  // const [selectedFamily, setSelectedFamily] = useState(
+  //   router.query.plantFamily ? router.query.plantFamily : "Vitaceae"
+  // );
+  const [selectedFamily, setSelectedFamily] = useState(
+    selectedOrganism === "insects" && !router.query.insectFamily
+      ? "Braconidae"
+      : selectedOrganism === "plants" && router.query.plantFamily
+      ? router.query.plantFamily
+      : "Vitaceae"
+  );
+
   const [kmer, setkmer] = useState(9);
   const [filteredFamily, setfilteredFamily] = useState("Acanthaceae");
   const [selecteorder, setSelectedOrder] = useState("Braconidae");
@@ -112,7 +109,6 @@ export default function PhylogenyMafft() {
   };
   //change view if small screen variable
   const iframeRef = useRef(null);
-  const router = useRouter();
   useEffect(() => {
     if (newickData && iframeRef.current) {
       // Wait for the iframe to load
@@ -122,18 +118,21 @@ export default function PhylogenyMafft() {
       });
     }
   }, [newickData]);
-
-  //handle new set kmer
+  //handle new data
   useEffect(() => {
     if (data) {
       // console.log("selectedFamily changed to:", selectedFamily);
       handleChange();
     }
-  }, [selectedFamily, kmer]);
+  }, [selectedFamily]);
 
-  async function handleChange(event) {
+  function handleChange(event) {
     if (event) {
       if (selectedOrganism === "plants") {
+        // setNewickData(
+        //   "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
+        // );
+        setNewickData("");
         console.log("kmer at handlechange");
         const selectedValue =
           (event.target && event.target.value) || "Select family";
@@ -141,10 +140,11 @@ export default function PhylogenyMafft() {
         const filteredData = data.filter(
           (dat) => dat.plant_genera.plant_families.family_name === selectedValue
         );
-        setSelectedFamily(selectedValue);
+        // setSelectedFamily(selectedValue);
         setfilteredFamily(filteredData);
+        let counter = 1;
+
         const sequences = filteredData.reduce((result, obj) => {
-          let counter = 1;
           if (obj.plants_matk.length > 0) {
             obj.plants_matk.forEach((plant) => {
               if (plant.nucleotide !== null) {
@@ -156,8 +156,11 @@ export default function PhylogenyMafft() {
                   obj.id +
                   "_" +
                   plant.country.replace(/ /g, "-") +
-                  "_";
-                plant.ssgenebank_accession;
+                  counter;
+
+                ("_");
+                plant.genebank_accession;
+                counter++;
 
                 const cleanedSequence = plant.nucleotide
                   .replace(/-/g, "")
@@ -211,15 +214,16 @@ export default function PhylogenyMafft() {
           });
       } else if (selectedOrganism === "insects") {
         setNewickData("");
-        console.log("insect kmer at handlechange");
+        // console.log("insect kmer at handlechange");
         const selectedValue =
           (event.target && event.target.value) || "Select family";
         setSelectedOrder(selectedValue);
+        // setSelectedFamily(se);
         const filteredData = data.filter(
           (dat) => dat.insect_families.family_name === selectedValue
         );
         setSelectedOrder(selectedValue);
-        setFilteredOrder(filteredData);
+        // setFilteredOrder(filteredData);
         console.log("insect filteredData");
         const sequences = filteredData.reduce((result, obj) => {
           let counter = 1;
@@ -235,11 +239,14 @@ export default function PhylogenyMafft() {
                   "_" +
                   obj.insect_genera.id +
                   "_" +
-                  insect.country?.replace(/ /g, "");
-
+                  insect.country?.replace(/ /g, "") +
+                  counter +
+                  "_" +
+                  (insect.genebank_accession || "");
                 result[name.replace(/\s/g, "")] = insect.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
+                counter++;
               }
             });
           }
@@ -294,12 +301,15 @@ export default function PhylogenyMafft() {
                   obj.id +
                   "_" +
                   plant.country.replace(/ /g, "-") +
-                  "_";
-                plant.ssgenebank_accession;
+                  counter +
+                  "_" +
+                  plant.genebank_accession;
+                // counter++;
 
                 const cleanedSequence = plant.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
+
                 // const name =
                 //   obj.plant_genera.genus_name +
                 //   "_" +
@@ -312,6 +322,7 @@ export default function PhylogenyMafft() {
                 result[name.replace(/\s/g, "")] = cleanedSequence
                   .replace(/-/g, "")
                   .replace(/N/g, "");
+                counter++;
               }
             });
           }
@@ -349,7 +360,6 @@ export default function PhylogenyMafft() {
           });
       } else if (selectedOrganism === "insects") {
         setNewickData("");
-
         console.log("insect selecteorder");
         const filteredData = data.filter(
           (dat) => dat.insect_families.family_name === selecteorder
@@ -369,10 +379,14 @@ export default function PhylogenyMafft() {
                   "_" +
                   obj.insect_genera.id +
                   "_" +
-                  insect.country?.replace(/ /g, "");
+                  insect.country?.replace(/ /g, "") +
+                  counter +
+                  "_" +
+                  (insect.genebank_accession || "");
                 result[name.replace(/\s/g, "")] = insect.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
+                counter++;
               }
             });
           }
@@ -716,6 +730,11 @@ export default function PhylogenyMafft() {
         {/* Footer goes here */}
       </Container>
     );
+  //navigation to phylogeny
+  const handleClick = () => {
+    router.push("/phylogeny/plantsInsects");
+  };
+
   //conditional rendering with data
   if (data) {
     // setIsLoadingData(false); // Set loading state to false
@@ -770,7 +789,7 @@ export default function PhylogenyMafft() {
       }
     }
     return (
-      <Container sx={{ marginTop: 10 }}>
+      <Container sx={{ marginTop: 12 }}>
         {/* <ConverttoFasta></ConverttoFasta> */}
         <Box sx={{ display: isSmallScreen ? "row" : "flex" }}>
           <Box sx={{ display: "flex" }}>
@@ -914,6 +933,12 @@ export default function PhylogenyMafft() {
                   </TreeItem>
                 </TreeItem>
               </TreeView>
+            </Box>
+            <Box sx={{ marginLeft: 2 }}>
+              {" "}
+              <Button onClick={handleClick}>
+                Link to Plants-Insects Phylogeny
+              </Button>
             </Box>
           </Box>
         </Box>{" "}

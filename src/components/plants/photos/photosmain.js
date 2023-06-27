@@ -8,7 +8,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
   const photos = photos_data[selectedIndex].plants_photos.map(
     (p) => p.photo_name
   );
-  const imagePaths = photos.map((specie) => `/plantPhotos/${specie}`);
+  const imagePaths = photos.map((specie) => `/photos/plants/${specie}`);
   const hasImages = photos.length > 0;
   const showIndicator = hasImages && photos.length > 1;
 
@@ -55,15 +55,15 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
     <Image
       src={imagePaths[currentImage]}
       alt="No Image"
-      width={500}
-      height={400}
+      width={showImage.isFullScreen ? 800 : 500}
+      height={showImage.isFullScreen ? 600 : 400}
     />
   ) : (
     <Image
-      src="/plantPhotos/noImage.jpg"
+      src="/photos/plants/noImage.jpg"
       alt="No Image"
-      width={500}
-      height={400}
+      width={showImage.isFullScreen ? 800 : 500}
+      height={showImage.isFullScreen ? 600 : 400}
     />
   );
 
