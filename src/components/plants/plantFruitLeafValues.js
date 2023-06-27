@@ -13,7 +13,6 @@ import PlantDescription from "./plantDescriptionCard";
 import PhotosComponent from "./photos/photosmain";
 import OpenLayersMap from "./distribution/map";
 import InsectsRearedfromPlants from "./insectsRared/insects";
-// import PlantFamilyGenusSpecies from "./FamilyGenusSpecies/PlantGenusFamilySearchbar";
 import PlantSpecieFamilyGenus from "./plantSpeciesFamily";
 import PlantDetailValues from "./Plant/plantDetailValuesMUI";
 import LeafDetailValues from "./Leaf/leafDetailValues";
@@ -41,8 +40,6 @@ export default function PlantDetailsFeaturesValues() {
   const router = useRouter();
   const species = router.query.species || null;
   const classes = useStyles();
-
-  // const contextValue = useContext(PlantFamilyGenusSpecies);
 
   const { data, error } = useSWR(
     `${base_url}/api/plants/plantsPage/${species}`,
