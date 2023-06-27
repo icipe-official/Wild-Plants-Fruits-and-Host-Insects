@@ -68,7 +68,7 @@ export default function Photos({ photo_data }) {
               {specie.map((photo) => (
                 <Box key={photo.id}>
                   <Image
-                    src={`${base_path}/photos/plantPhotos/${photo.photo_name}`}
+                    src={`${base_path}/photos/plants/${photo.photo_name}`}
                     alt="Picture of the plant"
                     width={500}
                     height={400}
@@ -84,7 +84,7 @@ export default function Photos({ photo_data }) {
       return (
         <Box sx={{ marginTop: "1rem", marginLeft: 2, paddingBottom: 2 }}>
           <Image
-            src={`${base_path}/plantPhotos/noImage.jpg`}
+            src={`${base_path}/noImage.jpg`}
             alt="No Image"
             width={500}
             height={400}

@@ -97,7 +97,7 @@ export default function InsectPhotos({ photos_data }) {
           }}
         >
           <Image
-            src={`${base_path}/insectPhotos/${photos[open]}.jpg`}
+            src={`${base_path}/photos/insects/${photos[open]}.jpg`}
             alt="No Image"
             width={showImage.isFullScreen ? 800 : 600}
             height={showImage.isFullScreen ? 600 : 400}

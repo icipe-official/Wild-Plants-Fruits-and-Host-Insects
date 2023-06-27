@@ -9,7 +9,8 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
   const photos = photos_data[selectedIndex].plants_photos.map(
     (p) => p.photo_name
   );
-  const imagePaths = photos.map((specie) => `${base_path}/plantPhotos/${specie}`);
+  const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : ""
+  const imagePaths = photos.map((specie) => `${base_path}/photos/plants/${specie}`);
 
   const [showImage, setShowImage] = useState({
     showModal: false,
