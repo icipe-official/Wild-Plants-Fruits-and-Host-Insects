@@ -1,13 +1,14 @@
-//This functional component implements cascading drop downs for plant Family-Genus-Species
-//Import required libraries
+// This functional component implements cascading drop downs for plant Family-Genus-Species
+// Import required libraries
 // define state variables
-//By default, family drop down shows the families available for user to select
+// By default, family drop down shows the families available for user to select
 // Selecting family calls the api for genus for the selected family
 // and clears any available data of genus and species from previous search
 // Selecting genus calls an api for fetching species data which are filterd based on the selected genus
 // use Material UI to custom the styles of the page
 
-//1. Import required libraries
+// 1. Import required libraries
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useEffect } from "react";
 import Link from "next/link";
@@ -15,7 +16,9 @@ import {
   Box,
   Container,
   FormControl,
+  IconButton,
   InputLabel,
+  TextField,
   useMediaQuery,
 } from "@mui/material";
 import Select from "@mui/material/Select";
@@ -23,18 +26,47 @@ import MenuItem from "@mui/material/MenuItem";
 // import { Router } from "next/router";
 import Router from "next/router";
 import useSWR from "swr";
+import SearchIcon from "@mui/icons-material/Search";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function PlantFamilyGenusSpecies({ defaultValues }) {
-  //manage sate of id's of selected plant family genus and species
+  const router = useRouter();
+  // manage sate of id's of selected plant family genus and species
   const [familyId, setFamilyId] = useState("");
   const [genusId, setGenusId] = useState("");
   const [speciesId, setSpeciesId] = useState("");
   // const {defaultValue} = props;
 
-  console.log("Default Values: ", defaultValues);
+  ////console.log('Default Values: ', defaultValues);
+  //handle search dunctionality
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchedSpecies, setSearchedSpecies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
-  //manage sate  of the data for family, genus and species
+  const handleSearch = () => {
+    setFamilyId("");
+    setGenusId("");
+    setSpeciesData([]);
+    setFamilyData([]);
+    setSpeciesId("");
+
+    // Filter the data based on the search term
+    const filteredSpecies = data.filter((species) => {
+      const speciesName = `${species.plant_genera.genus_name} ${species.species_name}`;
+      return speciesName.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
+    if (filteredSpecies.length > 0) {
+      const speciesId = filteredSpecies[0].id;
+      // Redirect to the species detail page
+      router.push(`/plants/${speciesId}`);
+    }
+  };
+
+  // manage sate  of the data for family, genus and species
   const [familyData, setFamilyData] = useState([]);
   const [genusData, setGenusData] = useState([]);
   const [speciesData, setSpeciesData] = useState([]);
@@ -49,23 +81,13 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
     //   revalidateOnMount: false,
     // }
   );
-  console.log("FamilyData");
-  console.log("familyId");
-  console.log(familyId);
-  console.log("dataaa");
-  console.log(data);
 
-  //fetch genus based on genus selected
-  //set the family id to the clicked family
-  //set the family data to the fetched family data
   const OnFamilyChange = (e) => {
-    // fetch(`${base_url}/api/plants/genus`)
-    //   .then((res) => res.json())
-    //   .then(
-    //     (result) => {
-    const filteredgenus = data.filter((genus) => {
-      return genus.plant_genera.plant_families.family_name == e.target.value;
-    });
+    const filteredgenus = data.filter(
+      (genus) => genus.plant_genera.plant_families.family_name == e.target.value
+    );
+    Router.push(`/plants/${filteredgenus.map((specie) => specie.id)[0]}`);
+
     const sortedgenus = filteredgenus.sort((a, b) => {
       if (a.genus < b.genus) {
         return -1;
@@ -77,60 +99,29 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
     });
     // setLoaded(true);
     setFamilyData(sortedgenus);
-    console.log("filtered genus after clicking");
 
-    console.log(filteredgenus);
-
-    //     (error) => {
-    //       setLoaded(true);
-    //       setError(error);
-    //     }
-    //   );
     setFamilyId(e.target.value);
     setGenusId("");
     setSpeciesId("");
+    setSearchTerm("");
     setSpeciesData([]);
   };
-  console.log("family data");
-  console.log(familyData);
-
-  console.log("Genus data");
-  console.log(genusData);
-
-  console.log("genusId");
-  console.log(genusId);
-
-  console.log("genus_data");
-  console.log(genusData);
-  console.log("genusId");
-
-  console.log(genusId);
-  console.log("speciesId");
-  console.log(speciesId);
-
-  const OnGenusChange = (e) => {
-    // fetch species names based on family and genus selected
-    // use the clicked family id
-    // fetch(`${base_url}/api/plants/plantSpecies`)
-    //   .then((res) => res.json())
-    //   .then(
-    //     (result) => {
-    // const filteredspecies = familyData.filter((specie) => {
-    //   return (
-    //     // specie.plant_genera.genus_id == e.target.value &&
-    //     specie.plant_genera.family_id == familyId
-    //   );
-    // }); /// mapping ids of family with that stored in familyid
-    // // setLoaded(true);
-    console.log(e);
-    console.log(familyData);
-    const filterespecies = familyData.filter((specie) => {
-      return specie.plant_genera.genus_name == e.target.value;
+  const handleDoubleClick = (e) => {
+    Router.push({
+      pathname: "/phylogeny",
+      query: {
+        plantFamily: familyData[0].plant_genera.plant_families.family_name,
+      },
     });
+  };
+  const OnGenusChange = (e) => {
+    const filterespecies = familyData.filter(
+      (specie) => specie.plant_genera.genus_name == e.target.value
+    );
     // setLoaded(true);
-    console.log("filterespecies");
+    ////console.log('filterespecies');
 
-    console.log(filterespecies);
+    ////console.log(filterespecies);
     setGenusData(filterespecies);
     // (error) => {
     //   setLoaded(true);
@@ -139,39 +130,21 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
 
     setGenusId(e.target.value);
     setSpeciesId("");
+    setSearchTerm("");
   };
 
   const OnSpeciesChange = (e, specie) => {
-    setSpeciesId(specie.plant_genera.genus_name + " " + specie.species_name);
-    // const filteredspecies = genusData.filter((specie) => {
+    setSpeciesId(`${specie.plant_genera.genus_name} ${specie.species_name}`);
 
-    //   return (
-    //     // specie.plant_genera.genus_id == e.target.value &&
-    //     specie.id == familyId
-    //   );
-    //   setSpeciesData(filteredspecies)
-    // });
-    console.log("speciesId");
-
-    console.log(speciesId);
     Router.push(`/plants/${specie.id}`);
 
-    Router.push;
-    console.log(speciesId);
+    // Router.push;
+    ////console.log(speciesId);
   };
-  console.log("species_data");
-  console.log(speciesId);
-  console.log("speciesId");
+  const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
 
-  // // update form with default values on load
-  // if (defaultValues != null) {
-  //   setFamilyId("Malvaceae")
-  // }
-
-  console.log(speciesId);
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   if (data) {
-    //convert the sets vto list
+    // convert the sets vto list
     const families = [
       ...new Set(
         data.map((species) => species.plant_genera.plant_families.family_name)
@@ -180,17 +153,12 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
     const genus = [
       ...new Set(familyData.map((species) => species.plant_genera.genus_name)),
     ];
-    // const species= [...new Set(genusData.map(species=>species.species_name))];
-
-    console.log("families plant data");
-
-    console.log(families);
 
     return (
       <Container
         sx={{
           display: isSmallScreen ? "block" : "flex",
-          marginTop: isSmallScreen ? 8 : 3,
+          marginTop: isSmallScreen ? 12 : 6,
         }}
       >
         <Box sx={{ display: "flex" }}>
@@ -219,6 +187,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
                 height: "60%",
               }}
               value={familyId}
+              onDoubleClick={(e) => handleDoubleClick(e)}
               onChange={(e) => OnFamilyChange(e)}
             >
               {families.map((family, index) => (
@@ -234,7 +203,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
           <Box
             sx={{
               marginTop: isSmallScreen ? "0rem" : "3.5rem",
-              marginLeft: isSmallScreen ? "1.5" : "8rem",
+              marginLeft: isSmallScreen ? "1.5" : "3rem",
               fontWeight: "bold",
             }}
           >
@@ -258,7 +227,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
                 marginTop: isSmallScreen ? "0rem" : "1rem",
                 height: "60%",
               }}
-              defaultValue={"value"}
+              defaultValue="value"
               value={genusId}
               onChange={(e) => OnGenusChange(e)}
             >
@@ -276,7 +245,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
           <Box
             sx={{
               marginTop: isSmallScreen ? "0rem" : "3.5rem",
-              marginLeft: isSmallScreen ? "0" : "8rem",
+              marginLeft: isSmallScreen ? "0" : "3rem",
               fontWeight: "bold",
             }}
           >
@@ -307,16 +276,46 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
                 // value must be equal to e.target.value
                 <MenuItem
                   key={index}
-                  value={
-                    specie.plant_genera.genus_name + " " + specie.species_name
-                  }
+                  value={`${specie.plant_genera.genus_name} ${specie.species_name}`}
                   onClick={(e) => OnSpeciesChange(e, specie)}
                 >
-                  {specie.plant_genera.genus_name + " " + specie.species_name}
+                  {`${specie.plant_genera.genus_name} ${specie.species_name}`}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
+          <Box
+            sx={{
+              marginTop: isSmallScreen ? "0rem" : "3rem",
+              marginLeft: isSmallScreen ? "1.5rem" : 0,
+              width: "100%",
+            }}
+          >
+            <Box
+              display="flex"
+              // height={3}
+              alignItems="center"
+              sx={{ position: "relative" }}
+            >
+              <TextField
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search species..."
+                // sx={{ height: "60%" }} // Set the width to 80%
+              />
+              <IconButton
+                onClick={handleSearch}
+                sx={{
+                  position: "absolute",
+                  right: "0",
+                  marginRight: "8px", // Adjust the margin as needed
+                }}
+              >
+                <SearchIcon />
+              </IconButton>
+            </Box>
+          </Box>
         </Box>
       </Container>
     );
