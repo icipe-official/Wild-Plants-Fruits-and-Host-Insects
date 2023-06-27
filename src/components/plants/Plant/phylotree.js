@@ -1,7 +1,7 @@
-import { phylotree } from "phylotree";
-import ReactDOMServer from "react-dom/server";
-import { useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import { phylotree } from 'phylotree';
+import ReactDOMServer from 'react-dom/server';
+import { useState, useEffect } from 'react';
+import { Box } from '@mui/material';
 
 export default function PhyloTree({ newick }) {
   const [renderedTree, setRenderedTree] = useState(null);
@@ -20,17 +20,15 @@ export default function PhyloTree({ newick }) {
     };
 
     const rt = tree.render({
-      height: height,
-      width: width,
-      "left-right-spacing": "fit-to-size",
-      "align-tips": true,
-      "node-styler": colorNodesByName,
-      "edge-styler": colorEdgesByTarget,
+      height,
+      width,
+      'left-right-spacing': 'fit-to-size',
+      'align-tips': true,
+      'node-styler': colorNodesByName,
+      'edge-styler': colorEdgesByTarget,
     });
 
-    rt.nodeLabel((n) => {
-      return n.data.name + " HELLO";
-    });
+    rt.nodeLabel((n) => `${n.data.name} HELLO`);
 
     setRenderedTree(rt);
   }, []);

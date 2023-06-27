@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function PlantDetailsFeaturesValues() {
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const [selectedNode, setSelectedNode] = useState(null);
   const handleNodeSelect = (event, nodeId) => {
     setSelectedNode(nodeId);

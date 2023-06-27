@@ -1,8 +1,8 @@
 // component shared across all pages/wrap all pages
-//import React from "react"; no need to inport in latest version of react
-//this function is exported to layout.js componet
-import Link from "next/link";
-//import Head from "next/head";
+// import React from "react"; no need to inport in latest version of react
+// this function is exported to layout.js componet
+import Link from 'next/link';
+// import Head from "next/head";
 // import styles from "./navbar.module.css"
 export default function Nav() {
   return (

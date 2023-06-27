@@ -56,15 +56,15 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
     <Image
       src={imagePaths[currentImage]}
       alt="No Image"
-      width={500}
-      height={400}
+      width={showImage.isFullScreen ? 800 : 500}
+      height={showImage.isFullScreen ? 600 : 400}
     />
   ) : (
     <Image
       src={`${base_path}/noImage.jpg`}
       alt="No Image"
-      width={500}
-      height={400}
+      width={showImage.isFullScreen ? 800 : 500}
+      height={showImage.isFullScreen ? 600 : 400}
     />
   );
 
