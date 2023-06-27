@@ -42,7 +42,7 @@ export default function InsectsRearedfromPlants() {
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const { data, error } = useSWR(
-    `${base_url}/api/plants/Allinsectsreared/${species}`,
+    `${base_url}/api/plants/Allinsectsreared/${species ? species : 1}`,
     fetcher
   );
 
