@@ -186,9 +186,7 @@ model plants {
   max_latitude             Int?
   min_latitude             Int?
   genus_id                 Int
-  rbcl                     String?                    @db.VarChar
-  matk                     String?                    @db.VarChar
-  plant_genera             plant_genera               @relation(fields: [genus_id], references: [id], onDelete: Cascade)
+  plant_genera             plant_genera               @relation(fields: [genus_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   plants_fruit_colors      plants_fruit_colors[]
   plants_fruit_shapes      plants_fruit_shapes[]
   plants_fruit_sizes       plants_fruit_sizes[]
@@ -201,7 +199,6 @@ model plants {
   plants_leaf_margins      plants_leaf_margins[]
   plants_matk              plants_matk[]
   plants_photos            plants_photos[]
-  plants_rbcl              plants_rbcl[]
   plants_regions           plants_regions[]
   plants_shrub_climbings   plants_shrub_climbings[]
   plants_spines_thorns     plants_spines_thorns[]
@@ -257,8 +254,8 @@ model plants_fruiting_months {
 model plants_insects {
   plant_id  Int
   insect_id Int
-  insects   insects @relation(fields: [insect_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_insects_regions_regions")
-  plants    plants  @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_plants_insects_plant")
+  insects   insects @relation(fields: [insect_id], references: [id], onDelete: Cascade)
+  plants    plants  @relation(fields: [plant_id], references: [id], onDelete: Cascade)
 
   @@id([plant_id, insect_id])
 }
@@ -324,7 +321,6 @@ model plants_rbcl {
   nucleotide        String? @db.VarChar
   country           String? @db.VarChar
   genebank_accesion String? @db.VarChar
-  plants            plants? @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model plants_regions {

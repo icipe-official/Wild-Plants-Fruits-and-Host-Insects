@@ -2497,7 +2497,28 @@
             // window.open(boldURL, "_blank");
           });
       }
+      const nameParts = node.data.name.split("_"); // Split the name into parts
+      const lastPart = nameParts[nameParts.length - 1]; // Get the last part
 
+      const ncbiAccessionPattern = /[A-Z]{1,2}\d+/; // Pattern for NCBI accessions (one or two letters followed by numbers)
+      const match = lastPart.match(ncbiAccessionPattern); // Check if the last part matches the pattern
+
+      if (match) {
+        const accession = match[0]; // Accession found
+        const ncbiURL = `https://www.ncbi.nlm.nih.gov/search/all/?term=${accession}`;
+
+        menu_object
+          .append("a")
+          .attr("class", "dropdown-item")
+          .attr("tabindex", "-1")
+          .text("Link to NCBI records")
+          .on("click", (d) => {
+            menu_object.style("display", "none");
+
+            // Open a new window with the NCBI records page
+            window.open(ncbiURL, "_blank");
+          });
+      }
       if (!isNaN(parseInt(plantInsectId)) && !isNaN(parseInt(Insectgenus))) {
         menu_object
           .append("a")
