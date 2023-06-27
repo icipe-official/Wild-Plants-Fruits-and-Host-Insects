@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     fasta += `>${name}\n${sequence}\n`;
   });
 
-  const pythonScriptPath = "src/python.py";
+  const pythonScriptPath = "python.py";
   const pythonProcess = spawn("python3", [pythonScriptPath]);
 
   let newick = "";
