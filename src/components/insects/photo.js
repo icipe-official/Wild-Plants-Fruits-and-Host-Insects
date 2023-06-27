@@ -1,10 +1,10 @@
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import { useState } from "react";
 import Image from "next/legacy/image";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 
 export default function InsectPhotos({ photos_data }) {
-  const photos = photos_data[0]?.insect_photos.map((y) => y.photo_id) || [];
+  const photos = photos_data[0]?.insect_photos || [];
   const hasPhotos = photos.length > 0;
   const showNextImage = hasPhotos && photos.length > 1;
 
@@ -63,11 +63,22 @@ export default function InsectPhotos({ photos_data }) {
             }}
           />
           <Image
-            src={`/insectPhotos/${photos[open]}.jpg`}
+            src={`/insectPhotos/${photos[open].photo_id}.jpg`}
             alt="No Image"
             width={500}
             height={400}
           />
+          {photos[open] && photos[open].sex && (
+            <Box style={{ position: "absolute", bottom: 0, right: 0 }}>
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                textTransform="capitalize"
+              >
+                {photos[open].sex}
+              </Typography>
+            </Box>
+          )}
         </Box>
       ) : (
         <Box>
@@ -78,12 +89,6 @@ export default function InsectPhotos({ photos_data }) {
             height={400}
           />
         </Box>
-      )}
-
-      {showNextImage && (
-        <span>
-          {open + 1}/{photos.length}
-        </span>
       )}
 
       <Modal
@@ -103,12 +108,34 @@ export default function InsectPhotos({ photos_data }) {
             p: 4,
           }}
         >
-          <Image
-            src={`/insectPhotos/${photos[open]}.jpg`}
-            alt="No Image"
-            width={showImage.isFullScreen ? 800 : 600}
-            height={showImage.isFullScreen ? 600 : 400}
-          />
+          {hasPhotos ? (
+            <>
+              <Image
+                src={`/insectPhotos/${photos[open].photo_id}.jpg`}
+                alt="No Image"
+                width={showImage.isFullScreen ? 800 : 600}
+                height={showImage.isFullScreen ? 600 : 400}
+              />
+              {photos[open] && photos[open].sex && (
+                <Box style={{ position: "absolute", bottom: 0, right: 0 }}>
+                  <Typography
+                    variant="body1"
+                    fontWeight="bold"
+                    textTransform="capitalize"
+                  >
+                    {photos[open].sex}
+                  </Typography>
+                </Box>
+              )}
+            </>
+          ) : (
+            <Image
+              src="/plantPhotos/noImage.jpg"
+              alt="No Image"
+              width={showImage.isFullScreen ? 800 : 600}
+              height={showImage.isFullScreen ? 600 : 400}
+            />
+          )}
 
           {showImage.isFullScreen && (
             <Button
@@ -129,9 +156,21 @@ export default function InsectPhotos({ photos_data }) {
       </Modal>
 
       {showNextImage && (
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 2,
+          }}
+        >
           <Button onClick={() => openImage(open)} className="ground">
-            Next Image
+            <Typography variant="body1" sx={{ marginRight: "10px" }}>
+              Next Image
+            </Typography>
+            <span>{open + 1}</span>
+            <span>/</span>
+            <span>{photos.length}</span>
           </Button>
         </Box>
       )}
