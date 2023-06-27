@@ -83,12 +83,13 @@ export default function PlantFirstPage({ props }) {
             <TreeItem nodeId="11" label="Distribution">
               <KsectorValues k_sector_data={data} />
             </TreeItem>
-            <TreeItem nodeId="12" label="Map">
-              <OpenLayersMap coordinates={coordinates} />
-            </TreeItem>
 
             <TreeItem nodeId="15" label="Image">
               <PhotosComponent photos_data={data} selectedIndex={0} />
+            </TreeItem>
+
+            <TreeItem nodeId="12" label="Map">
+              <OpenLayersMap coordinates={coordinates} />
             </TreeItem>
 
             <TreeItem nodeId="19" label="Insects Reared">
@@ -116,11 +117,11 @@ export default function PlantFirstPage({ props }) {
             </Grid>
             <Grid item xs={12} sm={6} md={5} lg={4}>
               <Box sx={{ marginLeft: 0 }}>
+                <PhotosComponent photos_data={data} selectedIndex={0} />
                 <Box sx={{ fontWeight: "bold", marginTop: 2 }}>
                   Regions collected
                 </Box>
                 <OpenLayersMap coordinates={coordinates} />
-                <PhotosComponent photos_data={data} selectedIndex={0} />
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={5} lg={5}>

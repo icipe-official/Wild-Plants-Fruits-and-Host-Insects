@@ -1,16 +1,13 @@
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import { useState } from "react";
 import Image from "next/legacy/image";
-import Router from "next/router";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
-import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 
 export default function InsectPhotos({ photos_data }) {
   const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
-  const photos = photos_data.map((insect) =>
-    insect.insect_photos.map((y) => y.photo_id)
-  )[0]; // [0] extract photonames from [[]] object
+  const photos = photos_data[0]?.insect_photos || [];
+  const hasPhotos = photos.length > 0;
+  const showNextImage = hasPhotos && photos.length > 1;
 
   const [showImage, setShowImage] = useState({
     showModal: false,
@@ -27,19 +24,14 @@ export default function InsectPhotos({ photos_data }) {
   };
 
   const toggleModal = () => {
-    if (showImage.isFullScreen) {
-      setShowImage((prevState) => ({
-        isFullScreen: false,
-      }));
-    } else {
-      setShowImage((prevState) => ({
-        showModal: !prevState.showModal,
-        isFullScreen: true,
-      }));
-    }
+    setShowImage((prevState) => ({
+      ...prevState,
+      showModal: !prevState.showModal,
+      isFullScreen: !prevState.isFullScreen,
+    }));
   };
 
-  const OpenImage = (open) => {
+  const openImage = (open) => {
     if (open === photos.length - 1) {
       setOpen(0);
     } else {
@@ -49,35 +41,56 @@ export default function InsectPhotos({ photos_data }) {
 
   return (
     <Box sx={{ marginTop: 8, marginLeft: 2, paddingBottom: 2 }}>
-      <Box
-        sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "flex-start",
-        }}
-      >
-        <Button
-          variant="contained"
-          onClick={toggleModal}
-          startIcon={<ZoomInIcon />}
+      {hasPhotos ? (
+        <Box
           sx={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            zIndex: 1,
+            position: "relative",
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "flex-start",
           }}
-        />
-        <Image
-          src={`${base_path}/photos/insects/${photos[open]}.jpg`}
-          alt="No Image"
-          width={500}
-          height={400}
-        />
-      </Box>
-      <span>
-        {open + 1}/{photos.length}
-      </span>
+        >
+          <Button
+            variant="contained"
+            onClick={toggleModal}
+            startIcon={<ZoomInIcon />}
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              zIndex: 1,
+              color: "black",
+              backgroundColor: "transparent",
+            }}
+          />
+          <Image
+            src={`${base_path}/photos/insects/${photos[open].photo_id}.jpg`}
+            alt="No Image"
+            width={500}
+            height={400}
+          />
+          {photos[open] && photos[open].sex && (
+            <Box style={{ position: "absolute", bottom: 0, right: 0 }}>
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                textTransform="capitalize"
+              >
+                {photos[open].sex}
+              </Typography>
+            </Box>
+          )}
+        </Box>
+      ) : (
+        <Box>
+          <Image
+            src={`${base_path}/noImage.jpg`}
+            alt="No Image"
+            width={500}
+            height={400}
+          />
+        </Box>
+      )}
 
       <Modal
         open={showImage.showModal}
@@ -96,32 +109,69 @@ export default function InsectPhotos({ photos_data }) {
             p: 4,
           }}
         >
-          <Image
-            src={`${base_path}/photos/insects/${photos[open]}.jpg`}
-            alt="No Image"
-            width={showImage.isFullScreen ? 800 : 600}
-            height={showImage.isFullScreen ? 600 : 400}
-          />
+          {hasPhotos ? (
+            <>
+              <Image
+                src={`${base_path}/photos/insects/${photos[open].photo_id}.jpg`}
+                alt="No Image"
+                width={showImage.isFullScreen ? 800 : 600}
+                height={showImage.isFullScreen ? 600 : 400}
+              />
+              {photos[open] && photos[open].sex && (
+                <Box style={{ position: "absolute", bottom: 0, right: 0 }}>
+                  <Typography
+                    variant="body1"
+                    fontWeight="bold"
+                    textTransform="capitalize"
+                  >
+                    {photos[open].sex}
+                  </Typography>
+                </Box>
+              )}
+            </>
+          ) : (
+            <Image
+              src={`${base_path}/noImage.jpg`}
+              alt="No Image"
+              width={showImage.isFullScreen ? 800 : 600}
+              height={showImage.isFullScreen ? 600 : 400}
+            />
+          )}
+
           {showImage.isFullScreen && (
             <Button
               variant="contained"
               onClick={closeModal}
               startIcon={<ZoomInIcon />}
-              sx={{
+              style={{
                 position: "absolute",
                 top: 0,
                 right: 0,
                 zIndex: 1,
+                color: "black",
+                backgroundColor: "transparent",
               }}
             />
           )}
         </Box>
       </Modal>
 
-      {!showImage.isFullScreen && (
-        <Box>
-          <Button onClick={() => OpenImage(open)} className="ground">
-            Next Image
+      {showNextImage && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 2,
+          }}
+        >
+          <Button onClick={() => openImage(open)} className="ground">
+            <Typography variant="body1" sx={{ marginRight: "10px" }}>
+              Next Image
+            </Typography>
+            <span>{open + 1}</span>
+            <span>/</span>
+            <span>{photos.length}</span>
           </Button>
         </Box>
       )}

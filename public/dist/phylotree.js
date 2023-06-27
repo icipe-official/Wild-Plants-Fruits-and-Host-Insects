@@ -2473,6 +2473,31 @@
             window.top.location.href = detailsPageURL;
           });
       }
+      if (!isNaN(parseInt(plantInsectId)) && isNaN(parseInt(Insectgenus))) {
+        menu_object
+          .append("a")
+          .attr("class", "dropdown-item")
+          .attr("tabindex", "-1")
+          .text("Link to BOLD systems records")
+          .on("click", (d) => {
+            menu_object.style("display", "none");
+
+            // Generate the URL for the BOLD systems database using the species name
+            const speciesName =
+              node.data.name.split("_")[0] + " " + node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
+
+            // const speciesName = "Your Species Name"; // Replace "Your Species Name" with the actual species name
+            // Generate the search URL for the BOLD systems database using the species name
+            const boldSearchURL = `https://boldsystems.org/index.php/Public_SearchTerms?query=${encodeURIComponent(
+              speciesName
+            )}`;
+
+            // Open a new window with the search results page in the BOLD systems database
+            window.open(boldSearchURL, "_blank");
+            // window.open(boldURL, "_blank");
+          });
+      }
+
       if (!isNaN(parseInt(plantInsectId)) && !isNaN(parseInt(Insectgenus))) {
         menu_object
           .append("a")
@@ -2488,6 +2513,33 @@
             const detailsPageURL = `/insects/${Insectgenus}?genus=${Insectgenus}&species=${plantInsectId}`;
             // Navigate to the details page using window.location
             window.top.location.href = detailsPageURL;
+          });
+      }
+      //link to BOLD systems for the Insects
+
+      if (!isNaN(parseInt(plantInsectId)) && !isNaN(parseInt(Insectgenus))) {
+        menu_object
+          .append("a")
+          .attr("class", "dropdown-item")
+          .attr("tabindex", "-1")
+          .text("Link BOLD systems records")
+          .on("click", (d) => {
+            console.log("dddd");
+            console.log(plantInsectId);
+            menu_object.style("display", "none");
+
+            // Generate the URL for the BOLD systems database using the species name
+            const speciesName =
+              node.data.name.split("_")[0] + " " + node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
+
+            // const speciesName = "Your Species Name"; // Replace "Your Species Name" with the actual species name
+            // Generate the search URL for the BOLD systems database using the species name
+            const boldSearchURL = `https://boldsystems.org/index.php/Public_SearchTerms?query=${encodeURIComponent(
+              speciesName
+            )}`;
+
+            // Open a new window with the search results page in the BOLD systems database
+            window.open(boldSearchURL, "_blank");
           });
       }
 
