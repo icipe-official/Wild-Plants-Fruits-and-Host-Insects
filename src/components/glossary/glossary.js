@@ -1,15 +1,14 @@
-import { Button, Card, Container } from "@mui/material";
-import Glossary from "components/glossary/glossary";
-import { Box } from "@mui/system";
-import { makeStyles } from "@mui/styles";
-import { useRouter } from "next/router";
-import Router from "next/router";
-import DynamicValueCard from "components/plants/dynamicvaluecard";
-import Link from "next/link";
+import { Button, Card, Container } from '@mui/material';
+import Glossary from 'components/glossary/glossary';
+import { Box } from '@mui/system';
+import { makeStyles } from '@mui/styles';
+import Router, { useRouter } from 'next/router';
+import DynamicValueCard from 'components/plants/dynamicvaluecard';
+import Link from 'next/link';
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
+    display: 'flex',
     paddingTop: 4,
     // marginLeft: "1rem",
   },
@@ -17,20 +16,20 @@ const useStyles = makeStyles({
     margin: 0,
   },
   card: {
-    width: "100%",
+    width: '100%',
     height: 25,
   },
   activeLink: {
-    color: "red",
-    borderBottom: "1px solid white",
+    color: 'red',
+    borderBottom: '1px solid white',
   },
   content: {
     // height: 150,
-    overflowY: "scroll",
-    width: "20%",
-    border: "1px solid #ccc",
-    color: "red",
-    textAlign: "center",
+    overflowY: 'scroll',
+    width: '20%',
+    border: '1px solid #ccc',
+    color: 'red',
+    textAlign: 'center',
     marginTop: 4,
     marginLeft: 3,
   },
@@ -42,7 +41,7 @@ export default function GlossaryPage() {
   const classes = useStyles();
   const handleClick = (genus) => {
     Router.push({
-      pathname: `/glossary/allterms`,
+      pathname: '/glossary/allterms',
     });
   };
   return (
@@ -50,11 +49,11 @@ export default function GlossaryPage() {
       <Button
         sx={{
           // height: 150,
-          overflowY: "scroll",
-          width: "30%",
-          border: "1px solid #ccc",
-          color: "green",
-          textAlign: "center",
+          overflowY: 'scroll',
+          width: '30%',
+          border: '1px solid #ccc',
+          color: 'green',
+          textAlign: 'center',
           marginLeft: 40,
         }}
         onClick={(e) => handleClick(e)}
@@ -62,7 +61,8 @@ export default function GlossaryPage() {
         <Link href="/glossary/allterms">
           View all terms in alphabetical order
         </Link>
-      </Button>{" "}
+      </Button>
+      {' '}
       <Box sx={{ marginLeft: 7 }}> Fruit features</Box>
       <Button className={classes.content}>Type</Button>
     </Container>

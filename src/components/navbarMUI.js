@@ -5,27 +5,30 @@ import {
   AppBar,
   useMediaQuery,
   Box,
+  Drawer,
+  List,
+  ListItem,
+  Container,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuIcon from "@mui/icons-material/Menu";
 /*
-This module defines a mobile-responsive navigation bar using Material-UI components. 
+This module defines a mobile-responsive navigation bar using Material-UI components.
 
-It exports a single component `Navbar` that displays a list of links to different pages of the website. 
+It exports a single component `Navbar` that displays a list of links to different pages of the website.
 The navigation bar is built using Material-UI's `AppBar`, `Toolbar`, `Typography`, `Link`, and `useMediaQuery` components.
 
-The `Navbar` component takes no arguments, and it returns a Material-UI `AppBar` component with a `Toolbar`. 
-Inside the `Toolbar`, there is a `div` container that contains several `Link` components, each linking to a different page of the website. 
-The links are styled using CSS classes defined in the `makeStyles` hook. 
+The `Navbar` component takes no arguments, and it returns a Material-UI `AppBar` component with a `Toolbar`.
+Inside the `Toolbar`, there is a `div` container that contains several `Link` components, each linking to a different page of the website.
+The links are styled using CSS classes defined in the `makeStyles` hook.
 
-The navigation bar is made mobile-responsive by using the `useMediaQuery` hook to detect small screens (using the `sm` breakpoint defined in the theme). 
-When the screen size is small, the links are displayed vertically (in a column), instead of horizontally (in a row). 
+The navigation bar is made mobile-responsive by using the `useMediaQuery` hook to detect small screens (using the `sm` breakpoint defined in the theme).
+When the screen size is small, the links are displayed vertically (in a column), instead of horizontally (in a row).
 This is achieved by changing the `flexDirection` property of the `navlinks` CSS class.
 */
 import React, { useState } from "react";
-import { Drawer, List, ListItem, Container } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     [theme.breakpoints.up("md")]: {
       width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: 0,
+      marginLeft: drawerWidth,
     },
   },
   appBarBackground: {
@@ -48,11 +51,6 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  // toolbar: theme.mixins.toolbar,
-  // drawerPaper: {
-  //   width: drawerWidth,
-  //   backgroundColor: "red",
-  // },
   closeIcon: {
     display: "flex",
     justifyContent: "flex-end",
@@ -67,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
     },
   },
-
   link: {
     textDecoration: "none",
     color: "yellow",
@@ -89,11 +86,6 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
     borderBottom: "1px solid white",
   },
-  // cancelicon: {
-  //   // position: 'absolute',
-  //   marginLeft: 7,
-  //   right: 0,
-  // },
 }));
 
 export default function TopAppBar() {
@@ -107,7 +99,7 @@ export default function TopAppBar() {
   };
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
   console.log("menuOpen");
 
   console.log(menuOpen);
@@ -161,7 +153,7 @@ export default function TopAppBar() {
                     </ListItem>
                     <ListItem ButtonBase>
                       <Link
-                        href={`/plants/1`}
+                        href="/plants"
                         passHref
                         className={`${classes.link} ${
                           router.pathname.startsWith("/plants")
@@ -192,7 +184,7 @@ export default function TopAppBar() {
                         href="/insects"
                         passHref
                         className={`${classes.link} ${
-                          router.pathname.startsWith("/plants")
+                          router.pathname.startsWith("/insects")
                             ? classes.activeLink
                             : ""
                         }`}
@@ -249,7 +241,7 @@ export default function TopAppBar() {
                 Home
               </Link>
               <Link
-                href={`/plants/1`}
+                href="/plants"
                 passHref
                 className={`${classes.link} ${
                   router.pathname.startsWith("/plants")

@@ -3,20 +3,19 @@
 import { useState } from "react";
 
 import useSWR from "swr";
-import RegionsInsect from "./regeons";
 import { useRouter } from "next/router";
+import OpenLayersMap from "components/plants/distribution/map";
+import Grid from "@mui/material/Grid";
+import RegionsInsect from "./regeons";
 import InsectQueryComponent from "./insectsQuery";
 import InsectPhotos from "./photo";
 import FruitsReared from "./fruitsReared";
-import OpenLayersMap from "components/plants/distribution/map";
-
-import Grid from "@mui/material/Grid";
 
 // import { Container,ButtonBase } from '@mui/material';
 // import Link from 'next/link';
 export default function InsectQuery2() {
   const router = useRouter();
-  const genus = router.query.genus;
+  const { genus } = router.query;
   const species = parseInt(router.query.species);
   console.log("species");
   console.log(genus);
@@ -26,7 +25,7 @@ export default function InsectQuery2() {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [speciesdata, setSpecciesdata] = useState("");
-  //species list data set revalidation to false to prevent data refetch
+  // species list data set revalidation to false to prevent data refetch
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error, isLoading } = useSWR(
     `${base_url}/api/insects/insectsPage/${genus}`,
@@ -59,7 +58,7 @@ export default function InsectQuery2() {
   if (data) {
     const fruits = data.map((fruit) =>
       fruit.plants_insects.map((specie) => specie.plants)
-    )[0]; //[0] extract the first object
+    )[0]; // [0] extract the first object
     console.log("fruits reatred Fruits functionsl component");
     console.log(fruits);
 
@@ -79,11 +78,7 @@ export default function InsectQuery2() {
       })
     );
     console.log("coordinates");
-    console.log(
-      coordinates.map((c) => {
-        return c;
-      })
-    );
+    console.log(coordinates.map((c) => c));
 
     return (
       <Grid container spacing={2} marginTop={3}>
@@ -96,7 +91,6 @@ export default function InsectQuery2() {
         </Grid>
         <Grid item xs={12} md={6} lg={6}>
           <InsectPhotos photos_data={insects_region} />
-          {/* <Grid item xs={12} md={6} lg={6}> */}
         </Grid>
 
         {/* </Grid> */}

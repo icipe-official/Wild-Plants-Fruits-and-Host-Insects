@@ -148,19 +148,19 @@ export default function HymenopteraBraconidaeComponent({ other_diptera_data }) {
             (item) => item.insect_genera.genus_name
           )
         )
-      ).map((name) => {
-        return data.hymenopteraBraconidae.find(
+      ).map((name) =>
+        data.hymenopteraBraconidae.find(
           (item) => item.insect_genera.genus_name === name
-        );
-      });
+        )
+      );
       setunique_hymenopterabraconidae(unique__hymenopterabraconidae);
     }
   }, [data]);
 
   const classes = useStyles();
-  // console.log(uniqueColeopteraData);
+  // ////console.log(uniqueColeopteraData);
 
-  //obtain frst four genus nanmes
+  // obtain frst four genus nanmes
 
   const unique__hymenopterabraconidae_data = Array.from(
     new Set(
@@ -168,25 +168,25 @@ export default function HymenopteraBraconidaeComponent({ other_diptera_data }) {
         (item) => item.insect_sub_families.sub_family_name
       )
     )
-  ).map((name) => {
-    return unique__hymenopterabraconidae.find(
+  ).map((name) =>
+    unique__hymenopterabraconidae.find(
       (item) => item.insect_sub_families.sub_family_name === name
-    );
-  });
+    )
+  );
 
-  console.log("unique__hymenoptera data");
+  ////console.log('unique__hymenoptera data');
 
-  console.log(unique__hymenopterabraconidae);
-  //handle family click
+  ////console.log(unique__hymenopterabraconidae);
+  // handle family click
   const [selectedFamily, setSelectedFamily] = useState(null);
   const [selectedSubFamily, setSelectedSubFamily] = useState(null);
   const genera = unique__hymenopterabraconidae_data.filter(
     (genus) => genus.insect_families.family_name === selectedFamily
   );
 
-  //pass the status to the insect details page
+  // pass the status to the insect details page
   // on click, the selected genus name will be passed to getserverside prop function
-  //handle genus click
+  // handle genus click
   const handleClick = (genus) => {
     Router.push({
       pathname: `/insects/${genus.insect_genera.id}`,
@@ -199,7 +199,7 @@ export default function HymenopteraBraconidaeComponent({ other_diptera_data }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  //handle subfamily click event
+  // handle subfamily click event
   const handleSubFamilyClick = (event, subfamily) => {
     setSelectedSubFamily(subfamily);
     setAnchorEl(event.currentTarget);

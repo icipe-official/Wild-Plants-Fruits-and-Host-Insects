@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { Box, Drawer, List, ListItem, ListItemText } from "@mui/material";
+import React, { useState } from 'react';
+import {
+  Box, Drawer, List, ListItem, ListItemText,
+} from '@mui/material';
 
-const OrderDropdown = ({ orderName, children }) => {
+function OrderDropdown({ orderName, children }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -14,8 +16,8 @@ const OrderDropdown = ({ orderName, children }) => {
 
   return (
     <>
-      <Box sx={{ marginBottom: "0.5rem" }}>
-        <Box sx={{ cursor: "pointer" }} onClick={handleToggle}>
+      <Box sx={{ marginBottom: '0.5rem' }}>
+        <Box sx={{ cursor: 'pointer' }} onClick={handleToggle}>
           {orderName}
         </Box>
       </Box>
@@ -29,4 +31,4 @@ const OrderDropdown = ({ orderName, children }) => {
       </Drawer>
     </>
   );
-};
+}

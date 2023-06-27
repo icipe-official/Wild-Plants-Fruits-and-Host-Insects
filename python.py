@@ -52,6 +52,6 @@ sequences = sys.stdin.read()
 
 # Construct the phylogenetic tree
 newick = construct_phylogenetic_tree(sequences)
-
+newick
 # Print the Newick tree to the standard output
 print(newick)

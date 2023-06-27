@@ -1,11 +1,11 @@
 // component shared across all pages/wrap all pages
-import React from "react";
-import Navbar from "../components/navbar/navbar";
-//import Head from "next/head";
-import NavbarMUI from "./navbarMUI";
-import Footer from "components/footer/footer";
-import Header from "components/header/header";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from 'react';
+// import Head from "next/head";
+import Footer from 'components/footer/footer';
+import Header from 'components/header/header';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import NavbarMUI from './navbarMUI';
+import Navbar from './navbar/navbar';
 
 const queryClient = new QueryClient();
 

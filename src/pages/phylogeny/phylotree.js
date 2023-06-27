@@ -19,26 +19,23 @@ export default function MyComponent() {
     };
 
     const rt = tree.render({
-      height: height,
-      width: width,
+      height,
+      width,
       "left-right-spacing": "fit-to-size",
       "align-tips": true,
       "node-styler": colorNodesByName,
       "edge-styler": colorEdgesByTarget,
     });
 
-    rt.nodeLabel((n) => {
-      return n.data.name + " HELLO";
-    });
+    rt.nodeLabel((n) => `${n.data.name} HELLO`);
 
     setRenderedTree(rt);
-    console.log(rt)
-
+    ////console.log(rt);
   }, []);
   return (
     <div>
       {renderedTree ? (
-        <div dangerouslySetInnerHTML={{ __html: renderedTree.__html}} />
+        <div dangerouslySetInnerHTML={{ __html: renderedTree.__html }} />
       ) : (
         "Loading..."
       )}

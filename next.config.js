@@ -8,7 +8,7 @@ const nextConfig = {
       use: ["@svgr/webpack"],
     });
 
-    // Exclude console.log statements in production
+    // Exclude ////console.log statements in production
     if (config.mode === "production") {
       config.optimization.minimizer.forEach((minimizer) => {
         if (minimizer.constructor.name === "TerserPlugin") {
@@ -19,7 +19,7 @@ const nextConfig = {
 
     return config;
   },
-  //page redirect
+  // page redirect
   async rewrites() {
     return [
       {

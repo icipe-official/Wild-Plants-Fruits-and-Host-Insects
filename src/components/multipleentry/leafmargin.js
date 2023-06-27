@@ -42,6 +42,13 @@ export default function LeafMargin({
   handleOnChangeLeafMargins,
   checkedStateLeafMargins,
 }) {
+  function handleDoubleClick(type) {
+    Router.push({
+      pathname: "/glossary/allterms",
+      query: { glossary_term: type.toLowerCase() },
+    });
+  }
+  //
   const classes = useStyles();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
@@ -61,15 +68,16 @@ export default function LeafMargin({
         </Typography>
       </Box>
       <Box className={classes.component1}>
-        {leaf_margins_array.map((spine, index) => (
+        {leaf_margins_array.map((margin, index) => (
           <div
-            key={spine}
+            key={margin}
             onClick={() => handleOnChangeLeafMargins(index)}
+            onDoubleClick={() => handleDoubleClick(margin)}
             className={`${classes.item} ${
               checkedStateLeafMargins[index] ? classes.itemChecked : ""
             }`}
           >
-            {spine}
+            {margin}
           </div>
         ))}
       </Box>

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Box, Button, InputLabel } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Router from "next/router";
+import Link from "next/link";
+import { connect } from "react-redux";
 
 // custom MUIstyles
 const useStyles = makeStyles({
@@ -55,8 +57,6 @@ const useStyles = makeStyles({
     },
   },
 });
-import Link from "next/link";
-import { connect } from "react-redux";
 
 export default function DipteraTephridiae({
   diptera_tephritideae_data,
@@ -70,27 +70,25 @@ export default function DipteraTephridiae({
       new Set(
         diptera_tephritideae_data.map((item) => item.insect_genera.genus_name)
       )
-    ).map((name) => {
-      return diptera_tephritideae_data.find(
+    ).map((name) =>
+      diptera_tephritideae_data.find(
         (item) => item.insect_genera.genus_name === name
-      );
-    });
+      )
+    );
     setUniqueColeopteraData(uniqueData);
   }, [diptera_tephritideae_data]);
-  console.log(selectedGenus);
-  console.log(other_diptera_data);
+  ////console.log(selectedGenus);
+  ////console.log(other_diptera_data);
 
-  //obtain frst four genus nanmes
+  // obtain frst four genus nanmes
   const firstThreeGenera = uniqueColeopteraData.slice(0, 4);
   const remainingGenera = uniqueColeopteraData.slice(3);
   const unique_other_diptera_data = Array.from(
     new Set(other_diptera_data.map((item) => item.insect_families.family_name))
-  ).map((name) => {
-    return other_diptera_data.find(
-      (item) => item.insect_families.family_name === name
-    );
-  });
-  //pass the status to the insect details page
+  ).map((name) =>
+    other_diptera_data.find((item) => item.insect_families.family_name === name)
+  );
+  // pass the status to the insect details page
   // on click, the selected genus name will be passed to getserverside prop function
   const handleClick = (genus) => {
     // setSelectedGenus(genus.insect_genera.genus_name);
@@ -103,7 +101,7 @@ export default function DipteraTephridiae({
     return { count: state.count };
   }
 
-  console.log(selectedGenus);
+  ////console.log(selectedGenus);
   const classes = useStyles();
 
   return (

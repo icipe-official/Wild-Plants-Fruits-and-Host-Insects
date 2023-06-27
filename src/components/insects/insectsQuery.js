@@ -5,25 +5,24 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import useSWR from "swr";
-import RegionsInsect from "./regeons";
-import { useRouter } from "next/router";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { Button } from "@mui/material";
+import RegionsInsect from "./regeons";
 // import { Container,ButtonBase } from '@mui/material';
 // import Link from 'next/link';
 export default function InsectQueryComponent({ genus_data }) {
   const [selectedIndexPlant, setSelectedIndexPlant] = useState(0);
   const [selected, setSelectedItem] = useState(null);
   const router = useRouter();
-  const genus = router.query.genus;
-  console.log("species");
-  console.log(genus);
+  const { genus } = router.query;
+  ////console.log('species');
+  ////console.log(genus);
   const [selectedIndex, setSelectedIndex] = useState(0);
   function mapStateToProps(state) {
     return { count: state.count };
   }
-  console.log("genus list  side");
-  console.log(genus_data);
+  ////console.log('genus list  side');
+  ////console.log(genus_data);
   const species = genus_data[selectedIndex].species_name;
 
   const handleItemClick = (specie, index) => {
@@ -86,7 +85,7 @@ export default function InsectQueryComponent({ genus_data }) {
             </Box>
           ))}
         </Box>
-        <Box sx={{ marginTop: "1rem", fontWeight: "bold" }}></Box>
+        <Box sx={{ marginTop: "1rem", fontWeight: "bold" }} />
       </Box>
     );
   }

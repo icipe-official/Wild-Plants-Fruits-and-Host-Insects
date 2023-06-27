@@ -357,9 +357,9 @@
       let new_level = {
         name: null,
       };
-      console.log("new_level");
+      // console.log("new_level");
 
-      console.log(new_level);
+      // console.log(new_level);
       let the_parent = clade_stack[clade_stack.length - 1];
 
       if (!("children" in the_parent)) {
@@ -555,9 +555,9 @@
     if (clade_stack.length != 1) {
       return generateError(nwk_str.length - 1);
     }
-    console.log(tree_json);
+    // console.log(tree_json);
 
-    console.log(tree_json);
+    // console.log(tree_json);
     return {
       json: tree_json,
       error: null,
@@ -1830,25 +1830,25 @@
     const i_names = !this.internalNames(); //did the margic {{{{}}}}
     console.log("node internal names");
 
-    console.log(node);
+    // console.log(node);
 
     if (i_names) {
       // console.log(i_names);
       if (typeof i_names === "function") {
-        console.log("i_names function");
+        // console.log("i_names function");
 
-        console.log(i_names);
+        // console.log(i_names);
 
         return i_names(node);
       }
       if (i_names !== "root") {
-        console.log(i_names);
+        // console.log(i_names);
         return i_names;
       }
     }
-    console.log("this .internal nodes");
+    // console.log("this .internal nodes");
 
-    console.log(node);
+    // console.log(node);
     // console.log("i_names function");
 
     // console.log(i_names);
@@ -1950,18 +1950,18 @@
     _node = _node.data;
 
     if (isLeafNode(_node)) {
-      console.log(" leaf");
-      console.log(_node.name);
+      // console.log(" leaf");
+      // console.log(_node.name);
 
       return _node.name;
     } else {
-      console.log(" internal node");
-      console.log(_node);
+      // console.log(" internal node");
+      // console.log(_node);
     }
 
     if (this.showInternalName(_node)) {
-      console.log("node");
-      console.log(_node);
+      // console.log("node");
+      // console.log(_node);
       if (_node.name !== "root") {
         // avoid he root from the boostrap
         return _node.name;
@@ -2416,7 +2416,7 @@
     d3PhylotreeSvgTranslate: d3PhylotreeSvgTranslate,
     d3PhylotreeSvgRotate: d3PhylotreeSvgRotate,
   });
-
+  //modify for hyperlinks
   let d3_layout_phylotree_context_menu_id = "d3_layout_phylotree_context_menu";
 
   function nodeDropdownMenu(node, container, phylotree, options, event) {
@@ -2448,6 +2448,49 @@
         !options["show-menu"]
       )
         return;
+      // Get the ID of the plant modified
+      const plantInsectId = node.data.name.split("_")[2]; // Get the ID from the newick terminal node name
+      // const InsectId = node.data.name.split("_")[2]; // Get the ID from the newick terminal node name
+      const Insectgenus = node.data.name.split("_")[3]; // Get the ID from the newick terminal node name
+
+      // Check if the second position is inatger and third position is not intger guide navigation to plaants page
+      //else allow navigation to insects page
+      if (!isNaN(parseInt(plantInsectId)) && isNaN(parseInt(Insectgenus))) {
+        menu_object
+          .append("a")
+          .attr("class", "dropdown-item")
+          .attr("tabindex", "-1")
+          .text("Plant details page")
+          .on("click", (d) => {
+            console.log("dddd");
+            console.log(plantInsectId);
+            menu_object.style("display", "none");
+
+            // Generate the URL for the details page
+            const detailsPageURL = `/plants/${plantInsectId}`; // Replace '/plant' with the appropriate route path for your Next.js application
+
+            // Navigate to the details page using window.location
+            window.top.location.href = detailsPageURL;
+          });
+      }
+      if (!isNaN(parseInt(plantInsectId)) && !isNaN(parseInt(Insectgenus))) {
+        menu_object
+          .append("a")
+          .attr("class", "dropdown-item")
+          .attr("tabindex", "-1")
+          .text("Insect details page")
+          .on("click", (d) => {
+            console.log("dddd");
+            console.log(plantInsectId);
+            menu_object.style("display", "none");
+
+            // Generate the URL for the details page for insects
+            const detailsPageURL = `/insects/${Insectgenus}?genus=${Insectgenus}&species=${plantInsectId}`;
+            // Navigate to the details page using window.location
+            window.top.location.href = detailsPageURL;
+          });
+      }
+
       if (!isLeafNode(node)) {
         if (options["collapsible"]) {
           menu_object
@@ -2529,7 +2572,7 @@
               this.modifySelection(this.phylotree.pathToRoot(node));
             });
 
-          if (options["reroot"] || options["hide"]) {
+          if (options["details"] || options["reroot"] || options["hide"]) {
             menu_object.append("div").attr("class", "dropdown-divider");
           }
         }
@@ -2548,6 +2591,8 @@
         }
 
         if (options["hide"]) {
+          // Color branches with similar genus names the same
+
           menu_object
             .append("a")
             .attr("class", "dropdown-item")

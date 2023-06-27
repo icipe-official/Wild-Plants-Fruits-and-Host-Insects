@@ -1,8 +1,8 @@
-import { Box } from '@mui/material';
-import { useState } from 'react';
+import { Box } from "@mui/material";
+import { useState } from "react";
 
 export default function FastaToDict() {
-  const [fastaInput, setFastaInput] = useState('');
+  const [fastaInput, setFastaInput] = useState("");
   const [fastaArray, setFastaArray] = useState([]);
 
   const handleInputChange = (event) => {
@@ -11,18 +11,18 @@ export default function FastaToDict() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const fastaLines = fastaInput.trim().split('\n');
-    let currentSequenceName = '';
-    let currentSequence = '';
+    const fastaLines = fastaInput.trim().split("\n");
+    let currentSequenceName = "";
+    let currentSequence = "";
     const fastaArray = [];
-    for (let line of fastaLines) {
-      if (line.startsWith('>')) {
-        if (currentSequenceName !== '') {
+    for (const line of fastaLines) {
+      if (line.startsWith(">")) {
+        if (currentSequenceName !== "") {
           fastaArray.push({
             name: currentSequenceName.slice(1),
-            sequence: currentSequence
+            sequence: currentSequence,
           });
-          currentSequence = '';
+          currentSequence = "";
         }
         currentSequenceName = line;
       } else {
@@ -31,11 +31,11 @@ export default function FastaToDict() {
     }
     fastaArray.push({
       name: currentSequenceName.slice(1),
-      sequence: currentSequence
+      sequence: currentSequence,
     });
     setFastaArray(fastaArray);
   };
-console.log(fastaArray)
+  ////console.log(fastaArray);
   return (
     <Box>
       <form onSubmit={handleSubmit}>

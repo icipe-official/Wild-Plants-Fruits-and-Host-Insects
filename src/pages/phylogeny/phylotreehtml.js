@@ -13,16 +13,16 @@
 
 // export default Home;
 // import fs from "fs";
-import { Box } from "@mui/material";
+import { Box } from '@mui/material';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
 
 export default function MyComponent() {
   useEffect(() => {
-    document.body.style.margin = "0";
-    document.body.style.overflow = "hidden";
+    document.body.style.margin = '0';
+    document.body.style.overflow = 'hidden';
   }, []);
 
   return (
@@ -30,11 +30,11 @@ export default function MyComponent() {
       <iframe
         src={`${base_path}/phylotree.html`}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 8,
-          width: "90%",
-          height: "90%",
+          width: '90%',
+          height: '90%',
         }}
       />
     </div>

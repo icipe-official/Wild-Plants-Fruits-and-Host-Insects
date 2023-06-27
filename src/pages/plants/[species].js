@@ -1,18 +1,9 @@
-import Grid from "@mui/material/Grid";
-// import PlantDetailValues from "components/plants/Plant/plantDetailValuesMUI"
-// import FruitDetailsFeaturesValues from "components/plants/plantFruitLeafValues"
-// import LeafDetailValues from "components/plants/Leaf/leafDetailValues"
-import Photos from "components/plants/photos/photos";
-// import FruitDetails from "components/plants/fruitdetailsMUI"
-import FruitDetailsFeaturesValues from "components/plants/plantFruitLeafValues";
-import { Container, Box } from "@mui/material";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+/* eslint-disable react/react-in-jsx-scope */
 
-// );
+import FruitDetailsFeaturesValues from 'components/plants/plantFruitLeafValues';
+import { Container } from '@mui/material';
 
-export default function PlantPage(props) {
+export default function PlantPage() {
   // const router = useRouter();
   // const query = router.query;
   return (

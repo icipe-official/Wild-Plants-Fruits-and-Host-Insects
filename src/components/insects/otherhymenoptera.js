@@ -147,20 +147,20 @@ export default function OtherHymenopteracomponent({ other_diptera_data }) {
         new Set(
           data.otherHymenoptera.map((item) => item.insect_genera.genus_name)
         )
-      ).map((name) => {
-        return data.otherHymenoptera.find(
+      ).map((name) =>
+        data.otherHymenoptera.find(
           (item) => item.insect_genera.genus_name === name
-        );
-      });
+        )
+      );
       setunique_hymenopterabraconidae(unique_otherhymenoptera);
     }
   }, [data]);
 
   const classes = useStyles();
-  console.log("unique__lepidoptera");
-  // console.log(uniqueColeopteraData);
+  ////console.log('unique__lepidoptera');
+  // ////console.log(uniqueColeopteraData);
 
-  //obtain frst four genus nanmes
+  // obtain frst four genus nanmes
 
   const unique_otherhymenoptera_data = Array.from(
     new Set(
@@ -168,24 +168,24 @@ export default function OtherHymenopteracomponent({ other_diptera_data }) {
         (item) => item.insect_sub_families.sub_family_name
       )
     )
-  ).map((name) => {
-    return unique_otherhymenoptera.find(
+  ).map((name) =>
+    unique_otherhymenoptera.find(
       (item) => item.insect_sub_families.sub_family_name === name
-    );
-  });
+    )
+  );
 
-  console.log("unique__coleoptera data");
+  ////console.log('unique__coleoptera data');
 
-  console.log(unique_otherhymenoptera);
-  //handle family click
+  ////console.log(unique_otherhymenoptera);
+  // handle family click
   const [selectedFamily, setSelectedFamily] = useState(null);
   const genera = unique_otherhymenoptera_data.filter(
     (genus) => genus.insect_families.family_name === selectedFamily
   );
 
-  //pass the status to the insect details page
+  // pass the status to the insect details page
   // on click, the selected genus name will be passed to getserverside prop function
-  //handle genus click
+  // handle genus click
   const handleClick = (genus) => {
     Router.push({
       pathname: `/insects/${genus.insect_genera.id}`,

@@ -158,31 +158,29 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
         new Set(
           data.dipteraTephridiae.map((item) => item.insect_genera.genus_name)
         )
-      ).map((name) => {
-        return data.dipteraTephridiae.find(
+      ).map((name) =>
+        data.dipteraTephridiae.find(
           (item) => item.insect_genera.genus_name === name
-        );
-      });
+        )
+      );
       setunique__diptera_tephtitidae(unique__diptera_tephtitidae);
 
       const unique_other_diptera_data = Array.from(
         new Set(data.otherdiptera.map((item) => item.insect_genera.genus_name))
-      ).map((name) => {
-        return data.otherdiptera.find(
-          (item) => item.insect_genera.genus_name === name
-        );
-      });
+      ).map((name) =>
+        data.otherdiptera.find((item) => item.insect_genera.genus_name === name)
+      );
       setunique__other_diptera(unique_other_diptera_data);
     }
   }, [data]);
 
   const classes = useStyles();
-  console.log("unique__diptera_tephtitidae");
+  ////console.log('unique__diptera_tephtitidae');
 
-  console.log(unique__diptera_tephtitidae);
-  // console.log(uniqueColeopteraData);
+  ////console.log(unique__diptera_tephtitidae);
+  // ////console.log(uniqueColeopteraData);
 
-  //obtain frst four genus nanmes
+  // obtain frst four genus nanmes
   const firstThreeGenera = unique__diptera_tephtitidae.slice(0, 4);
   const remainingGenera = unique__diptera_tephtitidae.slice(3);
 
@@ -190,24 +188,24 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
     new Set(
       unique_other_diptera.map((item) => item.insect_families.family_name)
     )
-  ).map((name) => {
-    return unique_other_diptera.find(
+  ).map((name) =>
+    unique_other_diptera.find(
       (item) => item.insect_families.family_name === name
-    );
-  });
+    )
+  );
 
-  console.log("unique_other_diptera_data");
+  ////console.log('unique_other_diptera_data');
 
-  console.log(unique_other_diptera_data);
-  //handle family click
+  ////console.log(unique_other_diptera_data);
+  // handle family click
   const [selectedFamily, setSelectedFamily] = useState(null);
   const genera = unique_other_diptera_data.filter(
     (genus) => genus.insect_families.family_name === selectedFamily
   );
 
-  //pass the status to the insect details page
+  // pass the status to the insect details page
   // on click, the selected genus name will be passed to getserverside prop function
-  //handle genus click
+  // handle genus click
   const handleClick = (genus) => {
     Router.push({
       pathname: `/insects/${genus.insect_genera.id}`,
@@ -233,12 +231,12 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
   function mapStateToProps(state) {
     return { count: state.count };
   }
-  console.log("firstThreeGenera");
-  console.log(firstThreeGenera);
-  //   console.log(selectedGenus);
+  ////console.log('firstThreeGenera');
+  ////console.log(firstThreeGenera);
+  //   ////console.log(selectedGenus);
   //   const classes = useStyles();
 
-  if (error)
+  if (error) {
     return (
       <Container
         sx={{
@@ -255,8 +253,9 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
         <Box sx={{ marginTop: 6 }}>Failed to load</Box>;
       </Container>
     );
+  }
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <Container
         sx={{
@@ -274,6 +273,7 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
         {/* Footer goes here */}
       </Container>
     );
+  }
   if (data) {
     return (
       <Box>

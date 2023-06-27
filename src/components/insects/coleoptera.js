@@ -141,41 +141,37 @@ export default function ColeopteraComponent({ other_diptera_data }) {
     if (data) {
       const unique__coleoptera = Array.from(
         new Set(data.coleoptera.map((item) => item.insect_genera.genus_name))
-      ).map((name) => {
-        return data.coleoptera.find(
-          (item) => item.insect_genera.genus_name === name
-        );
-      });
+      ).map((name) =>
+        data.coleoptera.find((item) => item.insect_genera.genus_name === name)
+      );
       setunique__lepidoptera(unique__coleoptera);
     }
   }, [data]);
 
   const classes = useStyles();
-  console.log("unique__lepidoptera");
-  // console.log(uniqueColeopteraData);
+  ////console.log('unique__lepidoptera');
+  // ////console.log(uniqueColeopteraData);
 
-  //obtain frst four genus nanmes
+  // obtain frst four genus nanmes
 
   const unique_coleoptera_data = Array.from(
     new Set(unique__coleoptera.map((item) => item.insect_families.family_name))
-  ).map((name) => {
-    return unique__coleoptera.find(
-      (item) => item.insect_families.family_name === name
-    );
-  });
+  ).map((name) =>
+    unique__coleoptera.find((item) => item.insect_families.family_name === name)
+  );
 
-  console.log("unique__coleoptera data");
+  ////console.log('unique__coleoptera data');
 
-  console.log(unique__coleoptera);
-  //handle family click
+  ////console.log(unique__coleoptera);
+  // handle family click
   const [selectedFamily, setSelectedFamily] = useState(null);
   // const genera = unique_coleoptera_data.filter(
   //   (genus) => genus.insect_families.family_name === selectedFamily
   // );
 
-  //pass the status to the insect details page
+  // pass the status to the insect details page
   // on click, the selected genus name will be passed to getserverside prop function
-  //handle genus click
+  // handle genus click
   const handleClick = (genus) => {
     Router.push({
       pathname: `/insects/${genus.insect_genera.id}`,

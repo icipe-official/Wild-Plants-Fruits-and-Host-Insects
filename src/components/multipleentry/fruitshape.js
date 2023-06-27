@@ -41,6 +41,12 @@ export default function FruitShape({
   handleOnChangeFruitShape,
   checkedStateFruitShape,
 }) {
+  function handleDoubleClick(type) {
+    Router.push({
+      pathname: "/glossary/allterms",
+      query: { glossary_term: type.toLowerCase() },
+    });
+  }
   const classes = useStyles();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
@@ -60,15 +66,16 @@ export default function FruitShape({
         </Typography>
       </Box>
       <Box className={classes.component}>
-        {fruit_shape_array.map((spine, index) => (
+        {fruit_shape_array.map((shape, index) => (
           <div
-            key={spine}
+            key={shape}
             onClick={() => handleOnChangeFruitShape(index)}
+            onDoubleClick={() => handleDoubleClick(shape)}
             className={`${classes.item} ${
               checkedStateFruitShape[index] ? classes.itemChecked : ""
             }`}
           >
-            {spine}
+            {shape}
           </div>
         ))}
       </Box>
