@@ -2467,7 +2467,7 @@
             menu_object.style("display", "none");
 
             // Generate the URL for the details page
-            const detailsPageURL = `wpfhi/plants/${plantInsectId}`; // Replace '/plant' with the appropriate route path for your Next.js application
+            const detailsPageURL = `plants/${plantInsectId}`; // Replace '/plant' with the appropriate route path for your Next.js application
 
             // Navigate to the details page using window.location
             window.top.location.href = detailsPageURL;
@@ -2531,7 +2531,7 @@
             menu_object.style("display", "none");
 
             // Generate the URL for the details page for insects
-            const detailsPageURL = `/insects/${Insectgenus}?genus=${Insectgenus}&species=${plantInsectId}`;
+            const detailsPageURL = `insects/${Insectgenus}?genus=${Insectgenus}&species=${plantInsectId}`;
             // Navigate to the details page using window.location
             window.top.location.href = detailsPageURL;
           });
