@@ -61,7 +61,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
     />
   ) : (
     <Image
-      src="/plantPhotos/noImage.jpg"
+      src={`${base_path}/noImage.jpg`}
       alt="No Image"
       width={500}
       height={400}

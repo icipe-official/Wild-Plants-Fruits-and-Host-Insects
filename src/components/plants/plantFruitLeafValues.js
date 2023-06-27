@@ -42,7 +42,7 @@ export default function PlantDetailsFeaturesValues() {
   const species = router.query.species || null;
   const classes = useStyles();
 
-  const contextValue = useContext(PlantFamilyGenusSpecies);
+  // const contextValue = useContext(PlantFamilyGenusSpecies);
 
   const { data, error } = useSWR(
     `${base_url}/api/plants/plantsPage/${species}`,
