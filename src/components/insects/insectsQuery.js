@@ -1,49 +1,54 @@
-// import { useState, useEffect } from 'react';
-// import { useRouter } from 'next/router';
-import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Box from "@mui/material/Box";
 import Link from "next/link";
-
 import useSWR from "swr";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import { Button } from "@mui/material";
-import RegionsInsect from "./regeons";
-// import { Container,ButtonBase } from '@mui/material';
-// import Link from 'next/link';
+
 export default function InsectQueryComponent({ genus_data }) {
-  const [selectedIndexPlant, setSelectedIndexPlant] = useState(0);
-  const [selected, setSelectedItem] = useState(null);
+  const [selectedSpecies, setSelectedSpecies] = useState(null);
+  const [data, setData] = useState(genus_data); // Add state for genus_data
   const router = useRouter();
-  const { genus } = router.query;
-  ////console.log('species');
-  ////console.log(genus);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  function mapStateToProps(state) {
-    return { count: state.count };
-  }
-  ////console.log('genus list  side');
-  ////console.log(genus_data);
-  const species = genus_data[selectedIndex].species_name;
+  const { genus, species } = router.query;
 
-  const handleItemClick = (specie, index) => {
-    setSelectedIndex(index);
+  useEffect(() => {
+    // Find the species object whose ID matches the query parameter
+    const selectedSpecies = genus_data.find(
+      (specie) => specie.id === parseInt(species)
+    );
+    if (selectedSpecies) {
+      setSelectedSpecies(selectedSpecies);
+    }
+
+    // Move the selected species to the beginning of the array
+    if (selectedSpecies && genus_data.length > 1) {
+      const filteredSpecies = genus_data.filter(
+        (specie) => specie.id !== selectedSpecies.id
+      );
+      setSelectedSpecies(selectedSpecies);
+      setData([selectedSpecies, ...filteredSpecies]); // Use setData to update genus_data
+    }
+  }, [species, genus_data]);
+
+  const handleItemClick = (specie) => {
+    setSelectedSpecies(specie);
   };
-  const handlebacknavigate = (event) => {
-    const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+  const handleBackNavigate = () => {
+    const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
     Router.push(`${base_url}/insects`);
   };
-  if (genus_data) {
+
+  if (data) {
+    // Update variable name from genus_data to data
     return (
       <Box sx={{ marginTop: 6 }}>
         <Box sx={{ marginTop: "1rem", fontWeight: "bold" }}>
-          {genus_data.length} Insect Species retrieved. Click each specie for
-          details
+          {data.length} Insect Species retrieved. Click each specie for details
         </Box>
         <Box>
-          <Button onClick={() => handlebacknavigate(event)}>
-            Back to Insects page
-          </Button>
+          <Button onClick={handleBackNavigate}>Back to Insects page</Button>
         </Box>
         <Box
           sx={{
@@ -53,20 +58,20 @@ export default function InsectQueryComponent({ genus_data }) {
             border: "1px solid #ccc",
           }}
         >
-          {" "}
-          {genus_data.map((specie, index) => (
+          {data.map((specie) => (
             <Box
               key={specie.id}
               sx={{
                 backgroundColor:
-                  index === 0 && selectedIndex !== 0
-                    ? "inherit"
-                    : selectedIndex === index
+                  selectedSpecies && selectedSpecies.id === specie.id
                     ? "gray"
                     : "inherit",
-                color: selectedIndex === index ? "white" : "black",
+                color:
+                  selectedSpecies && selectedSpecies.id === specie.id
+                    ? "white"
+                    : "black",
               }}
-              onClick={() => handleItemClick(specie, index)}
+              onClick={() => handleItemClick(specie)}
             >
               <Link
                 href={{
@@ -76,10 +81,8 @@ export default function InsectQueryComponent({ genus_data }) {
                     species: specie.id,
                   },
                 }}
-                // as={`/insects/${specie.insect_genera.genus_name}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
-                {" "}
                 {specie.insect_genera.genus_name} {specie.species_name}
               </Link>
             </Box>
@@ -89,4 +92,6 @@ export default function InsectQueryComponent({ genus_data }) {
       </Box>
     );
   }
+
+  return null;
 }
