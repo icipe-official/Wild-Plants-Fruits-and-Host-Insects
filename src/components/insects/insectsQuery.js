@@ -8,7 +8,7 @@ import { Button } from "@mui/material";
 
 export default function InsectQueryComponent({ genus_data }) {
   const [selectedSpecies, setSelectedSpecies] = useState(null);
-  const [data, setData] = useState(genus_data); // Add state for genus_data
+  const [initialLoad, setInitialLoad] = useState(false); // Track initial load
   const router = useRouter();
   const { genus, species } = router.query;
 
@@ -20,15 +20,7 @@ export default function InsectQueryComponent({ genus_data }) {
     if (selectedSpecies) {
       setSelectedSpecies(selectedSpecies);
     }
-
-    // Move the selected species to the beginning of the array
-    if (selectedSpecies && genus_data.length > 1) {
-      const filteredSpecies = genus_data.filter(
-        (specie) => specie.id !== selectedSpecies.id
-      );
-      setSelectedSpecies(selectedSpecies);
-      setData([selectedSpecies, ...filteredSpecies]); // Use setData to update genus_data
-    }
+    setInitialLoad(true); // Set initial load to true after the first render
   }, [species, genus_data]);
 
   const handleItemClick = (specie) => {
@@ -40,12 +32,21 @@ export default function InsectQueryComponent({ genus_data }) {
     Router.push(`${base_url}/insects`);
   };
 
-  if (data) {
-    // Update variable name from genus_data to data
+  if (genus_data) {
+    let sortedGenusData = [...genus_data];
+
+    if (initialLoad && selectedSpecies) {
+      sortedGenusData = sortedGenusData.filter(
+        (specie) => specie.id !== selectedSpecies.id
+      );
+      sortedGenusData.unshift(selectedSpecies);
+    }
+
     return (
       <Box sx={{ marginTop: 6 }}>
         <Box sx={{ marginTop: "1rem", fontWeight: "bold" }}>
-          {data.length} Insect Species retrieved. Click each specie for details
+          {genus_data.length} Insect Species retrieved. Click each specie for
+          details
         </Box>
         <Box>
           <Button onClick={handleBackNavigate}>Back to Insects page</Button>
@@ -58,7 +59,7 @@ export default function InsectQueryComponent({ genus_data }) {
             border: "1px solid #ccc",
           }}
         >
-          {data.map((specie) => (
+          {sortedGenusData.map((specie) => (
             <Box
               key={specie.id}
               sx={{
