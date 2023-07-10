@@ -257,7 +257,10 @@ export default function PhylogenyMafft() {
           let counter = 1;
           if (obj.insects_coi.length > 0) {
             obj.insects_coi.forEach((insect) => {
-              if (insect.nucleotide !== null && insect.length > 658) {
+              if (
+                insect.nucleotide !== null &&
+                insect.nucleotide.length >= 658
+              ) {
                 const name =
                   obj.insect_genera.genus_name +
                   "_" +
@@ -388,7 +391,10 @@ export default function PhylogenyMafft() {
           if (obj.insects_coi.length > 0) {
             obj.insects_coi.forEach((insect) => {
               //filter sequences whose length is less than 658
-              if (insect.nucleotide !== null && insect.length > 658) {
+              if (
+                insect.nucleotide !== null &&
+                insect.nucleotide.length >= 658
+              ) {
                 const name =
                   obj.insect_genera.genus_name +
                   "_" +
