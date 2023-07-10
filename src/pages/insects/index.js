@@ -1,5 +1,4 @@
-import { Container, Box, Grid } from "@mui/material";
-import { useMediaQuery } from "@mui/material";
+import { Container, Box, Grid, useMediaQuery } from "@mui/material";
 
 import { useState } from "react";
 // import Order from "../src/components/insects/dipteraTephritidae";
@@ -14,9 +13,10 @@ import { makeStyles } from "@mui/styles";
 import { TreeView, TreeItem } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Insectssearch from "components/insects/search";
 const drawerWidth = 240;
 
-//Dynamic imports to avoid hydration error. ensure serverdide and client side rendering are the same
+// Dynamic imports to avoid hydration error. ensure serverdide and client side rendering are the same
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -78,11 +78,6 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
     borderBottom: "1px solid white",
   },
-  // cancelicon: {
-  //   // position: 'absolute',
-  //   marginLeft: 7,
-  //   right: 0,
-  // },
 }));
 
 export default function order(props) {
@@ -100,9 +95,9 @@ export default function order(props) {
   };
   const [menuOpen, setMenuOpen] = useState(false);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-  console.log("menuOpen");
+  ////console.log('menuOpen');
   return (
-    <Container sx={{ marginTop: 8 }}>
+    <Container sx={{ marginTop: 12 }}>
       {isSmallScreen ? (
         <TreeView
           className={classes.root}
@@ -111,6 +106,10 @@ export default function order(props) {
           selected={selectedNode}
           onNodeSelect={handleNodeSelect}
         >
+          {/* <TreeItem nodeId="70" label="Search"> */}
+          <Insectssearch />
+          {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
+          {/* </TreeItem> */}
           <TreeItem nodeId="1" label="Diptera">
             <DipteraTephridiae2Clientside />
             {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
@@ -136,23 +135,28 @@ export default function order(props) {
           </TreeItem>
         </TreeView>
       ) : (
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={3}>
-            <DipteraTephridiae2Clientside />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <LepidopteraClientside />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <ColeopteraComponent />
-          </Grid>
-          <Grid item xs={12} md={3} lg={3}>
-            <HymenopteraBraconidaeComponent />
+        <>
+          <Box>
+            <Insectssearch />
+          </Box>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={3}>
+              <DipteraTephridiae2Clientside />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <LepidopteraClientside />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <ColeopteraComponent />
+            </Grid>
+            <Grid item xs={12} md={3} lg={3}>
+              <HymenopteraBraconidaeComponent />
 
-            <HymenopterahymenopteraIchneumonoidae />
-            <OtherHymenopteracomponent />
+              <HymenopterahymenopteraIchneumonoidae />
+              <OtherHymenopteracomponent />
+            </Grid>
           </Grid>
-        </Grid>
+        </>
       )}{" "}
     </Container>
   );
