@@ -5,18 +5,19 @@ import InsectQuery2 from "components/insects/insectQuery2";
 import FruitsReared from "components/insects/fruitsReared";
 import RegionsInsect from "components/insects/regeons";
 import InsectPhotos from "components/insects/photo";
+
 export default function Inects(props) {
-  // console.log("props.insect_data client side");
-  // console.log(props.insect_data);
+  // ////console.log("props.insect_data client side");
+  // ////console.log(props.insect_data);
 
-  // console.log("props.fruits reared client side");
-  // console.log(props.fruits_reared_data);
+  // ////console.log("props.fruits reared client side");
+  // ////console.log(props.fruits_reared_data);
 
-  // console.log("props.regions_collected_data client side");
-  // console.log(props.regions_collected_data);
+  // ////console.log("props.regions_collected_data client side");
+  // ////console.log(props.regions_collected_data);
 
-  // console.log("props.photos_data client side");
-  // console.log(props.photos_data);
+  // ////console.log("props.photos_data client side");
+  // ////console.log(props.photos_data);
   return (
     <Container>
       <Box sx={{ display: "flex" }}>
@@ -37,15 +38,15 @@ export default function Inects(props) {
 
 // //fetch data for preparing page fior insects
 // export async function getServerSideProps(context) {
-//   console.log("path for i details");
+//   ////console.log("path for i details");
 //   //extract query params from url
 //   const genus = context.query.genus;
 //   const selected_species = context.query.species_name;
-//   console.log("genus selected serverside");
-//   console.log(genus);
-//   console.log("species selected serverside");
-//   console.log(selected_species);
-//   console.log("http://localhost:3000/api/insects/" + genus);
+//   ////console.log("genus selected serverside");
+//   ////console.log(genus);
+//   ////console.log("species selected serverside");
+//   ////console.log(selected_species);
+//   ////console.log("http://localhost:3000/api/insects/" + genus);
 
 //   //define the data to be returned
 //   const props = {};
@@ -54,7 +55,7 @@ export default function Inects(props) {
 //   if (genus) {
 //     const res_genus = await fetch(`http://localhost:3000/api/insects/${genus}`);
 //     const insect_data = await res_genus.json();
-//     console.log("insect_data server side");
+//     ////console.log("insect_data server side");
 
 //     // fruits reared data
 //     // Set the insects and genus props if they are defined
@@ -72,8 +73,8 @@ export default function Inects(props) {
 //       `http://localhost:3000/api/insects/fruitsRared/${selected_species}`
 //     );
 //     const fruits_reared_data = await res_selected_species.json();
-//     console.log("fruits_reared server side");
-//     console.log(fruits_reared_data);
+//     ////console.log("fruits_reared server side");
+//     ////console.log(fruits_reared_data);
 
 //     // Set the insects and genus props if they are defined
 //     if (selected_species) {
@@ -85,16 +86,16 @@ export default function Inects(props) {
 //     `http://localhost:3000/api/insects/regions/${selected_species}`
 //   );
 //   const regions_collected_data = await region.json();
-//   console.log("region_collected_data server side");
-//   console.log(regions_collected_data);
+//   ////console.log("region_collected_data server side");
+//   ////console.log(regions_collected_data);
 
 //   // insect photo data
 //   const photo = await fetch(
 //     `http://localhost:3000/api/insects/photos/${selected_species}`
 //   );
 //   const photos_data = await photo.json();
-//   console.log("photo_data server side");
-//   console.log(photos_data);
+//   ////console.log("photo_data server side");
+//   ////console.log(photos_data);
 //   //
 
 //   // Set any other props that need to be returned
