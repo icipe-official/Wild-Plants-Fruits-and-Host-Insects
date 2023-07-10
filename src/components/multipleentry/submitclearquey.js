@@ -1,13 +1,12 @@
-import { Box, useMediaQuery } from "@mui/material";
-import { Button } from "@mui/material";
+import { Box, useMediaQuery, Button } from '@mui/material';
 
 export default function SubmitClearquery({ handleCancel, handleData }) {
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   return (
     <>
       {!isSmallScreen && (
-        <Box sx={{ width: "100%", marginLeft: "5rem", marginTop: "2rem" }}>
+        <Box sx={{ width: '100%', marginLeft: '5rem', marginTop: '2rem' }}>
           <Box sx={{ padding: 3 }}>
             <Button
               color="success"
@@ -37,7 +36,7 @@ export default function SubmitClearquery({ handleCancel, handleData }) {
         <Box
 
           sx={{
-            display: "flex",
+            display: 'flex',
             // position: "fixed",
             top: 55,
             marginLeft: 0,
@@ -52,7 +51,7 @@ export default function SubmitClearquery({ handleCancel, handleData }) {
                 handleData();
               }}
               style={{
-                height:'70%',
+                height: '70%',
                 width: '100%', // default width for larger screens
                 '@media (max-width: 768px)': { // narrow the width on screens <= 768px
                   width: '30%',
@@ -71,15 +70,14 @@ export default function SubmitClearquery({ handleCancel, handleData }) {
                 handleCancel();
               }}
               style={{
-                height:'70%',
+                height: '70%',
                 width: '100%', // default width for larger screens
                 '@media (max-width: 768px)': { // narrow the width on screens <= 768px
                   width: '30%',
 
                 },
-              }} 
-              
-              
+              }}
+
             >
               Clear Query
             </Button>

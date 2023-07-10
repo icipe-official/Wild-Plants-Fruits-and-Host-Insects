@@ -45,7 +45,7 @@ export default function PlantSpines({
     <Box sx={{ marginLeft: isSmallScreen ? 0 : 2, width: "100%" }}>
       <Box sx={{ paddingTop: "1.5rem" }}>
         <Typography variant="subtitle1" sx={{ color: "maroon" }}>
-          Thorns{" "}
+          Thorns Spines and Prickles{" "}
           {/* <Box
       sx={{
         display: "inline-flex",

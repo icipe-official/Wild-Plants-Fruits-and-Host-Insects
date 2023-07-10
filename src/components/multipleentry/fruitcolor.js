@@ -61,7 +61,7 @@ export default function FruitColor({
         </Typography>
       </Box>
       <Box className={classes.component}>
-        {fruit_color_array.map((spine, index) => (
+        {fruit_color_array.sort().map((spine, index) => (
           <div
             key={spine}
             onClick={() => handleOnChangeColor(index)}

@@ -45,7 +45,7 @@ export default function Leafarrangement({
   function handleDoubleClick(type) {
     Router.push({
       pathname: "/glossary/allterms",
-      query: { glossary_term: type.toLowerCase() },
+      query: { leaf_arrangements: type.toLowerCase() },
     });
   }
   const classes = useStyles();
@@ -67,7 +67,7 @@ export default function Leafarrangement({
         </Typography>
       </Box>
       <Box className={classes.component1}>
-        {leaf_arrangement_array.map((leaf, index) => (
+        {leaf_arrangement_array.sort().map((leaf, index) => (
           <div
             key={leaf}
             onClick={() => handleOnChangeLeafArrangement(index)}

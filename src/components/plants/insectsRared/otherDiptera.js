@@ -47,7 +47,7 @@ export default function OtherDiptera() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((otherdip) => (
+          {data?.map((otherdip) => (
             <TableRow key={otherdip.id}>
               <TableCell key={otherdip.id} className={classes.cell}>
                 {otherdip.insect_families.family_name}

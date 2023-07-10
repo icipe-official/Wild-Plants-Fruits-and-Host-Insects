@@ -6,15 +6,17 @@ import { Box } from "@mui/system";
 const useStyles = makeStyles({
   root: {
     display: "flex",
-    alignItems: "flex-start", // Align items at the start to ensure left margin consistency
+    alignItems: "flex-start",
+    border: "1px solid rgba(0, 0, 0, 0.12)", // Aadd boundary line
     paddingTop: 2,
+    // minHeight: 1,
   },
   card: {
     width: "100%",
   },
   content: {
-    paddingLeft: 20, // Add this line to add left padding to the content
-    margin: -15, // Remove this line to remove negative margin
+    paddingLeft: 20,
+    margin: -15,
   },
 });
 

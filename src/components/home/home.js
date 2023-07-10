@@ -7,18 +7,16 @@ export default function HomePage() {
 
   useEffect(() => {
     const img = new Image();
-    img.src = "/home.jpg";
+    img.src = "/newest_home.png";
     img.onload = () => {
       setImageLoaded(true);
     };
   }, []);
 
   return (
-    <>
+    <Box>
       <Head>
-        <title>
-          Natural History Collection of Wild plants, fruits and insects
-        </title>
+        <title>Wild Fruits and Host Insects of Kenya</title>
         <meta name="description" content="home page" />
       </Head>
       <Box
@@ -28,11 +26,11 @@ export default function HomePage() {
           alignItems: "center",
           justifyContent: "center",
           height: "100%",
-          marginTop: 9,
+          // marginTop: 9,
         }}
       >
         <img
-          src="/home.jpg"
+          src="/newest_home.png"
           alt="Picture of the plant"
           style={{
             display: "block",
@@ -45,6 +43,6 @@ export default function HomePage() {
         />
         {imageLoaded && <Container>{/* Content of the homepage */}</Container>}
       </Box>
-    </>
+    </Box>
   );
 }

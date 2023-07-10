@@ -1,9 +1,9 @@
-import UKWFValues from "./distribution/ukwfareas/ukwfvalues";
 import { Box } from "@mui/system";
-import KsectorValues from "./distribution/KsectorValues";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import KsectorValues from "./distribution/KsectorValues";
+import UKWFValues from "./distribution/ukwfareas/ukwfvalues";
 
 export default function KsectorUKFKeyValues() {
   const [ksectorData, setksectorData] = useState([]);
@@ -12,8 +12,8 @@ export default function KsectorUKFKeyValues() {
   //   const classes = useStyles();
   const router = useRouter();
   const species = router.query.speciesName;
-  console.log("species");
-  console.log(species);
+  ////console.log('species');
+  ////console.log(species);
   //   useEffect(() => {
   //     fetch(`/api/plantsPage/${species}`)
   //       .then((res) => res.json())
@@ -35,8 +35,8 @@ export default function KsectorUKFKeyValues() {
   // fetch(`/api/plantsPage/${species}`)
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
-  console.log("ksector client side");
-  console.log(ksectorData);
+  ////console.log('ksector client side');
+  ////console.log(ksectorData);
   return (
     <Box sx={{ display: "flex", marginLeft: 2 }}>
       <Box>

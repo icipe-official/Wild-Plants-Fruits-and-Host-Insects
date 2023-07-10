@@ -31,8 +31,8 @@ export default function InsectsReared({ data }) {
   // // Set the default species to "abutilum hirtum"
   // const species = router.query.speciesName;
   // // const species = router.query.speciesName;
-  // console.log("species");
-  // console.log(species);
+  // ////console.log("species");
+  // ////console.log(species);
   // useEffect(() => {
   //   fetch(`/api/plants/insectsReared/coleoptera/${species}`)
   //     .then((res) => res.json())
@@ -57,56 +57,61 @@ export default function InsectsReared({ data }) {
   // // fetch(`/api/plantsPage/${species}`)
   // if (error) return <div>Failed to load</div>;
   // if (!data) return <div>Loading...</div>;
-  console.log("coleoptera_data client side");
-  console.log(data);
+  ////console.log("coleoptera_data client side");
+  ////console.log(data);
 
   // const [data, setData] = useState([]);
   // useEffect(() => {
   //   setData(coleoptera_data);
   // }, [coleoptera_data]);
-  if(data){
-
-  return (
-    <Box sx={{ marginTop: 1, width: "100%", marginBottom: 2 }}>
-      <Table className={classes.table}>
-        <TableHead sx={{ color: "maroon" }}>
-          {/* Coleoptera */}
-          <TableRow>
-            <TableCell className={classes.cell}>Family</TableCell>
-            <TableCell className={classes.cell}>Species</TableCell>
-            <TableCell className={classes.cell}>Link</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data?.map((col,index) => (
-            <TableRow key={index}>
-              <TableCell key={index} className={classes.cell}>
-                {col.insect_families.family_name}
-              </TableCell>
-              <TableCell key={index} className={classes.cell}>
-                {col.insect_genera.genus_name + " " + col.species_name}
-              </TableCell>
-              <TableCell key={index} className={classes.cell}>
-              <Link
-      href={{
-        pathname: `/insects/${col.insect_genera.id}`,
-        query: {
-          genus: col.insect_genera.id,
-          species: col.id,
-        },
-      }}
-      // as={`/insects/${col.insect_genera.id}`}
-    >
-      Go to Insect detail page
-    </Link>
-              </TableCell>
+  if (data) {
+    return (
+      <Box sx={{ marginTop: 1, width: "100%", marginBottom: 2 }}>
+        <Table className={classes.table}>
+          <TableHead sx={{ color: "maroon" }}>
+            {/* Coleoptera */}
+            <TableRow>
+              <TableCell className={classes.cell}>Family</TableCell>
+              <TableCell className={classes.cell}>Species</TableCell>
+              <TableCell className={classes.cell}>Link</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Box>
-  );
-}}
+          </TableHead>
+          <TableBody>
+            {data?.map((col, index) => (
+              <TableRow key={index}>
+                <TableCell key={index} className={classes.cell}>
+                  {col.insect_families.family_name}
+                </TableCell>
+                <TableCell key={index} className={classes.cell}>
+                  {col.insect_genera.genus_name + " " + col.species_name}
+                </TableCell>
+                <TableCell key={index} className={classes.cell}>
+                  <Link
+                    href={{
+                      pathname: `/insects/${col.insect_genera.id}`,
+                      query: {
+                        genus: col.insect_genera.id,
+                        species: col.id,
+                        speciesName:
+                          col.insect_genera.genus_name +
+                          " " +
+                          col.species_name.replace(/\.\s*\d+/g, "").trim(),
+                        order: col.insect_orders.order_name,
+                      },
+                    }}
+                    // as={`/insects/${col.insect_genera.id}`}
+                  >
+                    Go to Insect detail page
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
+    );
+  }
+}
 
 // const handleClick = (genus) => {
 //   Router.push({

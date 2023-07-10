@@ -33,15 +33,6 @@ export default function InsectQueryComponent({ genus_data }) {
   };
 
   if (genus_data) {
-    let sortedGenusData = [...genus_data];
-
-    if (initialLoad && selectedSpecies) {
-      sortedGenusData = sortedGenusData.filter(
-        (specie) => specie.id !== selectedSpecies.id
-      );
-      sortedGenusData.unshift(selectedSpecies);
-    }
-
     return (
       <Box sx={{ marginTop: 6 }}>
         <Box sx={{ marginTop: "1rem", fontWeight: "bold" }}>
@@ -59,7 +50,7 @@ export default function InsectQueryComponent({ genus_data }) {
             border: "1px solid #ccc",
           }}
         >
-          {sortedGenusData.map((specie) => (
+          {genus_data.map((specie) => (
             <Box
               key={specie.id}
               sx={{

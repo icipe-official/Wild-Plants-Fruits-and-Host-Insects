@@ -17,7 +17,10 @@ import {
   Container,
   FormControl,
   IconButton,
+  InputBase,
   InputLabel,
+  OutlinedInput,
+  Paper,
   TextField,
   useMediaQuery,
 } from "@mui/material";
@@ -31,6 +34,8 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function PlantFamilyGenusSpecies({ defaultValues }) {
   const router = useRouter();
+  // const { family } = router.query.familyName;
+
   // manage sate of id's of selected plant family genus and species
   const [familyId, setFamilyId] = useState("");
   const [genusId, setGenusId] = useState("");
@@ -47,25 +52,99 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
   };
 
   const handleSearch = () => {
-    setFamilyId("");
-    setGenusId("");
-    setSpeciesData([]);
-    setFamilyData([]);
-    setSpeciesId("");
+    if (searchTerm.length > 1) {
+      setFamilyId("");
+      setGenusId("");
+      setSpeciesData([]);
+      setFamilyData([]);
+      // setSpeciesId(speciesId);
+      setGenusId(genusName);
+      setSpeciesData("");
 
-    // Filter the data based on the search term
-    const filteredSpecies = data.filter((species) => {
-      const speciesName = `${species.plant_genera.genus_name} ${species.species_name}`;
-      return speciesName.toLowerCase().includes(searchTerm.toLowerCase());
-    });
+      // Filter the data based on the search term
+      // const filteredSpecies = data.filter((species) => {
+      //   const speciesName = `${species.plant_genera.genus_name} ${species.species_name}`;
+      //   return speciesName.toLowerCase().includes(searchTerm.toLowerCase());
+      // });
+      const filteredSpecies = data.filter((species) => {
+        const speciesName = `${species.plant_genera.genus_name} ${species.species_name}`;
+        const wordRegex = new RegExp(`\\b${searchTerm}\\b`, "i");
+        return wordRegex.test(speciesName);
+      });
 
-    if (filteredSpecies.length > 0) {
-      const speciesId = filteredSpecies[0].id;
-      // Redirect to the species detail page
-      router.push(`/plants/${speciesId}`);
+      // setLoaded(true);
+
+      // const specie = filteredgenus[0]; // Assuming filteredgenus is an array containing species objects
+
+      if (filteredSpecies.length > 0) {
+        setSpeciesData([]);
+        setFamilyId("");
+        // setSearchTerm("");
+        //filtered species for the selected genus
+        const filteredgenus = data.filter(
+          (genus) => genus.plant_genera.genus_name === genusName
+        );
+        const specie = filteredgenus[0]; // Assuming filteredgenus is an array containing species objects
+
+        const filteredsearch = data.filter(
+          (genus) => genus.plant_genera.genus_name === genusName
+        );
+        const sortesearch = filteredsearch.sort((a, b) => {
+          if (a.genus < b.genus) {
+            return -1;
+          }
+          if (a.genus > b.genus) {
+            return 1;
+          }
+          return 0;
+        });
+        setGenusId(filteredSpecies[0].plant_genera.genus_name);
+        console.log("genusData");
+        const speciesId = filteredSpecies[0]?.id;
+
+        // setGenusData(filteredgenus);
+        setFamilyData(filteredgenus);
+        setGenusData(filteredSpecies);
+
+        // console.log(filteredSpecies[0].species_name);
+        // if species name complete, set the value of species name to the one typed
+        // console.log(searchTerm.split(/\s+/));
+
+        // console.log(searchTerm.split(/\s+/).length);
+        // searchTerm.split(/\s+/).length > 1
+        //   ? setSpeciesId(
+        //       filteredSpecies[0].plant_genera.genus_name +
+        //         " " +
+        //         filteredSpecies[0].species_name
+        //     )
+        //   : null;
+
+        // Redirect to the species detail page
+        router.push(
+          `/plants/${speciesId}?familyName=${filteredSpecies[0].plant_genera.plant_families.family_name}&genusName=${filteredSpecies[0].plant_genera.genus_name}`
+
+          // `/plants/${speciesId}?familyName=${filteredSpecies[0].plant_genera.plant_families.family_name}`
+        );
+      }
     }
   };
+  const { familyName } = router.query;
+  let family;
 
+  if (typeof familyName !== "undefined") {
+    family = familyName;
+  } else {
+    family = familyId;
+  }
+  //set the genus in url
+  const { genusName } = router.query;
+  let plantGenus;
+
+  if (typeof genusName !== "undefined") {
+    plantGenus = genusName;
+  } else {
+    plantGenus = genusId;
+  }
   // manage sate  of the data for family, genus and species
   const [familyData, setFamilyData] = useState([]);
   const [genusData, setGenusData] = useState([]);
@@ -86,8 +165,11 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
     const filteredgenus = data.filter(
       (genus) => genus.plant_genera.plant_families.family_name == e.target.value
     );
-    Router.push(`/plants/${filteredgenus.map((specie) => specie.id)[0]}`);
+    const specie = filteredgenus[0]; // Assuming filteredgenus is an array containing species objects
 
+    Router.push(
+      `/plants/${specie.id}?familyName=${specie.plant_genera.plant_families.family_name}&genusName=${specie.plant_genera.genus_name}`
+    );
     const sortedgenus = filteredgenus.sort((a, b) => {
       if (a.genus < b.genus) {
         return -1;
@@ -99,7 +181,6 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
     });
     // setLoaded(true);
     setFamilyData(sortedgenus);
-
     setFamilyId(e.target.value);
     setGenusId("");
     setSpeciesId("");
@@ -115,28 +196,66 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
     });
   };
   const OnGenusChange = (e) => {
-    const filterespecies = familyData.filter(
-      (specie) => specie.plant_genera.genus_name == e.target.value
-    );
-    // setLoaded(true);
-    ////console.log('filterespecies');
+    if (familyId.length !== 0) {
+      const filterespecies = familyData.filter(
+        (specie) => specie.plant_genera.genus_name == e.target.value
+      );
 
-    ////console.log(filterespecies);
-    setGenusData(filterespecies);
-    // (error) => {
-    //   setLoaded(true);
-    //   setError(error);
-    // }
+      // setLoaded(true);
+      ////console.log('filterespecies');
 
-    setGenusId(e.target.value);
-    setSpeciesId("");
-    setSearchTerm("");
+      ////console.log(filterespecies);
+      setGenusData(filterespecies);
+      // (error) => {
+      //   setLoaded(true);
+      //   setError(error);
+      // }
+
+      setGenusId(e.target.value);
+      setSpeciesId("");
+      setSearchTerm("");
+    } else {
+      const filterespecies = data.filter(
+        (specie) => specie.plant_genera.genus_name == e.target.value
+      );
+
+      // setLoaded(true);
+      ////console.log('filterespecies');
+
+      ////console.log(filterespecies);
+      setGenusData(filterespecies);
+      setGenusId("jjjjj");
+      // (error) => {
+      //   setLoaded(true);
+      //   setError(error);
+      // }
+      setFamilyId(filterespecies[0].plant_genera.plant_families.family_name);
+      const filteredgenus = data.filter(
+        (genus) =>
+          genus.plant_genera.plant_families.family_name ==
+          filterespecies[0].plant_genera.plant_families.family_name
+      );
+      //extract specis details
+      const specie = filteredgenus[0]; // Assuming filteredgenus is an array containing species objects
+
+      setFamilyData(filteredgenus);
+      Router.push(
+        `/plants/${specie.id}?familyName=${specie.plant_genera.plant_families.family_name}&genusName=${specie.plant_genera.genus_name}`
+      );
+
+      setGenusId(specie.plant_genera.genus_name);
+      // setSpeciesId("");
+      setSearchTerm("");
+    }
   };
 
   const OnSpeciesChange = (e, specie) => {
     setSpeciesId(`${specie.plant_genera.genus_name} ${specie.species_name}`);
 
-    Router.push(`/plants/${specie.id}`);
+    Router.push(
+      `/plants/${specie.id}?familyName=${specie.plant_genera.plant_families.family_name}&genusName=${specie.plant_genera.genus_name}`
+    );
+    // `/plants/${specie.id}?familyName=${specie.plant_genera.plant_families.family_name}`
 
     // Router.push;
     ////console.log(speciesId);
@@ -152,6 +271,9 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
     ].sort();
     const genus = [
       ...new Set(familyData.map((species) => species.plant_genera.genus_name)),
+    ];
+    const genusAll = [
+      ...new Set(data.map((species) => species.plant_genera.genus_name)),
     ];
 
     return (
@@ -186,7 +308,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
                 marginTop: isSmallScreen ? "0rem" : "1rem",
                 height: "60%",
               }}
-              value={familyId}
+              value={family}
               onDoubleClick={(e) => handleDoubleClick(e)}
               onChange={(e) => OnFamilyChange(e)}
             >
@@ -231,11 +353,17 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
               value={genusId}
               onChange={(e) => OnGenusChange(e)}
             >
-              {genus.map((genus, index) => (
-                <MenuItem key={index} value={genus}>
-                  {genus}
-                </MenuItem>
-              ))}
+              {familyId.length !== 0
+                ? genus.map((genus, index) => (
+                    <MenuItem key={index} value={genus}>
+                      {genus}
+                    </MenuItem>
+                  ))
+                : genusAll.map((genus, index) => (
+                    <MenuItem key={index} value={genus}>
+                      {genus}
+                    </MenuItem>
+                  ))}
             </Select>
           </FormControl>
 
@@ -287,6 +415,40 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
           <Box
             sx={{
               marginTop: isSmallScreen ? "0rem" : "3rem",
+              marginLeft: isSmallScreen ? "1.5rem" : "3rem",
+              width: "100%",
+            }}
+          >
+            <Paper
+              component="form"
+              sx={{
+                p: "2px 4px",
+                display: "flex",
+                alignItems: "center",
+                width: "auto",
+                height: "75%",
+              }}
+            >
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search here..."
+                inputProps={{ "aria-label": "Search species" }}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                value={searchTerm}
+              />
+              <IconButton
+                onClick={handleSearch}
+                type="button"
+                sx={{ p: "10px" }}
+                aria-label="search"
+              >
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+          </Box>
+          {/* <Box
+            sx={{
+              marginTop: isSmallScreen ? "0rem" : "3rem",
               marginLeft: isSmallScreen ? "1.5rem" : 0,
               width: "100%",
             }}
@@ -301,8 +463,9 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                size="small"
+                sx={{ py: 1 }}
                 placeholder="Search species..."
-                // sx={{ height: "60%" }} // Set the width to 80%
               />
               <IconButton
                 onClick={handleSearch}
@@ -314,8 +477,8 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
               >
                 <SearchIcon />
               </IconButton>
-            </Box>
-          </Box>
+            </Box> 
+          </Box>*/}
         </Box>
       </Container>
     );

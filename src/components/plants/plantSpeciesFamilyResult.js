@@ -15,7 +15,7 @@ export default function PlantSpecieFamilyGenusResult({ plants_data }) {
   const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
 
   const classes = useStyles();
-  return plants_data.map((specie) => (
+  return plants_data?.map((specie) => (
     <Box
       key={specie.id}
       sx={{

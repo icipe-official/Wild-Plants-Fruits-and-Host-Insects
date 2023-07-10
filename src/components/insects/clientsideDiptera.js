@@ -181,8 +181,28 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
   // ////console.log(uniqueColeopteraData);
 
   // obtain frst four genus nanmes
-  const firstThreeGenera = unique__diptera_tephtitidae.slice(0, 4);
-  const remainingGenera = unique__diptera_tephtitidae.slice(3);
+  // obtain frst four genus nanmes
+  // const firstThreeGenera = ["Ceratitis", "Dacus"];
+  console.log("unique__diptera_tephtitidae");
+
+  console.log(unique__diptera_tephtitidae);
+  const firstThreeGenera = unique__diptera_tephtitidae.filter(
+    (genus) =>
+      (genus.insect_genera.genus_name === "Ceratitis") |
+      (genus.insect_genera.genus_name === "Dacus") |
+      (genus.insect_genera.genus_name === "Trirhithrum")
+  );
+  console.log("firstThreeGenera");
+
+  console.log(firstThreeGenera);
+  const remainingGenera = unique__diptera_tephtitidae
+    .filter(
+      (genus) =>
+        genus.insect_genera.genus_name !== "Ceratitis" &&
+        genus.insect_genera.genus_name !== "Dacus" &&
+        genus.insect_genera.genus_name !== "Trirhithrum"
+    )
+    .sort();
 
   const unique_other_diptera_data = Array.from(
     new Set(
@@ -207,6 +227,14 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
   // on click, the selected genus name will be passed to getserverside prop function
   // handle genus click
   const handleClick = (genus) => {
+    console.log(
+      data.dipteraTephridiae.filter(
+        (g) => g.insect_genera.genus_name === genus.insect_genera.genus_name
+      )
+    );
+    console.log("genussss");
+
+    console.log(genus);
     Router.push({
       pathname: `/insects/${genus.insect_genera.id}`,
       query: {
@@ -315,7 +343,7 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
           )}
           {selectedGenus && (
             <Box>
-              {remainingGenera.map((genus) => (
+              {remainingGenera.sort().map((genus) => (
                 <ul key={genus.id} className={classes.ul}>
                   <Button
                     classes={{ root: classes.buttongenus }}

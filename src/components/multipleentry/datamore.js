@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+
 export default function DetailPage() {
   const location = useLocation();
   const { data } = location.state || {};

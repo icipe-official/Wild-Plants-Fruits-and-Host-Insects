@@ -1,13 +1,3 @@
-// This functional component implements cascading drop downs for plant Family-Genus-Species
-// Import required libraries
-// define state variables
-// By default, family drop down shows the families available for user to select
-// Selecting family calls the api for genus for the selected family
-// and clears any available data of genus and species from previous search
-// Selecting genus calls an api for fetching species data which are filterd based on the selected genus
-// use Material UI to custom the styles of the page
-
-// 1. Import required libraries
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -23,75 +13,99 @@ import {
 } from "@mui/material";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-// import { Router } from "next/router";
 import Router from "next/router";
 import useSWR from "swr";
 import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from "@mui/icons-material/Clear"; // Import the ClearIcon component
+
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function Insectssearch({ defaultValues }) {
-  // manage sate  of the data for family, genus and species
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { data, error, isLoading } = useSWR(
     `${base_url}/api/insects/species`,
     fetcher
   );
   const router = useRouter();
-  // manage sate of id's of selected plant family genus and species
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {
-    // Filter the data based on the search term
-    const filteredSpecies = data.filter((species) => {
-      // console.log("species");
-
-      // console.log(
-      //   `${species.insect_genera.genus_name.trim()} ${species.species_name.trim()}`
-      // );
-      const speciesName = `${species.insect_genera.genus_name.trim()} ${species.species_name.trim()}`;
-      return speciesName.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-
-    if (filteredSpecies.length > 0) {
-      const speciesId = filteredSpecies[0];
-      console.log(" insect speciesId");
-
-      console.log(speciesId);
-
-      // Redirect to the species detail page
-      router.push({
-        pathname: `/insects/${speciesId.insect_genera.id}`,
-        query: {
-          genus: speciesId.insect_genera.id,
-          species: speciesId.id,
-        },
+    if (searchTerm.length > 1) {
+      const filteredSpecies = data.filter((species) => {
+        const speciesName = `${species.insect_genera.genus_name.trim()} ${species.species_name.trim()}`;
+        const regex = new RegExp(`\\b${searchTerm}\\b`, "i");
+        return regex.test(speciesName);
       });
+
+      if (filteredSpecies.length > 0) {
+        const speciesId = filteredSpecies[0];
+        router.push({
+          pathname: `/insects/${speciesId.insect_genera.id}`,
+          query: {
+            genus: speciesId.insect_genera.id,
+            species: speciesId.id,
+            speciesName:
+              speciesId.insect_genera.genus_name +
+              " " +
+              speciesId.species_name.replace(/\.\s*\d+/g, "").trim(),
+            order: speciesId.insect_orders.order_name,
+          },
+        });
+      }
     }
   };
 
-  ////console.log(speciesId);
+  const handleCancel = () => {
+    setSearchTerm(""); // Clear the search term
+  };
+
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   if (data)
     return (
-      <Container>
-        <Box display="flex" alignItems="center" sx={{ position: "relative" }}>
+      <Box>
+        <Box
+          display="flex"
+          alignItems="center"
+          sx={{
+            position: "relative",
+            width: "100%",
+            marginBottom: 2,
+          }}
+        >
           <TextField
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search species..."
+            placeholder="Search Insect Species..."
+            sx={{
+              flex: 1,
+            }}
           />
+          {searchTerm && ( // Render the ClearIcon if there is a search term
+            <IconButton
+              onClick={handleCancel}
+              sx={{
+                position: "absolute",
+                right: isSmallScreen ? "36px" : "48px", // Adjust the positioning based on screen size
+                top: "50%",
+                transform: "translateY(-50%)",
+              }}
+            >
+              <ClearIcon />
+            </IconButton>
+          )}
           <IconButton
             onClick={handleSearch}
             sx={{
               position: "absolute",
               right: "0",
-              marginRight: "8px",
+              top: "50%",
+              transform: "translateY(-50%)",
             }}
           >
             <SearchIcon />
           </IconButton>
         </Box>
-      </Container>
+      </Box>
     );
 }

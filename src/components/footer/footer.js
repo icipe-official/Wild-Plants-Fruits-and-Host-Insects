@@ -68,7 +68,7 @@ export default function Footer() {
           >
             Insects Associated With the Wild Fruits of Kenya
           </Typography>
-          <Box
+          {/* <Box
             display="flex"
             justifyContent="center"
             // marginTop={2}
@@ -81,7 +81,7 @@ export default function Footer() {
             >
               {isDownloading ? "Downloading..." : "Download Data"}
             </button>
-          </Box>
+          </Box> */}
         </Container>
       </footer>
     </>

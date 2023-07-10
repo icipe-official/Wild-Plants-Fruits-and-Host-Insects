@@ -1,18 +1,19 @@
-import LeafDetailValues from "./Leaf/leafDetailValues";
-import PlantDetailValues from "./Plant/plantDetailValuesMUI";
-import FruitDetailValues from "./Fruit/fruitDetailValues";
-import { Box } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import LeafDetailValues from './Leaf/leafDetailValues';
+import PlantDetailValues from './Plant/plantDetailValuesMUI';
+import FruitDetailValues from './Fruit/fruitDetailValues';
+
 const useStyles = makeStyles({
   root: {
-    display: "row",
+    display: 'row',
   },
 });
 export default function PlantDetailsFeaturesValues({ plants_data }) {
   const classes = useStyles();
   return (
     <Box className={classes.root} sx={{ marginTop: 2 }}>
-      <Box sx={{ padding: 0.5 }}></Box>
+      <Box sx={{ padding: 0.5 }} />
       <Box sx={{ padding: 0.5 }}>
         <PlantDetailValues plants_data={plants_data} />
       </Box>

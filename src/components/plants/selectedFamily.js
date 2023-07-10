@@ -1,8 +1,8 @@
-import { createContext, useState } from "react";
-//maintain state across pages
+import { createContext, useState } from 'react';
+// maintain state across pages
 export const SelectedItemsContext = createContext([]);
 
-export const SelectedItemsProvider = ({ children }) => {
+export function SelectedItemsProvider({ children }) {
   const [selectedItems, setSelectedItems] = useState([]);
 
   return (
@@ -10,4 +10,4 @@ export const SelectedItemsProvider = ({ children }) => {
       {children}
     </SelectedItemsContext.Provider>
   );
-};
+}

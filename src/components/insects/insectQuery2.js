@@ -20,8 +20,8 @@ export default function InsectQuery2() {
   const { genus, order } = router.query;
 
   const species = parseInt(router.query.species);
-  console.log("species");
-  console.log(genus);
+  // console.log("species");
+  // console.log(genus);
   // const base_url = "http://localhost:3000";
 
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -37,7 +37,7 @@ export default function InsectQuery2() {
 
   if (error) return <div>Error fetching data</div>;
   if (isLoading || !data) return <div>Loading...</div>;
-  console.log("species");
+  // console.log("species");
 
   // insect data
   // const { data: insect_data, error: insectserror } = useSWR(
@@ -49,29 +49,29 @@ export default function InsectQuery2() {
   //     setSpecciesdata(species);
   //   }
   // }, [genus_data]);
-  console.log("species insect page");
-  console.log(typeof species);
-  console.log("genus_data");
+  // console.log("species insect page");
+  // console.log(typeof species);
+  // console.log("genus_data");
   const { speciesName } = router.query;
-  console.log(data);
-  console.log("insect_data");
+  // console.log(data);
+  // console.log("insect_data");
   // console.log(insect_data);
 
-  console.log("selected_species client side");
+  // console.log("selected_species client side");
   if (data) {
     const fruits = data.map((fruit) =>
       fruit.plants_insects.map((specie) => specie.plants)
     )[0]; // [0] extract the first object
-    console.log("fruits reatred Fruits functionsl component");
-    console.log(fruits);
+    // console.log("fruits reatred Fruits functionsl component");
+    // console.log(fruits);
 
-    console.log("fruits_reared");
-    console.log(fruits);
-    console.log("singleList");
+    // console.log("fruits_reared");
+    // console.log(fruits);
+    // console.log("singleList");
 
     const insects_region = data.filter((insect) => insect.id === species);
-    console.log("insect region");
-    console.log(insects_region);
+    // console.log("insect region");
+    // console.log(insects_region);
 
     const coordinates = insects_region.map((specie) =>
       specie.insects_regions.map((region) => {
@@ -80,8 +80,8 @@ export default function InsectQuery2() {
         return [longitude, latitude];
       })
     );
-    console.log("coordinates");
-    console.log(coordinates.map((c) => c));
+    // console.log("coordinates");
+    // console.log(coordinates.map((c) => c));
 
     return (
       <Grid

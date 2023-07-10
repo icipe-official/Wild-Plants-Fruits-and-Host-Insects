@@ -30,16 +30,16 @@ export default function GroupcheckboxAPI({fruit_color_data,fruit_size_data}){
           color:'yellow'
         },
       }))
-console.log('fruit_size_data') 
-console.log(Array.from(fruit_size_data).map(specie =>(
+////console.log('fruit_size_data') 
+////console.log(Array.from(fruit_size_data).map(specie =>(
   // return a list of species
 specie.size)) ) // data object with list of dictionaries
-//console.log('fruit_color-data') 
-console.log(Array.from(fruit_color_data).map(specie =>(
+//////console.log('fruit_color-data') 
+////console.log(Array.from(fruit_color_data).map(specie =>(
   // return a list of fruit color
 specie.color)) ) 
 // Extract arrays from the query params
- //console.log(fruit_size.fruit_size.fruit_size)
+ //////console.log(fruit_size.fruit_size.fruit_size)
  const fruit_size_array= Array.from(fruit_size_data).map(specie =>(
     // return a list of species
   specie.size)) 
@@ -184,34 +184,34 @@ const handleCancel=()=>{
        
 
 
-// // console.log('Themeprovidetr');
+// // ////console.log('Themeprovidetr');
 // const [checkedStateSize, setCheckedStateSize] = useState(
 //   new Array(fruit_size_array.length).fill(false)
 // );
 
-console.log('query')
-console.log(query)
-console.log('JSON.stringfy(query)')
-console.log(JSON.stringify(query))
+////console.log('query')
+////console.log(query)
+////console.log('JSON.stringfy(query)')
+////console.log(JSON.stringify(query))
 const j= JSON.stringify(query)
-console.log('/api/plants/prisma_api/multipleEntry/multipletrial?filters='+j)
-//console.log(checkedStateSize)
-console.log('checkedStateColor')
-console.log(checkedStateColor)
-// console.log(query)
-// console.log('fruit_size_array')
-// console.log(fruit_size_array)
-console.log('query')
-console.log(query)
-  //console.log(fr)
-//console.log('data')
-console.log(Array.from(data))
-console.log('data')
-console.log(data)
-console.log(selectedSpecies)
+////console.log('/api/plants/prisma_api/multipleEntry/multipletrial?filters='+j)
+//////console.log(checkedStateSize)
+////console.log('checkedStateColor')
+////console.log(checkedStateColor)
+// ////console.log(query)
+// ////console.log('fruit_size_array')
+// ////console.log(fruit_size_array)
+////console.log('query')
+////console.log(query)
+  //////console.log(fr)
+//////console.log('data')
+////console.log(Array.from(data))
+////console.log('data')
+////console.log(data)
+////console.log(selectedSpecies)
 //extract species name
-// console.log(selectedSpecies.split(' ').slice(1, ).join(' '))// split with space, splice to get species name
-// console.log('/plants/prisma_api/'+ selectedSpecies.split(' ').slice(1, ).join(' '))// split with space, splice to get species name
+// ////console.log(selectedSpecies.split(' ').slice(1, ).join(' '))// split with space, splice to get species name
+// ////console.log('/plants/prisma_api/'+ selectedSpecies.split(' ').slice(1, ).join(' '))// split with space, splice to get species name
 
 
 {/* <Stack direction="row" spacing={2}> */}
@@ -221,8 +221,8 @@ console.log(selectedSpecies)
 //     return -1;
 //   }
 // });
-// console.log('data-sorted')
-// console.log(data_sorted)
+// ////console.log('data-sorted')
+// ////console.log(data_sorted)
 return(
     <>
     <Container sx={{ display:'flex'}}>

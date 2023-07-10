@@ -35,44 +35,11 @@ const useStyles = makeStyles({
  * @returns {JSX.Element} A Card component that displays the name, description, and details of the plant.
  */
 export default function PlantDescriptioncomponent({ plants_data }) {
-  const [descriptionData, setdescriptionData] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  // const [error, setError] = useState(null);
-  //   const classes = useStyles();
-  // const router = useRouter();
-  // const species = router.query.speciesName;
-  // console.log("species description");
-  // console.log(species);
-  // // useEffect(() => {
-  // //   fetch(`/api/plantsPage/${species}`)
-  // //     .then((res) => res.json())
-  // //     .then(
-  // //       (result) => {
-  // //         setLoaded(true);
-  // //         setdescriptionData(result);
-  // //       },
-  // //       (error) => {
-  // //         setLoaded(true);
-  // //         setError(error);
-  // //       }
-  // //     );
-  // // }, []);
-  // const fetcher = (url) => fetch(url).then((r) => r.json());
-  // const { data, error } = useSWR(`/api/plantsPage/${species}`, fetcher);
-  // // Use the useStyles function to get styles
-  // const classes = useStyles();
-  // Use the useState hook to manage state
-  const [expanded, setExpanded] = useState(false);
-
-  // Define handleExpandClick function to handle button click
-
   if (data && data.length > 0) {
-    console.log(" data description");
+    ////console.log(' data description');
 
-    console.log(data);
+    ////console.log(data);
 
-    // Return the card component
     return <PlantDescription plants_data={data} />;
-    // <PlantDescription />;
   }
 }

@@ -45,7 +45,7 @@ export default function Leaftype({
   function handleDoubleClick(type) {
     Router.push({
       pathname: "/glossary/allterms",
-      query: { glossary_term: type.toLowerCase() },
+      query: { leaf_margins: type.toLowerCase() },
     });
   }
   const classes = useStyles();
@@ -70,7 +70,7 @@ export default function Leaftype({
         </Typography>
       </Box>
       <Box className={classes.component}>
-        {leaf_type_array.map((type, index) => (
+        {leaf_type_array.sort().map((type, index) => (
           <div
             key={type}
             onClick={() => handleOnChangeLeafType(index)}

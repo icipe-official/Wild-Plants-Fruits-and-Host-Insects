@@ -45,7 +45,7 @@ export default function LeafMargin({
   function handleDoubleClick(type) {
     Router.push({
       pathname: "/glossary/allterms",
-      query: { glossary_term: type.toLowerCase() },
+      query: { leaf_margins: type.toLowerCase() },
     });
   }
   //
@@ -68,7 +68,7 @@ export default function LeafMargin({
         </Typography>
       </Box>
       <Box className={classes.component1}>
-        {leaf_margins_array.map((margin, index) => (
+        {leaf_margins_array.sort().map((margin, index) => (
           <div
             key={margin}
             onClick={() => handleOnChangeLeafMargins(index)}

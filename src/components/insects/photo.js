@@ -63,7 +63,7 @@ export default function InsectPhotos({ photos_data }) {
             }}
           />
           <Image
-            src={`/insectPhotos/${photos[open].photo_id}.jpg`}
+            src={`/photos/insects/${photos[open].photo_id}.jpg`}
             alt="No Image"
             width={500}
             height={400}
@@ -83,7 +83,7 @@ export default function InsectPhotos({ photos_data }) {
       ) : (
         <Box>
           <Image
-            src="/plantPhotos/noImage.jpg"
+            src="/photos/plants/noImage.jpg"
             alt="No Image"
             width={500}
             height={400}
@@ -111,7 +111,7 @@ export default function InsectPhotos({ photos_data }) {
           {hasPhotos ? (
             <>
               <Image
-                src={`/insectPhotos/${photos[open].photo_id}.jpg`}
+                src={`/photos/insects/${photos[open].photo_id}.jpg`}
                 alt="No Image"
                 width={showImage.isFullScreen ? 800 : 600}
                 height={showImage.isFullScreen ? 600 : 400}
@@ -130,7 +130,7 @@ export default function InsectPhotos({ photos_data }) {
             </>
           ) : (
             <Image
-              src="/plantPhotos/noImage.jpg"
+              src="/photos/plants/noImage.jpg"
               alt="No Image"
               width={showImage.isFullScreen ? 800 : 600}
               height={showImage.isFullScreen ? 600 : 400}

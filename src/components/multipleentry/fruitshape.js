@@ -44,7 +44,7 @@ export default function FruitShape({
   function handleDoubleClick(type) {
     Router.push({
       pathname: "/glossary/allterms",
-      query: { glossary_term: type.toLowerCase() },
+      query: { fruit_shapes: type.toLowerCase() },
     });
   }
   const classes = useStyles();
@@ -66,7 +66,7 @@ export default function FruitShape({
         </Typography>
       </Box>
       <Box className={classes.component}>
-        {fruit_shape_array.map((shape, index) => (
+        {fruit_shape_array.sort().map((shape, index) => (
           <div
             key={shape}
             onClick={() => handleOnChangeFruitShape(index)}

@@ -1,11 +1,14 @@
-import React from "react";
-import { Card, CardContent, Container, Grid, Stack } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { AddBox, StackedBarChart } from "@mui/icons-material";
-import { Box } from "@mui/system";
+import React from 'react';
+import {
+  Card, CardContent, Container, Grid, Stack,
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { AddBox, StackedBarChart } from '@mui/icons-material';
+import { Box } from '@mui/system';
+
 const useStyles = makeStyles({
   root: {
-    display: "flex",
+    display: 'flex',
     // alignItems: 'right',
     // justifyContent: 'left',
     // padding: 2,
@@ -15,7 +18,7 @@ const useStyles = makeStyles({
   // },
   card: {
     width: 200,
-    height: "100%",
+    height: '100%',
   },
   content: {
     // display: 'row',
