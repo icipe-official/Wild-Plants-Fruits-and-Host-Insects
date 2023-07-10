@@ -56,7 +56,7 @@ export default function CombinedSearchPlantsInsects({ defaultValues }) {
     }
 
     // Search logic for insects
-    const filteredInsectSpecies = insectData.filter((species) => {
+    const filteredInsectSpecies = insectData?.filter((species) => {
       const speciesName = `${species.insect_genera.genus_name} ${species.species_name}`;
       const regex = new RegExp(`\\b${searchTerm}\\b`, "i");
       return regex.test(speciesName);

@@ -5,6 +5,7 @@ import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import { ZoomOut } from "@mui/icons-material";
 export default function PhotosComponent({ photos_data, selectedIndex }) {
+  const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
   if (typeof photos_data !== "undefined") {
     const photos = photos_data[selectedIndex]?.plants_photos.map(
       (p) => p.photo_name
@@ -61,7 +62,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
       />
     ) : (
       <Image
-        src="/photos/plants/noImage.jpg"
+        src={`${base_path}/noImage.jpg`}
         alt="No Image"
         width={showImage.isFullScreen ? 800 : 500}
         height={showImage.isFullScreen ? 600 : 400}
