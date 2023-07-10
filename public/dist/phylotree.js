@@ -2465,6 +2465,8 @@
             console.log("dddd");
             console.log(plantInsectId);
             menu_object.style("display", "none");
+            // const speciesName =
+            // node.data.name.split("_")[0] + " " + node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
 
             // Generate the URL for the details page
             const detailsPageURL = `plants/${plantInsectId}`; // Replace '/plant' with the appropriate route path for your Next.js application
@@ -2529,9 +2531,10 @@
             console.log("dddd");
             console.log(plantInsectId);
             menu_object.style("display", "none");
-
+            const speciesName =
+              node.data.name.split("_")[0] + " " + node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
             // Generate the URL for the details page for insects
-            const detailsPageURL = `insects/${Insectgenus}?genus=${Insectgenus}&species=${plantInsectId}`;
+            const detailsPageURL = `insects/${Insectgenus}?genus=${Insectgenus}&species=${plantInsectId}&speciesName=${speciesName}`;
             // Navigate to the details page using window.location
             window.top.location.href = detailsPageURL;
           });

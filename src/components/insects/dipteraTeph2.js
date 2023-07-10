@@ -81,8 +81,11 @@ export default function DipteraTephridiae2Trial({
   ////console.log(other_diptera_data);
 
   // obtain frst four genus nanmes
-  const firstThreeGenera = uniqueColeopteraData.slice(0, 4);
-  const remainingGenera = uniqueColeopteraData.slice(3);
+  // obtain frst four genus nanmes
+  const firstThreeGenera = ["Ceratitis", "Dacus"];
+  const remainingGenera = uniqueColeopteraData.filter(
+    (genus) => !firstThreeGenera.includes(genus)
+  );
   const unique_other_diptera_data = Array.from(
     new Set(other_diptera_data.map((item) => item.insect_families.family_name))
   ).map((name) =>

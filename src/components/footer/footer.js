@@ -66,10 +66,9 @@ export default function Footer() {
             color="white"
             component="p"
           >
-            Natural History Collections of wild Plants, Fruits, and Host insects
-            in Kenya
+            Insects Associated With the Wild Fruits of Kenya
           </Typography>
-          <Box
+          {/* <Box
             display="flex"
             justifyContent="center"
             // marginTop={2}
@@ -82,7 +81,7 @@ export default function Footer() {
             >
               {isDownloading ? "Downloading..." : "Download Data"}
             </button>
-          </Box>
+          </Box> */}
         </Container>
       </footer>
     </>

@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import DynamicValueCard from "../dynamicvaluecard";
 
 export default function FruitDetailValues({ fruits_data }) {
-  return fruits_data.map((specie, index) => (
+  return fruits_data?.map((specie, index) => (
     <Box key={index} sx={{ paddingTop: "1rem", marginRight: "1rem" }}>
       <Box sx={{ color: "red" }}>Fruit</Box>
 

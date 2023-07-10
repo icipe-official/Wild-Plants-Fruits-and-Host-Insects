@@ -6,7 +6,7 @@ import {
   TableBody,
 } from "@mui/material";
 import { Box } from "@mui/system";
-// import { makeStyles } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -23,15 +23,30 @@ export default function InsectsRearedfromPlants() {
   // Set the default species to "abutilum hirtum"
   const { species } = router.query;
 
+  // const species = router.query.speciesName;
+  ////console.log('species');
+  ////console.log(species);
+  // useEffect(() => {
+  //   fetch(`/api/plants/insectsReared/coleoptera/${species}`)
+  //     .then((res) => res.json())
+  //     .then(
+  //       (result) => {
+  //         setLoaded(true);
+  //         setcoleopteraData(result);
+  //       },
+  //       (error) => {
+  //         setLoaded(true);
+  //         setError(error);
+  //       }
+  //     );
+  // }, []);
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
   // const base_url = "http://localhost:3000";
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   //make species id to be one for the plant index page
   const { data, error } = useSWR(
-    `${base_url}/api/plants/Allinsectsreared/${
-      typeof species !== "undefined" ? species : 1
-    }`,
+    `${base_url}/api/plants/Allinsectsreared/1`,
     fetcher
   );
 
@@ -91,12 +106,12 @@ export default function InsectsRearedfromPlants() {
       <Box sx={{ color: "green" }}>Coleoptera (beetles)</Box>
       <InsectsReared data={coleopteraOrders} />
       <Box sx={{ marginBottom: 0, color: "maroon" }}>
-        Lepidoptera: (moths and butterflies)
+        Lepidoptera (moths and butterflies)
       </Box>
       <InsectsReared data={lepidopteraOrders} />
       <Box sx={{ marginBottom: 0, color: "blue" }}>
         {" "}
-        Diptera: Tephridae (fruit flies)
+        Diptera Tephridae(fruit flies)
       </Box>
       <InsectsReared data={diptertephritidaeOrders} />
       <Box sx={{ marginBottom: 0, color: "blue" }}>
@@ -105,7 +120,7 @@ export default function InsectsRearedfromPlants() {
       </Box>
       <InsectsReared data={otherdipteraOrders} />
       <Box sx={{ marginBottom: 0, color: "red" }}>
-        Hymenoptera: (Braconidae: Opiinae) (wasps)
+        Hymenoptera (Braconidae: Opinae) (wasps)
       </Box>
       <InsectsReared data={hymenopteraBraconidae} />
       <Box sx={{ marginBottom: 0, color: "red" }}>

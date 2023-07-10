@@ -48,7 +48,7 @@ export default function Lepidoptera({ lepidoptera_data }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((lep) => (
+          {data?.map((lep) => (
             <TableRow key={lep.id}>
               <TableCell key={lep.id} className={classes.cell}>
                 {lep.insect_families.family_name}

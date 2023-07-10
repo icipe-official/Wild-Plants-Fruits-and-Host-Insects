@@ -20,7 +20,7 @@ export default function LeafDetailValues({ leaves_data }) {
 
   // padding 3 ensures first line is mapped to fruits in the features
 
-  return leaves_data.map((leaf, index) => (
+  return leaves_data?.map((leaf, index) => (
     <Box
       key={index}
       sx={{ paddingTop: "1rem", marginRight: "1rem", marginBottom: 2 }}

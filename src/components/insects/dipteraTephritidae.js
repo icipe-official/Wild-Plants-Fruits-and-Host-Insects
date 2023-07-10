@@ -81,8 +81,11 @@ export default function DipteraTephridiae({
   ////console.log(other_diptera_data);
 
   // obtain frst four genus nanmes
-  const firstThreeGenera = uniqueColeopteraData.slice(0, 4);
-  const remainingGenera = uniqueColeopteraData.slice(3);
+  const firstThreeGenera = ["Ceratitis", "Dacus"];
+  const remainingGenera = uniqueColeopteraData.filter(
+    (genus) => !firstThreeGenera.includes(genus)
+  );
+
   const unique_other_diptera_data = Array.from(
     new Set(other_diptera_data.map((item) => item.insect_families.family_name))
   ).map((name) =>
@@ -91,6 +94,8 @@ export default function DipteraTephridiae({
   // pass the status to the insect details page
   // on click, the selected genus name will be passed to getserverside prop function
   const handleClick = (genus) => {
+    console.log("firstThreeGenera");
+    console.log(firstThreeGenera);
     // setSelectedGenus(genus.insect_genera.genus_name);
     Router.push({
       pathname: "/insects/query",

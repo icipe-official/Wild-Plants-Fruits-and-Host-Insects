@@ -38,7 +38,8 @@ export default function PlantDetailsFeaturesValues() {
 
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const router = useRouter();
-  const species = router.query.species || null;
+  const species =
+    typeof router.query.species !== "undefined" ? router.query.species : null;
   const classes = useStyles();
 
   const { data, error } = useSWR(

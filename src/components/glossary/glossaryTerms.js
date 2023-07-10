@@ -128,16 +128,29 @@ export default function GlossaryAll() {
   const handleItemClick = (specie, index) => {
     setSelectedIndex(index);
   };
+
+  const handleDoubleClick = (specie, index) => {
+    // const url = `/plants/${specie.id}`;
+    // setSelectedIndex(index);
+    router.push(
+      `/plants/${specie.id}?familyName=${specie.plant_genera.plant_families?.family_name}&genusName=${specie}`
+    );
+  };
+
   //handle on click event of the image
   function handleClick(type) {
-    if (type.glossary_term) {
+    // console.log(type);
+    cancel();
+    if (type?.glossary_term) {
       ////console.log("type on click");
       ////console.log(type);
       ////console.log(showPhotos);
       ////console.log("example");
 
       ////console.log(example);
+      // console.log("type");
 
+      // console.log(type);
       setSelectedType(type);
       setShowPhotos(true);
       setSelectedTerm(true);
@@ -145,23 +158,79 @@ export default function GlossaryAll() {
         ...prevQueryInfo,
         [type.glossary_type + "s"]: type?.glossary_term.toLowerCase(),
       }));
+      // console.log("selectedType");
+
+      // console.log(selectedType);
       //empty the query
     }
   }
   useEffect(() => {
+    cancel();
+
     if (glossary && glossaryTerm) {
-      const filteredType = glossary.find(
-        (type) =>
-          type.glossary_term.toLowerCase() === glossaryTerm.toLowerCase()
-      );
+      const filteredType = router.query;
+      //   (type) =>
+      //     type.glossary_term.toLowerCase() === glossaryTerm.toLowerCase()
+      // );
       if (filteredType) {
         handleClick(filteredType);
-        cancel();
       }
     }
   }, [glossary, glossaryTerm]);
-  const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
+  // useEffect(() => {
+  //   if (router.query.glossart === "y") {
+  //     const newUrl = window.location.pathname + window.location.search;
+  //     const newQuery = { ...router.query };
+  //     delete newQuery.glossart;
 
+  //     router.replace({
+  //       pathname: newUrl,
+  //       query: newQuery,
+  //     });
+  //   }
+  // }, [router.query]);
+  useEffect(() => {
+    const currentQuery = { ...router.query };
+
+    // Iterate over the query parameters
+    for (const key in currentQuery) {
+      const value = currentQuery[key];
+
+      // Update the corresponding key in the query state dynamically
+      if (key in query) {
+        setQuery((prevQuery) => ({
+          ...prevQuery,
+          [key]: Array.isArray(value) ? value : [value],
+        }));
+      }
+
+      // Extract the dynamic URL parameter
+      const dynamicParam = Object.values(query).find(
+        (value) => typeof value === "string"
+      );
+      console.log("dynamicParam");
+      //pass in key e.g fruit_types and value e.g achene to the handleclick function
+      // console.log(key);
+
+      let typeCapitalize = value.charAt(0).toUpperCase() + value.slice(1);
+
+      // Filter the glossary items based on the conditions
+
+      const filterdGlossary = glossary?.filter((item) => {
+        return (
+          item.glossary_type === key.replace(/s$/, "") &&
+          item.glossary_term === typeCapitalize
+        );
+      });
+      if (typeof filterdGlossary !== "undefined") {
+        // console.log(filterdGlossary);
+        // Call handleClick with the dynamicParam
+        handleClick(filterdGlossary[0]);
+      }
+    }
+  }, [router.query]);
+  const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
+  // console.log(query);
   function handleClose() {
     setSelectedType(null);
     setShowPhotos(false);
@@ -175,8 +244,9 @@ export default function GlossaryAll() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          height: isSmallScreen ? "100%" : "80%",
-          paddingBottom: "65%", // Adjust this value to create space for the footer
+          height: isSmallScreen ? "100%" : "50%",
+          paddingLeft: isSmallScreen ? 0 : "10%", // Adjust the left margin for large screens
+          paddingRight: isSmallScreen ? 0 : "10%", // Adjust the right margin for large screens
         }}
       >
         {/* Content goes here */}
@@ -204,8 +274,8 @@ export default function GlossaryAll() {
     );
 
   if (glossary && example) {
-    ////console.log("glossary");
-    ////console.log(glossary);
+    // console.log("glossary");
+    // console.log(glossary);
     ////console.log(glossary);
 
     // ////console.log("example");
@@ -238,6 +308,7 @@ export default function GlossaryAll() {
     ////console.log("photos");
     ////console.log(filtered_examples.map((photo) => photo.plants_photos));
     // \\use the selected index status to get the specific photls
+    // const quey=
     const photos = filtered_examples.map((photo) => photo.plants_photos)[
       selectedIndex
     ];
@@ -257,6 +328,7 @@ export default function GlossaryAll() {
               <Grid item xs={true}>
                 <div className={classes.dynamicValueCard}>
                   <DynamicValueCard
+                    key={type.id} // Add a unique key prop
                     value={
                       type.glossary_term.replace(/_/g, " ") +
                       " (" +
@@ -291,10 +363,10 @@ export default function GlossaryAll() {
               transform: "translate(-40%, -50%)",
               backgroundColor: "lightgrey",
               padding: "1rem",
-              maxHeight: "60vh",
-              maxWidth: "75vw", // Adjusted maxWidth to occupy around 3/4 of the screen
+              maxHeight: "80%",
+              maxWidth: "100%", // Adjusted maxWidth to occupy around 3/4 of the screen
               overflowY: "auto",
-              marginTop: 2,
+              marginTop: 10,
             }}
           >
             {/* <IconButton onClick={handleClose} sx={{ position: "absolute", top: 0, right: 0 }}>
@@ -313,7 +385,7 @@ export default function GlossaryAll() {
               <span aria-hidden="true">&times;</span>
             </Button>
             <Box sx={{ marginLeft: 0 }}>
-              <Box sx={{ color: "red" }}> {selectedType.glossary_term}</Box>
+              <Box sx={{ color: "red" }}> {selectedType.glossary_term} </Box>
               <Box> {selectedType.glossary_description}</Box>
               <Box>
                 <Box>
@@ -329,7 +401,6 @@ export default function GlossaryAll() {
                       photos_data={filtered_examples}
                       selectedIndex={selectedIndex}
                     />
-                    s
                   </Box>
                 </Box>
               </Box>
@@ -347,8 +418,10 @@ export default function GlossaryAll() {
                           ? "gray"
                           : "inherit",
                       color: selectedIndex === index ? "white" : "black",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleItemClick(specie, index)}
+                    onDoubleClick={() => handleDoubleClick(specie, index)}
                   >
                     {/* <Link
                       key={specie.id}
