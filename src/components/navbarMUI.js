@@ -99,7 +99,9 @@ export default function TopAppBar() {
   };
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  // Custom media query for 1282px width
+  const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
+  // const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
   console.log("menuOpen");
 
   console.log(menuOpen);

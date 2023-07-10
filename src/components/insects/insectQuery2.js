@@ -10,12 +10,15 @@ import RegionsInsect from "./regeons";
 import InsectQueryComponent from "./insectsQuery";
 import InsectPhotos from "./photo";
 import FruitsReared from "./fruitsReared";
+import { Box, Typography } from "@mui/material";
 
 // import { Container,ButtonBase } from '@mui/material';
 // import Link from 'next/link';
 export default function InsectQuery2() {
   const router = useRouter();
-  const { genus } = router.query;
+  // destructure to obtain insect oredr ans species
+  const { genus, order } = router.query;
+
   const species = parseInt(router.query.species);
   console.log("species");
   console.log(genus);
@@ -49,7 +52,7 @@ export default function InsectQuery2() {
   console.log("species insect page");
   console.log(typeof species);
   console.log("genus_data");
-
+  const { speciesName } = router.query;
   console.log(data);
   console.log("insect_data");
   // console.log(insect_data);
@@ -81,15 +84,46 @@ export default function InsectQuery2() {
     console.log(coordinates.map((c) => c));
 
     return (
-      <Grid container spacing={2} marginTop={3}>
+      <Grid
+        container
+        spacing={2}
+        marginTop={typeof speciesName === "undefined" ? 3 : 8}
+      >
         <Grid item xs={12} md={6} lg={6}>
-          <InsectQueryComponent genus_data={data} />
+          {typeof speciesName === "undefined" ? (
+            <InsectQueryComponent genus_data={data} />
+          ) : (
+            <>
+              <Typography variant="body1">
+                <strong>Species:</strong>{" "}
+                <span style={{ color: "maroon", fontWeight: "bold" }}>
+                  {speciesName}
+                </span>
+              </Typography>
+              <Typography variant="body1">
+                <strong>Genus:</strong>{" "}
+                <span style={{ color: "maroon" }}>
+                  {speciesName.split(" ")[0]}
+                </span>
+              </Typography>
+              <Typography variant="body1">
+                <strong>Order:</strong>{" "}
+                <span style={{ color: "maroon" }}>{order}</span>
+              </Typography>
+            </>
+          )}
           <FruitsReared fruits_reared_data={insects_region} />
           <RegionsInsect regions_collected_data={insects_region} />
           Map
           <OpenLayersMap coordinates={coordinates} />
         </Grid>
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          lg={6}
+          marginTop={typeof speciesName === "undefined" ? 3 : 6}
+        >
           <InsectPhotos photos_data={insects_region} />
         </Grid>
 

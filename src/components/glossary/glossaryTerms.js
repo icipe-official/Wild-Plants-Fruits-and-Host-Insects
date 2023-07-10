@@ -160,6 +160,19 @@ export default function GlossaryAll() {
       }
     }
   }, [glossary, glossaryTerm]);
+  useEffect(() => {
+    if (router.query.glossart === "y") {
+      const newUrl = window.location.pathname + window.location.search;
+      const newQuery = { ...router.query };
+      delete newQuery.glossart;
+
+      router.replace({
+        pathname: newUrl,
+        query: newQuery,
+      });
+    }
+  }, [router.query]);
+
   const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
 
   function handleClose() {
@@ -175,8 +188,9 @@ export default function GlossaryAll() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          height: isSmallScreen ? "100%" : "80%",
-          paddingBottom: "65%", // Adjust this value to create space for the footer
+          height: isSmallScreen ? "100%" : "50%",
+          paddingLeft: isSmallScreen ? 0 : "10%", // Adjust the left margin for large screens
+          paddingRight: isSmallScreen ? 0 : "10%", // Adjust the right margin for large screens
         }}
       >
         {/* Content goes here */}
@@ -204,8 +218,8 @@ export default function GlossaryAll() {
     );
 
   if (glossary && example) {
-    ////console.log("glossary");
-    ////console.log(glossary);
+    console.log("glossary");
+    console.log(glossary);
     ////console.log(glossary);
 
     // ////console.log("example");
@@ -257,6 +271,7 @@ export default function GlossaryAll() {
               <Grid item xs={true}>
                 <div className={classes.dynamicValueCard}>
                   <DynamicValueCard
+                    key={type.id} // Add a unique key prop
                     value={
                       type.glossary_term.replace(/_/g, " ") +
                       " (" +
@@ -313,7 +328,7 @@ export default function GlossaryAll() {
               <span aria-hidden="true">&times;</span>
             </Button>
             <Box sx={{ marginLeft: 0 }}>
-              <Box sx={{ color: "red" }}> {selectedType.glossary_term}</Box>
+              <Box sx={{ color: "red" }}> {selectedType.glossary_term} </Box>
               <Box> {selectedType.glossary_description}</Box>
               <Box>
                 <Box>
@@ -329,7 +344,6 @@ export default function GlossaryAll() {
                       photos_data={filtered_examples}
                       selectedIndex={selectedIndex}
                     />
-                    s
                   </Box>
                 </Box>
               </Box>
@@ -347,8 +361,10 @@ export default function GlossaryAll() {
                           ? "gray"
                           : "inherit",
                       color: selectedIndex === index ? "white" : "black",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleItemClick(specie, index)}
+                    ss
                   >
                     {/* <Link
                       key={specie.id}

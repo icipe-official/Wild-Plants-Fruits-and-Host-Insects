@@ -66,8 +66,7 @@ export default function Footer() {
             color="white"
             component="p"
           >
-            Natural History Collections of wild Plants, Fruits, and Host insects
-            in Kenya
+            Insects Associated With the Wild Fruits of Kenya
           </Typography>
           <Box
             display="flex"
