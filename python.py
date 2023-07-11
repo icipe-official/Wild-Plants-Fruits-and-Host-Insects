@@ -29,7 +29,7 @@ def construct_phylogenetic_tree(sequences):
         for seq_id, sequence in aligned_seqs.items():
             f.write(f">{seq_id}\n{sequence}\n")
 
-    # Run IQ-TREE to construct the phylogenetic tree
+    # Run IQ-TREE to construct the phylogenetic tree (iqtree2 for local | iqtree for container)
     iqtree_command = f"iqtree -s {temp_file_path}"
     # subprocess.run(iqtree_command, shell=True)
     # supress standard output
