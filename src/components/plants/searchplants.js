@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, TextField, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -35,15 +35,22 @@ export default function CombinedSearchPlantsInsects({ defaultValues }) {
   const [searchTerm, setSearchTerm] = useState("");
   const isSearchTermEmpty = searchTerm.trim() === "";
 
-  const handleSearch = () => {
+  // useEffect(() => {
+  //   // Perform search when the component mounts or search term changes
+  //   performSearch();
+  // }, [searchTerm]);
+
+  const performSearch = () => {
     // Search logic for plants
     const filteredPlantSpecies = plantData?.filter((species) => {
       const speciesName = `${species.plant_genera.genus_name} ${species.species_name}`;
-      const regex = new RegExp(`\\b${searchTerm}\\b`, "i");
-      return regex.test(speciesName);
+      return speciesName.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
-    if (filteredPlantSpecies?.length > 0) {
+    if (
+      typeof filteredPlantSpecies !== "undefineds" &&
+      typeof filteredPlantSpecies !== null
+    ) {
       const speciesId = filteredPlantSpecies[0];
       router.push({
         pathname: `/plants/${speciesId.id}`,
@@ -56,13 +63,16 @@ export default function CombinedSearchPlantsInsects({ defaultValues }) {
     }
 
     // Search logic for insects
-    const filteredInsectSpecies = insectData.filter((species) => {
+    const filteredInsectSpecies = insectData?.filter((species) => {
       const speciesName = `${species.insect_genera.genus_name} ${species.species_name}`;
-      const regex = new RegExp(`\\b${searchTerm}\\b`, "i");
-      return regex.test(speciesName);
+      return speciesName.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
-    if (filteredInsectSpecies.length > 0) {
+    if (
+      typeof filteredInsectSpecies !== "undefined" &&
+      typeof filteredInsectSpecies !== null
+    ) {
+      console.log(searchTerm);
       const speciesId = filteredInsectSpecies[0];
       router.push({
         pathname: `/insects/${speciesId.insect_genera.id}`,
@@ -77,6 +87,10 @@ export default function CombinedSearchPlantsInsects({ defaultValues }) {
         },
       });
     }
+  };
+
+  const handleSearch = () => {
+    performSearch();
   };
 
   const handleCancel = () => {
