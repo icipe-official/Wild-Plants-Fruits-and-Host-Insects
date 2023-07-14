@@ -14,7 +14,7 @@ export default function CombinedSearchPlantsInsects({ defaultValues }) {
     error: plantError,
     isLoading: plantIsLoading,
   } = useSWR(`${base_url}/api/plants/species`, fetcher, {
-    revalidateOnMount: false,
+    revalidateOnMount: true, // Fetch data on component mount
     shouldRetryOnError: false,
     refreshWhenHidden: false,
     refreshWhenOffline: false,
@@ -25,7 +25,7 @@ export default function CombinedSearchPlantsInsects({ defaultValues }) {
     error: insectError,
     isLoading: insectIsLoading,
   } = useSWR(`${base_url}/api/insects/species`, fetcher, {
-    revalidateOnMount: false,
+    revalidateOnMount: true, // Fetch data on component mount
     shouldRetryOnError: false,
     refreshWhenHidden: false,
     refreshWhenOffline: false,
@@ -49,43 +49,43 @@ export default function CombinedSearchPlantsInsects({ defaultValues }) {
 
     if (
       typeof filteredPlantSpecies !== "undefineds" &&
-      typeof filteredPlantSpecies !== null
+      filteredPlantSpecies !== null
     ) {
-      const speciesId = filteredPlantSpecies[0];
-      router.push({
-        pathname: `/plants/${speciesId.id}`,
-        query: {
-          familyName: speciesId.plant_genera.plant_families.family_name,
-          genusName: speciesId.plant_genera.genus_name,
-        },
-      });
-      return;
+      if (filteredPlantSpecies[0]) {
+        const speciesId = filteredPlantSpecies[0];
+        router.push({
+          pathname: `/plants/${speciesId.id}`,
+          query: {
+            familyName: speciesId.plant_genera.plant_families.family_name,
+            genusName: speciesId.plant_genera.genus_name,
+          },
+        });
+        return;
+      }
     }
-
     // Search logic for insects
     const filteredInsectSpecies = insectData?.filter((species) => {
       const speciesName = `${species.insect_genera.genus_name} ${species.species_name}`;
       return speciesName.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
-    if (
-      typeof filteredInsectSpecies !== "undefined" &&
-      typeof filteredInsectSpecies !== null
-    ) {
-      console.log(searchTerm);
-      const speciesId = filteredInsectSpecies[0];
-      router.push({
-        pathname: `/insects/${speciesId.insect_genera.id}`,
-        query: {
-          genus: speciesId.insect_genera.id,
-          species: speciesId.id,
-          speciesName:
-            speciesId.insect_genera.genus_name +
-            " " +
-            speciesId.species_name.replace(/\.\s*\d+/g, "").trim(),
-          order: speciesId.insect_orders.order_name,
-        },
-      });
+    if (typeof filteredInsectSpecies !== "undefined") {
+      if (filteredInsectSpecies[0]) {
+        console.log(searchTerm);
+        const speciesId = filteredInsectSpecies[0];
+        router.push({
+          pathname: `/insects/${speciesId.insect_genera.id}`,
+          query: {
+            genus: speciesId.insect_genera.id,
+            species: speciesId.id,
+            speciesName:
+              speciesId.insect_genera.genus_name +
+              " " +
+              speciesId.species_name.replace(/\.\s*\d+/g, "").trim(),
+            order: speciesId.insect_orders.order_name,
+          },
+        });
+      }
     }
   };
 
