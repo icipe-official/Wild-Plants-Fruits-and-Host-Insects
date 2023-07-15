@@ -1,8 +1,7 @@
-import prisma from "../../../lib/prisma";
 import NextCors from "nextjs-cors";
-import formidable from "formidable";
-import fs from "fs";
-import path from "path";
+import prisma from "../../../lib/prisma";
+import { useSWRConfig } from "swr";
+
 export default async function postPlant(req, res) {
   await NextCors(req, res, {
     methods: ["POST", "GET"],
@@ -14,10 +13,25 @@ export default async function postPlant(req, res) {
     const {
       species_name,
       max_latitude,
+      min_latitude,
       genus_name,
       family_name,
       plant_description,
+      latex,
+      tree_type,
+      leaf_type,
+      shape,
+      type_of_fruit,
+      color,
+      size,
+      type_of_leaf_margin,
+      thorns_spines,
+      arrangement,
     } = req.body;
+
+    // Convert max_latitude and min_latitude to integers
+    const parsedMaxLatitude = parseInt(max_latitude, 10);
+    const parsedMinLatitude = parseInt(min_latitude, 10);
 
     try {
       // Check if the family already exists in the plant_families table
@@ -70,7 +84,7 @@ export default async function postPlant(req, res) {
       // Check if the plant already exists
       const existingPlant = await prisma.plants.findFirst({
         where: {
-          species_name: species_name,
+          species_name,
         },
       });
 
@@ -80,12 +94,13 @@ export default async function postPlant(req, res) {
         return;
       }
 
-      // Create the plant record with the obtained genusId
+      // Create the plant record with the obtained genusId and converted latitudes
       const createdPlant = await prisma.plants.create({
         data: {
-          species_name: species_name,
-          max_latitude: max_latitude,
-          plant_description: plant_description,
+          species_name,
+          max_latitude: parsedMaxLatitude,
+          min_latitude: parsedMinLatitude,
+          plant_description,
           plant_genera: {
             connect: {
               id: genusId,
@@ -93,9 +108,169 @@ export default async function postPlant(req, res) {
           },
         },
       });
-
-      console.log("createdPlant");
+      console.log("data back end");
       console.log(createdPlant);
+      // Function to check if each feature exists or create it if it doesn't exist
+      // Function to check if each feature exists or create it if it doesn't exist
+      const checkOrCreateFeature = async (
+        featureList,
+        modelName,
+        fieldName
+      ) => {
+        const createdFeatures = [];
+        for (let feature of featureList) {
+          let existingFeature = await prisma[modelName].findUnique({
+            where: {
+              [fieldName]: feature, // Use the unique identifier, e.g., color_id
+            },
+          });
+          if (!existingFeature) {
+            existingFeature = await prisma[modelName].create({
+              data: {
+                [fieldName]: feature[fieldName], // Use the unique identifier, e.g., color_id
+              },
+            });
+          }
+          createdFeatures.push(existingFeature);
+        }
+        return createdFeatures;
+      };
+
+      // Function to connect the feature to the plant using the bridge table
+      const connectFeatureToPlant = async (
+        featureList,
+        bridgeTable,
+        model,
+        fieldName,
+        idFieldName
+      ) => {
+        for (let feature of featureList) {
+          const existingFeature = await prisma[model].findUnique({
+            where: {
+              [fieldName]: feature[fieldName],
+            },
+          });
+          console.log("existingFeature");
+
+          console.log(existingFeature);
+          const [firstKey, firstValue] = Object.entries(existingFeature)[0];
+          console.log(firstValue);
+
+          if (existingFeature) {
+            await prisma[bridgeTable].create({
+              data: {
+                [idFieldName]: createdPlant.id,
+                [fieldName]: firstValue,
+              },
+            });
+          } else {
+            const createdFeature = await prisma[model].create({
+              data: {
+                [fieldName]: feature[fieldName],
+              },
+            });
+
+            await prisma[bridgeTable].create({
+              data: {
+                [idFieldName]: createdPlant.id,
+                [`${model.toLowerCase()}_id`]: createdFeature.id,
+              },
+            });
+          }
+        }
+      };
+
+      // Check and create features for each bridge table
+      const createdShapes = await checkOrCreateFeature(
+        shape,
+        "fruit_shapes",
+        "shape"
+      );
+      const createdFruitTypes = await checkOrCreateFeature(
+        type_of_fruit,
+        "fruit_types",
+        "type_of_fruit"
+      );
+      const createdColors = await checkOrCreateFeature(
+        color,
+        "fruit_colors",
+        "color"
+      );
+      const createdSizes = await checkOrCreateFeature(
+        size,
+        "fruit_sizes",
+        "size"
+      );
+      const createdLeafMargins = await checkOrCreateFeature(
+        type_of_leaf_margin,
+        "leaf_margins",
+        "type_of_leaf_margin"
+      );
+      const createdSpinesThorns = await checkOrCreateFeature(
+        thorns_spines,
+        "spines_thorns",
+        "thorns_spines"
+      );
+      const createdLeafArrangements = await checkOrCreateFeature(
+        arrangement,
+        "leaf_arrangements",
+        "arrangement"
+      );
+
+      // Connect the plant to the features using bridge tables
+      await connectFeatureToPlant(
+        createdShapes,
+        "plants_fruit_shapes",
+        "fruit_shapes",
+        "shape_id",
+        "plant_id"
+      );
+      await connectFeatureToPlant(
+        createdFruitTypes,
+        "plants_fruit_types",
+        "fruit_types",
+        "type_of_fruit_id",
+        "plant_id"
+      );
+      await connectFeatureToPlant(
+        createdColors,
+        "plants_fruit_colors",
+        "fruit_colors",
+        "color_id",
+        "plant_id"
+      );
+      await connectFeatureToPlant(
+        createdSizes,
+        "plants_fruit_sizes",
+        "fruit_sizes",
+        "size_id",
+        "plant_id"
+      );
+      await connectFeatureToPlant(
+        createdLeafMargins,
+        "plants_leaf_margins",
+        "leaf_margins",
+        "type_of_leaf_margin_id",
+        "plant_id"
+      );
+      await connectFeatureToPlant(
+        createdSpinesThorns,
+        "plants_spines_thorns",
+        "spines_thorns",
+        "thorns_spines_id",
+        "plant_id"
+      );
+      await connectFeatureToPlant(
+        createdLeafArrangements,
+        "plants_leaf_arrangements",
+        "leaf_arrangements",
+        "leaf_arrangement_id",
+        "plant_id"
+      );
+
+      // Invalidate SWR cache to trigger a revalidation
+      const { cache } = useSWRConfig();
+      cache.invalidate("/api/plantData");
 
       res.status(200).json({ message: "Data inserted successfully" });
     } catch (error) {
