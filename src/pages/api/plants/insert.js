@@ -1,8 +1,16 @@
 import NextCors from "nextjs-cors";
 import prisma from "../../../lib/prisma";
 import { useSWRConfig } from "swr";
+async function invalidateSWRCache() {
+  // Get the SWR config
+  const swrConfig = useSWRConfig();
+
+  // Invalidate the cache for the specified key
+  swrConfig.mutate("/api/plantData");
+}
 
 export default async function postPlant(req, res) {
+  // Convert max_latitude and min_latitude to integers
   await NextCors(req, res, {
     methods: ["POST", "GET"],
     origin: "*",
@@ -28,10 +36,6 @@ export default async function postPlant(req, res) {
       thorns_spines,
       arrangement,
     } = req.body;
-
-    // Convert max_latitude and min_latitude to integers
-    const parsedMaxLatitude = parseInt(max_latitude, 10);
-    const parsedMinLatitude = parseInt(min_latitude, 10);
 
     try {
       // Check if the family already exists in the plant_families table
@@ -124,7 +128,12 @@ export default async function postPlant(req, res) {
               [fieldName]: feature, // Use the unique identifier, e.g., color_id
             },
           });
+          console.log("existingFeature");
+          console.log(existingFeature);
+
           if (!existingFeature) {
+            console.log("existingFeature 5");
+            console.log(existingFeature);
             existingFeature = await prisma[modelName].create({
               data: {
                 [fieldName]: feature[fieldName], // Use the unique identifier, e.g., color_id
@@ -145,11 +154,27 @@ export default async function postPlant(req, res) {
         idFieldName
       ) => {
         for (let feature of featureList) {
-          const existingFeature = await prisma[model].findUnique({
-            where: {
-              [fieldName]: feature[fieldName],
-            },
-          });
+          if (fieldName == "fruit_size_id") {
+            var existingFeature = await prisma[model].findUnique({
+              where: {
+                ["id"]: feature["id"],
+              },
+            });
+          } else {
+            if (fieldName == "thorn_id") {
+              var existingFeature = await prisma[model].findUnique({
+                where: {
+                  ["thorn_id"]: feature["thorn_id"],
+                },
+              });
+            } else {
+              var existingFeature = await prisma[model].findUnique({
+                where: {
+                  [fieldName]: feature[fieldName],
+                },
+              });
+            }
+          }
           console.log("existingFeature");
 
           console.log(existingFeature);
@@ -173,7 +198,7 @@ export default async function postPlant(req, res) {
             await prisma[bridgeTable].create({
               data: {
                 [idFieldName]: createdPlant.id,
-                [`${model.toLowerCase()}_id`]: createdFeature.id,
+                [fieldName]: createdFeature.id,
               },
             });
           }
@@ -222,14 +247,14 @@ export default async function postPlant(req, res) {
         createdShapes,
         "plants_fruit_shapes",
         "fruit_shapes",
-        "shape_id",
+        "fruit_shape_id",
         "plant_id"
       );
       await connectFeatureToPlant(
         createdFruitTypes,
         "plants_fruit_types",
         "fruit_types",
-        "type_of_fruit_id",
+        "fruit_type_id",
         "plant_id"
       );
       await connectFeatureToPlant(
@@ -243,21 +268,21 @@ export default async function postPlant(req, res) {
         createdSizes,
         "plants_fruit_sizes",
         "fruit_sizes",
-        "size_id",
+        "fruit_size_id",
         "plant_id"
       );
       await connectFeatureToPlant(
         createdLeafMargins,
         "plants_leaf_margins",
         "leaf_margins",
-        "type_of_leaf_margin_id",
+        "leaf_margin_id",
         "plant_id"
       );
       await connectFeatureToPlant(
         createdSpinesThorns,
         "plants_spines_thorns",
         "spines_thorns",
-        "thorns_spines_id",
+        "thorn_id",
         "plant_id"
       );
       await connectFeatureToPlant(
@@ -269,8 +294,7 @@ export default async function postPlant(req, res) {
       );
 
       // Invalidate SWR cache to trigger a revalidation
-      const { cache } = useSWRConfig();
-      cache.invalidate("/api/plantData");
+      await invalidateSWRCache();
 
       res.status(200).json({ message: "Data inserted successfully" });
     } catch (error) {
