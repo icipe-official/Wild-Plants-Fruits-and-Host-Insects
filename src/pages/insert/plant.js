@@ -329,20 +329,6 @@ export default function InsertForm() {
             />
 
             <Autocomplete
-              options={leafMargins}
-              value={leafMargin}
-              onChange={(event, value) => setLeafMargin(value)}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Leaf Margin"
-                  fullWidth
-                  margin="normal"
-                />
-              )}
-            />
-
-            <Autocomplete
               multiple
               options={thornsSpinesOptions}
               value={thornsSpines}
@@ -351,6 +337,21 @@ export default function InsertForm() {
                 <TextField
                   {...params}
                   label="Thorns or Spines"
+                  fullWidth
+                  margin="normal"
+                />
+              )}
+            />
+
+            <Autocomplete
+              multiple
+              options={leafMargins}
+              value={leafMargin}
+              onChange={(event, value) => setLeafMargin(value)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Leaf Margin(s)"
                   fullWidth
                   margin="normal"
                 />
