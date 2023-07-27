@@ -66,7 +66,7 @@ export default function Footer() {
             color="white"
             component="p"
           >
-            Insects Associated With the Wild Fruits of Kenya
+            Wild Plants, fruits and Host Insects
           </Typography>
           {/* <Box
             display="flex"

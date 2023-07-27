@@ -172,16 +172,7 @@
           </li>
 
           <li>
-            <form class="form-inline my-2 my-lg-0">
-              <input
-                type="text"
-                id="selection_name_box"
-                class="form-control mr-sm-2"
-                value="Foreground"
-                disabled
-                size="40"
-              />
-            </form>
+            <form class="form-inline my-2 my-lg-0"></form>
           </li>
 
           <li id="save_selection_name" style="display: none" class="my-auto">
@@ -233,7 +224,7 @@
               <a id="select_none" class="dropdown-item" href="#"
                 >Clear selection</a
               >
-              <div class="dropdown-divider"></div>
+              <!-- <div class="dropdown-divider"></div>
               <a id="mp_label" class="dropdown-item" href="#"
                 >Label internal nodes using maximum parsimony</a
               >
@@ -242,7 +233,7 @@
               >
               <a id="or_label" class="dropdown-item" href="#"
                 >Label internal nodes using disjunction (OR)</a
-              >
+              > -->
             </div>
           </li>
         </ul>
@@ -1059,7 +1050,7 @@
 
       var width = 800, //$(container_id).width(),
         height = 800, //$(container_id).height()
-        selection_set = ["Foreground"],
+        // selection_set = ["Foreground"],
         current_selection_name = $("#selection_name_box").val(),
         current_selection_id = 0,
         max_selections = 10;

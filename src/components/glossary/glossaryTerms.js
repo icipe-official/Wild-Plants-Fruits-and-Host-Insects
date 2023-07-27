@@ -99,7 +99,10 @@ export default function GlossaryAll() {
     `${base_url}/api/multipleEntry/multipleentry?filters=${JSON.stringify(
       query
     )}`,
-    fetcher
+    fetcher,
+    {
+      revalidateOnMount: true, // Fetch data on component mount
+    }
   );
 
   const router = useRouter();
@@ -354,7 +357,7 @@ export default function GlossaryAll() {
           ))}
         {/* </Box> */}
 
-        {showPhotos && selectedType && example && (
+        {showPhotos && (
           <Box
             sx={{
               position: "fixed",
