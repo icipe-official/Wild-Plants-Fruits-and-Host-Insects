@@ -99,7 +99,11 @@ export default function GlossaryAll() {
     `${base_url}/api/multipleEntry/multipleentry?filters=${JSON.stringify(
       query
     )}`,
-    fetcher
+    fetcher,
+    {
+      revalidateOnMount: true, // Fetch data on component mount
+      // revalidateOnMount: false, // Fetch data on component mount
+    }
   );
 
   const router = useRouter();
@@ -139,6 +143,9 @@ export default function GlossaryAll() {
 
   //handle on click event of the image
   function handleClick(type) {
+    // if (typeof currentQuery !== "undefined") {
+    //   setShowPhotos(true);
+    // }
     // console.log(type);
     cancel();
     if (type?.glossary_term) {
@@ -177,22 +184,12 @@ export default function GlossaryAll() {
       }
     }
   }, [glossary, glossaryTerm]);
-  // useEffect(() => {
-  //   if (router.query.glossart === "y") {
-  //     const newUrl = window.location.pathname + window.location.search;
-  //     const newQuery = { ...router.query };
-  //     delete newQuery.glossart;
 
-  //     router.replace({
-  //       pathname: newUrl,
-  //       query: newQuery,
-  //     });
-  //   }
-  // }, [router.query]);
   useEffect(() => {
     const currentQuery = { ...router.query };
 
     // Iterate over the query parameters
+    // if (typeof currentQuery !== "undefined") {
     for (const key in currentQuery) {
       const value = currentQuery[key];
 
@@ -222,13 +219,18 @@ export default function GlossaryAll() {
           item.glossary_term === typeCapitalize
         );
       });
+
+      // setSelectedType(filterdGlossary);
       if (typeof filterdGlossary !== "undefined") {
         // console.log(filterdGlossary);
         // Call handleClick with the dynamicParam
         handleClick(filterdGlossary[0]);
       }
     }
+
+    // setShowPhotos(true);
   }, [router.query]);
+
   const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
   // console.log(query);
   function handleClose() {
@@ -274,22 +276,6 @@ export default function GlossaryAll() {
     );
 
   if (glossary && example) {
-    // console.log("glossary");
-    // console.log(glossary);
-    ////console.log(glossary);
-
-    // ////console.log("example");
-
-    // ////console.log(example);
-
-    // ////console.log(
-    //   fruit_type.fruit_types
-    //     .filter((t) => Boolean(t.fruit_type_description))
-    //     .map((t) => t.fruit_type_description)
-
-    // const photos = example;
-    ////console.log("example");
-    // get plant species with photos
     const filtered_examples = example.filter((specie) => {
       ////console.log(" of the example");
 
@@ -312,9 +298,9 @@ export default function GlossaryAll() {
     const photos = filtered_examples.map((photo) => photo.plants_photos)[
       selectedIndex
     ];
-    ////console.log("individual photos");
+    console.log("individual photos");
 
-    ////console.log(photos);
+    // console.log(query);
     //handle clicking of example species
 
     return (
@@ -354,7 +340,7 @@ export default function GlossaryAll() {
           ))}
         {/* </Box> */}
 
-        {showPhotos && selectedType && example && (
+        {showPhotos && (
           <Box
             sx={{
               position: "fixed",
@@ -385,8 +371,8 @@ export default function GlossaryAll() {
               <span aria-hidden="true">&times;</span>
             </Button>
             <Box sx={{ marginLeft: 0 }}>
-              <Box sx={{ color: "red" }}> {selectedType.glossary_term} </Box>
-              <Box> {selectedType.glossary_description}</Box>
+              <Box sx={{ color: "red" }}> {selectedType?.glossary_term} </Box>
+              <Box> {selectedType?.glossary_description}</Box>
               <Box>
                 <Box>
                   <Box>
@@ -444,30 +430,5 @@ export default function GlossaryAll() {
         )}
       </Container>
     );
-    // // ////console.log(data);
-    // ////console.log("data.fruit_types.map(type)=>type.fruit_types_glossary");
-    // const photos = data.fruit_types.map((type) =>
-    //   type.fruit_types_glossary.map((photo) => photo.photo_id)
-    // );
-    // ////console.log("photos");
-
-    // ////console.log(photos);
-    // return (
-    //   <Container sx={{ marginBottom: 2, marginTop: 7 }}>
-    //     <Box sx={{ fontWeight: "bold" }}>Alphabetical</Box>
-    //     {data.fruit_types.map((type) => (
-    //       <Box sx={{ display: "flex" }}>
-    //         <DynamicValueCard
-    //           value={
-    //             type.type_of_fruit +
-    //             " (fruit type): " +
-    //             type.fruit_type_description
-    //           }
-    //         />
-    //         <Box>{handleClick(type)}</Box>
-    //       </Box>
-    //     ))}
-    //   </Container>
-    // );
   }
 }

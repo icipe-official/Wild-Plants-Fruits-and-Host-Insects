@@ -96,6 +96,66 @@ export default function PhylogenyMafft() {
       ? router.query.plantFamily
       : "Rubiaceae"
   );
+  console.log("selectedFamily");
+
+  console.log(selectedFamily);
+  const nosequences = [
+    "Achariaceae",
+    "Amaranthaceae",
+    "Amaryllidaceae",
+    "Araceae",
+    "Araliaceae",
+    "Aristolochiaceae",
+    "Calophyllaceae",
+    "Chrysobalanaceae",
+    "Clusiaceae",
+    "Combretaceae",
+  ];
+  const seqlist = [
+    "Achariaceae",
+    "Amaranthaceae",
+    "Amaryllidaceae",
+    "Araceae",
+    "Araliaceae",
+    "Aristolochiaceae",
+    "Calophyllaceae",
+    "Chrysobalanaceae",
+    "Clusiaceae",
+    "Combretaceae",
+    "Combretaceae",
+    "Gelsemiaceae",
+    "Putranjivaceae",
+    "Rhizophoraceae",
+    "Cornaceae",
+    "Gentianaceae",
+    "Icacinaceae",
+    "Erythroxylaceae",
+    "Aristolochiaceae",
+    "Araliaceae",
+    "Amaryllidaceae",
+    "Stilbaceae",
+    "Calophyllaceae",
+    "Violaceae",
+    "Portulacaceae",
+    "Taccaceae",
+    "Lecythidaceae",
+    "Sterculiaceae",
+    "Chrysobalanaceae",
+    "Achariaceae",
+    "Amaranthaceae",
+    "Peraceae",
+    "Santalaceae",
+    "Orobanchaceae",
+    "Opiliaceae",
+    "Proteaceae",
+    "Clusiaceae",
+    "Araceae",
+    "Hernandiaceae",
+    "Monimiaceae",
+  ];
+
+  // Now you can use the 'plantFamilyNames' constant list in your JavaScript code.
+
   const [newickData, setNewickData] = useState(
     selectedFamily == "Rubiaceae" && !router.query.plantFamily
       ? "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
@@ -162,7 +222,10 @@ export default function PhylogenyMafft() {
           const sequences = filteredData.reduce((result, obj) => {
             if (obj.plants_matk.length > 0) {
               obj.plants_matk.forEach((plant) => {
-                if (plant.nucleotide !== null) {
+                if (
+                  plant.nucleotide !== null &&
+                  plant.nucleotide.length >= 400
+                ) {
                   const name =
                     obj.plant_genera.genus_name +
                     "_" +
@@ -260,7 +323,7 @@ export default function PhylogenyMafft() {
             obj.insects_coi.forEach((insect) => {
               if (
                 insect.nucleotide !== null &&
-                insect.nucleotide.length >= 658
+                insect.nucleotide.length >= 400
               ) {
                 const name =
                   obj.insect_genera.genus_name +
@@ -322,7 +385,7 @@ export default function PhylogenyMafft() {
         // console.log("filteredData");
         const sequences = filteredData.reduce((result, obj) => {
           let counter = 1;
-          if (obj.plants_matk.length > 0) {
+          if (obj.plants_matk.length > 0 && plant.nucleotide.length >= 400) {
             obj.plants_matk.forEach((plant) => {
               if (plant.nucleotide !== null) {
                 const name =
@@ -394,7 +457,7 @@ export default function PhylogenyMafft() {
               //filter sequences whose length is less than 658
               if (
                 insect.nucleotide !== null &&
-                insect.nucleotide.length >= 658
+                insect.nucleotide.length >= 400
               ) {
                 const name =
                   obj.insect_genera.genus_name +
@@ -500,17 +563,6 @@ export default function PhylogenyMafft() {
         sequence: currentSequence,
       });
 
-      if (fastaArray.length > 50 || fastaInput.length > 2000) {
-        alert(
-          "Warning: Limit exceeded, Only less than 50  sequences  and  each less than 2000bp in length or below can be processed. Return to default phylogeny page"
-        );
-        setNewickData(
-          "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
-        );
-        setSelectedFamily("Rubiaceae");
-        return;
-      }
-
       const fastaObject = {};
       for (let entry of fastaArray) {
         fastaObject[entry.name] = entry.sequence;
@@ -519,6 +571,16 @@ export default function PhylogenyMafft() {
       setFastaArray(fastaObject);
       // console.log("fastaArray");
       if (fastaArray) {
+        // if (fastaArray.length > 50 || fastaInput.length > 2000) {
+        //   alert(
+        //     "Warning: Limit exceeded, Only less than 50  sequences  and  each less than 2000bp in length or below can be processed. Return to default phylogeny page"
+        //   );
+        //   setNewickData(
+        //     "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
+        //   );
+        //   setSelectedFamily("Rubiaceae");
+        //   return;
+        // }
         setSelectedFamily("Select family");
         //retrieve the data from back end API
         // console.log("input  sequences format");
@@ -567,6 +629,7 @@ export default function PhylogenyMafft() {
         // console.log("newick");
         setNewickData(newick);
         setDownload(newick);
+        setFastaInput("");
       }
     } else {
       if (fastaArray && userSequences) {
@@ -793,7 +856,14 @@ export default function PhylogenyMafft() {
             .map((family) => family.plant_genera.plant_families.family_name)
             .sort()
         ),
-      ]; // Convert set to array
+      ];
+      //remove families with less than 2 sequences from the liest
+      // Remove plant families that are in the 'plantFamilyNames' list
+      var filtered_families_list = families_list.filter(
+        (family) => !seqlist.includes(family)
+      );
+
+      // Convert set to array
       // console.log("familes");
 
       // console.log(families);
@@ -857,7 +927,7 @@ export default function PhylogenyMafft() {
                   //   IconComponent={ArrowDropDown}
                 >
                   {selectedOrganism === "plants"
-                    ? families_list.map((family, index) => (
+                    ? filtered_families_list.map((family, index) => (
                         <MenuItem key={index} value={family}>
                           {family}
                         </MenuItem>
