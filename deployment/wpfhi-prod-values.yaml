@@ -4,5 +4,9 @@ client:
   deployment:
     image: "51.140.225.217/wpfhi/app"
   ingress:
-      useHost: "true"
-      host: test-dmmg.icipe.org
+    useHost: "true"
+    host: test-dmmg.icipe.org
+  config:
+    databaseUrl: "postgresql://wpfhi:wpfhi2023@postgres.default.svc.cluster.local:5432/wpfhi"
+    nextPublicApiBaseUrl: "https://test-dmmg.icipe.org/wpfhi"
+    nextPublicApiBasePath: /wpfhi

@@ -186,7 +186,9 @@ model plants {
   max_latitude             Int?
   min_latitude             Int?
   genus_id                 Int
-  plant_genera             plant_genera               @relation(fields: [genus_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  rbcl                     String?                    @db.VarChar
+  matk                     String?                    @db.VarChar
+  plant_genera             plant_genera               @relation(fields: [genus_id], references: [id], onDelete: Cascade)
   plants_fruit_colors      plants_fruit_colors[]
   plants_fruit_shapes      plants_fruit_shapes[]
   plants_fruit_sizes       plants_fruit_sizes[]
@@ -199,6 +201,7 @@ model plants {
   plants_leaf_margins      plants_leaf_margins[]
   plants_matk              plants_matk[]
   plants_photos            plants_photos[]
+  plants_rbcl              plants_rbcl[]
   plants_regions           plants_regions[]
   plants_shrub_climbings   plants_shrub_climbings[]
   plants_spines_thorns     plants_spines_thorns[]
@@ -321,6 +324,7 @@ model plants_rbcl {
   nucleotide        String? @db.VarChar
   country           String? @db.VarChar
   genebank_accesion String? @db.VarChar
+  plants            plants? @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model plants_regions {

@@ -18,3 +18,7 @@ client:
     path: /wpfhi
     useTls: "false"
     tls: wpfhi-selfsigned-ca
+  config:
+    databaseUrl:
+    nextPublicApiBaseUrl:
+    nextPublicApiBasePath:

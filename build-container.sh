@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# --build-arg DATABASE_URL="postgresql://postgres:postgres2023@host.docker.internal:5432/wpfhi" \
+
 docker build -t icipe/wpfhi/app:latest . \
 --build-arg NEXT_PUBLIC_API_BASE_URL="https://test-dmmg.icipe.org/wpfhi" \
 --build-arg DATABASE_URL="postgresql://wpfhi:wpfhi2023@postgres.default.svc.cluster.local:5432/wpfhi" \

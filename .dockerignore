@@ -12,3 +12,4 @@ capacitor.config.ts
 venv
 *Dockerfile
 public/photos/*
+database/*
