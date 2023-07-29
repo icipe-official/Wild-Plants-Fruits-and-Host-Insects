@@ -1,5 +1,5 @@
-import prisma from "../../../../lib/prisma";
 import NextCors from "nextjs-cors";
+import prisma from "../../../../lib/prisma";
 // API for plant  fruit details
 export default async function getFamily(req, res) {
   // Run the cors middleware
@@ -12,12 +12,12 @@ export default async function getFamily(req, res) {
   });
   const { species } = req.query;
   try {
-    //Fetch data from database
-    // console.log(params);
+    // Fetch data from database
+    // ////console.log(params);
     const plant = await prisma.plants.findMany({
       where: {
-        //convert species to intager
-        //this id must be similatr to  dynamic file name
+        // convert species to intager
+        // this id must be similatr to  dynamic file name
         id: parseInt(species),
       },
       select: {
@@ -122,6 +122,12 @@ export default async function getFamily(req, res) {
             },
           },
         },
+        plant_coordinates: {
+          select: {
+            latitude: true,
+            longitude: true,
+          },
+        },
         plants_fruit_sizes: {
           select: {
             fruit_size_id: true,
@@ -174,7 +180,7 @@ export default async function getFamily(req, res) {
         },
       },
     });
-    // console.log(tms);
+    // ////console.log(tms);
     res.json(plant);
   } catch (e) {
     console.error(e);
