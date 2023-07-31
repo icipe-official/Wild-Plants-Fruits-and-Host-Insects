@@ -77,15 +77,15 @@ export default function InsectsReared({ data }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.map((col, index) => (
-              <TableRow key={index}>
-                <TableCell key={index} className={classes.cell}>
+            {data?.map((col) => (
+              <TableRow key={col.id}>
+                <TableCell className={classes.cell}>
                   {col.insect_families.family_name}
                 </TableCell>
-                <TableCell key={index} className={classes.cell}>
+                <TableCell className={classes.cell}>
                   {col.insect_genera.genus_name + " " + col.species_name}
                 </TableCell>
-                <TableCell key={index} className={classes.cell}>
+                <TableCell className={classes.cell}>
                   <Link
                     href={{
                       pathname: `/insects/${col.insect_genera.id}`,
