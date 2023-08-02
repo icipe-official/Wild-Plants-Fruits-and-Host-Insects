@@ -1,5 +1,5 @@
-import prisma from "../../../lib/prisma";
 import NextCors from "nextjs-cors";
+import prisma from "../../../lib/prisma";
 // const [query,setQuery]=useState({'plant_types':[],'plant_thorns':[],'plant_latex':[],'fruit_types':[],'fruit_colors':[],
 // 'fruit_sizes':[],'fruit_shapes':[],'leaf_types':[],'leaf_margins':[],'leaf_arrangements':[]})
 
@@ -23,9 +23,9 @@ export default async function getFilterdData(req, res) {
     const leaf_types = filterObj.leaf_types || [];
     const leaf_margins = filterObj.leaf_margins || [];
     const leaf_arrangements = filterObj.leaf_arrangements || [];
-    console.log("filterObj");
+    ////console.log('filterObj');
 
-    console.log(filterObj);
+    ////console.log(filterObj);
     const plant = await prisma.plants.findMany({
       select: {
         id: true,
