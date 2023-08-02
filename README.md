@@ -1,8 +1,4 @@
-# Wild-Plants-Fruits-and-Host-Insects
-
-Wild Plants, Fruits, and Host Insects BioCollections
-
-# Wild Plants, Fruits, and Host Insects
+# Wild Plants, Fruits, and Host Insects BioCollections
 
 Welcome to Wild Plants, Fruits, and Host Insects BioCollections - a comprehensive platform dedicated to exploring and understanding the diverse world of wild fruits and their associated host insects. Our project aims to provide a centralized repository of valuable information about various plant species, their fruits, and the insects that rely on them for their survival.
 
