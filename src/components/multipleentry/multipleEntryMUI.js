@@ -52,16 +52,6 @@ export default function Groupcheckbox({
     },
   }));
 
-  // plant type data
-  console.log("plant_type_data");
-  console.log(plant_type_data);
-  console.log(
-    Array.from(plant_type_data).map(
-      (specie) =>
-        // return a list of fruit color
-        specie.tree_type
-    )
-  );
   // Extract arrays from the query params
   //console.log(fruit_size.fruit_size.fruit_size)
   const plant_type_array = Array.from(plant_type_data).map(
@@ -69,8 +59,8 @@ export default function Groupcheckbox({
       // return a list of fruit color
       specie.tree_type
   );
-  console.log("plant_type_array");
-  console.log(plant_type_array);
+  // console.log("plant_type_array");
+  // console.log(plant_type_array);
 
   // manage states of checked plant type
   const [checkedStatePlantType, setCheckedStatePlantType] = useState(
@@ -93,16 +83,16 @@ export default function Groupcheckbox({
 
   //plant latex
   // plant latex data data
-  console.log("plant_latex_data");
+  // console.log("plant_latex_data");
 
-  console.log(latex_data);
-  console.log(
-    Array.from(latex_data).map(
-      (specie) =>
-        // return a list of fruit shape
-        specie.latex_description
-    )
-  );
+  // console.log(latex_data);
+  // console.log(
+  //   Array.from(latex_data).map(
+  //     (specie) =>
+  //       // return a list of fruit shape
+  //       specie.latex_description
+  //   )
+  // );
   // Extract arrays from the query params
   //console.log(fruit_size.fruit_size.fruit_size)
   const plant_latex_array = Array.from(latex_data).map(
@@ -110,20 +100,9 @@ export default function Groupcheckbox({
       // return a list of fruit color
       specie.latex_description
   );
-  console.log("plant_latex_array");
-  console.log(plant_latex_array);
 
   // plant spines data data
-  console.log("plant_spines_data");
 
-  console.log(spines_data);
-  console.log(
-    Array.from(spines_data).map(
-      (specie) =>
-        // return a list of fruit shape
-        specie.thorns_spines
-    )
-  );
   // Extract arrays from the query params
   //console.log(fruit_size.fruit_size.fruit_size)
   const plant_spines_array = Array.from(spines_data).map(
@@ -131,8 +110,6 @@ export default function Groupcheckbox({
       // return a list of fruit color
       specie.thorns_spines
   );
-  console.log("plant_spines_array");
-  console.log(plant_spines_array);
 
   // manage states of checked fruit shape
   const [checkedStatePlantSpnines, setCheckedStatePlantSpnines] = useState(
@@ -173,14 +150,14 @@ export default function Groupcheckbox({
   };
 
   //fruit size data
-  console.log("fruit_size_data");
-  console.log(
-    Array.from(fruit_size_data).map(
-      (specie) =>
-        // return a list of species
-        specie.size
-    )
-  ); // data object with list of dictionaries
+  // console.log("fruit_size_data");
+  // console.log(
+  //   Array.from(fruit_size_data).map(
+  //     (specie) =>
+  //       // return a list of species
+  //       specie.size
+  //   )
+  // ); // data object with list of dictionaries
   //console.log('fruit_color-data')
   const fruit_size_array = Array.from(fruit_size_data).map(
     (specie) =>
@@ -207,13 +184,7 @@ export default function Groupcheckbox({
   };
 
   //fruit color data
-  console.log(
-    Array.from(fruit_color_data).map(
-      (specie) =>
-        // return a list of fruit color
-        specie.color
-    )
-  );
+
   // Extract arrays from the query params
   //console.log(fruit_size.fruit_size.fruit_size)
   const fruit_color_array = Array.from(fruit_color_data).map(
@@ -246,16 +217,7 @@ export default function Groupcheckbox({
 
   //Fruit type data
   // fruit type data
-  console.log("fruit_type_data");
 
-  console.log(fruit_type_data);
-  console.log(
-    Array.from(fruit_type_data).map(
-      (specie) =>
-        // return a list of fruit color
-        specie.tree_type
-    )
-  );
   // Extract arrays from the query params
   //console.log(fruit_size.fruit_size.fruit_size)
   const fruit_type_array = Array.from(fruit_type_data).map(
@@ -263,10 +225,6 @@ export default function Groupcheckbox({
       // return a list of fruit color
       specie.type_of_fruit
   );
-  console.log("fruit_type_array");
-
-  console.log(fruit_type_array);
-  console.log(fruit_color_array);
 
   // manage states of checked fruit type
   const [checkedStateFruitType, setCheckedStateFruitType] = useState(
@@ -289,15 +247,7 @@ export default function Groupcheckbox({
 
   //Fruit shape data
   // fruit shape data
-  console.log("fruit_shape_data");
-  console.log(fruit_shape_data);
-  console.log(
-    Array.from(fruit_shape_data).map(
-      (specie) =>
-        // return a list of fruit shape
-        specie.tree_type
-    )
-  );
+
   // Extract arrays from the query params
   //console.log(fruit_size.fruit_size.fruit_size)
   const fruit_shape_array = Array.from(fruit_shape_data).map(
@@ -305,8 +255,6 @@ export default function Groupcheckbox({
       // return a list of fruit color
       specie.shape
   );
-  console.log("fruit_shape_array");
-  console.log(fruit_shape_array);
 
   // manage states of checked fruit shape
   const [checkedStateFruitShape, setCheckedStateFruitShape] = useState(
@@ -328,15 +276,7 @@ export default function Groupcheckbox({
   };
 
   //leaf type data
-  console.log("leaf_type_data");
-  console.log(plants_data);
-  console.log(
-    Array.from(plants_data).map(
-      (specie) =>
-        // return a list of fruit shape
-        specie.leaf_type
-    )
-  );
+
   // Extract arrays from the query params
   //console.log(fruit_size.fruit_size.fruit_size)
   const leaf_type_array = Array.from(plants_data).map(
@@ -344,8 +284,6 @@ export default function Groupcheckbox({
       // return a list of fruit color
       specie.leaf_type
   );
-  console.log("leaf_type_array");
-  console.log(leaf_type_array);
 
   // manage states of checked leaf type
   const [checkedStateLeafType, setCheckedStateLeafType] = useState(
@@ -367,16 +305,7 @@ export default function Groupcheckbox({
   };
 
   // plant leaf margin data data
-  console.log("leaf_margins_data");
 
-  console.log(leaf_margin_data);
-  console.log(
-    Array.from(leaf_margin_data).map(
-      (specie) =>
-        // return a list of fruit shape
-        specie.type_of_leaf_margin
-    )
-  );
   // Extract arrays from the query params
   //console.log(fruit_size.fruit_size.fruit_size)
   const leaf_margins_array = Array.from(leaf_margin_data).map(
@@ -384,8 +313,6 @@ export default function Groupcheckbox({
       // return a list of fruit color
       specie.type_of_leaf_margin
   );
-  console.log("leaf_margins_array");
-  console.log(leaf_margins_array);
 
   // manage states of checked leaf margin boxes
   const [checkedStateLeafMargins, setCheckedStateLeafMargins] = useState(
@@ -407,16 +334,7 @@ export default function Groupcheckbox({
   };
 
   // plant leaf arrangement data data
-  console.log("leaf_arrangement_data");
 
-  console.log(leaf_arrangement_data);
-  console.log(
-    Array.from(leaf_arrangement_data).map(
-      (specie) =>
-        // return a list of leaf arrangement
-        specie.arrangement
-    )
-  );
   // Extract arrays from the query params
   //console.log(fruit_size.fruit_size.fruit_size)
   const leaf_arrangement_array = Array.from(leaf_arrangement_data).map(
@@ -424,8 +342,6 @@ export default function Groupcheckbox({
       // return a list of fruit color
       specie.arrangement
   );
-  console.log("leaf_arrangement_array");
-  console.log(leaf_arrangement_array);
 
   // manage states of checked fruit shape
   const [checkedStateLeafArrangement, setCheckedStateLeafArrangement] =
@@ -511,26 +427,8 @@ export default function Groupcheckbox({
     setData([]);
   };
 
-  console.log("query");
-  console.log(query);
-  console.log("JSON.stringfy(query)");
-  console.log(JSON.stringify(query));
   const j = JSON.stringify(query);
-  console.log("/api/plants/multipleEntry/multipleentry?filters=" + j);
-  //console.log(checkedStateSize)
-  console.log("checkedStateColor");
-  console.log(checkedStateColor);
-  // console.log(query)
-  // console.log('fruit_size_array')
-  // console.log(fruit_size_array)
-  console.log("query");
-  console.log(query);
-  //console.log(fr)
-  //console.log('data')
-  console.log(Array.from(data));
-  console.log("data");
-  console.log(data);
-  console.log(selectedSpecies);
+
   //extract species name
   // console.log(selectedSpecies.split(' ').slice(1, ).join(' '))// split with space, splice to get species name
   // console.log('/plants/prisma_api/'+ selectedSpecies.split(' ').slice(1, ).join(' '))// split with space, splice to get species name
