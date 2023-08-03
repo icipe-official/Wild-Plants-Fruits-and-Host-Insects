@@ -41,9 +41,9 @@ export default function PlantFirstPage({ props }) {
   // const router = useRouter();
   // const query = router.query;
   const coordinates = data.map((specie) =>
-    specie.plants_regions.map((region) => {
-      const latitude = parseFloat(region.regions.latitude);
-      const longitude = parseFloat(region.regions.longitude);
+    specie.plant_coordinates.map((region) => {
+      const latitude = parseFloat(region.latitude);
+      const longitude = parseFloat(region.longitude);
       return [longitude, latitude];
     })
   );
