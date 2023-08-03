@@ -86,9 +86,9 @@ export default function PlantDetailsFeaturesValues() {
       return [longitude, latitude];
     })
   );
-  console.log(" plant coordinates");
+  // console.log(" plant coordinates");
 
-  console.log(data);
+  // console.log(data);
   return (
     <Container
       sx={{
