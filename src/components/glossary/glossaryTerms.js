@@ -163,7 +163,7 @@ export default function GlossaryAll() {
       setSelectedTerm(true);
       setQuery((prevQueryInfo) => ({
         ...prevQueryInfo,
-        [type.glossary_type + "s"]: type?.glossary_term.toLowerCase(),
+        [type.glossary_type + "s"]: [type?.glossary_term.toLowerCase()],
       }));
       // console.log("selectedType");
 
@@ -275,8 +275,9 @@ export default function GlossaryAll() {
       </Container>
     );
 
-  if (glossary && example) {
-    const filtered_examples = example.filter((specie) => {
+  if (glossary && Array.isArray(example)) {
+    console.log(example)
+    const filtered_examples = example?.filter((specie) => {
       ////console.log(" of the example");
 
       // ////console.log(specie);
@@ -364,7 +365,7 @@ export default function GlossaryAll() {
             </Button> */}
             <Button
               type="button"
-              class="close"
+              className="close"
               aria-label="Close"
               onClick={handleClose}
             >
