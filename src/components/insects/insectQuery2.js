@@ -17,7 +17,8 @@ import { Box, Typography } from "@mui/material";
 export default function InsectQuery2() {
   const router = useRouter();
   // destructure to obtain insect oredr ans species
-  const { genus, order } = router.query;
+  const { genus, order } =
+    typeof router.query !== "undefined" ? router.query : null;
 
   const species = parseInt(router.query.species);
   // console.log("species");
@@ -73,14 +74,26 @@ export default function InsectQuery2() {
     // console.log("insect region");
     // console.log(insects_region);
 
-    const coordinates = insects_region.map((specie) =>
+    const coordinates1 = insects_region.map((specie) =>
       specie.insects_regions.map((region) => {
         const latitude = parseFloat(region.regions.latitude);
         const longitude = parseFloat(region.regions.longitude);
         return [longitude, latitude];
       })
     );
-    // console.log("coordinates");
+
+    const coordinates = insects_region.flatMap((specie) =>
+      specie.plants_insects?.map((insect) =>
+        insect.plants.plant_coordinates.map((region) => {
+          const latitude = parseFloat(region.latitude);
+          const longitude = parseFloat(region.longitude);
+          return [longitude, latitude];
+        })
+      )
+    );
+    console.log("coordinates");
+    console.log(coordinates);
+
     // console.log(coordinates.map((c) => c));
 
     return (

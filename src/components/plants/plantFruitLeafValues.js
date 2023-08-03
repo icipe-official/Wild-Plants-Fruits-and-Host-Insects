@@ -16,6 +16,7 @@ import InsectsRearedfromPlants from "./insectsRared/insects";
 import PlantSpecieFamilyGenus from "./plantSpeciesFamily";
 import PlantDetailValues from "./Plant/plantDetailValuesMUI";
 import LeafDetailValues from "./Leaf/leafDetailValues";
+import { Description } from "@mui/icons-material";
 
 const useStyles = makeStyles({
   root: {
@@ -71,14 +72,23 @@ export default function PlantDetailsFeaturesValues() {
     );
   }
 
+  // const coordinates = data.map((specie) =>
+  //   specie.plants_regions.map((region) => {
+  //     const latitude = parseFloat(region.regions.latitude);
+  //     const longitude = parseFloat(region.regions.longitude);
+  //     return [longitude, latitude];
+  //   })
+  // );
   const coordinates = data.map((specie) =>
-    specie.plants_regions.map((region) => {
-      const latitude = parseFloat(region.regions.latitude);
-      const longitude = parseFloat(region.regions.longitude);
+    specie.plant_coordinates.map((region) => {
+      const latitude = parseFloat(region.latitude);
+      const longitude = parseFloat(region.longitude);
       return [longitude, latitude];
     })
   );
+  console.log("coordinates");
 
+  console.log(coordinates);
   return (
     <Container
       sx={{
@@ -147,6 +157,7 @@ export default function PlantDetailsFeaturesValues() {
             <Grid item xs={12} sm={6} md={5} lg={4}>
               <Box sx={{ marginLeft: 0 }}>
                 <PhotosComponent photos_data={data} selectedIndex={0} />
+                <PlantDescription />
                 <Box sx={{ fontWeight: "bold", marginBottom: 2 }}>
                   Regions collected
                 </Box>
