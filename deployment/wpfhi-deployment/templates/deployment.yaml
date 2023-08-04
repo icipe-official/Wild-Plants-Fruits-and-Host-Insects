@@ -20,6 +20,13 @@ spec:
         imagePullPolicy: {{ .Values.client.deployment.imagePullPolicy }}
         ports:
         - containerPort: 3000
+        resources:
+          limits:
+            cpu: {{ .Values.client.deployment.cpuLimit }}
+            memory: {{ .Values.client.deployment.memoryLimit }}          
+          requests:
+            cpu: 1m
+            memory: 1Mi
         envFrom:
         - configMapRef:
             name: {{ .Values.client.app }}

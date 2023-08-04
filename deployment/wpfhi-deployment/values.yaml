@@ -10,6 +10,8 @@ client:
     image: "wpfhi/app"
     replicas: 1
     imagePullPolicy: Always
+    cpuLimit: 1000m
+    memoryLimit: 700Mi
   service:
     port: 3000
   ingress:
