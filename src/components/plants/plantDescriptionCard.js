@@ -53,24 +53,25 @@ export default function PlantDescription({ plants_data }) {
         )}
       </>
     );
-  } else {
-    return (
-      <>
-        <Button
-          sx={{ fontWeight: "bold", cursor: "pointer" }}
-          onClick={() => handlePlantClick("specie")}
-        >
-          <InfoIcon /> Plant description
-        </Button>
-        {/* <Box sx={{ marginLeft: 0 }}>
-          <Card className={classes.root}>
-            <CardContent>kkkkkkk</CardContent>
-          </Card>
-        </Box> */}
-        {selectedPlant && <PlantPopup plant="tttt" onClose={handleClose} />}
-      </>
-    );
   }
+  // else {
+  //   return (
+  //     <>
+  //       <Button
+  //         sx={{ fontWeight: "bold", cursor: "pointer" }}
+  //         onClick={() => handlePlantClick("specie")}
+  //       >
+  //         <InfoIcon /> Plant description
+  //       </Button>
+  //       {/* <Box sx={{ marginLeft: 0 }}>
+  //         <Card className={classes.root}>
+  //           <CardContent>kkkkkkk</CardContent>
+  //         </Card>
+  //       </Box> */}
+  //       {selectedPlant && <PlantPopup plant="tttt" onClose={handleClose} />}
+  //     </>
+  //   );
+  // }
 }
 function PlantPopup({ plant, onClose }) {
   return (
