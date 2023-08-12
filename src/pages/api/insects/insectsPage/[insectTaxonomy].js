@@ -72,6 +72,12 @@ export default async function getColeoptera(req, res) {
                     genus_name: true,
                   },
                 },
+                plant_coordinates: {
+                  select: {
+                    latitude: true,
+                    longitude: true,
+                  },
+                },
               },
             },
           },
