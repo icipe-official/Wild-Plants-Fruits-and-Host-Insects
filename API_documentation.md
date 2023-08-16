@@ -24,15 +24,15 @@ https://test-dmmg.icipe.org/api/plants/species
 ### Example output
 
 
-# 2. Plantspage
+##  2. Plantspage
 ## Description
 Designed with simplicity in mind, this API endpoint allows you to retrieve detailed information about specific plant species based on their unique species IDs.
 HTTP Method: GET
 Type: Public
-## Parameters: 
+- Parameters
 species_id (required): The unique ID of the plant species for which the details should be retrieved.
-## Output 
-Output: The API response will be a JSON object containing the details of the retrieved species. The structure of the JSON response will include the following fields:
+- Output:
+The API response will be a JSON object containing the details of the retrieved species. The structure of the JSON response will include the following fields:
 
 id (string): The ID of the plant.
 
@@ -78,9 +78,9 @@ order_name (string): The name of the insect order.
 insect_families (array of objects): An array of objects representing insect families, containing the following fields:
 
 family_name (string): The name of the insect family.
-## Example usage
+- Example usage
 http://localhost:3000/api/plants/plantsPage/1
-## Example output
+- Example output
 {
 "id": 9,
 "species_name": "schimperi (A. DC.) Schweinf.",
