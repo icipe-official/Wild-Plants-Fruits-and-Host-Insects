@@ -10,12 +10,28 @@ API Endpoint: /api/plants/species
 
 Description
 
-This API endpoint allows one to retrieve species data for plants taxonomy information and their associated insects. It serves as a data retrieval service for plant-related information, including species names, genera, families, and related insect data such as species names, genera, orders, and families.
+This API endpoint allows one to retrieve species data for plant's taxonomy information and their associated insects. It serves as a data retrieval service for plant-related information, including species names, genera, families, and related insect data such as species names, genera, orders, and families.
 
 HTTP Method: GET
 
 Parameters: None
 
+
+## Example usage
+
+https://test-dmmg.icipe.org/api/plants/species
+
+### Example output
+
+
+# 2. Plantspage
+## Description
+Designed with simplicity in mind, this API endpoint allows you to retrieve detailed information about specific plant species based on their unique species IDs.
+HTTP Method: GET
+Type: Public
+## Parameters: 
+species_id (required): The unique ID of the plant species for which the details should be retrieved.
+## Output 
 Output: The API response will be a JSON object containing the details of the retrieved species. The structure of the JSON response will include the following fields:
 
 id (string): The ID of the plant.
@@ -62,13 +78,9 @@ order_name (string): The name of the insect order.
 insect_families (array of objects): An array of objects representing insect families, containing the following fields:
 
 family_name (string): The name of the insect family.
-
 ## Example usage
-
-https://test-dmmg.icipe.org/api/plants/species
-
-### Example output
-
+http://localhost:3000/api/plants/plantsPage/1
+## Example output
 {
 "id": 9,
 "species_name": "schimperi (A. DC.) Schweinf.",
