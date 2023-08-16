@@ -1,16 +1,8 @@
 import NextCors from "nextjs-cors";
+import { mutate } from "swr";
 import prisma from "../../../lib/prisma";
-import { useSWRConfig } from "swr";
-async function invalidateSWRCache() {
-  // Get the SWR config
-  const swrConfig = useSWRConfig();
-
-  // Invalidate the cache for the specified key
-  swrConfig.mutate("/api/plantData");
-}
 
 export default async function postPlant(req, res) {
-  // Convert max_latitude and min_latitude to integers
   await NextCors(req, res, {
     methods: ["POST", "GET"],
     origin: "*",
@@ -35,7 +27,12 @@ export default async function postPlant(req, res) {
       type_of_leaf_margin,
       thorns_spines,
       arrangement,
+      photo_name,
     } = req.body;
+
+    // Convert max_latitude and min_latitude to integers
+    const parsedMaxLatitude = parseInt(max_latitude, 10);
+    const parsedMinLatitude = parseInt(min_latitude, 10);
 
     try {
       // Check if the family already exists in the plant_families table
@@ -115,7 +112,6 @@ export default async function postPlant(req, res) {
       console.log("data back end");
       console.log(createdPlant);
       // Function to check if each feature exists or create it if it doesn't exist
-      // Function to check if each feature exists or create it if it doesn't exist
       const checkOrCreateFeature = async (
         featureList,
         modelName,
@@ -144,6 +140,26 @@ export default async function postPlant(req, res) {
         }
         return createdFeatures;
       };
+      // crete plant photos
+      // Create plant_photos records for the uploaded photos
+      if (photo_name && Array.isArray(photo_name)) {
+        for (const photo of photo_name) {
+          await prisma.plants_photos.create({
+            data: {
+              plant_id: createdPlant.id,
+              photo_name: photo,
+            },
+          });
+        }
+      } else if (photo_name) {
+        // If it's a single photo, create one plant_photos entry
+        await prisma.plants_photos.create({
+          data: {
+            plant_id: createdPlant.id,
+            photo_name: photo_name,
+          },
+        });
+      }
 
       // Function to connect the feature to the plant using the bridge table
       const connectFeatureToPlant = async (
@@ -294,7 +310,7 @@ export default async function postPlant(req, res) {
       );
 
       // Invalidate SWR cache to trigger a revalidation
-      await invalidateSWRCache();
+      mutate("/api/plantData");
 
       res.status(200).json({ message: "Data inserted successfully" });
     } catch (error) {
