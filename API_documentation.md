@@ -16,12 +16,11 @@ This API endpoint allows one to retrieve species data for plant's taxonomy infor
   GET
 
 - Parameters
-- None
-
+    None
 
 - Example usage
 
-  https://test-dmmg.icipe.org/api/plants/species
+ https://test-dmmg.icipe.org/api/plants/species
 
 - Example output
 
