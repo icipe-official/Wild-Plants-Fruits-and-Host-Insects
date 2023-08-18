@@ -112,7 +112,10 @@ function PlantPopup({ plant, onClose }) {
         <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: 1 }}>
           {plant[0]?.plant_genera.genus_name} {plant[0]?.species_name}
         </Typography>
-        <Typography variant="body1">{plant[0].plant_description}</Typography>
+        <Typography variant="body1">
+          {" "}
+          Description:{plant[0].plant_description}
+        </Typography>
       </Box>
     </Box>
   );
