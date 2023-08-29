@@ -7,6 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model admin {
+  id              Int    @id @default(autoincrement())
+  username        String @db.VarChar(50)
+  password_salt   String @db.VarChar(128)
+  hashed_password String @db.VarChar(128)
+}
+
 model fruit_colors {
   color_id            Int                   @id @default(autoincrement())
   color               String                @unique @db.VarChar(20)
@@ -57,10 +64,9 @@ model glossary {
 }
 
 model glossary_photos {
-  glossary_id   Int
-  photo_id      Int
-  glossary      glossary      @relation(fields: [glossary_id], references: [glossary_id], onDelete: NoAction, onUpdate: NoAction)
-  plants_photos plants_photos @relation(fields: [photo_id], references: [photo_id], onDelete: NoAction, onUpdate: NoAction)
+  glossary_id Int
+  photo_id    Int
+  glossary    glossary @relation(fields: [glossary_id], references: [glossary_id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([photo_id, glossary_id])
 }
@@ -317,13 +323,13 @@ model plants_matk {
 }
 
 model plants_photos {
-  plant_id        Int
-  photo_id        Int               @unique
-  photo_name      String            @unique @db.VarChar(10)
-  glossary_photos glossary_photos[]
-  plants          plants            @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  plant_id   Int
+  photo_name String @unique @db.VarChar(100)
+  photo_id   Int    @default(autoincrement())
+  plants     plants @relation(fields: [plant_id], references: [id], onDelete: Cascade)
 
-  @@id([plant_id, photo_id])
+  @@id([plant_id, photo_id], map: "pk_plants_photos")
+  @@unique([plant_id, photo_id], map: "unique_plant_photo_combination")
 }
 
 model plants_rbcl {
@@ -393,6 +399,15 @@ model shrub_climbings {
   id                     Int                      @id @default(autoincrement())
   tree_type              String                   @unique @db.VarChar(10)
   plants_shrub_climbings plants_shrub_climbings[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String? @db.VarChar(256)
+  auth_srid Int?
+  srtext    String? @db.VarChar(2048)
+  proj4text String? @db.VarChar(2048)
 }
 
 model spines_thorns {

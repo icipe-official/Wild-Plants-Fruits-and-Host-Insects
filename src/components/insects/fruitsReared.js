@@ -37,18 +37,7 @@ export default function FruitsReared({ fruits_reared_data }) {
         }}
       >
         {fruits.map((dat, index) => (
-          <Box
-            key={dat.id}
-            // sx={{
-            //   backgroundColor:
-            //     index === 0 && selectedIndexPlant !== 0
-            //       ? "inherit"
-            //       : selectedIndexPlant === index
-            //       ? "gray"
-            //       : "inherit",
-            //   color: selectedIndexPlant === index ? "white" : "black",
-            // }}
-          >
+          <Box key={dat.id}>
             <Link
               href={`/plants/${dat.id}`}
               style={{ textDecoration: "none", color: "black" }}

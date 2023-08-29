@@ -86,9 +86,9 @@ export default function PlantDetailsFeaturesValues() {
       return [longitude, latitude];
     })
   );
-  console.log(" plant coordinates");
+  // console.log(" plant coordinates");
 
-  console.log(data);
+  // console.log(data);
   return (
     <Container
       sx={{
@@ -157,7 +157,7 @@ export default function PlantDetailsFeaturesValues() {
             <Grid item xs={12} sm={6} md={5} lg={4}>
               <Box sx={{ marginLeft: 0 }}>
                 <PhotosComponent photos_data={data} selectedIndex={0} />
-                <PlantDescription />
+                <PlantDescription plants_data={data} />
                 <Box sx={{ fontWeight: "bold", marginBottom: 2 }}>
                   Regions collected
                 </Box>
