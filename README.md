@@ -18,9 +18,9 @@ Our platform is a result of extensive research and data collection on wild plant
 
 - Phylogeny
 
-  Uncover the evolutionary relationships between different plant families and their respective host insects through interactive phylogenetic trees. The molecular barcode data used for phylogeny tree construction is sourced from external databases.
+  Uncover the ghylogenetics relationships between insects' DNA barcodes and their host plants. The molecular barcode data used for phylogeny tree construction is sourced from external databases.
 
-- Multiple Entry Key Search: Our advanced search functionality empowers users to find specific plant species based on unique features. Whether it's leaf shape, flower color, or growth habit, users can use key characteristics to identify plants that match their criteria.
+- Multiple Entry Key Search: Our advanced search functionality enables users to find specific plant species based on unique features such as leaf shape,type of leaf margin, fruit size, fruit color and otrher plant morphological features. Users can use thes key characteristics to identify plants that match their search criteria.
 
 - Glossary
 
