@@ -286,7 +286,7 @@ export default function PlantFirstPage() {
             </TreeItem>
 
             <TreeItem nodeId="23" label="Description">
-              <PlantDescription plants_data={props.data} />
+              <PlantDescription plants_data={data} />
             </TreeItem>
           </TreeView>
         ) : (

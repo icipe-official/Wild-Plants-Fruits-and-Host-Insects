@@ -84,11 +84,12 @@ export default function InsectQuery2() {
 
     const coordinates = insects_region.flatMap((specie) =>
       specie.plants_insects?.map((insect) =>
+        typeof insect.plants.plant_coordinates !== "undefined" ?
         insect.plants.plant_coordinates.map((region) => {
           const latitude = parseFloat(region.latitude);
           const longitude = parseFloat(region.longitude);
           return [longitude, latitude];
-        })
+        }) : []
       )
     );
     console.log("coordinates");
