@@ -12,12 +12,22 @@ export default async function getColeoptera(req, res) {
     const { insectTaxonomy } = req.query;
     // Fetch data from database for a specific genus
     const plants = await prisma.insects.findMany({
+      // where: {
+      //   insect_genera: {
+      //     is: {
+      //       id: parseInt(insectTaxonomy),
+      //       // genus_name: insectTaxonomy,
+      //     },
+      //   },
+      // },
       where: {
         insect_genera: {
           is: {
             id: parseInt(insectTaxonomy),
-            // genus_name: insectTaxonomy,
           },
+        },
+        plants_insects: {
+          some: {}, // This ensures that only insects with associated plants are selected
         },
       },
       select: {
