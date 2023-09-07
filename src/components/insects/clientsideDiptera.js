@@ -192,9 +192,14 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
       (genus.insect_genera.genus_name === "Dacus") |
       (genus.insect_genera.genus_name === "Trirhithrum")
   );
-  console.log("firstThreeGenera");
+  // console.log("firstThreeGenera");
+  // Sort the first three genera by genus_name
+  const sortedGenera = firstThreeGenera.slice(0, 3).sort((a, b) => {
+    // Use localeCompare for string comparison, to special characters and case sensitivity
+    return a.insect_genera.genus_name.localeCompare(b.insect_genera.genus_name);
+  });
 
-  console.log(firstThreeGenera);
+  // console.log(firstThreeGenera);
   const remainingGenera = unique__diptera_tephtitidae
     .filter(
       (genus) =>
@@ -315,7 +320,7 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
         </Box>
 
         <Box>
-          {firstThreeGenera.map((genus) => (
+          {sortedGenera.map((genus) => (
             <ul key={genus.id} className={classes.ul}>
               <Button
                 onClick={() => {
