@@ -33,6 +33,17 @@ export default function InsectQueryComponent({ genus_data }) {
   };
 
   if (genus_data) {
+    //sort the data by species name
+    const sortedGenusData = genus_data.sort((a, b) => {
+      if (a.species_name < b.species_name) {
+        return -1;
+      }
+      if (a.species_name > b.species_name) {
+        return 1;
+      }
+      return 0;
+    });
+
     return (
       <Box sx={{ marginTop: 6 }}>
         <Box sx={{ marginTop: "1rem", fontWeight: "bold" }}>
@@ -50,7 +61,7 @@ export default function InsectQueryComponent({ genus_data }) {
             border: "1px solid #ccc",
           }}
         >
-          {genus_data.map((specie) => (
+          {sortedGenusData.sort().map((specie) => (
             <Box
               key={specie.id}
               sx={{
