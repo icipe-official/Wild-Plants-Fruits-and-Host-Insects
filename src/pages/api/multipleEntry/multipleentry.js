@@ -13,17 +13,38 @@ export default async function getFilterdData(req, res) {
   try {
     const filterJson = req.query.filters;
     const filterObj = filterJson ? JSON.parse(filterJson) : {};
-    const shrub_climbings = filterObj.shrub_climbings || [];
-    const plant_latex = filterObj.plant_latex || [];
-    const plant_spines = filterObj.plant_spines || [];
-    const fruit_types = filterObj.fruit_types || [];
-    const fruit_colors = filterObj.fruit_colors || [];
-    const fruit_sizes = filterObj.fruit_sizes || [];
-    const fruit_shapes = filterObj.fruit_shapes || [];
-    const leaf_types = filterObj.leaf_types || [];
-    const leaf_margins = filterObj.leaf_margins || [];
-    const leaf_arrangements = filterObj.leaf_arrangements || [];
+    // const shrub_climbings = filterObj.shrub_climbings || [];
+    // const plant_latex = filterObj.plant_latex || [];
+    // const plant_spines = filterObj.plant_spines || [];
+    // const fruit_types = filterObj.fruit_types || [];
+    // const fruit_colors = filterObj.fruit_colors || [];
+    // const fruit_sizes = filterObj.fruit_sizes || [];
+    // const fruit_shapes = filterObj.fruit_shapes || [];
+    // const leaf_types = filterObj.leaf_types || [];
+    // const leaf_margins = filterObj.leaf_margins || [];
+    // const leaf_arrangements = filterObj.leaf_arrangements || [];
     ////console.log('filterObj');
+    // Helper function to ensure a variable is always an array
+    function ensureArray(value) {
+      if (Array.isArray(value)) {
+        return value;
+      } else if (typeof value === "string") {
+        return [value];
+      } else {
+        return [];
+      }
+    }
+
+    const shrub_climbings = ensureArray(filterObj.shrub_climbings);
+    const plant_latex = ensureArray(filterObj.plant_latex);
+    const plant_spines = ensureArray(filterObj.plant_spines);
+    const fruit_types = ensureArray(filterObj.fruit_types);
+    const fruit_colors = ensureArray(filterObj.fruit_colors);
+    const fruit_sizes = ensureArray(filterObj.fruit_sizes);
+    const fruit_shapes = ensureArray(filterObj.fruit_shapes);
+    const leaf_types = ensureArray(filterObj.leaf_types);
+    const leaf_margins = ensureArray(filterObj.leaf_margins);
+    const leaf_arrangements = ensureArray(filterObj.leaf_arrangements);
 
     ////console.log(filterObj);
     const plant = await prisma.plants.findMany({
