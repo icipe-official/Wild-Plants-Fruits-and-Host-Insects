@@ -365,20 +365,6 @@ export default function DipteraTephridiae2Clientside({ other_diptera_data }) {
           <Box sx={{ fontWeight: "bold", marginLeft: "1rem", color: "black" }}>
             Other families
           </Box>
-          {/* {unique_other_diptera_data.map((genus) => (
-          <ul key={item.id} className={classes.ul}>
-            <Button
-              onClick={() => {
-                setSelectedFamily(genus.insect_families.family_name);
-                setSelectedGenus(null);
-              }}
-              // onClick={() => setSelectedGenus(item.insect_families.family_name)}
-              classes={{ root: classes.buttonfamily }}
-            >
-              {genus.insect_families.family_name}
-            </Button>
-          </ul>
-        ))} */}
           {unique_other_diptera_data.map((genus) => (
             <Button
               key={genus.id}
