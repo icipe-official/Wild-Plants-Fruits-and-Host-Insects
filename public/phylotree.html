@@ -247,11 +247,24 @@
                 class="form-control mr-sm-2"
                 placeholder="Filter branches on"
                 onkeypress="return event.keyCode != 13"
+                oninput="replaceSpacesWithUnderscores(this)"
               />
             </form>
           </li>
         </ul>
       </div>
+      <script>
+        function replaceSpacesWithUnderscores(inputElement) {
+          // Get the current input value
+          let inputValue = inputElement.value;
+
+          // Replace spaces with underscores globally, handle multiple spaces, and trim leading/trailing underscores
+          // inputValue = inputValue.replace(/\s+/g, "_");
+
+          // Update the input value with underscores
+          inputElement.value = inputValue;
+        }
+      </script>
       <!-- /.container-fluid -->
     </nav>
 
@@ -766,10 +779,19 @@
       });
 
       $("#branch_filter").on("input propertychange", function (e) {
+        // Get the current input value
         var filter_value = $(this).val();
 
-        var rx = new RegExp(filter_value, "i");
+        // Replace spaces with underscores globally
+        filter_value = filter_value;
 
+        // Update the input value with underscores
+        $(this).val(filter_value);
+
+        // Create a regular expression with the modified value
+        var rx = new RegExp(filter_value.replace(/\s+/g, "_"), "i");
+
+        // Use the modified value with underscores in your filter logic
         tree.display.modifySelection((n) => {
           if (!n.target.data.name) {
             return false;

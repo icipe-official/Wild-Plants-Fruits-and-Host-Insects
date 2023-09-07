@@ -940,7 +940,14 @@ export default function PhylogenyMafft() {
                 </Select>
               </FormControl>
             </Box>
+            {isSmallScreen ? (
+              <Box sx={{ marginLeft: 2 }}>
+                {" "}
+                <Button onClick={handleClick}>Insect-Plant Phylogeny</Button>
+              </Box>
+            ) : null}
           </Box>
+
           <Box sx={{ display: "flex" }}>
             {/* <Box sx={{marginLeft:2}}>          <FastaToDict/>
 </Box> */}
@@ -1042,12 +1049,14 @@ export default function PhylogenyMafft() {
                 </TreeItem>
               </TreeView>
             </Box>
-            <Box sx={{ marginLeft: 2 }}>
-              {" "}
-              <Button onClick={handleClick}>
-                Link to Insect-Plant Phylogeny
-              </Button>
-            </Box>
+            {!isSmallScreen ? (
+              <Box sx={{ marginLeft: 2 }}>
+                {" "}
+                <Button onClick={handleClick}>
+                  Link to Insect-Plant Phylogeny
+                </Button>
+              </Box>
+            ) : null}
           </Box>
         </Box>{" "}
         <Box>

@@ -36,8 +36,11 @@ export default function PlantDescription({ plants_data }) {
     setSelectedPlant(null);
   };
 
-  // Check if plant descriptions exist in the data
-  if (plants_data[0].plant_description) {
+  // Check if plant descriptions exist in the data and check if value is not null or nan
+  if (
+    // plants_data[0].plant_description !== null ||
+    plants_data[0].plant_description !== "nan"
+  ) {
     console.group("plants_data"); // Start a console group
 
     console.group(plants_data); // Log plants_data within the group
