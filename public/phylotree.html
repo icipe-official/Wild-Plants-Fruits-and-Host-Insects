@@ -254,6 +254,7 @@
         </ul>
       </div>
       <script>
+        // Modified to enable filter search
         function replaceSpacesWithUnderscores(inputElement) {
           // Get the current input value
           let inputValue = inputElement.value;
@@ -1266,14 +1267,14 @@
           .serializeToString(svg)
           .replace("</style>", "<![CDATA[" + styles + "]]></style>");
         var doctype =
-          '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+          '<?xml version="1.0" standalone="no"?><!DOCTYPE png PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
         var to_download = [doctype + source];
         var image_string =
           "data:image/svg+xml;base66," + encodeURIComponent(to_download);
 
         if (navigator.msSaveBlob) {
           // IE10
-          download(image_string, "image.svg", "image/svg+xml");
+          download(image_string, "image.png", "image/svg+xml");
         } else if (type == "png") {
           b64toBlob(
             image_string,
@@ -1292,7 +1293,7 @@
           );
         } else {
           var pom = document.createElement("a");
-          pom.setAttribute("download", "image.svg");
+          pom.setAttribute("download", "image.png");
           pom.setAttribute("href", image_string);
           $("body").append(pom);
           pom.click();

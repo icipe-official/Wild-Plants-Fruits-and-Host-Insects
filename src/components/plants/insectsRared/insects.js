@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import InsectsReared from "./insectsreared";
 
-export default function InsectsRearedfromPlants() {
+export default function InsectsRearedfromPlants(selectedSpeciesId) {
   const [coleopteraData, setcoleopteraData] = useState([]);
   const [loaded, setLoaded] = useState(false);
   // const [error, setError] = useState(null);
@@ -22,6 +22,14 @@ export default function InsectsRearedfromPlants() {
 
   // Set the default species to "abutilum hirtum"
   const { species } = router.query;
+  // checks if species is undefined or falsy, and if it is, it sets finalSpecies to the value of selectedSpeciesId.
+  const finalSpecies = species || selectedSpeciesId.selectedSpeciesId;
+
+  // const selectedSpecies = "defaultSpecies"; // Set your default species value here
+
+  // console.log("species");
+
+  // console.log(selectedSpeciesId.selectedSpeciesId);
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -30,7 +38,7 @@ export default function InsectsRearedfromPlants() {
   //make species id to be one for the plant index page
   const { data, error } = useSWR(
     `${base_url}/api/plants/Allinsectsreared/${
-      typeof species !== "undefined" ? species : 1
+      typeof finalSpecies !== "undefined" ? finalSpecies : 1
     }`,
     fetcher
   );
