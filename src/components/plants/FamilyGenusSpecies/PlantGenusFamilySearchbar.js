@@ -74,7 +74,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
 
       // setLoaded(true);
 
-      // const specie = filteredgenus[0]; // Assuming filteredgenus is an array containing species objects
+      // const specie = filteredgenus[0];
 
       if (filteredSpecies.length > 0) {
         setSpeciesData([]);
@@ -84,7 +84,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
         const filteredgenus = data.filter(
           (genus) => genus.plant_genera.genus_name === genusName
         );
-        const specie = filteredgenus[0]; // Assuming filteredgenus is an array containing species objects
+        const specie = filteredgenus[0];
 
         const filteredsearch = data.filter(
           (genus) => genus.plant_genera.genus_name === genusName
@@ -165,7 +165,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
     const filteredgenus = data.filter(
       (genus) => genus.plant_genera.plant_families.family_name == e.target.value
     );
-    const specie = filteredgenus[0]; // Assuming filteredgenus is an array containing species objects
+    const specie = filteredgenus[0];
 
     Router.push(
       `/plants/${specie.id}?familyName=${specie.plant_genera.plant_families.family_name}&genusName=${specie.plant_genera.genus_name}`
@@ -215,29 +215,40 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
       setSpeciesId("");
       setSearchTerm("");
     } else {
+      setGenusId(e.target.value);
+
       const filterespecies = data.filter(
         (specie) => specie.plant_genera.genus_name == e.target.value
       );
+      console.log("value");
+
+      console.log(e.target.value);
 
       // setLoaded(true);
-      ////console.log('filterespecies');
+      console.log("filterespecies");
+      console.log(filterespecies);
 
       ////console.log(filterespecies);
       setGenusData(filterespecies);
-      setGenusId("jjjjj");
+      // console.log("filterespecies august");
+
+      // setGenusId("jjjjj");
       // (error) => {
       //   setLoaded(true);
       //   setError(error);
       // }
-      setFamilyId(filterespecies[0].plant_genera.plant_families.family_name);
+      setFamilyId(filterespecies[0]?.plant_genera.plant_families.family_name);
       const filteredgenus = data.filter(
         (genus) =>
           genus.plant_genera.plant_families.family_name ==
           filterespecies[0].plant_genera.plant_families.family_name
       );
-      //extract specis details
-      const specie = filteredgenus[0]; // Assuming filteredgenus is an array containing species objects
+      //extract species details
+      const specie = filterespecies[0];
+      // console.log("genus");
+      // console.log(genusId);
 
+      console.log(filteredgenus);
       setFamilyData(filteredgenus);
       Router.push(
         `/plants/${specie.id}?familyName=${specie.plant_genera.plant_families.family_name}&genusName=${specie.plant_genera.genus_name}`
@@ -359,7 +370,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
                       {genus}
                     </MenuItem>
                   ))
-                : genusAll.map((genus, index) => (
+                : genusAll?.map((genus, index) => (
                     <MenuItem key={index} value={genus}>
                       {genus}
                     </MenuItem>
