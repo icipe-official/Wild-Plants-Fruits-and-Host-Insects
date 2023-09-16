@@ -1,12 +1,12 @@
 # API Documentation
 
-Welcome to the Wild Plants, Fruits, and Host Insects (WPFHI) API documentation for our digital platform. This API serves as a gateway to a rich database of information on various wild plants, fruits, and the host insects associated with them. With this API, developers can access comprehensive data on plant characteristics, fruit taxonomy, and the insects that rely on these plants for their survival. These APIs provides a wealth of botanical and entomological knowledge on the ICIPE biocollections. This documentation will guide you through the available endpoints, request formats, and provide examples of usage and output for each API
+Welcome to the Wild Plants, Fruits, and Associated Insects (WiPtFruIM) API documentation for the digital platform. The API serves as a gateway to a rich database of information on various wild plants, fruits, and the host insects associated with them. With this API, developers can access comprehensive data on plant characteristics, fruit taxonomy, and the insects that rely on these plants for their survival. These APIs provides a wealth of botanical and entomological knowledge on the ICIPE biocollections. This documentation will guide you through the available endpoints, request formats, and provide examples of usage and output for the API
 
-## A. Plants api
+<!-- ##  Plants api -->
 
-### 1. Taxonomy information
+<!-- ### 1. Taxonomy information and Related Barcodes-->
 
-API Endpoint: /api/plants/species
+<!-- API Endpoint: /api/plants/species
 
 Description
 
@@ -22,17 +22,18 @@ This API endpoint allows one to retrieve species data for plant's taxonomy infor
 
  https://test-dmmg.icipe.org/api/plants/species
 
-- Example output
+- Example output -->
 
-###  2. Plantspage
+### Plantspage
+
 - Description
-Designed with simplicity in mind, this API endpoint allows you to retrieve detailed information about specific plant species based on their unique species IDs.
-HTTP Method: GET
-Type: Public
+  This API endpoint allows you to retrieve detailed information about specific plant species based on their unique species IDs.
+  HTTP Method: GET
+  Type: Public
 - Parameters
-species_id (required): The unique ID of the plant species for which the details should be retrieved.
+  species_id (required): The unique ID of the plant species for which the details should be retrieved.
 - Output:
-The API response will be a JSON object containing the details of the retrieved species. The structure of the JSON response will include the following fields:
+  The API response will be a JSON object containing the details of the retrieved species. The structure of the JSON response will include the following fields:
 
 id (string): The ID of the plant.
 
@@ -78,11 +79,11 @@ order_name (string): The name of the insect order.
 insect_families (array of objects): An array of objects representing insect families, containing the following fields:
 
 family_name (string): The name of the insect family.
+
 - Example usage
-- 
-http://localhost:3000/api/plants/plantsPage/1
+- https://test-dmmg.icipe.org/wpfhi/api/plants/plantsPage/1
 - Example output
- 
+
 {
 "id": 9,
 "species_name": "schimperi (A. DC.) Schweinf.",
