@@ -614,7 +614,7 @@ export default function PhylogenyMafftPlantsInsects() {
                     plants matK and predator insects
                   </MenuItem> */}
                   <MenuItem value="insects">
-                    insects-coi and host plants
+                    insects-COI and host plants
                   </MenuItem>
                 </Select>
               </FormControl>
