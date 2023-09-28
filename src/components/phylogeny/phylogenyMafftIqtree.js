@@ -1,5 +1,6 @@
 import useSWR, { mutate } from "swr";
 import { useEffect, useState } from "react";
+import TephritidaeNewick from "./tephritidae";
 import { useRef } from "react";
 // import useMediaQuery from "@mui/material";
 import {
@@ -151,9 +152,14 @@ export default function PhylogenyMafft() {
     "Araceae",
     "Hernandiaceae",
     "Monimiaceae",
+    "Passifloraceae",
   ];
 
   // Now you can use the 'plantFamilyNames' constant list in your JavaScript code.
+  const teph = TephritidaeNewick();
+  console.log("teph");
+  console.log(teph.props.children);
+  console.log("selectedFamily on change event");
 
   const [newickData, setNewickData] = useState(
     selectedFamily == "Rubiaceae" && !router.query.plantFamily
@@ -201,6 +207,17 @@ export default function PhylogenyMafft() {
 
   function handleChange(event) {
     if (event) {
+      if (
+        selectedOrganism === "insects" &&
+        event.target.value === "Tephritidae"
+      ) {
+        setNewickData("");
+        setSelectedOrder("Tephritidae");
+        setNewickData(teph.props.children);
+        console.log("selectedFamily on cahnge event1");
+        console.log(event.target.value);
+      }
+      // if (selectedOrganism === "plants") {
       if (selectedOrganism === "plants") {
         if (event.target.value !== "Rubiaceae") {
           // setNewickData(
@@ -288,6 +305,9 @@ export default function PhylogenyMafft() {
             .catch((error) => {
               console.error(error);
             });
+          console.log("newickData plantsss");
+
+          console.log(newickData);
           // check length of sequences
           // Check if the total sequence count is less than three
           if (sequences.length < 3) {
@@ -298,19 +318,33 @@ export default function PhylogenyMafft() {
             window.location.href = `${base_url}/phylogeny`;
           }
         } else {
+          setSelectedOrder("Rubiaceae");
           setSelectedFamily("Rubiaceae");
           setNewickData(
             "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
           );
         }
-      } else if (selectedOrganism === "insects") {
+      } else if (
+        selectedOrganism === "insects" &&
+        event.target.value === "Tephritidae"
+      ) {
+        setNewickData("");
+        console.log("teph on clicking tephritidae");
+
+        console.log(teph);
+        setSelectedOrder("Tephritidae");
+        setNewickData(teph.props.children);
+      } else if (
+        selectedOrganism === "insects" &&
+        event.target.value !== "Tephritidae"
+      ) {
         setNewickData("");
         // console.log("insect kmer at handlechange");
         const selectedValue =
           (event.target && event.target.value) || "Select family";
         setSelectedOrder(selectedValue);
         // setSelectedFamily(se);
-        const filteredData = data.filter(
+        const filteredData = data?.filter(
           (dat) => dat.insect_families.family_name === selectedValue
         );
         setSelectedOrder(selectedValue);
@@ -374,7 +408,12 @@ export default function PhylogenyMafft() {
           });
       }
     } else {
+      //if not event
       if (selectedOrganism === "plants") {
+        console.log("Rubiaceae");
+        setSelectedOrder("Rubiaceae");
+        // setNewickData()
+
         // setNewickData("");
 
         const filteredData = data.filter(
@@ -443,6 +482,9 @@ export default function PhylogenyMafft() {
             console.error(error);
           });
       } else if (selectedOrganism === "insects") {
+        setSelectedOrder("Brocanidae");
+        setSelectedFamily("Brocanidae");
+
         setNewickData("");
         // console.log("insect selecteorder");
         const filteredData = data.filter(
@@ -895,6 +937,42 @@ export default function PhylogenyMafft() {
         // console.log(filteredData);
       }
     }
+    function generateUniqueIdentifier() {
+      // Generate a UUID (v4)
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+        /[xy]/g,
+        function (c) {
+          const r = (Math.random() * 16) | 0;
+          const v = c === "x" ? r : (r & 0x3) | 0x8;
+          return v.toString(16);
+        }
+      );
+    }
+
+    const uniqueIdentifier = generateUniqueIdentifier(); // Generate a unique identifier
+    const iframeSrc = `/phylotree.html`;
+
+    const handleIframeLoad = () => {
+      const iframe = iframeRef.current;
+      const iframeWindow = iframe.contentWindow;
+
+      // Check if newickData is present
+      if (newickData) {
+        console.log("Sending newickData to iframe:", newickData);
+
+        // Send a message to the iframe to load the data
+        iframeWindow.postMessage(
+          {
+            type: "loadData",
+            data: { newickData },
+          },
+          "*"
+        ); // Replace '*' with the appropriate origin if needed
+      } else {
+        console.log("No newickData to send to iframe.");
+      }
+    };
+
     return (
       <Container sx={{ marginTop: 12 }}>
         {/* <ConverttoFasta></ConverttoFasta> */}
@@ -1059,10 +1137,11 @@ export default function PhylogenyMafft() {
           </Box>
         </Box>{" "}
         <Box>
-          {newickData ? (
+          {(selecteorder === "Tephritidae" || selecteorder === "Rubiaceae") && (
             <iframe
               ref={iframeRef}
-              src={`/phylotree.html?newickData=${newickData}`}
+              onLoad={handleIframeLoad}
+              src={iframeSrc}
               style={{
                 position: "relative",
                 top: 3,
@@ -1071,18 +1150,40 @@ export default function PhylogenyMafft() {
                 height: "100vh", // Set a fixed height
               }}
             />
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-              }}
-            >
-              <p>Constructing phylogenetics tree....</p>
-            </div>
           )}
+          {(!selecteorder ||
+            (selecteorder !== "Tephritidae" && selecteorder !== "Rubiaceae")) &&
+            newickData && (
+              <iframe
+                ref={iframeRef}
+                onLoad={handleIframeLoad}
+                src={iframeSrc}
+                style={{
+                  position: "relative",
+                  top: 3,
+                  left: 2,
+                  width: "100%", // Set a fixed width
+                  height: "100vh", // Set a fixed height
+                }}
+              />
+            )}
+          {(!selecteorder ||
+            (selecteorder !== "Tephritidae" && selecteorder !== "Rubiaceae")) &&
+            !newickData && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100vh",
+                }}
+              >
+                <p>
+                  Constructing phylogenetics tree. Please wait. This may take a
+                  few minutes...
+                </p>
+              </div>
+            )}
         </Box>
       </Container>
     );
