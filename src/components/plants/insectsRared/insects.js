@@ -33,7 +33,6 @@ export default function InsectsRearedfromPlants(selectedSpeciesId) {
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
-  // const base_url = "http://localhost:3000";
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   //make species id to be one for the plant index page
   const { data, error } = useSWR(
