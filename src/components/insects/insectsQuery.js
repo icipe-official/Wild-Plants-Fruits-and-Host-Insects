@@ -86,7 +86,10 @@ export default function InsectQueryComponent({ genus_data }) {
                 }}
                 style={{ textDecoration: "none", color: "black" }}
               >
-                {specie.insect_genera.genus_name} {specie.species_name}
+                {specie.insect_genera.genus_name !== "nan" &&
+                specie.species_name !== "nan"
+                  ? `${specie.insect_genera.genus_name} ${specie.species_name}`
+                  : `${specie.insect_families.family_name} sp.`}
               </Link>
             </Box>
           ))}
