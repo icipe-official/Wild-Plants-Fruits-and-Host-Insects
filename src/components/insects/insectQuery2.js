@@ -110,13 +110,15 @@ export default function InsectQuery2() {
               <Typography variant="body1">
                 <strong>Species:</strong>{" "}
                 <span style={{ color: "maroon", fontWeight: "bold" }}>
-                  {speciesName}
+                  {speciesName == "nan nan" ? order + " " + "sp." : speciesName}
                 </span>
               </Typography>
               <Typography variant="body1">
                 <strong>Genus:</strong>{" "}
                 <span style={{ color: "maroon" }}>
-                  {speciesName.split(" ")[0]}
+                  {speciesName.split(" ")[0] == "nan"
+                    ? "unknown"
+                    : speciesName.split(" ")[0]}
                 </span>
               </Typography>
               <Typography variant="body1">
