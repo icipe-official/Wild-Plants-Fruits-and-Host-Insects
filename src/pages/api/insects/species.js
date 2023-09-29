@@ -74,7 +74,8 @@ export default async function handle(req, res) {
             select: {
               nucleotide: true,
               country: true,
-              genebank_accesion: true,
+              genbank_accesion: true,
+              bold_id: true,
             },
           },
         },
