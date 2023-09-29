@@ -250,10 +250,11 @@ export default function PhylogenyMafft() {
                     obj.id +
                     "_" +
                     plant.country.replace(/ /g, "-") +
-                    counter +
+                    // counter +
                     "_" +
-                    plant?.genebank_accession;
-                  counter++;
+                    plant?.genbank_accession +
+                    "_" +
+                    plant.bold_id;
 
                   const cleanedSequence = plant.nucleotide
                     .replace(/-/g, "")
@@ -370,11 +371,13 @@ export default function PhylogenyMafft() {
                   insect.country?.replace(/ /g, "") +
                   counter +
                   "_" +
-                  (insect.genebank_accession || "");
+                  (insect.genbank_accession || "") +
+                  "_" +
+                  (insect.bold_id || "");
                 result[name.replace(/\s/g, "")] = insect.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
-                counter++;
+                // counter++;
               }
             });
           }
@@ -436,13 +439,13 @@ export default function PhylogenyMafft() {
                   plant.country.replace(/ /g, "-") +
                   counter +
                   "_" +
-                  plant?.genebank_accession;
-                counter++;
+                  plant?.genbank_accession +
+                  "_" +
+                  plant?.bold_id;
 
                 const cleanedSequence = plant.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
-                counter++;
                 result[name.replace(/\s/g, "")] = cleanedSequence
                   .replace(/-/g, "")
                   .replace(/N/g, "");
@@ -512,11 +515,13 @@ export default function PhylogenyMafft() {
                   insect.country?.replace(/ /g, "") +
                   counter +
                   "_" +
-                  (insect.genebank_accession || "");
+                  (insect.genbank_accession || "") +
+                  "_" +
+                  insect.bold_id;
                 result[name.replace(/\s/g, "")] = insect.nucleotide
                   .replace(/-/g, "")
                   .replace(/N/g, "");
-                counter++;
+                // counter++;
               }
             });
           }
@@ -880,12 +885,11 @@ export default function PhylogenyMafft() {
   //conditional rendering with data
   if (data) {
     // setIsLoadingData(false); // Set loading state to false
-    // ...
 
     if (selectedOrganism === "plants") {
       let families =
         //return only families wth atleas two matk sequences
-        data.filter(
+        data?.filter(
           (species) =>
             species.plant_genera.plant_families.family_name &&
             species.plants_matk.length > 0
