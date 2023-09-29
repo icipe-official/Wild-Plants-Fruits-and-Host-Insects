@@ -2475,6 +2475,7 @@
             window.top.location.href = detailsPageURL;
           });
       }
+      //bold api
       if (!isNaN(parseInt(plantInsectId)) && isNaN(parseInt(Insectgenus))) {
         menu_object
           .append("a")
@@ -2485,22 +2486,28 @@
             menu_object.style("display", "none");
 
             // Generate the URL for the BOLD systems database using the species name
-            const speciesName =
-              node.data.name.split("_")[0] + " " + node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
+            // const speciesName =
+            //   node.data.name.split("_")[0] + " " + node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
 
-            // const speciesName = "Your Species Name"; // Replace "Your Species Name" with the actual species name
-            // Generate the search URL for the BOLD systems database using the species name
-            const boldSearchURL = `https://boldsystems.org/index.php/Public_SearchTerms?query=${encodeURIComponent(
-              speciesName
+            // // const speciesName = "Your Species Name"; // Replace "Your Species Name" with the actual species name
+            // // Generate the search URL for the BOLD systems database using the species name
+            // const boldSearchURL = `https://boldsystems.org/index.php/Public_SearchTerms?query=${encodeURIComponent(
+            //   speciesName
+            // )}`;
+            const nameParts = node.data.name.split("_");
+            const lastPart = nameParts[nameParts.length - 1]; // Get the last part after splitting
+            const bold_id = lastPart ? lastPart : "NA"; // Check if it's undefined and set to 'NA' if so
+
+            const boldSearchURL = `https://boldsystems.org/index.php/Public_RecordView?processid=${encodeURIComponent(
+              bold_id
             )}`;
-
             // Open a new window with the search results page in the BOLD systems database
             window.open(boldSearchURL, "_blank");
             // window.open(boldURL, "_blank");
           });
       }
       const nameParts = node.data.name.split("_"); // Split the name into parts
-      const lastPart = nameParts[nameParts.length - 1]; // Get the last part
+      const lastPart = nameParts[nameParts.length - 2]; // Get the second last part
 
       const ncbiAccessionPattern = /[A-Z]{1,2}\d+/; // Pattern for NCBI accessions (one or two letters followed by numbers)
       const match = lastPart.match(ncbiAccessionPattern); // Check if the last part matches the pattern
@@ -2555,12 +2562,17 @@
             // Generate the URL for the BOLD systems database using the species name
             const speciesName =
               node.data.name.split("_")[0] + " " + node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
+            const nameParts = node.data.name.split("_");
+            const lastPart = nameParts[nameParts.length - 1]; // Get the last part after splitting
+            const bold_id = lastPart ? lastPart : "NA"; // Check if it's undefined and set to 'NA' if so
 
+            // https://boldsystems.org/index.php/Public_RecordView?processid=KNPA1297-09
             // const speciesName = "Your Species Name"; // Replace "Your Species Name" with the actual species name
             // Generate the search URL for the BOLD systems database using the species name
-            const boldSearchURL = `https://boldsystems.org/index.php/Public_SearchTerms?query=${encodeURIComponent(
-              speciesName
-            )}`;
+            // const boldSearchURL = `https://boldsystems.org/index.php/Public_SearchTerms?query=${encodeURIComponent(
+            //   speciesName
+            // )}`;
+            const boldSearchURL = `https://boldsystems.org/index.php/Public_RecordView?processid=${bold_id}`;
 
             // Open a new window with the search results page in the BOLD systems database
             window.open(boldSearchURL, "_blank");
@@ -5795,4 +5807,4 @@
 
   Object.defineProperty(exports, "__esModule", { value: true });
 });
-//# sourceMappingURL=phylotree.js.map
+sourceMappingURL = phylotree.js.map;

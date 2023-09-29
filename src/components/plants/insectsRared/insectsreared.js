@@ -83,8 +83,12 @@ export default function InsectsReared({ data }) {
                   {col.insect_families.family_name}
                 </TableCell>
                 <TableCell className={classes.cell}>
-                  {col.insect_genera.genus_name + " " + col.species_name}
+                  {col.insect_genera.genus_name !== "nan" &&
+                  col.species_name !== "nan"
+                    ? `${col.insect_genera.genus_name} ${col.species_name}`
+                    : `${col.insect_families.family_name} sp.`}
                 </TableCell>
+
                 <TableCell className={classes.cell}>
                   <Link
                     href={{

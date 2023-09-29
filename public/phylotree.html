@@ -254,6 +254,7 @@
         </ul>
       </div>
       <script>
+        // Modified to enable filter search
         function replaceSpacesWithUnderscores(inputElement) {
           // Get the current input value
           let inputValue = inputElement.value;
@@ -1078,325 +1079,357 @@
         max_selections = 10;
       (color_scheme = d3.scaleOrdinal(d3.schemeCategory10)),
         (selection_menu_element_action = "phylotree_menu_element_action");
-      const params = new URLSearchParams(window.location.search);
-      const newickData = params.get("newickData");
-      console.log(newickData);
-      var test_string = newickData;
-      //"(((Adenia-gummifera-South-Africa-30:0.563533, ((Acokanthera-oppositifolia-South-Africa-24:0.498970, (Acokanthera-oppositifolia-South-Africa-21:0.498062, Acokanthera-oppositifolia-South-Africa-20:0.515957):0.001030):0.063243, (Adansonia-digitata-South-Africa-27:0.522313, (Abutilon-mauritianum-Kenya-17:0.503507, (Abutilon-hirtum-Kenya-13:0.500000, (Abutilon-hirtum-Kenya-9:0.500000, Abutilon-hirtum-Kenya-3:0.500000):0.000000):0.001123):0.024901):0.025837):0.044232):0.067740, (nan-31:0.523528, (Abutilon-hirtum-Kenya-14:0.501919, (Abutilon-hirtum-Kenya-6:0.500000, Abutilon-hirtum-Kenya-1:0.500000):0.014840):0.454673):0.027474):0.016783, (nan-25:0.553315, (nan-32:0.553956, ((Adenia-gummifera-South-Africa-29:0.593326, nan-28:0.504235):0.081452, ((Acokanthera-oppositifolia-South-Africa-19:0.500891, (Acokanthera-oppositifolia-South-Africa-23:0.514218, Acokanthera-oppositifolia-South-Africa-22:0.499867):0.003771):0.102737, ((Abutilon-hirtum-Kenya-8:0.496268, (Abutilon-mauritianum-Kenya-18:0.496693, (Abutilon-hirtum-Kenya-11:0.663119, Abutilon-hirtum-Kenya-5:0.483222):0.020980):0.014249):0.227929, ((Abutilon-hirtum-Kenya-12:0.481580, (Abutilon-hirtum-Kenya-10:0.463931, (Abutilon-mauritianum-Kenya-16:1.562491, Abutilon-hirtum-Kenya-4:0.425461):0.081434):0.025915):0.343333, (Adansonia-digitata-South-Africa-26:0.564585, (Abutilon-mauritianum-Kenya-15:0.568963, (Abutilon-hirtum-Kenya-7:0.500000, Abutilon-hirtum-Kenya-2:0.500000):0.244762):0.035795):0.075301):0.017759):0.047765):0.015092):0.006502):0.012280):0.002018, Adenium-obesum-United-States:0.543257)"
-      // "((Chrysopilus_laevis:0.034324,(Culicoides_imicola:0.056458,Simulium_damnosum:0.054925):0.023192):0.024599,((Drosophila_melanogaster:0.045603,Drosophila_virilis:0.048838):0.010688,(Musca_domestica:0.028555,Calliphora_vicina:0.035931):0.033036):0.018612,((Eristalis_arbustorum:0.051443,Eristalis_tenax:0.052172):0.007342,(Tabanus_sudeticus:0.039647,(Rhagio_scolopaceus:0.047358,(Tachina_fera:0.036210,(Empis_tessellata:0.030793,Empis_striata:0.034902):0.018703):0.012322):0.011284):0.015309):0.013881)"
-      // "(((Austrodicranomyia_americana:0.021600,Dolichopodidae_sp:0.034400):0.007200,Eudorylas_sp:0.017600):0.024000,(((Hybosoridae_sp:0.011200,Chelifera_sp:0.024000):0.004800,Asilidae_sp:0.015200):0.012000,((Ceratopogonidae_sp:0.024800,Thaumaleidae_sp:0.034400):0.016800,((Phoridae_sp:0.008800,Sarcophagidae_sp:0.006400):0.012800,Culicidae_sp:0.015200):0.028800):0.021600):0.012800)"
-      // "(((EELA:0.150276,CONGERA:0.213019):0.230956,(EELB:0.263487,CONGERB:0.202633):0.246917):0.094785,((CAVEFISH:0.451027,(GOLDFISH:0.340495,ZEBRAFISH:0.390163):0.220565):0.067778,((((((NSAM:0.008113,NARG:0.014065):0.052991,SPUN:0.061003,(SMIC:0.027806,SDIA:0.015298,SXAN:0.046873):0.046977):0.009822,(NAUR:0.081298,(SSPI:0.023876,STIE:0.013652):0.058179):0.091775):0.073346,(MVIO:0.012271,MBER:0.039798):0.178835):0.147992,((BFNKILLIFISH:0.317455,(ONIL:0.029217,XCAU:0.084388):0.201166):0.055908,THORNYHEAD:0.252481):0.061905):0.157214,LAMPFISH:0.717196,((SCABBARDA:0.189684,SCABBARDB:0.362015):0.282263,((VIPERFISH:0.318217,BLACKDRAGON:0.109912):0.123642,LOOSEJAW:0.397100):0.287152):0.140663):0.206729):0.222485,(COELACANTH:0.558103,((CLAWEDFROG:0.441842,SALAMANDER:0.299607):0.135307,((CHAMELEON:0.771665,((PIGEON:0.150909,CHICKEN:0.172733):0.082163,ZEBRAFINCH:0.099172):0.272338):0.014055,((BOVINE:0.167569,DOLPHIN:0.157450):0.104783,ELEPHANT:0.166557):0.367205):0.050892):0.114731):0.295021)myroot";
-      var container_id = "#tree_container";
-      // console.log(test_string)
-      //var tree = phylotree.phylotree(test_string);
-      //.size([height, width]);
+      // const params = new URLSearchParams(window.location.search);
+      // const newickData = params.get("newickData");
+      // console.log(newickData);
+      // var test_string = newickData;
 
-      //window.setInterval (function () {});
+      // Declare a variable to store the newickData
 
-      var example_controls = d3.select("#controls_form").append("form");
+      let test_string;
 
-      //var svg = d3.select(container_id).append("svg")
-      //    .attr("width", width)
-      //    .attr("height", height);
+      window.addEventListener("message", handleMessage);
 
-      function selection_handler_name_box(e) {
-        var name_box = d3.select(this);
-        switch (e.detail[0]) {
-          case "save":
-          case "cancel":
-            name_box
-              .property("disabled", true)
-              .style("color", color_scheme(current_selection_id));
-            break;
-          case "new":
-            name_box
-              .property("disabled", false)
-              .property("value", "new_selection_name")
-              .style("color", color_scheme(selection_set.length));
-            break;
-          case "rename":
-            name_box.property("disabled", false);
-            break;
+      function handleMessage(event) {
+        if (event.data.type === "loadData") {
+          // Retrieve the newickData from the message data
+          const newickData = event.data.data.newickData; // Updated this line
+
+          // Check if newickData is present
+          if (newickData) {
+            console.log("Received newickData:", newickData);
+
+            // Assign newickData to the test_string variable
+            test_string = newickData;
+          } else {
+            console.log("No newickData provided.");
+          }
         }
-      }
 
-      function selection_handler_new(e) {
-        var element = d3.select(this);
-        $(this).data("tooltip", false);
-        switch (e.detail[0]) {
-          case "save":
-          case "cancel":
-            if (selection_set.length == max_selections) {
+        function handleTestString(data) {
+          console.log("test_string:", data);
+        }
+
+        // This will log "test_string" after it's assigned
+        console.log("Logging test_string");
+        // const test_string=test_string
+        console.log(test_string);
+        //"(((Adenia-gummifera-South-Africa-30:0.563533, ((Acokanthera-oppositifolia-South-Africa-24:0.498970, (Acokanthera-oppositifolia-South-Africa-21:0.498062, Acokanthera-oppositifolia-South-Africa-20:0.515957):0.001030):0.063243, (Adansonia-digitata-South-Africa-27:0.522313, (Abutilon-mauritianum-Kenya-17:0.503507, (Abutilon-hirtum-Kenya-13:0.500000, (Abutilon-hirtum-Kenya-9:0.500000, Abutilon-hirtum-Kenya-3:0.500000):0.000000):0.001123):0.024901):0.025837):0.044232):0.067740, (nan-31:0.523528, (Abutilon-hirtum-Kenya-14:0.501919, (Abutilon-hirtum-Kenya-6:0.500000, Abutilon-hirtum-Kenya-1:0.500000):0.014840):0.454673):0.027474):0.016783, (nan-25:0.553315, (nan-32:0.553956, ((Adenia-gummifera-South-Africa-29:0.593326, nan-28:0.504235):0.081452, ((Acokanthera-oppositifolia-South-Africa-19:0.500891, (Acokanthera-oppositifolia-South-Africa-23:0.514218, Acokanthera-oppositifolia-South-Africa-22:0.499867):0.003771):0.102737, ((Abutilon-hirtum-Kenya-8:0.496268, (Abutilon-mauritianum-Kenya-18:0.496693, (Abutilon-hirtum-Kenya-11:0.663119, Abutilon-hirtum-Kenya-5:0.483222):0.020980):0.014249):0.227929, ((Abutilon-hirtum-Kenya-12:0.481580, (Abutilon-hirtum-Kenya-10:0.463931, (Abutilon-mauritianum-Kenya-16:1.562491, Abutilon-hirtum-Kenya-4:0.425461):0.081434):0.025915):0.343333, (Adansonia-digitata-South-Africa-26:0.564585, (Abutilon-mauritianum-Kenya-15:0.568963, (Abutilon-hirtum-Kenya-7:0.500000, Abutilon-hirtum-Kenya-2:0.500000):0.244762):0.035795):0.075301):0.017759):0.047765):0.015092):0.006502):0.012280):0.002018, Adenium-obesum-United-States:0.543257)"
+        // "((Chrysopilus_laevis:0.034324,(Culicoides_imicola:0.056458,Simulium_damnosum:0.054925):0.023192):0.024599,((Drosophila_melanogaster:0.045603,Drosophila_virilis:0.048838):0.010688,(Musca_domestica:0.028555,Calliphora_vicina:0.035931):0.033036):0.018612,((Eristalis_arbustorum:0.051443,Eristalis_tenax:0.052172):0.007342,(Tabanus_sudeticus:0.039647,(Rhagio_scolopaceus:0.047358,(Tachina_fera:0.036210,(Empis_tessellata:0.030793,Empis_striata:0.034902):0.018703):0.012322):0.011284):0.015309):0.013881)"
+        // "(((Austrodicranomyia_americana:0.021600,Dolichopodidae_sp:0.034400):0.007200,Eudorylas_sp:0.017600):0.024000,(((Hybosoridae_sp:0.011200,Chelifera_sp:0.024000):0.004800,Asilidae_sp:0.015200):0.012000,((Ceratopogonidae_sp:0.024800,Thaumaleidae_sp:0.034400):0.016800,((Phoridae_sp:0.008800,Sarcophagidae_sp:0.006400):0.012800,Culicidae_sp:0.015200):0.028800):0.021600):0.012800)"
+        // "(((EELA:0.150276,CONGERA:0.213019):0.230956,(EELB:0.263487,CONGERB:0.202633):0.246917):0.094785,((CAVEFISH:0.451027,(GOLDFISH:0.340495,ZEBRAFISH:0.390163):0.220565):0.067778,((((((NSAM:0.008113,NARG:0.014065):0.052991,SPUN:0.061003,(SMIC:0.027806,SDIA:0.015298,SXAN:0.046873):0.046977):0.009822,(NAUR:0.081298,(SSPI:0.023876,STIE:0.013652):0.058179):0.091775):0.073346,(MVIO:0.012271,MBER:0.039798):0.178835):0.147992,((BFNKILLIFISH:0.317455,(ONIL:0.029217,XCAU:0.084388):0.201166):0.055908,THORNYHEAD:0.252481):0.061905):0.157214,LAMPFISH:0.717196,((SCABBARDA:0.189684,SCABBARDB:0.362015):0.282263,((VIPERFISH:0.318217,BLACKDRAGON:0.109912):0.123642,LOOSEJAW:0.397100):0.287152):0.140663):0.206729):0.222485,(COELACANTH:0.558103,((CLAWEDFROG:0.441842,SALAMANDER:0.299607):0.135307,((CHAMELEON:0.771665,((PIGEON:0.150909,CHICKEN:0.172733):0.082163,ZEBRAFINCH:0.099172):0.272338):0.014055,((BOVINE:0.167569,DOLPHIN:0.157450):0.104783,ELEPHANT:0.166557):0.367205):0.050892):0.114731):0.295021)myroot";
+        var container_id = "#tree_container";
+        // console.log(test_string)
+        //var tree = phylotree.phylotree(test_string);
+        //.size([height, width]);
+
+        //window.setInterval (function () {});
+
+        var example_controls = d3.select("#controls_form").append("form");
+
+        //var svg = d3.select(container_id).append("svg")
+        //    .attr("width", width)
+        //    .attr("height", height);
+
+        function selection_handler_name_box(e) {
+          var name_box = d3.select(this);
+          switch (e.detail[0]) {
+            case "save":
+            case "cancel":
+              name_box
+                .property("disabled", true)
+                .style("color", color_scheme(current_selection_id));
+              break;
+            case "new":
+              name_box
+                .property("disabled", false)
+                .property("value", "new_selection_name")
+                .style("color", color_scheme(selection_set.length));
+              break;
+            case "rename":
+              name_box.property("disabled", false);
+              break;
+          }
+        }
+
+        function selection_handler_new(e) {
+          var element = d3.select(this);
+          $(this).data("tooltip", false);
+          switch (e.detail[0]) {
+            case "save":
+            case "cancel":
+              if (selection_set.length == max_selections) {
+                element.classed("disabled", true);
+                $(this).tooltip({
+                  title: "Up to " + max_selections + " are allowed",
+                  placement: "left",
+                });
+              } else {
+                element.classed("disabled", null);
+              }
+              break;
+            default:
               element.classed("disabled", true);
-              $(this).tooltip({
-                title: "Up to " + max_selections + " are allowed",
-                placement: "left",
-              });
-            } else {
-              element.classed("disabled", null);
-            }
-            break;
-          default:
-            element.classed("disabled", true);
-            break;
+              break;
+          }
         }
-      }
 
-      function selection_handler_rename(e) {
-        var element = d3.select(this);
-        element.classed(
-          "disabled",
-          e.detail[0] == "save" || e.detail[0] == "cancel" ? null : true
-        );
-      }
+        function selection_handler_rename(e) {
+          var element = d3.select(this);
+          element.classed(
+            "disabled",
+            e.detail[0] == "save" || e.detail[0] == "cancel" ? null : true
+          );
+        }
 
-      function selection_handler_save_selection_name(e) {
-        var element = d3.select(this);
-        element.style(
-          "display",
-          e.detail[0] == "save" || e.detail[0] == "cancel" ? "none" : null
-        );
-      }
+        function selection_handler_save_selection_name(e) {
+          var element = d3.select(this);
+          element.style(
+            "display",
+            e.detail[0] == "save" || e.detail[0] == "cancel" ? "none" : null
+          );
+        }
 
-      function selection_handler_name_dropdown(e) {
-        var element = d3.select(this).selectAll(".selection_set");
-        element.classed(
-          "disabled",
-          e.detail[0] == "save" || e.detail[0] == "cancel" ? null : true
-        );
-      }
+        function selection_handler_name_dropdown(e) {
+          var element = d3.select(this).selectAll(".selection_set");
+          element.classed(
+            "disabled",
+            e.detail[0] == "save" || e.detail[0] == "cancel" ? null : true
+          );
+        }
 
-      function selection_handler_delete(e) {
-        var element = d3.select(this);
-        $(this).tooltip("dispose");
-        switch (e.detail[0]) {
-          case "save":
-          case "cancel":
-            if (selection_set.length == 1) {
+        function selection_handler_delete(e) {
+          var element = d3.select(this);
+          $(this).tooltip("dispose");
+          switch (e.detail[0]) {
+            case "save":
+            case "cancel":
+              if (selection_set.length == 1) {
+                element.classed("disabled", true);
+                $(this).tooltip({
+                  title:
+                    "At least one named selection set <br> is required;<br>it can be empty, however",
+                  placement: "bottom",
+                  html: true,
+                });
+              } else {
+                element.classed("disabled", null);
+              }
+              break;
+            default:
               element.classed("disabled", true);
-              $(this).tooltip({
-                title:
-                  "At least one named selection set <br> is required;<br>it can be empty, however",
-                placement: "bottom",
-                html: true,
-              });
-            } else {
-              element.classed("disabled", null);
-            }
-            break;
-          default:
-            element.classed("disabled", true);
-            break;
+              break;
+          }
         }
-      }
 
-      var datamonkey_save_image = function (type, container) {
-        var prefix = {
-          xmlns: "http://www.w3.org/2000/xmlns/",
-          xlink: "http://www.w3.org/1999/xlink",
-          svg: "http://www.w3.org/2000/svg",
-        };
+        var datamonkey_save_image = function (type, container) {
+          var prefix = {
+            xmlns: "http://www.w3.org/2000/xmlns/",
+            xlink: "http://www.w3.org/1999/xlink",
+            svg: "http://www.w3.org/2000/svg",
+          };
 
-        function get_styles(doc) {
-          function process_stylesheet(ss) {
-            try {
-              if (ss.cssRules) {
-                for (var i = 0; i < ss.cssRules.length; i++) {
-                  var rule = ss.cssRules[i];
-                  if (rule.type === 3) {
-                    // Import Rule
-                    process_stylesheet(rule.styleSheet);
-                  } else {
-                    // hack for illustrator crashing on descendent selectors
-                    if (rule.selectorText) {
-                      if (rule.selectorText.indexOf(">") === -1) {
-                        styles += "\n" + rule.cssText;
+          function get_styles(doc) {
+            function process_stylesheet(ss) {
+              try {
+                if (ss.cssRules) {
+                  for (var i = 0; i < ss.cssRules.length; i++) {
+                    var rule = ss.cssRules[i];
+                    if (rule.type === 3) {
+                      // Import Rule
+                      process_stylesheet(rule.styleSheet);
+                    } else {
+                      // hack for illustrator crashing on descendent selectors
+                      if (rule.selectorText) {
+                        if (rule.selectorText.indexOf(">") === -1) {
+                          styles += "\n" + rule.cssText;
+                        }
                       }
                     }
                   }
                 }
+              } catch (e) {
+                console.log("Could not process stylesheet : " + ss); // eslint-disable-line
               }
-            } catch (e) {
-              console.log("Could not process stylesheet : " + ss); // eslint-disable-line
             }
+
+            var styles = "",
+              styleSheets = doc.styleSheets;
+
+            if (styleSheets) {
+              for (var i = 0; i < styleSheets.length; i++) {
+                process_stylesheet(styleSheets[i]);
+              }
+            }
+
+            return styles;
           }
 
-          var styles = "",
-            styleSheets = doc.styleSheets;
-
-          if (styleSheets) {
-            for (var i = 0; i < styleSheets.length; i++) {
-              process_stylesheet(styleSheets[i]);
-            }
+          var svg = $(container).find("svg")[0];
+          if (!svg) {
+            svg = $(container)[0];
           }
 
-          return styles;
-        }
+          var styles = get_styles(window.document);
 
-        var svg = $(container).find("svg")[0];
-        if (!svg) {
-          svg = $(container)[0];
-        }
+          svg.setAttribute("version", "1.1");
 
-        var styles = get_styles(window.document);
+          var defsEl = document.createElement("defs");
+          svg.insertBefore(defsEl, svg.firstChild);
 
-        svg.setAttribute("version", "1.1");
+          var styleEl = document.createElement("style");
+          defsEl.appendChild(styleEl);
+          styleEl.setAttribute("type", "text/css");
 
-        var defsEl = document.createElement("defs");
-        svg.insertBefore(defsEl, svg.firstChild);
+          // removing attributes so they aren't doubled up
+          svg.removeAttribute("xmlns");
+          svg.removeAttribute("xlink");
 
-        var styleEl = document.createElement("style");
-        defsEl.appendChild(styleEl);
-        styleEl.setAttribute("type", "text/css");
+          // These are needed for the svg
+          if (!svg.hasAttributeNS(prefix.xmlns, "xmlns")) {
+            svg.setAttributeNS(prefix.xmlns, "xmlns", prefix.svg);
+          }
 
-        // removing attributes so they aren't doubled up
-        svg.removeAttribute("xmlns");
-        svg.removeAttribute("xlink");
+          if (!svg.hasAttributeNS(prefix.xmlns, "xmlns:xlink")) {
+            svg.setAttributeNS(prefix.xmlns, "xmlns:xlink", prefix.xlink);
+          }
 
-        // These are needed for the svg
-        if (!svg.hasAttributeNS(prefix.xmlns, "xmlns")) {
-          svg.setAttributeNS(prefix.xmlns, "xmlns", prefix.svg);
-        }
+          var source = new XMLSerializer()
+            .serializeToString(svg)
+            .replace("</style>", "<![CDATA[" + styles + "]]></style>");
+          var doctype =
+            '<?xml version="1.0" standalone="no"?><!DOCTYPE png PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+          var to_download = [doctype + source];
+          var image_string =
+            "data:image/svg+xml;base66," + encodeURIComponent(to_download);
 
-        if (!svg.hasAttributeNS(prefix.xmlns, "xmlns:xlink")) {
-          svg.setAttributeNS(prefix.xmlns, "xmlns:xlink", prefix.xlink);
-        }
+          if (navigator.msSaveBlob) {
+            // IE10
+            download(image_string, "image.png", "image/svg+xml");
+          } else if (type == "png") {
+            b64toBlob(
+              image_string,
+              function (blob) {
+                var url = window.URL.createObjectURL(blob);
+                var pom = document.createElement("a");
+                pom.setAttribute("download", "image.png");
+                pom.setAttribute("href", url);
+                $("body").append(pom);
+                pom.click();
+                pom.remove();
+              },
+              function (error) {
+                console.log(error); // eslint-disable-line
+              }
+            );
+          } else {
+            var pom = document.createElement("a");
+            pom.setAttribute("download", "image.png");
+            pom.setAttribute("href", image_string);
+            $("body").append(pom);
+            pom.click();
+            pom.remove();
+          }
+        };
 
-        var source = new XMLSerializer()
-          .serializeToString(svg)
-          .replace("</style>", "<![CDATA[" + styles + "]]></style>");
-        var doctype =
-          '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
-        var to_download = [doctype + source];
-        var image_string =
-          "data:image/svg+xml;base66," + encodeURIComponent(to_download);
+        $(document).ready(function () {
+          tree = new phylotree.phylotree(test_string);
+          global_tree = tree;
 
-        if (navigator.msSaveBlob) {
-          // IE10
-          download(image_string, "image.svg", "image/svg+xml");
-        } else if (type == "png") {
-          b64toBlob(
-            image_string,
-            function (blob) {
-              var url = window.URL.createObjectURL(blob);
-              var pom = document.createElement("a");
-              pom.setAttribute("download", "image.png");
-              pom.setAttribute("href", url);
-              $("body").append(pom);
-              pom.click();
-              pom.remove();
+          tree.render({
+            container: "#tree_container",
+            "draw-size-bubbles": false,
+            "bubble-styler": (d) => {
+              return 5;
             },
-            function (error) {
-              console.log(error); // eslint-disable-line
-            }
-          );
-        } else {
-          var pom = document.createElement("a");
-          pom.setAttribute("download", "image.svg");
-          pom.setAttribute("href", image_string);
-          $("body").append(pom);
-          pom.click();
-          pom.remove();
-        }
-      };
+            "node-styler": node_colorizer,
+            zoom: false,
+            "edge-styler": edge_colorizer,
+          });
 
-      $(document).ready(function () {
-        tree = new phylotree.phylotree(test_string);
-        global_tree = tree;
+          $("#tree_container").on("reroot", function (e) {
+            update_selection_names();
 
-        tree.render({
-          container: "#tree_container",
-          "draw-size-bubbles": false,
-          "bubble-styler": (d) => {
-            return 5;
-          },
-          "node-styler": node_colorizer,
-          zoom: false,
-          "edge-styler": edge_colorizer,
-        });
+            tree.display.countHandler((count) => {
+              $("#selected_branch_counter").text(function (d) {
+                return count[current_selection_name];
+              });
+            });
+          });
 
-        $("#tree_container").on("reroot", function (e) {
-          update_selection_names();
+          tree.display.selectionLabel(current_selection_name);
 
           tree.display.countHandler((count) => {
             $("#selected_branch_counter").text(function (d) {
               return count[current_selection_name];
             });
           });
-        });
 
-        tree.display.selectionLabel(current_selection_name);
+          // Get selection set names from parsed newick
+          if (tree.parsed_tags.length) {
+            selection_set = tree.parsed_tags;
+          }
 
-        tree.display.countHandler((count) => {
-          $("#selected_branch_counter").text(function (d) {
-            return count[current_selection_name];
+          // Until a cleaner solution to supporting both Observable and regular HTML
+          $(tree.display.container).append(tree.display.show());
+
+          $("#selection_new")
+            .get(0)
+            .addEventListener(
+              selection_menu_element_action,
+              selection_handler_new,
+              false
+            );
+          $("#selection_rename")
+            .get(0)
+            .addEventListener(
+              selection_menu_element_action,
+              selection_handler_rename,
+              false
+            );
+          $("#selection_delete")
+            .get(0)
+            .addEventListener(
+              selection_menu_element_action,
+              selection_handler_delete,
+              false
+            );
+          $("#selection_delete")
+            .get(0)
+            .dispatchEvent(
+              new CustomEvent(selection_menu_element_action, {
+                detail: ["cancel", null],
+              })
+            );
+          $("#selection_name_box")
+            .get(0)
+            .addEventListener(
+              selection_menu_element_action,
+              selection_handler_name_box,
+              false
+            );
+          $("#save_selection_name")
+            .get(0)
+            .addEventListener(
+              selection_menu_element_action,
+              selection_handler_save_selection_name,
+              false
+            );
+          $("#selection_name_dropdown")
+            .get(0)
+            .addEventListener(
+              selection_menu_element_action,
+              selection_handler_name_dropdown,
+              false
+            );
+
+          update_selection_names();
+
+          $("#save_image").on("click", function (e) {
+            datamonkey_save_image("svg", "#tree_container");
           });
         });
-
-        // Get selection set names from parsed newick
-        if (tree.parsed_tags.length) {
-          selection_set = tree.parsed_tags;
-        }
-
-        // Until a cleaner solution to supporting both Observable and regular HTML
-        $(tree.display.container).append(tree.display.show());
-
-        $("#selection_new")
-          .get(0)
-          .addEventListener(
-            selection_menu_element_action,
-            selection_handler_new,
-            false
-          );
-        $("#selection_rename")
-          .get(0)
-          .addEventListener(
-            selection_menu_element_action,
-            selection_handler_rename,
-            false
-          );
-        $("#selection_delete")
-          .get(0)
-          .addEventListener(
-            selection_menu_element_action,
-            selection_handler_delete,
-            false
-          );
-        $("#selection_delete")
-          .get(0)
-          .dispatchEvent(
-            new CustomEvent(selection_menu_element_action, {
-              detail: ["cancel", null],
-            })
-          );
-        $("#selection_name_box")
-          .get(0)
-          .addEventListener(
-            selection_menu_element_action,
-            selection_handler_name_box,
-            false
-          );
-        $("#save_selection_name")
-          .get(0)
-          .addEventListener(
-            selection_menu_element_action,
-            selection_handler_save_selection_name,
-            false
-          );
-        $("#selection_name_dropdown")
-          .get(0)
-          .addEventListener(
-            selection_menu_element_action,
-            selection_handler_name_dropdown,
-            false
-          );
-
-        update_selection_names();
-
-        $("#save_image").on("click", function (e) {
-          datamonkey_save_image("svg", "#tree_container");
-        });
-      });
+      }
     </script>
 
     <script>

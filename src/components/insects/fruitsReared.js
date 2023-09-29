@@ -25,7 +25,7 @@ export default function FruitsReared({ fruits_reared_data }) {
   return (
     <Box sx={{ paddingBottom: "1rem" }}>
       <Box sx={{ marginTop: "1rem", fontWeight: "bold" }}>
-        {fruits.length} Fruits from which the insect was reared. click for
+        {fruits?.length} Fruits from which the insect was reared. click for
         details
       </Box>
       <Box
@@ -36,13 +36,13 @@ export default function FruitsReared({ fruits_reared_data }) {
           border: "1px solid #ccc",
         }}
       >
-        {fruits.map((dat, index) => (
+        {fruits?.map((dat, index) => (
           <Box key={dat.id}>
             <Link
               href={`/plants/${dat.id}`}
               style={{ textDecoration: "none", color: "black" }}
             >
-              {dat.plant_genera.genus_name} {dat.species_name}
+              {dat?.plant_genera.genus_name} {dat?.species_name}
             </Link>
           </Box>
         ))}

@@ -108,7 +108,8 @@ export default async function handle(req, res) {
               matk_id: true,
               nucleotide: true,
               country: true,
-              genebank_accession: true,
+              genbank_accession: true,
+              bold_id: true,
             },
           },
           plants_insects: {
