@@ -47,7 +47,7 @@ export default async function getColeoptera(req, res) {
           select: {
             nucleotide: true,
             country: true,
-            genebank_accesion: true,
+            genbank_accession: true,
           },
         },
         plants_insects: {
