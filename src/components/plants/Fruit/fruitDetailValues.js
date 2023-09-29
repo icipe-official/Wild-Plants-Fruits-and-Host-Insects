@@ -83,17 +83,26 @@ export default function FruitDetailValues({ fruits_data }) {
         <Box sx={{ width: "55%" }}>Fruiting months:</Box>
         <Box sx={{ width: "100%" }}>
           <DynamicValueCard
-            value={specie.plants_fruiting_months.map((month, index) => {
-              const value = `${month.fruiting_months.month}`;
-              const isLastValue =
-                index === specie.plants_fruiting_months.length - 1;
-              const separator = isLastValue
-                ? ""
-                : index === specie.plants_fruiting_months.length - 2
-                ? " or "
-                : ", ";
-              return value + separator;
-            })}
+            value={specie.plants_fruiting_months
+              .map((month, index) => {
+                const value = month.fruiting_months.month;
+
+                // Skip if the month is "unknown"
+                if (value === "unknown") {
+                  return null;
+                }
+
+                const isLastValue =
+                  index === specie.plants_fruiting_months.length - 1;
+                const separator = isLastValue
+                  ? ""
+                  : index === specie.plants_fruiting_months.length - 2
+                  ? " or "
+                  : ", ";
+
+                return value + separator;
+              })
+              .filter((month) => month !== null)} // Filter out "unknown" months
           />
         </Box>
       </Box>
