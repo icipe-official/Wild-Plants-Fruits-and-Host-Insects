@@ -163,7 +163,7 @@ export default function PhylogenyMafft() {
 
   const [newickData, setNewickData] = useState(
     selectedFamily == "Rubiaceae" && !router.query.plantFamily
-      ? "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
+      ? "(Calycosiphonia_spathicalyx_102_Cameroon1_KC627799_TCAFR372-10:0.0000009297,(Calycosiphonia_spathicalyx_102_Cameroon1_KC627420_TCAFR373-10:0.0000009297,(((((((Catunaregam_obovata_132_South-Africa1_JX517479_SAFH2404-11:0.0090347753,Rothmannia_manganjae_689_South-Africa1_JX517759_SAFH336-10:0.0039416080):0.0012635996,((Rothmannia_fischeri_688_South-Africa1_JF270919_KNPA1317-09:0.0000009297,Rothmannia_fischeri_688_South-Africa1_null_KNPA141-08:0.0000009297):0.0000009297,Rothmannia_fischeri_688_South-Africa1_JX518115_KNPA974-09:0.0000009297):0.0025900262):0.0000009297,((((Gardenia_ternifolia_356_Mozambique1_JX517388_TSA138-10:0.0000000000,Gardenia_volkensii_357_South-Africa1_JF270793_KNPA821-09:0.0000000000):0.0000009297,Gardenia_volkensii_357_South-Africa1_JX518233_KNPA1093-09:0.0000009297):0.0000009297,((((Gardenia_volkensii_357_Kenya1_MK290523_UHURU1674-17:0.0000000000,Gardenia_volkensii_357_Kenya1_MK290525_UHURU1676-17:0.0000000000):0.0000000000,Gardenia_volkensii_357_Kenya1_MK290526_UHURU1677-17:0.0000000000):0.0000000000,Coptosperma_graveolens_800_Kenya1_MK290531_UHURU1685-17:0.0000000000):0.0000009297,Gardenia_volkensii_357_Kenya1_MK290524_UHURU1675-17:0.0000009297):0.0000009297):0.0064474984,(Oxyanthus_pyriformis_571_South-Africa1_JX517942_SAFH342-10:0.0012900727,Oxyanthus_speciosus_572_South-Africa1_JX517484_SAFH1706-11:0.0000009297):0.0131662131):0.0000009297):0.0000009297,((Coptosperma_graveolens_800_Kenya1_MK290530_UHURU1684-17:0.0025978602,Coptosperma_supra-axillare_802_South-Africa1_JX517476_SAFH945-10:0.0051634358):0.0012685646,Tarenna_pavettoides_801_South-Africa1_JX517414_SAFH1700-11:0.0053266710):0.0065706609):0.0012158242,(((((Craterispermum_schweinfurthii_208_Mozambique1_JX517952_SAFH1575-11:0.0086836698,Psychotria_capensis_634_South-Africa1_JX517469_KNPA138-08:0.0452309006):0.0721418343,(((Crossopteryx_febrifuga_214_Mozambique1_null_PNG524-18:0.0512399448,Vangueria_infausta_843_Mozambique1_null_PNG296-18:0.0000014035):1.4162368633,Guettarda_speciosa_386_South-Africa1_JX517544_SAFH684-10:0.0000016538):0.0243555346,(Hymenodictyon_parvifolium_416_South-Africa1_JF270827_KNPA156-08:0.0000009297,Hymenodictyon_parvifolium_416_South-Africa1_JX517708_KNPA864-09:0.0066768472):0.0229430367):0.0151356272):0.0153806991,(Heinsia_crinita_398_South-Africa1_JF270815_KNPA154-08:0.0039955774,(Heinsia_crinita_398_Cameroon1_KC627834_TCAFR569-10:0.0000014960,Heinsia_crinita_398_Cameroon1_KC627522_TCAFR570-10:0.0000009297):0.0012870780):0.0220482982):0.0145510161,(Keetia_gueinzii_444_South-Africa1_JX518184_SAFH383-10:0.0096582629,((((Vangueria_infausta_843_South-Africa1_JF270985_KNPA1246-09:0.0000009297,Vangueria_infausta_843_Mozambique1_JX517485_TSA234-10:0.0000009297):0.0000009297,Vangueria_infausta_843_South-Africa1_null_KNPA488-09:0.0013106003):0.0000009297,(Vangueria_madagascariensis_844_Kenya1_MK285023_UHURU1504-15:0.0000009297,Vangueria_madagascariensis_844_Kenya1_MK290482_UHURU1505-15:0.0000009297):0.0013486622):0.0009053217,Vangueria_madagascariensis_844_South-Africa1_JF270986_KNPA1141-09:0.0019069597):0.0123705920):0.0221248546):0.0011335788,((Crossopteryx_febrifuga_214_South-Africa1_JF270725_KNPA1067-09:0.0000009297,Crossopteryx_febrifuga_214_Mozambique1_JX517365_TSA129-10:0.0000009297):0.0000009297,Crossopteryx_febrifuga_214_South-Africa1_null_KNPA346-09:0.0000009297):0.0180155799):0.0096581902):0.0026500591,Coffea_arabica_180_United-States1_OL689937_GRDMO111-21:0.0052177811):0.0012151155,Tricalysia_pallens_822_Gabon1_KC627487_TCAFR159-10:0.0039608086):0.0066287185):0.0000009297,Calycosiphonia_spathicalyx_102_Cameroon1_KC627495_TCAFR374-10:0.0000009297);"
       : ""
   );
   const [kmer, setkmer] = useState(9);
@@ -322,7 +322,7 @@ export default function PhylogenyMafft() {
           setSelectedOrder("Rubiaceae");
           setSelectedFamily("Rubiaceae");
           setNewickData(
-            "(Calycosiphonia_spathicalyx_102_Cameroon_:0.0065146261,((((Catunaregam_obovata_132_South-Africa_:0.0089283989,Rothmannia_manganjae_689_South-Africa_:0.0038783416):0.0012580537,(((Gardenia_ternifolia_356_Mozambique_:0.0000010000,Gardenia_volkensii_357_South-Africa_:0.0000010000):0.0000010000,(Gardenia_volkensii_357_Kenya_:0.0000010000,Coptosperma_graveolens_800_Kenya_:0.0000010000):0.0000010000):0.0063431604,(((Oxyanthus_pyriformis_571_South-Africa_:0.0012783140,Oxyanthus_speciosus_572_South-Africa_:0.0000010000):0.0129967622,(Tarenna_pavettoides_801_South-Africa_:0.0062060557,Coptosperma_supra-axillare_802_South-Africa_:0.0057373486):0.0062072372):0.0000010000,Rothmannia_fischeri_688_South-Africa_:0.0025722173):0.0000010000):0.0000010000):0.0012115393,(((((Craterispermum_schweinfurthii_208_Mozambique_:0.0077669857,Psychotria_capensis_634_South-Africa_:0.0458549100):0.0721375332,(Guettarda_speciosa_386_South-Africa_:0.0235601231,Hymenodictyon_parvifolium_416_South-Africa_:0.0304942729):0.0145171868):0.0152760505,(Heinsia_crinita_398_South-Africa_:0.0043509979,Heinsia_crinita_398_Cameroon_:0.0000010000):0.0206267766):0.0135388278,(Keetia_gueinzii_444_South-Africa_:0.0096219113,((Vangueria_infausta_843_South-Africa_:0.0013020862,(Vangueria_infausta_843_Mozambique_:0.0000010000,Vangueria_madagascariensis_844_Kenya_:0.0013470757):0.0000010000):0.0009155633,Vangueria_madagascariensis_844_South-Africa_:0.0018851766):0.0122956721):0.0217888126):0.0013308961,(Crossopteryx_febrifuga_214_South-Africa_:0.0000010000,Crossopteryx_febrifuga_214_Mozambique_:0.0000010000):0.0177373534):0.0095579059):0.0025909569,Coffea_arabica_180_United-States_:0.0051660120):0.0012292570,Tricalysia_pallens_822_Gabon_:0.0039115562);"
+            "(Calycosiphonia_spathicalyx_102_Cameroon1_KC627799_TCAFR372-10:0.0000009297,(Calycosiphonia_spathicalyx_102_Cameroon1_KC627420_TCAFR373-10:0.0000009297,(((((((Catunaregam_obovata_132_South-Africa1_JX517479_SAFH2404-11:0.0090347753,Rothmannia_manganjae_689_South-Africa1_JX517759_SAFH336-10:0.0039416080):0.0012635996,((Rothmannia_fischeri_688_South-Africa1_JF270919_KNPA1317-09:0.0000009297,Rothmannia_fischeri_688_South-Africa1_null_KNPA141-08:0.0000009297):0.0000009297,Rothmannia_fischeri_688_South-Africa1_JX518115_KNPA974-09:0.0000009297):0.0025900262):0.0000009297,((((Gardenia_ternifolia_356_Mozambique1_JX517388_TSA138-10:0.0000000000,Gardenia_volkensii_357_South-Africa1_JF270793_KNPA821-09:0.0000000000):0.0000009297,Gardenia_volkensii_357_South-Africa1_JX518233_KNPA1093-09:0.0000009297):0.0000009297,((((Gardenia_volkensii_357_Kenya1_MK290523_UHURU1674-17:0.0000000000,Gardenia_volkensii_357_Kenya1_MK290525_UHURU1676-17:0.0000000000):0.0000000000,Gardenia_volkensii_357_Kenya1_MK290526_UHURU1677-17:0.0000000000):0.0000000000,Coptosperma_graveolens_800_Kenya1_MK290531_UHURU1685-17:0.0000000000):0.0000009297,Gardenia_volkensii_357_Kenya1_MK290524_UHURU1675-17:0.0000009297):0.0000009297):0.0064474984,(Oxyanthus_pyriformis_571_South-Africa1_JX517942_SAFH342-10:0.0012900727,Oxyanthus_speciosus_572_South-Africa1_JX517484_SAFH1706-11:0.0000009297):0.0131662131):0.0000009297):0.0000009297,((Coptosperma_graveolens_800_Kenya1_MK290530_UHURU1684-17:0.0025978602,Coptosperma_supra-axillare_802_South-Africa1_JX517476_SAFH945-10:0.0051634358):0.0012685646,Tarenna_pavettoides_801_South-Africa1_JX517414_SAFH1700-11:0.0053266710):0.0065706609):0.0012158242,(((((Craterispermum_schweinfurthii_208_Mozambique1_JX517952_SAFH1575-11:0.0086836698,Psychotria_capensis_634_South-Africa1_JX517469_KNPA138-08:0.0452309006):0.0721418343,(((Crossopteryx_febrifuga_214_Mozambique1_null_PNG524-18:0.0512399448,Vangueria_infausta_843_Mozambique1_null_PNG296-18:0.0000014035):1.4162368633,Guettarda_speciosa_386_South-Africa1_JX517544_SAFH684-10:0.0000016538):0.0243555346,(Hymenodictyon_parvifolium_416_South-Africa1_JF270827_KNPA156-08:0.0000009297,Hymenodictyon_parvifolium_416_South-Africa1_JX517708_KNPA864-09:0.0066768472):0.0229430367):0.0151356272):0.0153806991,(Heinsia_crinita_398_South-Africa1_JF270815_KNPA154-08:0.0039955774,(Heinsia_crinita_398_Cameroon1_KC627834_TCAFR569-10:0.0000014960,Heinsia_crinita_398_Cameroon1_KC627522_TCAFR570-10:0.0000009297):0.0012870780):0.0220482982):0.0145510161,(Keetia_gueinzii_444_South-Africa1_JX518184_SAFH383-10:0.0096582629,((((Vangueria_infausta_843_South-Africa1_JF270985_KNPA1246-09:0.0000009297,Vangueria_infausta_843_Mozambique1_JX517485_TSA234-10:0.0000009297):0.0000009297,Vangueria_infausta_843_South-Africa1_null_KNPA488-09:0.0013106003):0.0000009297,(Vangueria_madagascariensis_844_Kenya1_MK285023_UHURU1504-15:0.0000009297,Vangueria_madagascariensis_844_Kenya1_MK290482_UHURU1505-15:0.0000009297):0.0013486622):0.0009053217,Vangueria_madagascariensis_844_South-Africa1_JF270986_KNPA1141-09:0.0019069597):0.0123705920):0.0221248546):0.0011335788,((Crossopteryx_febrifuga_214_South-Africa1_JF270725_KNPA1067-09:0.0000009297,Crossopteryx_febrifuga_214_Mozambique1_JX517365_TSA129-10:0.0000009297):0.0000009297,Crossopteryx_febrifuga_214_South-Africa1_null_KNPA346-09:0.0000009297):0.0180155799):0.0096581902):0.0026500591,Coffea_arabica_180_United-States1_OL689937_GRDMO111-21:0.0052177811):0.0012151155,Tricalysia_pallens_822_Gabon1_KC627487_TCAFR159-10:0.0039608086):0.0066287185):0.0000009297,Calycosiphonia_spathicalyx_102_Cameroon1_KC627495_TCAFR374-10:0.0000009297);"
           );
         }
       } else if (
@@ -1072,24 +1072,24 @@ export default function PhylogenyMafft() {
                 selected={selectedNode}
                 onNodeSelect={handleNodeSelect}
               >
-                <TreeItem nodeId="9" label="Paste file">
-                  <TreeItem nodeId="10" label="Paste newick">
-                    <form onSubmit={handleSubmitnewick}>
-                      <label>
-                        <textarea
-                          value={newickInput}
-                          onChange={handleInputChangenewick}
-                          placeholder="Enter newick sequence"
-                          autoFocus
-                        ></textarea>
-                      </label>
-                      <br />
-                      <button type="submit">Submit</button>
-                    </form>
-                    {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
-                  </TreeItem>
+                <TreeItem nodeId="9" label="Paste newick">
+                  {/* <TreeItem nodeId="10" label="Paste newick"> */}
+                  <form onSubmit={handleSubmitnewick}>
+                    <label>
+                      <textarea
+                        value={newickInput}
+                        onChange={handleInputChangenewick}
+                        placeholder="Enter newick sequence"
+                        autoFocus
+                      ></textarea>
+                    </label>
+                    <br />
+                    <button type="submit">Submit</button>
+                  </form>
+                  {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
+                  {/* </TreeItem> */}
 
-                  <TreeItem nodeId="30" label="Paste fasta Sequence">
+                  {/* <TreeItem nodeId="30" label="Paste fasta Sequence">
                     <Box sx={{ marginLeft: 2 }}>
                       <form onSubmit={handleSubmitfasta}>
                         <label>
@@ -1104,7 +1104,7 @@ export default function PhylogenyMafft() {
                         <button type="submit">Submit</button>
                       </form>
                     </Box>
-                  </TreeItem>
+                  </TreeItem> */}
                 </TreeItem>
               </TreeView>
             </Box>
