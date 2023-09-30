@@ -263,7 +263,8 @@ export default function PlantsInsectsPhylogeny() {
         <Box>
           <iframe
             ref={iframeRef}
-            src={`/phylotree.html?newickData=${newickData}`}
+            onLoad={handleIframeLoad}
+            src={iframeSrc}
             style={{
               position: "relative",
               top: 3,
