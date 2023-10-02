@@ -123,12 +123,15 @@ model insects {
 }
 
 model insects_coi {
-  coi_id            Int      @id
-  insect_id         Int?
-  country           String?  @db.VarChar
-  genebank_accesion String?  @db.VarChar
-  nucleotide        String?  @db.VarChar
-  insects           insects? @relation(fields: [insect_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  coi_id            Int
+  insect_id         Int
+  country           String? @db.VarChar
+  genbank_accession String? @db.VarChar
+  nucleotide        String? @db.VarChar
+  bold_id           String? @db.VarChar
+  insects           insects @relation(fields: [insect_id], references: [id], onDelete: Cascade)
+
+  @@id([coi_id, insect_id])
 }
 
 model insects_regions {
@@ -314,12 +317,15 @@ model plants_leaf_margins {
 }
 
 model plants_matk {
-  matk_id            Int     @id
-  plant_id           Int?
-  nucleotide         String? @db.VarChar
-  country            String? @db.VarChar
-  genebank_accession String? @db.VarChar
-  plants             plants? @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  matk_id           Int
+  plant_id          Int
+  nucleotide        String? @db.VarChar
+  country           String? @db.VarChar
+  genbank_accession String? @db.VarChar
+  bold_id           String? @db.VarChar
+  plants            plants  @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+
+  @@id([matk_id, plant_id])
 }
 
 model plants_photos {
@@ -399,15 +405,6 @@ model shrub_climbings {
   id                     Int                      @id @default(autoincrement())
   tree_type              String                   @unique @db.VarChar(10)
   plants_shrub_climbings plants_shrub_climbings[]
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model spatial_ref_sys {
-  srid      Int     @id
-  auth_name String? @db.VarChar(256)
-  auth_srid Int?
-  srtext    String? @db.VarChar(2048)
-  proj4text String? @db.VarChar(2048)
 }
 
 model spines_thorns {
