@@ -49,7 +49,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: fruit_colors; Type: TABLE; Schema: public; Owner: postgres
+-- Name: fruit_colors; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.fruit_colors (
@@ -58,10 +58,10 @@ CREATE TABLE public.fruit_colors (
 );
 
 
-ALTER TABLE public.fruit_colors OWNER TO postgres;
+ALTER TABLE public.fruit_colors OWNER TO pg_database_owner;
 
 --
--- Name: fruit_colors_color_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: fruit_colors_color_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.fruit_colors_color_id_seq
@@ -73,17 +73,17 @@ CREATE SEQUENCE public.fruit_colors_color_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.fruit_colors_color_id_seq OWNER TO postgres;
+ALTER TABLE public.fruit_colors_color_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: fruit_colors_color_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: fruit_colors_color_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.fruit_colors_color_id_seq OWNED BY public.fruit_colors.color_id;
 
 
 --
--- Name: fruit_shapes; Type: TABLE; Schema: public; Owner: postgres
+-- Name: fruit_shapes; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.fruit_shapes (
@@ -93,10 +93,10 @@ CREATE TABLE public.fruit_shapes (
 );
 
 
-ALTER TABLE public.fruit_shapes OWNER TO postgres;
+ALTER TABLE public.fruit_shapes OWNER TO pg_database_owner;
 
 --
--- Name: fruit_shapes_fruit_shape_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: fruit_shapes_fruit_shape_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.fruit_shapes_fruit_shape_id_seq
@@ -108,17 +108,17 @@ CREATE SEQUENCE public.fruit_shapes_fruit_shape_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.fruit_shapes_fruit_shape_id_seq OWNER TO postgres;
+ALTER TABLE public.fruit_shapes_fruit_shape_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: fruit_shapes_fruit_shape_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: fruit_shapes_fruit_shape_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.fruit_shapes_fruit_shape_id_seq OWNED BY public.fruit_shapes.fruit_shape_id;
 
 
 --
--- Name: fruit_sizes; Type: TABLE; Schema: public; Owner: postgres
+-- Name: fruit_sizes; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.fruit_sizes (
@@ -127,10 +127,10 @@ CREATE TABLE public.fruit_sizes (
 );
 
 
-ALTER TABLE public.fruit_sizes OWNER TO postgres;
+ALTER TABLE public.fruit_sizes OWNER TO pg_database_owner;
 
 --
--- Name: fruit_sizes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: fruit_sizes_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.fruit_sizes_id_seq
@@ -142,17 +142,17 @@ CREATE SEQUENCE public.fruit_sizes_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.fruit_sizes_id_seq OWNER TO postgres;
+ALTER TABLE public.fruit_sizes_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: fruit_sizes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: fruit_sizes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.fruit_sizes_id_seq OWNED BY public.fruit_sizes.id;
 
 
 --
--- Name: fruit_types; Type: TABLE; Schema: public; Owner: postgres
+-- Name: fruit_types; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.fruit_types (
@@ -162,10 +162,10 @@ CREATE TABLE public.fruit_types (
 );
 
 
-ALTER TABLE public.fruit_types OWNER TO postgres;
+ALTER TABLE public.fruit_types OWNER TO pg_database_owner;
 
 --
--- Name: fruit_types_fruit_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: fruit_types_fruit_type_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.fruit_types_fruit_type_id_seq
@@ -177,17 +177,17 @@ CREATE SEQUENCE public.fruit_types_fruit_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.fruit_types_fruit_type_id_seq OWNER TO postgres;
+ALTER TABLE public.fruit_types_fruit_type_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: fruit_types_fruit_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: fruit_types_fruit_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.fruit_types_fruit_type_id_seq OWNED BY public.fruit_types.fruit_type_id;
 
 
 --
--- Name: fruit_types_glossary; Type: TABLE; Schema: public; Owner: postgres
+-- Name: fruit_types_glossary; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.fruit_types_glossary (
@@ -196,10 +196,10 @@ CREATE TABLE public.fruit_types_glossary (
 );
 
 
-ALTER TABLE public.fruit_types_glossary OWNER TO postgres;
+ALTER TABLE public.fruit_types_glossary OWNER TO pg_database_owner;
 
 --
--- Name: fruiting_months; Type: TABLE; Schema: public; Owner: postgres
+-- Name: fruiting_months; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.fruiting_months (
@@ -208,10 +208,10 @@ CREATE TABLE public.fruiting_months (
 );
 
 
-ALTER TABLE public.fruiting_months OWNER TO postgres;
+ALTER TABLE public.fruiting_months OWNER TO pg_database_owner;
 
 --
--- Name: fruiting_months_fruiting_month_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: fruiting_months_fruiting_month_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.fruiting_months_fruiting_month_id_seq
@@ -223,17 +223,17 @@ CREATE SEQUENCE public.fruiting_months_fruiting_month_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.fruiting_months_fruiting_month_id_seq OWNER TO postgres;
+ALTER TABLE public.fruiting_months_fruiting_month_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: fruiting_months_fruiting_month_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: fruiting_months_fruiting_month_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.fruiting_months_fruiting_month_id_seq OWNED BY public.fruiting_months.fruiting_month_id;
 
 
 --
--- Name: glossary; Type: TABLE; Schema: public; Owner: postgres
+-- Name: glossary; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.glossary (
@@ -244,10 +244,10 @@ CREATE TABLE public.glossary (
 );
 
 
-ALTER TABLE public.glossary OWNER TO postgres;
+ALTER TABLE public.glossary OWNER TO pg_database_owner;
 
 --
--- Name: glossary_photos; Type: TABLE; Schema: public; Owner: postgres
+-- Name: glossary_photos; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.glossary_photos (
@@ -256,10 +256,10 @@ CREATE TABLE public.glossary_photos (
 );
 
 
-ALTER TABLE public.glossary_photos OWNER TO postgres;
+ALTER TABLE public.glossary_photos OWNER TO pg_database_owner;
 
 --
--- Name: insect_families; Type: TABLE; Schema: public; Owner: postgres
+-- Name: insect_families; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.insect_families (
@@ -268,10 +268,10 @@ CREATE TABLE public.insect_families (
 );
 
 
-ALTER TABLE public.insect_families OWNER TO postgres;
+ALTER TABLE public.insect_families OWNER TO pg_database_owner;
 
 --
--- Name: insect_families_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: insect_families_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.insect_families_id_seq
@@ -283,17 +283,17 @@ CREATE SEQUENCE public.insect_families_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.insect_families_id_seq OWNER TO postgres;
+ALTER TABLE public.insect_families_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: insect_families_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: insect_families_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.insect_families_id_seq OWNED BY public.insect_families.id;
 
 
 --
--- Name: insect_genera; Type: TABLE; Schema: public; Owner: postgres
+-- Name: insect_genera; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.insect_genera (
@@ -302,10 +302,10 @@ CREATE TABLE public.insect_genera (
 );
 
 
-ALTER TABLE public.insect_genera OWNER TO postgres;
+ALTER TABLE public.insect_genera OWNER TO pg_database_owner;
 
 --
--- Name: insect_genera_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: insect_genera_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.insect_genera_id_seq
@@ -317,17 +317,17 @@ CREATE SEQUENCE public.insect_genera_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.insect_genera_id_seq OWNER TO postgres;
+ALTER TABLE public.insect_genera_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: insect_genera_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: insect_genera_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.insect_genera_id_seq OWNED BY public.insect_genera.id;
 
 
 --
--- Name: insect_orders; Type: TABLE; Schema: public; Owner: postgres
+-- Name: insect_orders; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.insect_orders (
@@ -336,10 +336,10 @@ CREATE TABLE public.insect_orders (
 );
 
 
-ALTER TABLE public.insect_orders OWNER TO postgres;
+ALTER TABLE public.insect_orders OWNER TO pg_database_owner;
 
 --
--- Name: insect_orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: insect_orders_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.insect_orders_id_seq
@@ -351,17 +351,17 @@ CREATE SEQUENCE public.insect_orders_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.insect_orders_id_seq OWNER TO postgres;
+ALTER TABLE public.insect_orders_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: insect_orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: insect_orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.insect_orders_id_seq OWNED BY public.insect_orders.id;
 
 
 --
--- Name: insect_photos; Type: TABLE; Schema: public; Owner: postgres
+-- Name: insect_photos; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.insect_photos (
@@ -371,10 +371,10 @@ CREATE TABLE public.insect_photos (
 );
 
 
-ALTER TABLE public.insect_photos OWNER TO postgres;
+ALTER TABLE public.insect_photos OWNER TO pg_database_owner;
 
 --
--- Name: insect_sub_families; Type: TABLE; Schema: public; Owner: postgres
+-- Name: insect_sub_families; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.insect_sub_families (
@@ -383,10 +383,10 @@ CREATE TABLE public.insect_sub_families (
 );
 
 
-ALTER TABLE public.insect_sub_families OWNER TO postgres;
+ALTER TABLE public.insect_sub_families OWNER TO pg_database_owner;
 
 --
--- Name: insect_sub_families_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: insect_sub_families_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.insect_sub_families_id_seq
@@ -398,17 +398,17 @@ CREATE SEQUENCE public.insect_sub_families_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.insect_sub_families_id_seq OWNER TO postgres;
+ALTER TABLE public.insect_sub_families_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: insect_sub_families_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: insect_sub_families_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.insect_sub_families_id_seq OWNED BY public.insect_sub_families.id;
 
 
 --
--- Name: insects; Type: TABLE; Schema: public; Owner: postgres
+-- Name: insects; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.insects (
@@ -422,10 +422,10 @@ CREATE TABLE public.insects (
 );
 
 
-ALTER TABLE public.insects OWNER TO postgres;
+ALTER TABLE public.insects OWNER TO pg_database_owner;
 
 --
--- Name: insects_coi; Type: TABLE; Schema: public; Owner: postgres
+-- Name: insects_coi; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.insects_coi (
@@ -438,10 +438,10 @@ CREATE TABLE public.insects_coi (
 );
 
 
-ALTER TABLE public.insects_coi OWNER TO postgres;
+ALTER TABLE public.insects_coi OWNER TO pg_database_owner;
 
 --
--- Name: insects_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: insects_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.insects_id_seq
@@ -453,17 +453,17 @@ CREATE SEQUENCE public.insects_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.insects_id_seq OWNER TO postgres;
+ALTER TABLE public.insects_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: insects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: insects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.insects_id_seq OWNED BY public.insects.id;
 
 
 --
--- Name: insects_regions; Type: TABLE; Schema: public; Owner: postgres
+-- Name: insects_regions; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.insects_regions (
@@ -472,10 +472,10 @@ CREATE TABLE public.insects_regions (
 );
 
 
-ALTER TABLE public.insects_regions OWNER TO postgres;
+ALTER TABLE public.insects_regions OWNER TO pg_database_owner;
 
 --
--- Name: k_sectors; Type: TABLE; Schema: public; Owner: postgres
+-- Name: k_sectors; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.k_sectors (
@@ -484,10 +484,10 @@ CREATE TABLE public.k_sectors (
 );
 
 
-ALTER TABLE public.k_sectors OWNER TO postgres;
+ALTER TABLE public.k_sectors OWNER TO pg_database_owner;
 
 --
--- Name: k_sectors_k_sector_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: k_sectors_k_sector_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.k_sectors_k_sector_id_seq
@@ -499,17 +499,17 @@ CREATE SEQUENCE public.k_sectors_k_sector_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.k_sectors_k_sector_id_seq OWNER TO postgres;
+ALTER TABLE public.k_sectors_k_sector_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: k_sectors_k_sector_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: k_sectors_k_sector_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.k_sectors_k_sector_id_seq OWNED BY public.k_sectors.k_sector_id;
 
 
 --
--- Name: latex; Type: TABLE; Schema: public; Owner: postgres
+-- Name: latex; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.latex (
@@ -518,10 +518,10 @@ CREATE TABLE public.latex (
 );
 
 
-ALTER TABLE public.latex OWNER TO postgres;
+ALTER TABLE public.latex OWNER TO pg_database_owner;
 
 --
--- Name: latex_fruit_latex_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: latex_fruit_latex_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.latex_fruit_latex_id_seq
@@ -533,17 +533,17 @@ CREATE SEQUENCE public.latex_fruit_latex_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.latex_fruit_latex_id_seq OWNER TO postgres;
+ALTER TABLE public.latex_fruit_latex_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: latex_fruit_latex_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: latex_fruit_latex_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.latex_fruit_latex_id_seq OWNED BY public.latex.fruit_latex_id;
 
 
 --
--- Name: leaf_arrangements; Type: TABLE; Schema: public; Owner: postgres
+-- Name: leaf_arrangements; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.leaf_arrangements (
@@ -552,10 +552,10 @@ CREATE TABLE public.leaf_arrangements (
 );
 
 
-ALTER TABLE public.leaf_arrangements OWNER TO postgres;
+ALTER TABLE public.leaf_arrangements OWNER TO pg_database_owner;
 
 --
--- Name: leaf_arrangements_leaf_arrangement_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: leaf_arrangements_leaf_arrangement_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.leaf_arrangements_leaf_arrangement_id_seq
@@ -567,17 +567,17 @@ CREATE SEQUENCE public.leaf_arrangements_leaf_arrangement_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.leaf_arrangements_leaf_arrangement_id_seq OWNER TO postgres;
+ALTER TABLE public.leaf_arrangements_leaf_arrangement_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: leaf_arrangements_leaf_arrangement_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: leaf_arrangements_leaf_arrangement_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.leaf_arrangements_leaf_arrangement_id_seq OWNED BY public.leaf_arrangements.leaf_arrangement_id;
 
 
 --
--- Name: leaf_margins; Type: TABLE; Schema: public; Owner: postgres
+-- Name: leaf_margins; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.leaf_margins (
@@ -586,10 +586,10 @@ CREATE TABLE public.leaf_margins (
 );
 
 
-ALTER TABLE public.leaf_margins OWNER TO postgres;
+ALTER TABLE public.leaf_margins OWNER TO pg_database_owner;
 
 --
--- Name: leaf_margins_leaf_margin_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: leaf_margins_leaf_margin_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.leaf_margins_leaf_margin_id_seq
@@ -601,17 +601,17 @@ CREATE SEQUENCE public.leaf_margins_leaf_margin_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.leaf_margins_leaf_margin_id_seq OWNER TO postgres;
+ALTER TABLE public.leaf_margins_leaf_margin_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: leaf_margins_leaf_margin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: leaf_margins_leaf_margin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.leaf_margins_leaf_margin_id_seq OWNED BY public.leaf_margins.leaf_margin_id;
 
 
 --
--- Name: plant_coordinates; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plant_coordinates; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plant_coordinates (
@@ -621,10 +621,10 @@ CREATE TABLE public.plant_coordinates (
 );
 
 
-ALTER TABLE public.plant_coordinates OWNER TO postgres;
+ALTER TABLE public.plant_coordinates OWNER TO pg_database_owner;
 
 --
--- Name: plant_families; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plant_families; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plant_families (
@@ -633,10 +633,10 @@ CREATE TABLE public.plant_families (
 );
 
 
-ALTER TABLE public.plant_families OWNER TO postgres;
+ALTER TABLE public.plant_families OWNER TO pg_database_owner;
 
 --
--- Name: plant_families_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: plant_families_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.plant_families_id_seq
@@ -648,17 +648,17 @@ CREATE SEQUENCE public.plant_families_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.plant_families_id_seq OWNER TO postgres;
+ALTER TABLE public.plant_families_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: plant_families_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: plant_families_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.plant_families_id_seq OWNED BY public.plant_families.id;
 
 
 --
--- Name: plant_families_newick; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plant_families_newick; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plant_families_newick (
@@ -668,10 +668,10 @@ CREATE TABLE public.plant_families_newick (
 );
 
 
-ALTER TABLE public.plant_families_newick OWNER TO postgres;
+ALTER TABLE public.plant_families_newick OWNER TO pg_database_owner;
 
 --
--- Name: plant_genera; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plant_genera; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plant_genera (
@@ -681,10 +681,10 @@ CREATE TABLE public.plant_genera (
 );
 
 
-ALTER TABLE public.plant_genera OWNER TO postgres;
+ALTER TABLE public.plant_genera OWNER TO pg_database_owner;
 
 --
--- Name: plant_genera_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: plant_genera_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.plant_genera_id_seq
@@ -696,17 +696,17 @@ CREATE SEQUENCE public.plant_genera_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.plant_genera_id_seq OWNER TO postgres;
+ALTER TABLE public.plant_genera_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: plant_genera_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: plant_genera_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.plant_genera_id_seq OWNED BY public.plant_genera.id;
 
 
 --
--- Name: plants; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants (
@@ -720,10 +720,10 @@ CREATE TABLE public.plants (
 );
 
 
-ALTER TABLE public.plants OWNER TO postgres;
+ALTER TABLE public.plants OWNER TO pg_database_owner;
 
 --
--- Name: plants_fruit_colors; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_fruit_colors; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_fruit_colors (
@@ -732,10 +732,10 @@ CREATE TABLE public.plants_fruit_colors (
 );
 
 
-ALTER TABLE public.plants_fruit_colors OWNER TO postgres;
+ALTER TABLE public.plants_fruit_colors OWNER TO pg_database_owner;
 
 --
--- Name: plants_fruit_shapes; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_fruit_shapes; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_fruit_shapes (
@@ -744,10 +744,10 @@ CREATE TABLE public.plants_fruit_shapes (
 );
 
 
-ALTER TABLE public.plants_fruit_shapes OWNER TO postgres;
+ALTER TABLE public.plants_fruit_shapes OWNER TO pg_database_owner;
 
 --
--- Name: plants_fruit_sizes; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_fruit_sizes; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_fruit_sizes (
@@ -756,10 +756,10 @@ CREATE TABLE public.plants_fruit_sizes (
 );
 
 
-ALTER TABLE public.plants_fruit_sizes OWNER TO postgres;
+ALTER TABLE public.plants_fruit_sizes OWNER TO pg_database_owner;
 
 --
--- Name: plants_fruit_types; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_fruit_types; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_fruit_types (
@@ -768,10 +768,10 @@ CREATE TABLE public.plants_fruit_types (
 );
 
 
-ALTER TABLE public.plants_fruit_types OWNER TO postgres;
+ALTER TABLE public.plants_fruit_types OWNER TO pg_database_owner;
 
 --
--- Name: plants_fruiting_months; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_fruiting_months; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_fruiting_months (
@@ -780,10 +780,10 @@ CREATE TABLE public.plants_fruiting_months (
 );
 
 
-ALTER TABLE public.plants_fruiting_months OWNER TO postgres;
+ALTER TABLE public.plants_fruiting_months OWNER TO pg_database_owner;
 
 --
--- Name: plants_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: plants_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.plants_id_seq
@@ -795,17 +795,17 @@ CREATE SEQUENCE public.plants_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.plants_id_seq OWNER TO postgres;
+ALTER TABLE public.plants_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: plants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: plants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.plants_id_seq OWNED BY public.plants.id;
 
 
 --
--- Name: plants_insects; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_insects; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_insects (
@@ -814,10 +814,10 @@ CREATE TABLE public.plants_insects (
 );
 
 
-ALTER TABLE public.plants_insects OWNER TO postgres;
+ALTER TABLE public.plants_insects OWNER TO pg_database_owner;
 
 --
--- Name: plants_k_sectors; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_k_sectors; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_k_sectors (
@@ -826,10 +826,10 @@ CREATE TABLE public.plants_k_sectors (
 );
 
 
-ALTER TABLE public.plants_k_sectors OWNER TO postgres;
+ALTER TABLE public.plants_k_sectors OWNER TO pg_database_owner;
 
 --
--- Name: plants_latex; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_latex; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_latex (
@@ -838,10 +838,10 @@ CREATE TABLE public.plants_latex (
 );
 
 
-ALTER TABLE public.plants_latex OWNER TO postgres;
+ALTER TABLE public.plants_latex OWNER TO pg_database_owner;
 
 --
--- Name: plants_leaf_arrangements; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_leaf_arrangements; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_leaf_arrangements (
@@ -850,10 +850,10 @@ CREATE TABLE public.plants_leaf_arrangements (
 );
 
 
-ALTER TABLE public.plants_leaf_arrangements OWNER TO postgres;
+ALTER TABLE public.plants_leaf_arrangements OWNER TO pg_database_owner;
 
 --
--- Name: plants_leaf_margins; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_leaf_margins; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_leaf_margins (
@@ -862,10 +862,10 @@ CREATE TABLE public.plants_leaf_margins (
 );
 
 
-ALTER TABLE public.plants_leaf_margins OWNER TO postgres;
+ALTER TABLE public.plants_leaf_margins OWNER TO pg_database_owner;
 
 --
--- Name: plants_matk; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_matk; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_matk (
@@ -878,10 +878,10 @@ CREATE TABLE public.plants_matk (
 );
 
 
-ALTER TABLE public.plants_matk OWNER TO postgres;
+ALTER TABLE public.plants_matk OWNER TO pg_database_owner;
 
 --
--- Name: plants_photos; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_photos; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_photos (
@@ -891,10 +891,10 @@ CREATE TABLE public.plants_photos (
 );
 
 
-ALTER TABLE public.plants_photos OWNER TO postgres;
+ALTER TABLE public.plants_photos OWNER TO pg_database_owner;
 
 --
--- Name: plants_photos_photo_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: plants_photos_photo_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.plants_photos_photo_id_seq
@@ -906,17 +906,17 @@ CREATE SEQUENCE public.plants_photos_photo_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.plants_photos_photo_id_seq OWNER TO postgres;
+ALTER TABLE public.plants_photos_photo_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: plants_photos_photo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: plants_photos_photo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.plants_photos_photo_id_seq OWNED BY public.plants_photos.photo_id;
 
 
 --
--- Name: plants_rbcl; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_rbcl; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_rbcl (
@@ -928,10 +928,10 @@ CREATE TABLE public.plants_rbcl (
 );
 
 
-ALTER TABLE public.plants_rbcl OWNER TO postgres;
+ALTER TABLE public.plants_rbcl OWNER TO pg_database_owner;
 
 --
--- Name: plants_regions; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_regions; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_regions (
@@ -940,10 +940,10 @@ CREATE TABLE public.plants_regions (
 );
 
 
-ALTER TABLE public.plants_regions OWNER TO postgres;
+ALTER TABLE public.plants_regions OWNER TO pg_database_owner;
 
 --
--- Name: plants_shrub_climbings; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_shrub_climbings; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_shrub_climbings (
@@ -952,10 +952,10 @@ CREATE TABLE public.plants_shrub_climbings (
 );
 
 
-ALTER TABLE public.plants_shrub_climbings OWNER TO postgres;
+ALTER TABLE public.plants_shrub_climbings OWNER TO pg_database_owner;
 
 --
--- Name: plants_spines_thorns; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_spines_thorns; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_spines_thorns (
@@ -964,10 +964,10 @@ CREATE TABLE public.plants_spines_thorns (
 );
 
 
-ALTER TABLE public.plants_spines_thorns OWNER TO postgres;
+ALTER TABLE public.plants_spines_thorns OWNER TO pg_database_owner;
 
 --
--- Name: plants_ukwf_areas; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_ukwf_areas; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_ukwf_areas (
@@ -976,10 +976,10 @@ CREATE TABLE public.plants_ukwf_areas (
 );
 
 
-ALTER TABLE public.plants_ukwf_areas OWNER TO postgres;
+ALTER TABLE public.plants_ukwf_areas OWNER TO pg_database_owner;
 
 --
--- Name: plants_woody_herbaceous; Type: TABLE; Schema: public; Owner: postgres
+-- Name: plants_woody_herbaceous; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.plants_woody_herbaceous (
@@ -988,10 +988,10 @@ CREATE TABLE public.plants_woody_herbaceous (
 );
 
 
-ALTER TABLE public.plants_woody_herbaceous OWNER TO postgres;
+ALTER TABLE public.plants_woody_herbaceous OWNER TO pg_database_owner;
 
 --
--- Name: regions; Type: TABLE; Schema: public; Owner: postgres
+-- Name: regions; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.regions (
@@ -1002,10 +1002,10 @@ CREATE TABLE public.regions (
 );
 
 
-ALTER TABLE public.regions OWNER TO postgres;
+ALTER TABLE public.regions OWNER TO pg_database_owner;
 
 --
--- Name: regions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: regions_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.regions_id_seq
@@ -1017,17 +1017,17 @@ CREATE SEQUENCE public.regions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.regions_id_seq OWNER TO postgres;
+ALTER TABLE public.regions_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: regions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: regions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.regions_id_seq OWNED BY public.regions.id;
 
 
 --
--- Name: shrub_climbings; Type: TABLE; Schema: public; Owner: postgres
+-- Name: shrub_climbings; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.shrub_climbings (
@@ -1036,10 +1036,10 @@ CREATE TABLE public.shrub_climbings (
 );
 
 
-ALTER TABLE public.shrub_climbings OWNER TO postgres;
+ALTER TABLE public.shrub_climbings OWNER TO pg_database_owner;
 
 --
--- Name: shrub_climbings_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: shrub_climbings_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.shrub_climbings_id_seq
@@ -1051,17 +1051,17 @@ CREATE SEQUENCE public.shrub_climbings_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.shrub_climbings_id_seq OWNER TO postgres;
+ALTER TABLE public.shrub_climbings_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: shrub_climbings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: shrub_climbings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.shrub_climbings_id_seq OWNED BY public.shrub_climbings.id;
 
 
 --
--- Name: spines_thorns; Type: TABLE; Schema: public; Owner: postgres
+-- Name: spines_thorns; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.spines_thorns (
@@ -1070,10 +1070,10 @@ CREATE TABLE public.spines_thorns (
 );
 
 
-ALTER TABLE public.spines_thorns OWNER TO postgres;
+ALTER TABLE public.spines_thorns OWNER TO pg_database_owner;
 
 --
--- Name: spines_thorns_thorn_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: spines_thorns_thorn_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.spines_thorns_thorn_id_seq
@@ -1085,17 +1085,17 @@ CREATE SEQUENCE public.spines_thorns_thorn_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.spines_thorns_thorn_id_seq OWNER TO postgres;
+ALTER TABLE public.spines_thorns_thorn_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: spines_thorns_thorn_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: spines_thorns_thorn_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.spines_thorns_thorn_id_seq OWNED BY public.spines_thorns.thorn_id;
 
 
 --
--- Name: ukwf_areas; Type: TABLE; Schema: public; Owner: postgres
+-- Name: ukwf_areas; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.ukwf_areas (
@@ -1104,10 +1104,10 @@ CREATE TABLE public.ukwf_areas (
 );
 
 
-ALTER TABLE public.ukwf_areas OWNER TO postgres;
+ALTER TABLE public.ukwf_areas OWNER TO pg_database_owner;
 
 --
--- Name: ukwf_areas_ukwf_area_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: ukwf_areas_ukwf_area_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.ukwf_areas_ukwf_area_id_seq
@@ -1119,17 +1119,17 @@ CREATE SEQUENCE public.ukwf_areas_ukwf_area_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.ukwf_areas_ukwf_area_id_seq OWNER TO postgres;
+ALTER TABLE public.ukwf_areas_ukwf_area_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: ukwf_areas_ukwf_area_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: ukwf_areas_ukwf_area_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.ukwf_areas_ukwf_area_id_seq OWNED BY public.ukwf_areas.ukwf_area_id;
 
 
 --
--- Name: woody_herbaceous; Type: TABLE; Schema: public; Owner: postgres
+-- Name: woody_herbaceous; Type: TABLE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE TABLE public.woody_herbaceous (
@@ -1138,10 +1138,10 @@ CREATE TABLE public.woody_herbaceous (
 );
 
 
-ALTER TABLE public.woody_herbaceous OWNER TO postgres;
+ALTER TABLE public.woody_herbaceous OWNER TO pg_database_owner;
 
 --
--- Name: woody_herbaceous_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: woody_herbaceous_id_seq; Type: SEQUENCE; Schema: public; Owner: pg_database_owner
 --
 
 CREATE SEQUENCE public.woody_herbaceous_id_seq
@@ -1153,178 +1153,178 @@ CREATE SEQUENCE public.woody_herbaceous_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.woody_herbaceous_id_seq OWNER TO postgres;
+ALTER TABLE public.woody_herbaceous_id_seq OWNER TO pg_database_owner;
 
 --
--- Name: woody_herbaceous_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: woody_herbaceous_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pg_database_owner
 --
 
 ALTER SEQUENCE public.woody_herbaceous_id_seq OWNED BY public.woody_herbaceous.id;
 
 
 --
--- Name: fruit_colors color_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: fruit_colors color_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_colors ALTER COLUMN color_id SET DEFAULT nextval('public.fruit_colors_color_id_seq'::regclass);
 
 
 --
--- Name: fruit_shapes fruit_shape_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: fruit_shapes fruit_shape_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_shapes ALTER COLUMN fruit_shape_id SET DEFAULT nextval('public.fruit_shapes_fruit_shape_id_seq'::regclass);
 
 
 --
--- Name: fruit_sizes id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: fruit_sizes id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_sizes ALTER COLUMN id SET DEFAULT nextval('public.fruit_sizes_id_seq'::regclass);
 
 
 --
--- Name: fruit_types fruit_type_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: fruit_types fruit_type_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_types ALTER COLUMN fruit_type_id SET DEFAULT nextval('public.fruit_types_fruit_type_id_seq'::regclass);
 
 
 --
--- Name: fruiting_months fruiting_month_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: fruiting_months fruiting_month_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruiting_months ALTER COLUMN fruiting_month_id SET DEFAULT nextval('public.fruiting_months_fruiting_month_id_seq'::regclass);
 
 
 --
--- Name: insect_families id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: insect_families id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_families ALTER COLUMN id SET DEFAULT nextval('public.insect_families_id_seq'::regclass);
 
 
 --
--- Name: insect_genera id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: insect_genera id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_genera ALTER COLUMN id SET DEFAULT nextval('public.insect_genera_id_seq'::regclass);
 
 
 --
--- Name: insect_orders id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: insect_orders id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_orders ALTER COLUMN id SET DEFAULT nextval('public.insect_orders_id_seq'::regclass);
 
 
 --
--- Name: insect_sub_families id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: insect_sub_families id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_sub_families ALTER COLUMN id SET DEFAULT nextval('public.insect_sub_families_id_seq'::regclass);
 
 
 --
--- Name: insects id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: insects id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects ALTER COLUMN id SET DEFAULT nextval('public.insects_id_seq'::regclass);
 
 
 --
--- Name: k_sectors k_sector_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: k_sectors k_sector_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.k_sectors ALTER COLUMN k_sector_id SET DEFAULT nextval('public.k_sectors_k_sector_id_seq'::regclass);
 
 
 --
--- Name: latex fruit_latex_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: latex fruit_latex_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.latex ALTER COLUMN fruit_latex_id SET DEFAULT nextval('public.latex_fruit_latex_id_seq'::regclass);
 
 
 --
--- Name: leaf_arrangements leaf_arrangement_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: leaf_arrangements leaf_arrangement_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.leaf_arrangements ALTER COLUMN leaf_arrangement_id SET DEFAULT nextval('public.leaf_arrangements_leaf_arrangement_id_seq'::regclass);
 
 
 --
--- Name: leaf_margins leaf_margin_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: leaf_margins leaf_margin_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.leaf_margins ALTER COLUMN leaf_margin_id SET DEFAULT nextval('public.leaf_margins_leaf_margin_id_seq'::regclass);
 
 
 --
--- Name: plant_families id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: plant_families id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_families ALTER COLUMN id SET DEFAULT nextval('public.plant_families_id_seq'::regclass);
 
 
 --
--- Name: plant_genera id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: plant_genera id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_genera ALTER COLUMN id SET DEFAULT nextval('public.plant_genera_id_seq'::regclass);
 
 
 --
--- Name: plants id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: plants id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants ALTER COLUMN id SET DEFAULT nextval('public.plants_id_seq'::regclass);
 
 
 --
--- Name: plants_photos photo_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: plants_photos photo_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_photos ALTER COLUMN photo_id SET DEFAULT nextval('public.plants_photos_photo_id_seq'::regclass);
 
 
 --
--- Name: regions id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: regions id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.regions ALTER COLUMN id SET DEFAULT nextval('public.regions_id_seq'::regclass);
 
 
 --
--- Name: shrub_climbings id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: shrub_climbings id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.shrub_climbings ALTER COLUMN id SET DEFAULT nextval('public.shrub_climbings_id_seq'::regclass);
 
 
 --
--- Name: spines_thorns thorn_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: spines_thorns thorn_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.spines_thorns ALTER COLUMN thorn_id SET DEFAULT nextval('public.spines_thorns_thorn_id_seq'::regclass);
 
 
 --
--- Name: ukwf_areas ukwf_area_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: ukwf_areas ukwf_area_id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.ukwf_areas ALTER COLUMN ukwf_area_id SET DEFAULT nextval('public.ukwf_areas_ukwf_area_id_seq'::regclass);
 
 
 --
--- Name: woody_herbaceous id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: woody_herbaceous id; Type: DEFAULT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.woody_herbaceous ALTER COLUMN id SET DEFAULT nextval('public.woody_herbaceous_id_seq'::regclass);
 
 
 --
--- Data for Name: fruit_colors; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: fruit_colors; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.fruit_colors (color_id, color) FROM stdin;
@@ -1350,7 +1350,7 @@ COPY public.fruit_colors (color_id, color) FROM stdin;
 
 
 --
--- Data for Name: fruit_shapes; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: fruit_shapes; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.fruit_shapes (fruit_shape_id, shape, fruit_shape_description) FROM stdin;
@@ -1405,7 +1405,7 @@ COPY public.fruit_shapes (fruit_shape_id, shape, fruit_shape_description) FROM s
 
 
 --
--- Data for Name: fruit_sizes; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: fruit_sizes; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.fruit_sizes (id, size) FROM stdin;
@@ -1418,7 +1418,7 @@ COPY public.fruit_sizes (id, size) FROM stdin;
 
 
 --
--- Data for Name: fruit_types; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: fruit_types; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.fruit_types (fruit_type_id, type_of_fruit, fruit_type_description) FROM stdin;
@@ -1446,7 +1446,7 @@ COPY public.fruit_types (fruit_type_id, type_of_fruit, fruit_type_description) F
 
 
 --
--- Data for Name: fruit_types_glossary; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: fruit_types_glossary; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.fruit_types_glossary (fruit_id, photo_id) FROM stdin;
@@ -1454,7 +1454,7 @@ COPY public.fruit_types_glossary (fruit_id, photo_id) FROM stdin;
 
 
 --
--- Data for Name: fruiting_months; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: fruiting_months; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.fruiting_months (fruiting_month_id, month) FROM stdin;
@@ -1475,7 +1475,7 @@ COPY public.fruiting_months (fruiting_month_id, month) FROM stdin;
 
 
 --
--- Data for Name: glossary; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: glossary; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.glossary (glossary_id, glossary_type, glossary_term, glossary_description) FROM stdin;
@@ -1584,7 +1584,7 @@ COPY public.glossary (glossary_id, glossary_type, glossary_term, glossary_descri
 
 
 --
--- Data for Name: glossary_photos; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: glossary_photos; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.glossary_photos (glossary_id, photo_id) FROM stdin;
@@ -1592,7 +1592,7 @@ COPY public.glossary_photos (glossary_id, photo_id) FROM stdin;
 
 
 --
--- Data for Name: insect_families; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: insect_families; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.insect_families (id, family_name) FROM stdin;
@@ -1662,7 +1662,7 @@ COPY public.insect_families (id, family_name) FROM stdin;
 
 
 --
--- Data for Name: insect_genera; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: insect_genera; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.insect_genera (id, genus_name) FROM stdin;
@@ -1865,7 +1865,7 @@ COPY public.insect_genera (id, genus_name) FROM stdin;
 
 
 --
--- Data for Name: insect_orders; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: insect_orders; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.insect_orders (id, order_name) FROM stdin;
@@ -1878,7 +1878,7 @@ COPY public.insect_orders (id, order_name) FROM stdin;
 
 
 --
--- Data for Name: insect_photos; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: insect_photos; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.insect_photos (insect_id, photo_id, sex) FROM stdin;
@@ -2193,7 +2193,7 @@ COPY public.insect_photos (insect_id, photo_id, sex) FROM stdin;
 
 
 --
--- Data for Name: insect_sub_families; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: insect_sub_families; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.insect_sub_families (id, sub_family_name) FROM stdin;
@@ -2247,7 +2247,7 @@ COPY public.insect_sub_families (id, sub_family_name) FROM stdin;
 
 
 --
--- Data for Name: insects; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: insects; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.insects (id, unique_code, species_name, genus_id, sub_family_id, family_id, order_id) FROM stdin;
@@ -2850,7 +2850,7 @@ COPY public.insects (id, unique_code, species_name, genus_id, sub_family_id, fam
 
 
 --
--- Data for Name: insects_coi; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: insects_coi; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.insects_coi (coi_id, insect_id, country, genbank_accession, nucleotide, bold_id) FROM stdin;
@@ -3549,7 +3549,7 @@ COPY public.insects_coi (coi_id, insect_id, country, genbank_accession, nucleoti
 
 
 --
--- Data for Name: insects_regions; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: insects_regions; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.insects_regions (insect_id, region_id) FROM stdin;
@@ -4130,7 +4130,7 @@ COPY public.insects_regions (insect_id, region_id) FROM stdin;
 
 
 --
--- Data for Name: k_sectors; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: k_sectors; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.k_sectors (k_sector_id, sector) FROM stdin;
@@ -4147,7 +4147,7 @@ COPY public.k_sectors (k_sector_id, sector) FROM stdin;
 
 
 --
--- Data for Name: latex; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: latex; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.latex (fruit_latex_id, latex_description) FROM stdin;
@@ -4157,7 +4157,7 @@ COPY public.latex (fruit_latex_id, latex_description) FROM stdin;
 
 
 --
--- Data for Name: leaf_arrangements; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: leaf_arrangements; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.leaf_arrangements (leaf_arrangement_id, arrangement) FROM stdin;
@@ -4176,7 +4176,7 @@ COPY public.leaf_arrangements (leaf_arrangement_id, arrangement) FROM stdin;
 
 
 --
--- Data for Name: leaf_margins; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: leaf_margins; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.leaf_margins (leaf_margin_id, type_of_leaf_margin) FROM stdin;
@@ -4197,7 +4197,7 @@ COPY public.leaf_margins (leaf_margin_id, type_of_leaf_margin) FROM stdin;
 
 
 --
--- Data for Name: plant_coordinates; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plant_coordinates; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plant_coordinates (plant_id, latitude, longitude) FROM stdin;
@@ -6590,7 +6590,7 @@ COPY public.plant_coordinates (plant_id, latitude, longitude) FROM stdin;
 
 
 --
--- Data for Name: plant_families; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plant_families; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plant_families (id, family_name) FROM stdin;
@@ -6727,7 +6727,7 @@ COPY public.plant_families (id, family_name) FROM stdin;
 
 
 --
--- Data for Name: plant_families_newick; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plant_families_newick; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plant_families_newick (id, family_name, matk_newick) FROM stdin;
@@ -6735,7 +6735,7 @@ COPY public.plant_families_newick (id, family_name, matk_newick) FROM stdin;
 
 
 --
--- Data for Name: plant_genera; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plant_genera; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plant_genera (id, genus_name, family_id) FROM stdin;
@@ -7201,7 +7201,7 @@ COPY public.plant_genera (id, genus_name, family_id) FROM stdin;
 
 
 --
--- Data for Name: plants; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants (id, species_name, leaf_type, plant_description, max_latitude, min_latitude, genus_id) FROM stdin;
@@ -8091,7 +8091,7 @@ COPY public.plants (id, species_name, leaf_type, plant_description, max_latitude
 
 
 --
--- Data for Name: plants_fruit_colors; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_fruit_colors; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_fruit_colors (plant_id, color_id) FROM stdin;
@@ -9358,7 +9358,7 @@ COPY public.plants_fruit_colors (plant_id, color_id) FROM stdin;
 
 
 --
--- Data for Name: plants_fruit_shapes; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_fruit_shapes; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_fruit_shapes (plant_id, fruit_shape_id) FROM stdin;
@@ -10455,7 +10455,7 @@ COPY public.plants_fruit_shapes (plant_id, fruit_shape_id) FROM stdin;
 
 
 --
--- Data for Name: plants_fruit_sizes; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_fruit_sizes; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_fruit_sizes (plant_id, fruit_size_id) FROM stdin;
@@ -11917,7 +11917,7 @@ COPY public.plants_fruit_sizes (plant_id, fruit_size_id) FROM stdin;
 
 
 --
--- Data for Name: plants_fruit_types; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_fruit_types; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_fruit_types (plant_id, fruit_type_id) FROM stdin;
@@ -12885,7 +12885,7 @@ COPY public.plants_fruit_types (plant_id, fruit_type_id) FROM stdin;
 
 
 --
--- Data for Name: plants_fruiting_months; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_fruiting_months; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_fruiting_months (plant_id, fruiting_month_id) FROM stdin;
@@ -14829,7 +14829,7 @@ COPY public.plants_fruiting_months (plant_id, fruiting_month_id) FROM stdin;
 
 
 --
--- Data for Name: plants_insects; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_insects; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_insects (plant_id, insect_id) FROM stdin;
@@ -16047,7 +16047,7 @@ COPY public.plants_insects (plant_id, insect_id) FROM stdin;
 
 
 --
--- Data for Name: plants_k_sectors; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_k_sectors; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_k_sectors (plant_id, k_sector_id) FROM stdin;
@@ -16055,7 +16055,7 @@ COPY public.plants_k_sectors (plant_id, k_sector_id) FROM stdin;
 
 
 --
--- Data for Name: plants_latex; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_latex; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_latex (plant_id, fruit_latex_id) FROM stdin;
@@ -16915,7 +16915,7 @@ COPY public.plants_latex (plant_id, fruit_latex_id) FROM stdin;
 
 
 --
--- Data for Name: plants_leaf_arrangements; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_leaf_arrangements; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_leaf_arrangements (plant_id, leaf_arrangement_id) FROM stdin;
@@ -17836,7 +17836,7 @@ COPY public.plants_leaf_arrangements (plant_id, leaf_arrangement_id) FROM stdin;
 
 
 --
--- Data for Name: plants_leaf_margins; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_leaf_margins; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_leaf_margins (plant_id, leaf_margin_id) FROM stdin;
@@ -18879,7 +18879,7 @@ COPY public.plants_leaf_margins (plant_id, leaf_margin_id) FROM stdin;
 
 
 --
--- Data for Name: plants_matk; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_matk; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_matk (matk_id, plant_id, nucleotide, country, genbank_accession, bold_id) FROM stdin;
@@ -19572,7 +19572,7 @@ COPY public.plants_matk (matk_id, plant_id, nucleotide, country, genbank_accessi
 
 
 --
--- Data for Name: plants_photos; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_photos; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_photos (plant_id, photo_name, photo_id) FROM stdin;
@@ -21100,7 +21100,7 @@ COPY public.plants_photos (plant_id, photo_name, photo_id) FROM stdin;
 
 
 --
--- Data for Name: plants_rbcl; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_rbcl; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_rbcl (rbcl_id, plant_id, nucleotide, country, genebank_accesion) FROM stdin;
@@ -21108,7 +21108,7 @@ COPY public.plants_rbcl (rbcl_id, plant_id, nucleotide, country, genebank_accesi
 
 
 --
--- Data for Name: plants_regions; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_regions; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_regions (plants_id, region_id) FROM stdin;
@@ -22063,7 +22063,7 @@ COPY public.plants_regions (plants_id, region_id) FROM stdin;
 
 
 --
--- Data for Name: plants_shrub_climbings; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_shrub_climbings; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_shrub_climbings (plant_id, shrub_id) FROM stdin;
@@ -23293,7 +23293,7 @@ COPY public.plants_shrub_climbings (plant_id, shrub_id) FROM stdin;
 
 
 --
--- Data for Name: plants_spines_thorns; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_spines_thorns; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_spines_thorns (plant_id, thorn_id) FROM stdin;
@@ -24191,7 +24191,7 @@ COPY public.plants_spines_thorns (plant_id, thorn_id) FROM stdin;
 
 
 --
--- Data for Name: plants_ukwf_areas; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_ukwf_areas; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_ukwf_areas (plant_id, ukwf_area_id) FROM stdin;
@@ -25920,7 +25920,7 @@ COPY public.plants_ukwf_areas (plant_id, ukwf_area_id) FROM stdin;
 
 
 --
--- Data for Name: plants_woody_herbaceous; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: plants_woody_herbaceous; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.plants_woody_herbaceous (plant_id, back_id) FROM stdin;
@@ -26827,7 +26827,7 @@ COPY public.plants_woody_herbaceous (plant_id, back_id) FROM stdin;
 
 
 --
--- Data for Name: regions; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: regions; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.regions (id, region, latitude, longitude) FROM stdin;
@@ -26865,7 +26865,7 @@ COPY public.regions (id, region, latitude, longitude) FROM stdin;
 
 
 --
--- Data for Name: shrub_climbings; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: shrub_climbings; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.shrub_climbings (id, tree_type) FROM stdin;
@@ -26881,7 +26881,7 @@ COPY public.shrub_climbings (id, tree_type) FROM stdin;
 
 
 --
--- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
@@ -26889,7 +26889,7 @@ COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM
 
 
 --
--- Data for Name: spines_thorns; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: spines_thorns; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.spines_thorns (thorn_id, thorns_spines) FROM stdin;
@@ -26900,7 +26900,7 @@ COPY public.spines_thorns (thorn_id, thorns_spines) FROM stdin;
 
 
 --
--- Data for Name: ukwf_areas; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: ukwf_areas; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.ukwf_areas (ukwf_area_id, ukwf_area) FROM stdin;
@@ -26931,7 +26931,7 @@ COPY public.ukwf_areas (ukwf_area_id, ukwf_area) FROM stdin;
 
 
 --
--- Data for Name: woody_herbaceous; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: woody_herbaceous; Type: TABLE DATA; Schema: public; Owner: pg_database_owner
 --
 
 COPY public.woody_herbaceous (id, type_of_stem) FROM stdin;
@@ -26942,168 +26942,168 @@ COPY public.woody_herbaceous (id, type_of_stem) FROM stdin;
 
 
 --
--- Name: fruit_colors_color_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: fruit_colors_color_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.fruit_colors_color_id_seq', 18, true);
 
 
 --
--- Name: fruit_shapes_fruit_shape_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: fruit_shapes_fruit_shape_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.fruit_shapes_fruit_shape_id_seq', 47, true);
 
 
 --
--- Name: fruit_sizes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: fruit_sizes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.fruit_sizes_id_seq', 5, true);
 
 
 --
--- Name: fruit_types_fruit_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: fruit_types_fruit_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.fruit_types_fruit_type_id_seq', 20, true);
 
 
 --
--- Name: fruiting_months_fruiting_month_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: fruiting_months_fruiting_month_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.fruiting_months_fruiting_month_id_seq', 13, true);
 
 
 --
--- Name: insect_families_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: insect_families_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.insect_families_id_seq', 62, true);
 
 
 --
--- Name: insect_genera_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: insect_genera_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.insect_genera_id_seq', 197, true);
 
 
 --
--- Name: insect_orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: insect_orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.insect_orders_id_seq', 5, true);
 
 
 --
--- Name: insect_sub_families_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: insect_sub_families_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.insect_sub_families_id_seq', 46, true);
 
 
 --
--- Name: insects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: insects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.insects_id_seq', 597, true);
 
 
 --
--- Name: k_sectors_k_sector_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: k_sectors_k_sector_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.k_sectors_k_sector_id_seq', 9, true);
 
 
 --
--- Name: latex_fruit_latex_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: latex_fruit_latex_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.latex_fruit_latex_id_seq', 2, true);
 
 
 --
--- Name: leaf_arrangements_leaf_arrangement_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: leaf_arrangements_leaf_arrangement_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.leaf_arrangements_leaf_arrangement_id_seq', 11, true);
 
 
 --
--- Name: leaf_margins_leaf_margin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: leaf_margins_leaf_margin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.leaf_margins_leaf_margin_id_seq', 20, true);
 
 
 --
--- Name: plant_families_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: plant_families_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.plant_families_id_seq', 129, true);
 
 
 --
--- Name: plant_genera_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: plant_genera_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.plant_genera_id_seq', 458, true);
 
 
 --
--- Name: plants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: plants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.plants_id_seq', 882, true);
 
 
 --
--- Name: plants_photos_photo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: plants_photos_photo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.plants_photos_photo_id_seq', 1525, true);
 
 
 --
--- Name: regions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: regions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.regions_id_seq', 30, true);
 
 
 --
--- Name: shrub_climbings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: shrub_climbings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.shrub_climbings_id_seq', 8, true);
 
 
 --
--- Name: spines_thorns_thorn_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: spines_thorns_thorn_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.spines_thorns_thorn_id_seq', 3, true);
 
 
 --
--- Name: ukwf_areas_ukwf_area_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: ukwf_areas_ukwf_area_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.ukwf_areas_ukwf_area_id_seq', 23, true);
 
 
 --
--- Name: woody_herbaceous_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: woody_herbaceous_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pg_database_owner
 --
 
 SELECT pg_catalog.setval('public.woody_herbaceous_id_seq', 4, true);
 
 
 --
--- Name: fruit_colors fruit_colors_color_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_colors fruit_colors_color_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_colors
@@ -27111,7 +27111,7 @@ ALTER TABLE ONLY public.fruit_colors
 
 
 --
--- Name: fruit_colors fruit_colors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_colors fruit_colors_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_colors
@@ -27119,7 +27119,7 @@ ALTER TABLE ONLY public.fruit_colors
 
 
 --
--- Name: fruit_shapes fruit_shapes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_shapes fruit_shapes_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_shapes
@@ -27127,7 +27127,7 @@ ALTER TABLE ONLY public.fruit_shapes
 
 
 --
--- Name: fruit_shapes fruit_shapes_shape_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_shapes fruit_shapes_shape_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_shapes
@@ -27135,7 +27135,7 @@ ALTER TABLE ONLY public.fruit_shapes
 
 
 --
--- Name: fruit_sizes fruit_sizes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_sizes fruit_sizes_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_sizes
@@ -27143,7 +27143,7 @@ ALTER TABLE ONLY public.fruit_sizes
 
 
 --
--- Name: fruit_sizes fruit_sizes_size_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_sizes fruit_sizes_size_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_sizes
@@ -27151,7 +27151,7 @@ ALTER TABLE ONLY public.fruit_sizes
 
 
 --
--- Name: fruit_types_glossary fruit_types_glossary_photo_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_types_glossary fruit_types_glossary_photo_id_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_types_glossary
@@ -27159,7 +27159,7 @@ ALTER TABLE ONLY public.fruit_types_glossary
 
 
 --
--- Name: fruit_types_glossary fruit_types_glossary_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_types_glossary fruit_types_glossary_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_types_glossary
@@ -27167,7 +27167,7 @@ ALTER TABLE ONLY public.fruit_types_glossary
 
 
 --
--- Name: fruit_types fruit_types_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_types fruit_types_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_types
@@ -27175,7 +27175,7 @@ ALTER TABLE ONLY public.fruit_types
 
 
 --
--- Name: fruit_types fruit_types_type_of_fruit_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_types fruit_types_type_of_fruit_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_types
@@ -27183,7 +27183,7 @@ ALTER TABLE ONLY public.fruit_types
 
 
 --
--- Name: fruiting_months fruiting_months_month_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruiting_months fruiting_months_month_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruiting_months
@@ -27191,7 +27191,7 @@ ALTER TABLE ONLY public.fruiting_months
 
 
 --
--- Name: fruiting_months fruiting_months_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruiting_months fruiting_months_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruiting_months
@@ -27199,7 +27199,7 @@ ALTER TABLE ONLY public.fruiting_months
 
 
 --
--- Name: glossary_photos glossary_photos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: glossary_photos glossary_photos_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.glossary_photos
@@ -27207,7 +27207,7 @@ ALTER TABLE ONLY public.glossary_photos
 
 
 --
--- Name: glossary glossary_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: glossary glossary_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.glossary
@@ -27215,7 +27215,7 @@ ALTER TABLE ONLY public.glossary
 
 
 --
--- Name: insect_families insect_families_family_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_families insect_families_family_name_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_families
@@ -27223,7 +27223,7 @@ ALTER TABLE ONLY public.insect_families
 
 
 --
--- Name: insect_families insect_families_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_families insect_families_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_families
@@ -27231,7 +27231,7 @@ ALTER TABLE ONLY public.insect_families
 
 
 --
--- Name: insect_genera insect_genera_genus_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_genera insect_genera_genus_name_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_genera
@@ -27239,7 +27239,7 @@ ALTER TABLE ONLY public.insect_genera
 
 
 --
--- Name: insect_genera insect_genera_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_genera insect_genera_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_genera
@@ -27247,7 +27247,7 @@ ALTER TABLE ONLY public.insect_genera
 
 
 --
--- Name: insect_orders insect_orders_order_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_orders insect_orders_order_name_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_orders
@@ -27255,7 +27255,7 @@ ALTER TABLE ONLY public.insect_orders
 
 
 --
--- Name: insect_orders insect_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_orders insect_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_orders
@@ -27263,7 +27263,7 @@ ALTER TABLE ONLY public.insect_orders
 
 
 --
--- Name: insect_photos insect_photos_photo_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_photos insect_photos_photo_id_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_photos
@@ -27271,7 +27271,7 @@ ALTER TABLE ONLY public.insect_photos
 
 
 --
--- Name: insect_photos insect_photos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_photos insect_photos_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_photos
@@ -27279,7 +27279,7 @@ ALTER TABLE ONLY public.insect_photos
 
 
 --
--- Name: insect_sub_families insect_sub_families_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_sub_families insect_sub_families_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_sub_families
@@ -27287,7 +27287,7 @@ ALTER TABLE ONLY public.insect_sub_families
 
 
 --
--- Name: insect_sub_families insect_sub_families_sub_family_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_sub_families insect_sub_families_sub_family_name_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_sub_families
@@ -27295,7 +27295,7 @@ ALTER TABLE ONLY public.insect_sub_families
 
 
 --
--- Name: insects_coi insects_coi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects_coi insects_coi_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects_coi
@@ -27303,7 +27303,7 @@ ALTER TABLE ONLY public.insects_coi
 
 
 --
--- Name: insects insects_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects insects_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects
@@ -27311,7 +27311,7 @@ ALTER TABLE ONLY public.insects
 
 
 --
--- Name: insects_regions insects_regions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects_regions insects_regions_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects_regions
@@ -27319,7 +27319,7 @@ ALTER TABLE ONLY public.insects_regions
 
 
 --
--- Name: insects insects_unique_code_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects insects_unique_code_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects
@@ -27327,7 +27327,7 @@ ALTER TABLE ONLY public.insects
 
 
 --
--- Name: k_sectors k_sectors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: k_sectors k_sectors_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.k_sectors
@@ -27335,7 +27335,7 @@ ALTER TABLE ONLY public.k_sectors
 
 
 --
--- Name: latex latex_latex_description_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: latex latex_latex_description_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.latex
@@ -27343,7 +27343,7 @@ ALTER TABLE ONLY public.latex
 
 
 --
--- Name: latex latex_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: latex latex_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.latex
@@ -27351,7 +27351,7 @@ ALTER TABLE ONLY public.latex
 
 
 --
--- Name: leaf_arrangements leaf_arrangements_arrangement_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: leaf_arrangements leaf_arrangements_arrangement_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.leaf_arrangements
@@ -27359,7 +27359,7 @@ ALTER TABLE ONLY public.leaf_arrangements
 
 
 --
--- Name: leaf_arrangements leaf_arrangements_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: leaf_arrangements leaf_arrangements_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.leaf_arrangements
@@ -27367,7 +27367,7 @@ ALTER TABLE ONLY public.leaf_arrangements
 
 
 --
--- Name: leaf_margins leaf_margins_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: leaf_margins leaf_margins_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.leaf_margins
@@ -27375,7 +27375,7 @@ ALTER TABLE ONLY public.leaf_margins
 
 
 --
--- Name: leaf_margins leaf_margins_type_of_leaf_margin_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: leaf_margins leaf_margins_type_of_leaf_margin_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.leaf_margins
@@ -27383,7 +27383,7 @@ ALTER TABLE ONLY public.leaf_margins
 
 
 --
--- Name: plants_photos pk_plants_photos; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_photos pk_plants_photos; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_photos
@@ -27391,7 +27391,7 @@ ALTER TABLE ONLY public.plants_photos
 
 
 --
--- Name: plant_coordinates plant_coordinates_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plant_coordinates plant_coordinates_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_coordinates
@@ -27399,7 +27399,7 @@ ALTER TABLE ONLY public.plant_coordinates
 
 
 --
--- Name: plant_families plant_families_family_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plant_families plant_families_family_name_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_families
@@ -27407,7 +27407,7 @@ ALTER TABLE ONLY public.plant_families
 
 
 --
--- Name: plant_families_newick plant_families_newick_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plant_families_newick plant_families_newick_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_families_newick
@@ -27415,7 +27415,7 @@ ALTER TABLE ONLY public.plant_families_newick
 
 
 --
--- Name: plant_families plant_families_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plant_families plant_families_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_families
@@ -27423,7 +27423,7 @@ ALTER TABLE ONLY public.plant_families
 
 
 --
--- Name: plant_genera plant_genera_genus_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plant_genera plant_genera_genus_name_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_genera
@@ -27431,7 +27431,7 @@ ALTER TABLE ONLY public.plant_genera
 
 
 --
--- Name: plant_genera plant_genera_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plant_genera plant_genera_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_genera
@@ -27439,7 +27439,7 @@ ALTER TABLE ONLY public.plant_genera
 
 
 --
--- Name: plants_fruit_colors plants_fruit_colors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_colors plants_fruit_colors_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_colors
@@ -27447,7 +27447,7 @@ ALTER TABLE ONLY public.plants_fruit_colors
 
 
 --
--- Name: plants_fruit_shapes plants_fruit_shapes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_shapes plants_fruit_shapes_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_shapes
@@ -27455,7 +27455,7 @@ ALTER TABLE ONLY public.plants_fruit_shapes
 
 
 --
--- Name: plants_fruit_sizes plants_fruit_sizes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_sizes plants_fruit_sizes_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_sizes
@@ -27463,7 +27463,7 @@ ALTER TABLE ONLY public.plants_fruit_sizes
 
 
 --
--- Name: plants_fruit_types plants_fruit_types_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_types plants_fruit_types_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_types
@@ -27471,7 +27471,7 @@ ALTER TABLE ONLY public.plants_fruit_types
 
 
 --
--- Name: plants_fruiting_months plants_fruiting_months_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruiting_months plants_fruiting_months_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruiting_months
@@ -27479,7 +27479,7 @@ ALTER TABLE ONLY public.plants_fruiting_months
 
 
 --
--- Name: plants_insects plants_insects_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_insects plants_insects_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_insects
@@ -27487,7 +27487,7 @@ ALTER TABLE ONLY public.plants_insects
 
 
 --
--- Name: plants_k_sectors plants_k_sectors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_k_sectors plants_k_sectors_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_k_sectors
@@ -27495,7 +27495,7 @@ ALTER TABLE ONLY public.plants_k_sectors
 
 
 --
--- Name: plants_latex plants_latex_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_latex plants_latex_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_latex
@@ -27503,7 +27503,7 @@ ALTER TABLE ONLY public.plants_latex
 
 
 --
--- Name: plants_leaf_arrangements plants_leaf_arrangements_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_leaf_arrangements plants_leaf_arrangements_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_leaf_arrangements
@@ -27511,7 +27511,7 @@ ALTER TABLE ONLY public.plants_leaf_arrangements
 
 
 --
--- Name: plants_leaf_margins plants_leaf_margins_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_leaf_margins plants_leaf_margins_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_leaf_margins
@@ -27519,7 +27519,7 @@ ALTER TABLE ONLY public.plants_leaf_margins
 
 
 --
--- Name: plants_matk plants_matk_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_matk plants_matk_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_matk
@@ -27527,7 +27527,7 @@ ALTER TABLE ONLY public.plants_matk
 
 
 --
--- Name: plants_photos plants_photos_photo_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_photos plants_photos_photo_name_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_photos
@@ -27535,7 +27535,7 @@ ALTER TABLE ONLY public.plants_photos
 
 
 --
--- Name: plants plants_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants plants_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants
@@ -27543,7 +27543,7 @@ ALTER TABLE ONLY public.plants
 
 
 --
--- Name: plants_rbcl plants_rbcl_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_rbcl plants_rbcl_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_rbcl
@@ -27551,7 +27551,7 @@ ALTER TABLE ONLY public.plants_rbcl
 
 
 --
--- Name: plants_regions plants_regions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_regions plants_regions_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_regions
@@ -27559,7 +27559,7 @@ ALTER TABLE ONLY public.plants_regions
 
 
 --
--- Name: plants_shrub_climbings plants_shrub_climbings_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_shrub_climbings plants_shrub_climbings_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_shrub_climbings
@@ -27567,7 +27567,7 @@ ALTER TABLE ONLY public.plants_shrub_climbings
 
 
 --
--- Name: plants_spines_thorns plants_spines_thorns_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_spines_thorns plants_spines_thorns_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_spines_thorns
@@ -27575,7 +27575,7 @@ ALTER TABLE ONLY public.plants_spines_thorns
 
 
 --
--- Name: plants_ukwf_areas plants_ukwf_areas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_ukwf_areas plants_ukwf_areas_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_ukwf_areas
@@ -27583,7 +27583,7 @@ ALTER TABLE ONLY public.plants_ukwf_areas
 
 
 --
--- Name: plants_woody_herbaceous plants_woody_herbaceous_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_woody_herbaceous plants_woody_herbaceous_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_woody_herbaceous
@@ -27591,7 +27591,7 @@ ALTER TABLE ONLY public.plants_woody_herbaceous
 
 
 --
--- Name: regions regions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: regions regions_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.regions
@@ -27599,7 +27599,7 @@ ALTER TABLE ONLY public.regions
 
 
 --
--- Name: shrub_climbings shrub_climbings_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: shrub_climbings shrub_climbings_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.shrub_climbings
@@ -27607,7 +27607,7 @@ ALTER TABLE ONLY public.shrub_climbings
 
 
 --
--- Name: shrub_climbings shrub_climbings_tree_type_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: shrub_climbings shrub_climbings_tree_type_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.shrub_climbings
@@ -27615,7 +27615,7 @@ ALTER TABLE ONLY public.shrub_climbings
 
 
 --
--- Name: spines_thorns spines_thorns_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: spines_thorns spines_thorns_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.spines_thorns
@@ -27623,7 +27623,7 @@ ALTER TABLE ONLY public.spines_thorns
 
 
 --
--- Name: spines_thorns spines_thorns_thorns_spines_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: spines_thorns spines_thorns_thorns_spines_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.spines_thorns
@@ -27631,7 +27631,7 @@ ALTER TABLE ONLY public.spines_thorns
 
 
 --
--- Name: ukwf_areas ukwf_areas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: ukwf_areas ukwf_areas_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.ukwf_areas
@@ -27639,7 +27639,7 @@ ALTER TABLE ONLY public.ukwf_areas
 
 
 --
--- Name: plants_photos unique_plant_photo_combination; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_photos unique_plant_photo_combination; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_photos
@@ -27647,7 +27647,7 @@ ALTER TABLE ONLY public.plants_photos
 
 
 --
--- Name: woody_herbaceous woody_herbaceous_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: woody_herbaceous woody_herbaceous_pkey; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.woody_herbaceous
@@ -27655,7 +27655,7 @@ ALTER TABLE ONLY public.woody_herbaceous
 
 
 --
--- Name: woody_herbaceous woody_herbaceous_type_of_stem_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: woody_herbaceous woody_herbaceous_type_of_stem_key; Type: CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.woody_herbaceous
@@ -27663,7 +27663,7 @@ ALTER TABLE ONLY public.woody_herbaceous
 
 
 --
--- Name: fruit_types_glossary fruit_types_glossary_fruit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fruit_types_glossary fruit_types_glossary_fruit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.fruit_types_glossary
@@ -27671,7 +27671,7 @@ ALTER TABLE ONLY public.fruit_types_glossary
 
 
 --
--- Name: glossary_photos glossary_photos_glossary_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: glossary_photos glossary_photos_glossary_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.glossary_photos
@@ -27679,7 +27679,7 @@ ALTER TABLE ONLY public.glossary_photos
 
 
 --
--- Name: insect_photos insect_photos_insect_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insect_photos insect_photos_insect_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insect_photos
@@ -27687,7 +27687,7 @@ ALTER TABLE ONLY public.insect_photos
 
 
 --
--- Name: insects_coi insects_coi_insect_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects_coi insects_coi_insect_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects_coi
@@ -27695,7 +27695,7 @@ ALTER TABLE ONLY public.insects_coi
 
 
 --
--- Name: insects insects_family_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects insects_family_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects
@@ -27703,7 +27703,7 @@ ALTER TABLE ONLY public.insects
 
 
 --
--- Name: insects insects_genus_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects insects_genus_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects
@@ -27711,7 +27711,7 @@ ALTER TABLE ONLY public.insects
 
 
 --
--- Name: insects insects_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects insects_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects
@@ -27719,7 +27719,7 @@ ALTER TABLE ONLY public.insects
 
 
 --
--- Name: insects_regions insects_regions_insect_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects_regions insects_regions_insect_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects_regions
@@ -27727,7 +27727,7 @@ ALTER TABLE ONLY public.insects_regions
 
 
 --
--- Name: insects_regions insects_regions_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects_regions insects_regions_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects_regions
@@ -27735,7 +27735,7 @@ ALTER TABLE ONLY public.insects_regions
 
 
 --
--- Name: insects insects_sub_family_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: insects insects_sub_family_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.insects
@@ -27743,7 +27743,7 @@ ALTER TABLE ONLY public.insects
 
 
 --
--- Name: plant_coordinates plant_coordinates_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plant_coordinates plant_coordinates_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_coordinates
@@ -27751,7 +27751,7 @@ ALTER TABLE ONLY public.plant_coordinates
 
 
 --
--- Name: plant_genera plant_genera_family_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plant_genera plant_genera_family_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plant_genera
@@ -27759,7 +27759,7 @@ ALTER TABLE ONLY public.plant_genera
 
 
 --
--- Name: plants_fruit_colors plants_fruit_colors_color_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_colors plants_fruit_colors_color_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_colors
@@ -27767,7 +27767,7 @@ ALTER TABLE ONLY public.plants_fruit_colors
 
 
 --
--- Name: plants_fruit_colors plants_fruit_colors_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_colors plants_fruit_colors_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_colors
@@ -27775,7 +27775,7 @@ ALTER TABLE ONLY public.plants_fruit_colors
 
 
 --
--- Name: plants_fruit_shapes plants_fruit_shapes_fruit_shape_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_shapes plants_fruit_shapes_fruit_shape_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_shapes
@@ -27783,7 +27783,7 @@ ALTER TABLE ONLY public.plants_fruit_shapes
 
 
 --
--- Name: plants_fruit_shapes plants_fruit_shapes_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_shapes plants_fruit_shapes_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_shapes
@@ -27791,7 +27791,7 @@ ALTER TABLE ONLY public.plants_fruit_shapes
 
 
 --
--- Name: plants_fruit_sizes plants_fruit_sizes_fruit_size_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_sizes plants_fruit_sizes_fruit_size_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_sizes
@@ -27799,7 +27799,7 @@ ALTER TABLE ONLY public.plants_fruit_sizes
 
 
 --
--- Name: plants_fruit_sizes plants_fruit_sizes_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_sizes plants_fruit_sizes_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_sizes
@@ -27807,7 +27807,7 @@ ALTER TABLE ONLY public.plants_fruit_sizes
 
 
 --
--- Name: plants_fruit_types plants_fruit_types_fruit_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_types plants_fruit_types_fruit_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_types
@@ -27815,7 +27815,7 @@ ALTER TABLE ONLY public.plants_fruit_types
 
 
 --
--- Name: plants_fruit_types plants_fruit_types_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruit_types plants_fruit_types_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruit_types
@@ -27823,7 +27823,7 @@ ALTER TABLE ONLY public.plants_fruit_types
 
 
 --
--- Name: plants_fruiting_months plants_fruiting_months_fruiting_month_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruiting_months plants_fruiting_months_fruiting_month_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruiting_months
@@ -27831,7 +27831,7 @@ ALTER TABLE ONLY public.plants_fruiting_months
 
 
 --
--- Name: plants_fruiting_months plants_fruiting_months_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_fruiting_months plants_fruiting_months_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_fruiting_months
@@ -27839,7 +27839,7 @@ ALTER TABLE ONLY public.plants_fruiting_months
 
 
 --
--- Name: plants plants_genus_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants plants_genus_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants
@@ -27847,7 +27847,7 @@ ALTER TABLE ONLY public.plants
 
 
 --
--- Name: plants_insects plants_insects_insect_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_insects plants_insects_insect_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_insects
@@ -27855,7 +27855,7 @@ ALTER TABLE ONLY public.plants_insects
 
 
 --
--- Name: plants_insects plants_insects_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_insects plants_insects_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_insects
@@ -27863,7 +27863,7 @@ ALTER TABLE ONLY public.plants_insects
 
 
 --
--- Name: plants_k_sectors plants_k_sectors_k_sector_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_k_sectors plants_k_sectors_k_sector_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_k_sectors
@@ -27871,7 +27871,7 @@ ALTER TABLE ONLY public.plants_k_sectors
 
 
 --
--- Name: plants_k_sectors plants_k_sectors_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_k_sectors plants_k_sectors_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_k_sectors
@@ -27879,7 +27879,7 @@ ALTER TABLE ONLY public.plants_k_sectors
 
 
 --
--- Name: plants_latex plants_latex_fruit_latex_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_latex plants_latex_fruit_latex_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_latex
@@ -27887,7 +27887,7 @@ ALTER TABLE ONLY public.plants_latex
 
 
 --
--- Name: plants_latex plants_latex_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_latex plants_latex_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_latex
@@ -27895,7 +27895,7 @@ ALTER TABLE ONLY public.plants_latex
 
 
 --
--- Name: plants_leaf_arrangements plants_leaf_arrangements_leaf_arrangement_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_leaf_arrangements plants_leaf_arrangements_leaf_arrangement_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_leaf_arrangements
@@ -27903,7 +27903,7 @@ ALTER TABLE ONLY public.plants_leaf_arrangements
 
 
 --
--- Name: plants_leaf_arrangements plants_leaf_arrangements_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_leaf_arrangements plants_leaf_arrangements_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_leaf_arrangements
@@ -27911,7 +27911,7 @@ ALTER TABLE ONLY public.plants_leaf_arrangements
 
 
 --
--- Name: plants_leaf_margins plants_leaf_margins_leaf_margin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_leaf_margins plants_leaf_margins_leaf_margin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_leaf_margins
@@ -27919,7 +27919,7 @@ ALTER TABLE ONLY public.plants_leaf_margins
 
 
 --
--- Name: plants_leaf_margins plants_leaf_margins_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_leaf_margins plants_leaf_margins_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_leaf_margins
@@ -27927,7 +27927,7 @@ ALTER TABLE ONLY public.plants_leaf_margins
 
 
 --
--- Name: plants_matk plants_matk_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_matk plants_matk_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_matk
@@ -27935,7 +27935,7 @@ ALTER TABLE ONLY public.plants_matk
 
 
 --
--- Name: plants_photos plants_photos_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_photos plants_photos_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_photos
@@ -27943,7 +27943,7 @@ ALTER TABLE ONLY public.plants_photos
 
 
 --
--- Name: plants_rbcl plants_rbcl_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_rbcl plants_rbcl_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_rbcl
@@ -27951,7 +27951,7 @@ ALTER TABLE ONLY public.plants_rbcl
 
 
 --
--- Name: plants_regions plants_regions_plants_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_regions plants_regions_plants_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_regions
@@ -27959,7 +27959,7 @@ ALTER TABLE ONLY public.plants_regions
 
 
 --
--- Name: plants_regions plants_regions_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_regions plants_regions_region_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_regions
@@ -27967,7 +27967,7 @@ ALTER TABLE ONLY public.plants_regions
 
 
 --
--- Name: plants_shrub_climbings plants_shrub_climbings_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_shrub_climbings plants_shrub_climbings_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_shrub_climbings
@@ -27975,7 +27975,7 @@ ALTER TABLE ONLY public.plants_shrub_climbings
 
 
 --
--- Name: plants_shrub_climbings plants_shrub_climbings_shrub_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_shrub_climbings plants_shrub_climbings_shrub_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_shrub_climbings
@@ -27983,7 +27983,7 @@ ALTER TABLE ONLY public.plants_shrub_climbings
 
 
 --
--- Name: plants_spines_thorns plants_spines_thorns_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_spines_thorns plants_spines_thorns_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_spines_thorns
@@ -27991,7 +27991,7 @@ ALTER TABLE ONLY public.plants_spines_thorns
 
 
 --
--- Name: plants_spines_thorns plants_spines_thorns_thorn_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_spines_thorns plants_spines_thorns_thorn_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_spines_thorns
@@ -27999,7 +27999,7 @@ ALTER TABLE ONLY public.plants_spines_thorns
 
 
 --
--- Name: plants_ukwf_areas plants_ukwf_areas_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_ukwf_areas plants_ukwf_areas_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_ukwf_areas
@@ -28007,7 +28007,7 @@ ALTER TABLE ONLY public.plants_ukwf_areas
 
 
 --
--- Name: plants_ukwf_areas plants_ukwf_areas_ukwf_area_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_ukwf_areas plants_ukwf_areas_ukwf_area_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_ukwf_areas
@@ -28015,7 +28015,7 @@ ALTER TABLE ONLY public.plants_ukwf_areas
 
 
 --
--- Name: plants_woody_herbaceous plants_woody_herbaceous_back_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_woody_herbaceous plants_woody_herbaceous_back_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_woody_herbaceous
@@ -28023,355 +28023,11 @@ ALTER TABLE ONLY public.plants_woody_herbaceous
 
 
 --
--- Name: plants_woody_herbaceous plants_woody_herbaceous_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: plants_woody_herbaceous plants_woody_herbaceous_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: pg_database_owner
 --
 
 ALTER TABLE ONLY public.plants_woody_herbaceous
     ADD CONSTRAINT plants_woody_herbaceous_plant_id_fkey FOREIGN KEY (plant_id) REFERENCES public.plants(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: TABLE fruit_colors; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.fruit_colors TO copeland;
-
-
---
--- Name: TABLE fruit_shapes; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.fruit_shapes TO copeland;
-
-
---
--- Name: TABLE fruit_sizes; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.fruit_sizes TO copeland;
-
-
---
--- Name: TABLE fruit_types; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.fruit_types TO copeland;
-
-
---
--- Name: TABLE fruit_types_glossary; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.fruit_types_glossary TO copeland;
-
-
---
--- Name: TABLE fruiting_months; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.fruiting_months TO copeland;
-
-
---
--- Name: TABLE geography_columns; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.geography_columns TO copeland;
-
-
---
--- Name: TABLE geometry_columns; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.geometry_columns TO copeland;
-
-
---
--- Name: TABLE glossary; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.glossary TO copeland;
-
-
---
--- Name: TABLE glossary_photos; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.glossary_photos TO copeland;
-
-
---
--- Name: TABLE insect_families; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.insect_families TO copeland;
-
-
---
--- Name: TABLE insect_genera; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.insect_genera TO copeland;
-
-
---
--- Name: TABLE insect_orders; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.insect_orders TO copeland;
-
-
---
--- Name: TABLE insect_photos; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.insect_photos TO copeland;
-
-
---
--- Name: TABLE insect_sub_families; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.insect_sub_families TO copeland;
-
-
---
--- Name: TABLE insects; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.insects TO copeland;
-
-
---
--- Name: TABLE insects_regions; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.insects_regions TO copeland;
-
-
---
--- Name: TABLE k_sectors; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.k_sectors TO copeland;
-
-
---
--- Name: TABLE latex; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.latex TO copeland;
-
-
---
--- Name: TABLE leaf_arrangements; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.leaf_arrangements TO copeland;
-
-
---
--- Name: TABLE leaf_margins; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.leaf_margins TO copeland;
-
-
---
--- Name: TABLE plant_coordinates; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plant_coordinates TO copeland;
-
-
---
--- Name: TABLE plant_families; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plant_families TO copeland;
-
-
---
--- Name: TABLE plant_families_newick; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plant_families_newick TO copeland;
-
-
---
--- Name: TABLE plant_genera; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plant_genera TO copeland;
-
-
---
--- Name: TABLE plants; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants TO copeland;
-
-
---
--- Name: TABLE plants_fruit_colors; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_fruit_colors TO copeland;
-
-
---
--- Name: TABLE plants_fruit_shapes; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_fruit_shapes TO copeland;
-
-
---
--- Name: TABLE plants_fruit_sizes; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_fruit_sizes TO copeland;
-
-
---
--- Name: TABLE plants_fruit_types; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_fruit_types TO copeland;
-
-
---
--- Name: TABLE plants_fruiting_months; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_fruiting_months TO copeland;
-
-
---
--- Name: TABLE plants_insects; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_insects TO copeland;
-
-
---
--- Name: TABLE plants_k_sectors; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_k_sectors TO copeland;
-
-
---
--- Name: TABLE plants_latex; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_latex TO copeland;
-
-
---
--- Name: TABLE plants_leaf_arrangements; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_leaf_arrangements TO copeland;
-
-
---
--- Name: TABLE plants_leaf_margins; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_leaf_margins TO copeland;
-
-
---
--- Name: TABLE plants_photos; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_photos TO copeland;
-
-
---
--- Name: TABLE plants_rbcl; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_rbcl TO copeland;
-
-
---
--- Name: TABLE plants_regions; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_regions TO copeland;
-
-
---
--- Name: TABLE plants_shrub_climbings; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_shrub_climbings TO copeland;
-
-
---
--- Name: TABLE plants_spines_thorns; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_spines_thorns TO copeland;
-
-
---
--- Name: TABLE plants_ukwf_areas; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_ukwf_areas TO copeland;
-
-
---
--- Name: TABLE plants_woody_herbaceous; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.plants_woody_herbaceous TO copeland;
-
-
---
--- Name: TABLE regions; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.regions TO copeland;
-
-
---
--- Name: TABLE shrub_climbings; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.shrub_climbings TO copeland;
-
-
---
--- Name: TABLE spatial_ref_sys; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.spatial_ref_sys TO copeland;
-
-
---
--- Name: TABLE spines_thorns; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.spines_thorns TO copeland;
-
-
---
--- Name: TABLE ukwf_areas; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.ukwf_areas TO copeland;
-
-
---
--- Name: TABLE woody_herbaceous; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT INSERT,DELETE,UPDATE ON TABLE public.woody_herbaceous TO copeland;
-
 
 --
 -- PostgreSQL database dump complete

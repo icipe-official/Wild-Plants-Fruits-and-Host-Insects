@@ -126,7 +126,7 @@ export default function PhylogenyMafftPlantsInsects() {
   //   }
   // }, []);
   //handle inframe
-  const iframeSrc = `/phylotree.html`;
+  const iframeSrc = `${base_path}/phylotree.html`;
 
   const handleIframeLoad = () => {
     const iframe = iframeRef.current;
