@@ -125,7 +125,28 @@ export default function PhylogenyMafftPlantsInsects() {
   //     handleChange();
   //   }
   // }, []);
+  //handle inframe
+  const iframeSrc = `/phylotree.html`;
 
+  const handleIframeLoad = () => {
+    const iframe = iframeRef.current;
+    const iframeWindow = iframe.contentWindow;
+
+    // Check if newickData is present
+    if (newickData) {
+      // Send a message to the iframe to load the data
+      iframeWindow.postMessage(
+        {
+          type: "loadData",
+          data: { newickData },
+        },
+        "*"
+      );
+    }
+    // else {
+    //   console.log("No newickData to send to iframe.");
+    // }
+  };
   async function handleChange(event) {
     if (selectedOrganism === "plants") {
       setSelectedOrganism(event.target.value);
@@ -629,7 +650,8 @@ export default function PhylogenyMafftPlantsInsects() {
           {newickData ? (
             <iframe
               ref={iframeRef}
-              src={`${base_path}/phylotree.html?newickData=${newickData}`}
+              onLoad={handleIframeLoad}
+              src={iframeSrc}
               style={{
                 position: "relative",
                 top: 3,

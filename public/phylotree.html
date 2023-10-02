@@ -1093,11 +1093,11 @@
       function handleMessage(event) {
         if (event.data.type === "loadData") {
           // Retrieve the newickData from the message data
-          const newickData = event.data.data.newickData; // Updated this line
+          const newickData = event.data.data.newickData;
 
           // Check if newickData is present
           if (newickData) {
-            console.log("Received newickData:", newickData);
+            // console.log("Received newickData:", newickData);
 
             // Assign newickData to the test_string variable
             test_string = newickData;
@@ -1109,15 +1109,6 @@
         function handleTestString(data) {
           console.log("test_string:", data);
         }
-
-        // This will log "test_string" after it's assigned
-        console.log("Logging test_string");
-        // const test_string=test_string
-        console.log(test_string);
-        //"(((Adenia-gummifera-South-Africa-30:0.563533, ((Acokanthera-oppositifolia-South-Africa-24:0.498970, (Acokanthera-oppositifolia-South-Africa-21:0.498062, Acokanthera-oppositifolia-South-Africa-20:0.515957):0.001030):0.063243, (Adansonia-digitata-South-Africa-27:0.522313, (Abutilon-mauritianum-Kenya-17:0.503507, (Abutilon-hirtum-Kenya-13:0.500000, (Abutilon-hirtum-Kenya-9:0.500000, Abutilon-hirtum-Kenya-3:0.500000):0.000000):0.001123):0.024901):0.025837):0.044232):0.067740, (nan-31:0.523528, (Abutilon-hirtum-Kenya-14:0.501919, (Abutilon-hirtum-Kenya-6:0.500000, Abutilon-hirtum-Kenya-1:0.500000):0.014840):0.454673):0.027474):0.016783, (nan-25:0.553315, (nan-32:0.553956, ((Adenia-gummifera-South-Africa-29:0.593326, nan-28:0.504235):0.081452, ((Acokanthera-oppositifolia-South-Africa-19:0.500891, (Acokanthera-oppositifolia-South-Africa-23:0.514218, Acokanthera-oppositifolia-South-Africa-22:0.499867):0.003771):0.102737, ((Abutilon-hirtum-Kenya-8:0.496268, (Abutilon-mauritianum-Kenya-18:0.496693, (Abutilon-hirtum-Kenya-11:0.663119, Abutilon-hirtum-Kenya-5:0.483222):0.020980):0.014249):0.227929, ((Abutilon-hirtum-Kenya-12:0.481580, (Abutilon-hirtum-Kenya-10:0.463931, (Abutilon-mauritianum-Kenya-16:1.562491, Abutilon-hirtum-Kenya-4:0.425461):0.081434):0.025915):0.343333, (Adansonia-digitata-South-Africa-26:0.564585, (Abutilon-mauritianum-Kenya-15:0.568963, (Abutilon-hirtum-Kenya-7:0.500000, Abutilon-hirtum-Kenya-2:0.500000):0.244762):0.035795):0.075301):0.017759):0.047765):0.015092):0.006502):0.012280):0.002018, Adenium-obesum-United-States:0.543257)"
-        // "((Chrysopilus_laevis:0.034324,(Culicoides_imicola:0.056458,Simulium_damnosum:0.054925):0.023192):0.024599,((Drosophila_melanogaster:0.045603,Drosophila_virilis:0.048838):0.010688,(Musca_domestica:0.028555,Calliphora_vicina:0.035931):0.033036):0.018612,((Eristalis_arbustorum:0.051443,Eristalis_tenax:0.052172):0.007342,(Tabanus_sudeticus:0.039647,(Rhagio_scolopaceus:0.047358,(Tachina_fera:0.036210,(Empis_tessellata:0.030793,Empis_striata:0.034902):0.018703):0.012322):0.011284):0.015309):0.013881)"
-        // "(((Austrodicranomyia_americana:0.021600,Dolichopodidae_sp:0.034400):0.007200,Eudorylas_sp:0.017600):0.024000,(((Hybosoridae_sp:0.011200,Chelifera_sp:0.024000):0.004800,Asilidae_sp:0.015200):0.012000,((Ceratopogonidae_sp:0.024800,Thaumaleidae_sp:0.034400):0.016800,((Phoridae_sp:0.008800,Sarcophagidae_sp:0.006400):0.012800,Culicidae_sp:0.015200):0.028800):0.021600):0.012800)"
-        // "(((EELA:0.150276,CONGERA:0.213019):0.230956,(EELB:0.263487,CONGERB:0.202633):0.246917):0.094785,((CAVEFISH:0.451027,(GOLDFISH:0.340495,ZEBRAFISH:0.390163):0.220565):0.067778,((((((NSAM:0.008113,NARG:0.014065):0.052991,SPUN:0.061003,(SMIC:0.027806,SDIA:0.015298,SXAN:0.046873):0.046977):0.009822,(NAUR:0.081298,(SSPI:0.023876,STIE:0.013652):0.058179):0.091775):0.073346,(MVIO:0.012271,MBER:0.039798):0.178835):0.147992,((BFNKILLIFISH:0.317455,(ONIL:0.029217,XCAU:0.084388):0.201166):0.055908,THORNYHEAD:0.252481):0.061905):0.157214,LAMPFISH:0.717196,((SCABBARDA:0.189684,SCABBARDB:0.362015):0.282263,((VIPERFISH:0.318217,BLACKDRAGON:0.109912):0.123642,LOOSEJAW:0.397100):0.287152):0.140663):0.206729):0.222485,(COELACANTH:0.558103,((CLAWEDFROG:0.441842,SALAMANDER:0.299607):0.135307,((CHAMELEON:0.771665,((PIGEON:0.150909,CHICKEN:0.172733):0.082163,ZEBRAFINCH:0.099172):0.272338):0.014055,((BOVINE:0.167569,DOLPHIN:0.157450):0.104783,ELEPHANT:0.166557):0.367205):0.050892):0.114731):0.295021)myroot";
         var container_id = "#tree_container";
         // console.log(test_string)
         //var tree = phylotree.phylotree(test_string);
