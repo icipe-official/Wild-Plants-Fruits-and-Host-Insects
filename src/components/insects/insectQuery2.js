@@ -91,8 +91,8 @@ export default function InsectQuery2() {
         })
       )
     );
-    console.log("coordinates");
-    console.log(coordinates1);
+    console.log("insect coordinates");
+    console.log(coordinates);
 
     // console.log(coordinates.map((c) => c));
 
