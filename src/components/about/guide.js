@@ -74,8 +74,9 @@ export default function UserGuide() {
           on trifoliolate in the leaf type box will not exclude the correct
           plant from the results even if it is described in the literature as
           having 3 or 5 leaflets. Submitting a query will return a list of one
-          or more plant names. Selecting a plant name from the list brings up
-          the data page for that species.
+          or more plant names. Highlighting a plant name from the first plant
+          amomg the query result. Upon double clicking the plant, you can
+          navigate to the detailed page for that plant.
         </p>
         <Image
           src="/img/screen02a.jpg"
@@ -180,10 +181,10 @@ export default function UserGuide() {
         />
 
         <p class="caption">
-          Phylogeny page for Phyllanthaceae plant family. The phylogeny tree
-          shows that certain species display no genetic divergence based on
-          their barcodes, as seen in Margaritaria discoidea.Flueggea virosa
-          exhibits genetic variance among its species, potentially attributed to
+          Phylogeny page for Meliaceae plant family. The phylogeny tree shows
+          that certain species display no genetic divergence based on their
+          barcodes, as seen in Margaritaria discoidea.Flueggea virosa exhibits
+          genetic variance among its species, potentially attributed to
           geographical differences<em></em>.
         </p>
         <h3>Illustrated glossaries of plant terms</h3>
