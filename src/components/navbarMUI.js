@@ -224,6 +224,20 @@ export default function TopAppBar() {
                         Phylogeny
                       </Link>
                     </ListItem>
+                    <ListItem ButtonBase>
+                      <Link
+                        href="/about"
+                        passHref
+                        className={`${classes.link} ${
+                          router.pathname.startsWith("/about")
+                            ? classes.activeLink
+                            : ""
+                        }`}
+                        onClick={handleMenuClose}
+                      >
+                        About Us
+                      </Link>
+                    </ListItem>
                   </List>
                   {/* <IconButton onClick={handleMenuClose} >
               <CloseIcon className={classes.cancelicon}/>
@@ -275,6 +289,18 @@ export default function TopAppBar() {
               >
                 Insects
               </Link>
+
+              <Link
+                href="/phylogeny"
+                passHref
+                className={`${classes.link} ${
+                  router.pathname.startsWith("/phylogeny")
+                    ? classes.activeLink
+                    : ""
+                }`}
+              >
+                Phylogeny
+              </Link>
               <Link
                 href="/glossary"
                 passHref
@@ -287,15 +313,13 @@ export default function TopAppBar() {
                 Glossary
               </Link>
               <Link
-                href="/phylogeny"
+                href="/about"
                 passHref
                 className={`${classes.link} ${
-                  router.pathname.startsWith("/phylogeny")
-                    ? classes.activeLink
-                    : ""
+                  router.pathname.startsWith("/about") ? classes.activeLink : ""
                 }`}
               >
-                Phylogeny
+                About Us
               </Link>
             </div>
           )}
