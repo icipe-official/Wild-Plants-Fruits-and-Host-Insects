@@ -100,7 +100,7 @@ export default function AboutUs() {
         </p>
 
         <h2>
-          <a name="features_of_the_application" class="anchor">
+          <a name="features_of_the_application" className="anchor">
             Key Features of the Platform
           </a>
         </h2>

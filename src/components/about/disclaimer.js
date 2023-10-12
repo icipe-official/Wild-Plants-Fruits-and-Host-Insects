@@ -7,7 +7,7 @@ export default function Disclaimer() {
     <Container>
       <Box sx={{ marginTop: 12, justifyContent: "center" }}>
         <h3>
-          <a name="disclaimer" class="anchor">
+          <a name="disclaimer" className="anchor">
             Disclaimer
           </a>
         </h3>
