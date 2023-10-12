@@ -57,15 +57,19 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   navlinks: {
-    marginLeft: theme.spacing(10),
+    justifyContent: "center",
+    alignItems: "center",
+    // marginLeft: theme.spacing(10),
     display: "flex",
     [theme.breakpoints.down("sm")]: {
-      marginLeft: 0,
+      // marginLeft: 0,
       flexDirection: "column",
+      justifyContent: "center",
     },
   },
   link: {
     textDecoration: "none",
+    display: "block",
     color: "yellow",
     fontSize: "14px",
     fontFamily: "Open Sans",
@@ -246,7 +250,7 @@ export default function TopAppBar() {
                     </Link>
 
                     {menuItems.slice(1).map((menuItem) => (
-                      <div
+                      <Box
                         key={menuItem.text}
                         className={`${classes.menuItem} ${
                           router.pathname.startsWith(menuItem.href)
@@ -290,7 +294,7 @@ export default function TopAppBar() {
                               horizontal: "left",
                             }}
                           >
-                            <div
+                            <Box
                               style={{
                                 backgroundColor: "lightgrey",
                                 padding: 16,
@@ -327,10 +331,10 @@ export default function TopAppBar() {
                                   </ListItem>
                                 ))}
                               </List>
-                            </div>
+                            </Box>
                           </Popover>
                         )}
-                      </div>
+                      </Box>
                     ))}
                   </List>
                   {/* <IconButton onClick={handleMenuClose}>
@@ -340,7 +344,7 @@ export default function TopAppBar() {
               </Drawer>
             </>
           ) : (
-            <div className={classes.navlinks}>
+            <Box className={classes.navlinks}>
               <Link
                 href="/"
                 passHref
@@ -352,7 +356,7 @@ export default function TopAppBar() {
               </Link>
 
               {menuItems.slice(1).map((menuItem) => (
-                <div
+                <Box
                   key={menuItem.text}
                   className={`${classes.menuItem} ${
                     router.pathname.startsWith(menuItem.href) ? "active" : ""
@@ -390,7 +394,7 @@ export default function TopAppBar() {
                         horizontal: "left",
                       }}
                     >
-                      <div
+                      <Box
                         style={{
                           backgroundColor: "lightgrey",
                           padding: 16,
@@ -406,11 +410,11 @@ export default function TopAppBar() {
                               // justifyContent: "space-between",
                             }}
                           >
-                            <div
+                            <Box
                               style={{ display: "flex", alignItems: "center" }}
                             >
                               <Cancel style={{ marginRight: 8 }} />
-                            </div>
+                            </Box>
                           </ListItem>
                           {menuItem.subMenu.map((subMenuItem) => (
                             <ListItem key={subMenuItem.text} ButtonBase>
@@ -424,12 +428,12 @@ export default function TopAppBar() {
                             </ListItem>
                           ))}
                         </List>
-                      </div>
+                      </Box>
                     </Popover>
                   )}
-                </div>
+                </Box>
               ))}
-            </div>
+            </Box>
           )}
         </Toolbar>
       </AppBar>
