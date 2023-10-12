@@ -9,27 +9,26 @@ import {
   List,
   ListItem,
   Container,
+  Popover,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuIcon from "@mui/icons-material/Menu";
 /*
-This module defines a mobile-responsive navigation bar using Material-UI components.
-
-It exports a single component `Navbar` that displays a list of links to different pages of the website.
-The navigation bar is built using Material-UI's `AppBar`, `Toolbar`, `Typography`, `Link`, and `useMediaQuery` components.
-
-The `Navbar` component takes no arguments, and it returns a Material-UI `AppBar` component with a `Toolbar`.
-Inside the `Toolbar`, there is a `div` container that contains several `Link` components, each linking to a different page of the website.
-The links are styled using CSS classes defined in the `makeStyles` hook.
-
-The navigation bar is made mobile-responsive by using the `useMediaQuery` hook to detect small screens (using the `sm` breakpoint defined in the theme).
-When the screen size is small, the links are displayed vertically (in a column), instead of horizontally (in a row).
-This is achieved by changing the `flexDirection` property of the `navlinks` CSS class.
-*/
+ This module defines a mobile-responsive navigation bar using Material-UI components.
+ It exports a single component `Navbar` that displays a list of links to different pages of the website.
+ The navigation bar is built using Material-UI's `AppBar`, `Toolbar`, `Typography`, `Link`, and `useMediaQuery` components.
+ The `Navbar` component takes no arguments, and it returns a Material-UI `AppBar` component with a `Toolbar`.
+ Inside the `Toolbar`, there is a `div` container that contains several `Link` components, each linking to a different page of the website.
+ The links are styled using CSS classes defined in the `makeStyles` hook.
+ The navigation bar is made mobile-responsive by using the `useMediaQuery` hook to detect small screens (using the `sm` breakpoint defined in the theme).
+ When the screen size is small, the links are displayed vertically (in a column), instead of horizontally (in a row).
+ This is achieved by changing the `flexDirection` property of the `navlinks` CSS class.
+ */
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { Cancel } from "@mui/icons-material";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,19 +85,57 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
     borderBottom: "1px solid white",
   },
+  subMenu: {
+    display: "none",
+  },
+  menuItem: {
+    position: "relative",
+    "&:hover $subMenu": {
+      display: "block",
+    },
+  },
+  popoverPaper: {
+    backgroundColor: "#f0f0f0", // Greyish background color
+    maxWidth: "250px", // Limiting the max width
+    marginLeft: "10px", // Adjusting the margin from the menu item
+  },
 }));
 
 export default function TopAppBar() {
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const classes = useStyles();
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
   const handleMenuOpen = () => {
+    const handlePopoverOpen = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handlePopoverClose = () => {
+      setAnchorEl(null);
+    };
+
+    const isPopoverOpen = Boolean(anchorEl);
+
     setMenuOpen(true);
   };
 
   const handleMenuClose = () => {
     setMenuOpen(false);
+    // Close the popover when closing the menu
+    handlePopoverClose();
   };
+
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const isPopoverOpen = Boolean(anchorEl);
   // Custom media query for 1282px width
   const isSmallScreen = useMediaQuery(`(max-width: 1024px)`);
   // const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
@@ -108,6 +145,63 @@ export default function TopAppBar() {
   console.log("isSmallScreen");
 
   console.log(isSmallScreen);
+
+  const handleLinkHover = (menuItem) => {
+    if (menuItem.text === "About Us") {
+      handlePopoverOpen();
+    } else {
+      handlePopoverClose();
+    }
+  };
+
+  const menuItems = [
+    {
+      text: "Home",
+      href: "/",
+    },
+    {
+      text: "Plants and Fruits data",
+      href: "/plants",
+    },
+    {
+      text: "Multiple Entry Key",
+      href: "/multipleentry",
+    },
+    {
+      text: "Insects",
+      href: "/insects",
+    },
+    {
+      text: "Glossary",
+      href: "/glossary",
+    },
+    {
+      text: "Phylogeny",
+      href: "/phylogeny",
+    },
+    {
+      text: "About Us",
+      href: "/about",
+      subMenu: [
+        {
+          text: "About Us",
+          href: "/about",
+        },
+        {
+          text: "User Guide",
+          href: "/about/guide",
+        },
+        {
+          text: "Disclaimer",
+          href: "/about/disclaimer",
+        },
+        {
+          text: "Team",
+          href: "/about/team",
+        },
+      ],
+    },
+  ];
 
   return (
     <Container>
@@ -141,107 +235,107 @@ export default function TopAppBar() {
                     </IconButton>
                   </Box>
                   <List>
-                    <ListItem ButtonBase>
-                      <Link
-                        href="/"
-                        passHref
-                        className={`  ${classes.link} ${
-                          router.pathname === "/" ? classes.activeLink : ""
-                        }`}
-                        onClick={handleMenuClose}
-                      >
-                        Home
-                      </Link>
-                    </ListItem>
-                    <ListItem ButtonBase>
-                      <Link
-                        href="/plants"
-                        passHref
-                        className={`${classes.link} ${
-                          router.pathname.startsWith("/plants")
-                            ? classes.activeLink
+                    <Link
+                      href="/"
+                      passHref
+                      className={`${classes.link} ${
+                        router.pathname === "/" ? classes.activeLink : ""
+                      }`}
+                    >
+                      Home
+                    </Link>
+
+                    {menuItems.slice(1).map((menuItem) => (
+                      <div
+                        key={menuItem.text}
+                        className={`${classes.menuItem} ${
+                          router.pathname.startsWith(menuItem.href)
+                            ? "active"
                             : ""
                         }`}
-                        onClick={handleMenuClose}
+                        onMouseEnter={
+                          menuItem.text === "About Us"
+                            ? handlePopoverOpen
+                            : null
+                        }
+                        onMouseLeave={
+                          menuItem.text === "About Us"
+                            ? handlePopoverClose
+                            : null
+                        }
                       >
-                        Plants and Fruits data
-                      </Link>
-                    </ListItem>
-                    <ListItem ButtonBase>
-                      <Link
-                        href="/multipleentry"
-                        passHref
-                        className={`${classes.link} ${
-                          router.pathname.startsWith("/multipleentry")
-                            ? classes.activeLink
-                            : ""
-                        }`}
-                        onClick={handleMenuClose}
-                      >
-                        Multiple Entry Key
-                      </Link>
-                    </ListItem>
-                    <ListItem ButtonBase>
-                      <Link
-                        href="/insects"
-                        passHref
-                        className={`${classes.link} ${
-                          router.pathname.startsWith("/insects")
-                            ? classes.activeLink
-                            : ""
-                        }`}
-                        onClick={handleMenuClose}
-                      >
-                        Insects
-                      </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Link
-                        href="/glossary"
-                        passHref
-                        className={`${classes.link} ${
-                          router.pathname === "/glossary"
-                            ? classes.activeLink
-                            : ""
-                        }`}
-                        onClick={handleMenuClose}
-                      >
-                        {" "}
-                        Glossary
-                      </Link>
-                    </ListItem>
-                    <ListItem ButtonBase>
-                      <Link
-                        href="/phylogeny"
-                        passHref
-                        className={`${classes.link} ${
-                          router.pathname.startsWith("/phylogeny")
-                            ? classes.activeLink
-                            : ""
-                        }`}
-                        onClick={handleMenuClose}
-                      >
-                        Phylogeny
-                      </Link>
-                    </ListItem>
-                    <ListItem ButtonBase>
-                      <Link
-                        href="/about"
-                        passHref
-                        className={`${classes.link} ${
-                          router.pathname.startsWith("/about")
-                            ? classes.activeLink
-                            : ""
-                        }`}
-                        onClick={handleMenuClose}
-                      >
-                        About Us
-                      </Link>
-                    </ListItem>
+                        <Link
+                          href={menuItem.href}
+                          passHref
+                          className={`${classes.link} ${
+                            router.pathname.startsWith(menuItem.href)
+                              ? classes.activeLink
+                              : ""
+                          }`}
+                        >
+                          {menuItem.text}
+                        </Link>
+                        {menuItem.text === "About Us" && (
+                          <Popover
+                            style={{ color: "grey", marginTop: 16 }}
+                            open={isPopoverOpen}
+                            anchorEl={anchorEl}
+                            onClose={handlePopoverClose}
+                            anchorOrigin={{
+                              vertical: "bottom",
+                              horizontal: "center",
+                            }}
+                            transformOrigin={{
+                              vertical: "top",
+                              horizontal: "left",
+                            }}
+                          >
+                            <div
+                              style={{
+                                backgroundColor: "lightgrey",
+                                padding: 16,
+                                textAlign: "left",
+                              }}
+                            >
+                              <List>
+                                <ListItem
+                                  onClick={handlePopoverClose}
+                                  style={{
+                                    cursor: "pointer",
+                                    display: "flex",
+                                    // justifyContent: "space-between",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <Cancel style={{ marginRight: 8 }} />
+                                  </div>
+                                </ListItem>
+                                {menuItem.subMenu.map((subMenuItem) => (
+                                  <ListItem key={subMenuItem.text} ButtonBase>
+                                    <Link
+                                      href={subMenuItem.href}
+                                      passHref
+                                      style={{ textDecoration: "none" }}
+                                    >
+                                      {subMenuItem.text}
+                                    </Link>
+                                  </ListItem>
+                                ))}
+                              </List>
+                            </div>
+                          </Popover>
+                        )}
+                      </div>
+                    ))}
                   </List>
-                  {/* <IconButton onClick={handleMenuClose} >
-              <CloseIcon className={classes.cancelicon}/>
-            </IconButton> */}
+                  {/* <IconButton onClick={handleMenuClose}>
+                    <CloseIcon className={classes.cancelicon} />
+                  </IconButton> */}
                 </Box>
               </Drawer>
             </>
@@ -256,71 +350,85 @@ export default function TopAppBar() {
               >
                 Home
               </Link>
-              <Link
-                href="/plants"
-                passHref
-                className={`${classes.link} ${
-                  router.pathname.startsWith("/plants")
-                    ? classes.activeLink
-                    : ""
-                }`}
-              >
-                Plants and Fruits data
-              </Link>
-              <Link
-                href="/multipleentry"
-                passHref
-                className={`${classes.link} ${
-                  router.pathname.startsWith("/multipleentry")
-                    ? classes.activeLink
-                    : ""
-                }`}
-              >
-                Multiple-Entry Key to Plants
-              </Link>
-              <Link
-                href="/insects"
-                passHref
-                className={`${classes.link} ${
-                  router.pathname.startsWith("/insects")
-                    ? classes.activeLink
-                    : ""
-                }`}
-              >
-                Insects
-              </Link>
 
-              <Link
-                href="/phylogeny"
-                passHref
-                className={`${classes.link} ${
-                  router.pathname.startsWith("/phylogeny")
-                    ? classes.activeLink
-                    : ""
-                }`}
-              >
-                Phylogeny
-              </Link>
-              <Link
-                href="/glossary"
-                passHref
-                className={`${classes.link} ${
-                  router.pathname.startsWith("/glossary")
-                    ? classes.activeLink
-                    : ""
-                }`}
-              >
-                Glossary
-              </Link>
-              <Link
-                href="/about"
-                passHref
-                className={`${classes.link} ${
-                  router.pathname.startsWith("/about") ? classes.activeLink : ""
-                }`}
-              >
-                About Us
-              </Link>
+              {menuItems.slice(1).map((menuItem) => (
+                <div
+                  key={menuItem.text}
+                  className={`${classes.menuItem} ${
+                    router.pathname.startsWith(menuItem.href) ? "active" : ""
+                  }`}
+                  onMouseEnter={
+                    menuItem.text === "About Us" ? handlePopoverOpen : null
+                  }
+                  onMouseLeave={
+                    menuItem.text === "About Us" ? handlePopoverClose : null
+                  }
+                >
+                  <Link
+                    href={menuItem.href}
+                    passHref
+                    className={`${classes.link} ${
+                      router.pathname.startsWith(menuItem.href)
+                        ? classes.activeLink
+                        : ""
+                    }`}
+                  >
+                    {menuItem.text}
+                  </Link>
+                  {menuItem.text === "About Us" && (
+                    <Popover
+                      style={{ color: "grey", marginTop: 16 }}
+                      open={isPopoverOpen}
+                      anchorEl={anchorEl}
+                      onClose={handlePopoverClose}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "center",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "lightgrey",
+                          padding: 16,
+                          textAlign: "left",
+                        }}
+                      >
+                        <List>
+                          <ListItem
+                            onClick={handlePopoverClose}
+                            style={{
+                              cursor: "pointer",
+                              display: "flex",
+                              // justifyContent: "space-between",
+                            }}
+                          >
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              <Cancel style={{ marginRight: 8 }} />
+                            </div>
+                          </ListItem>
+                          {menuItem.subMenu.map((subMenuItem) => (
+                            <ListItem key={subMenuItem.text} ButtonBase>
+                              <Link
+                                href={subMenuItem.href}
+                                passHref
+                                style={{ textDecoration: "none" }}
+                              >
+                                {subMenuItem.text}
+                              </Link>
+                            </ListItem>
+                          ))}
+                        </List>
+                      </div>
+                    </Popover>
+                  )}
+                </div>
+              ))}
             </div>
           )}
         </Toolbar>
