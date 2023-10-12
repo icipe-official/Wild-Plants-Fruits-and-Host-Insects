@@ -195,10 +195,10 @@ export default function TopAppBar() {
           text: "Disclaimer",
           href: "/about/disclaimer",
         },
-        {
-          text: "Team",
-          href: "/about/team",
-        },
+        // {
+        //   text: "Team",
+        //   href: "/about/team",
+        // },
       ],
     },
   ];
