@@ -4,6 +4,8 @@ import { Box, Container, Divider } from "@mui/material";
 import Image from "next/legacy/image";
 
 export default function UserGuide() {
+  const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
+
   return (
     <Container>
       <Box sx={{ marginTop: 12, justifyContent: "center" }}>
@@ -42,7 +44,7 @@ export default function UserGuide() {
           fruit is also provided.
         </p>
         <Image
-          src="/img/screen01.jpg"
+          src={`${base_path}/img/screen01.jpg`}
           alt="No Image"
           width={1200}
           height={800}
@@ -79,7 +81,7 @@ export default function UserGuide() {
           navigate to the detailed page for that plant.
         </p>
         <Image
-          src="/img/screen02a.jpg"
+          src={`${base_path}/img/screen02a.png`}
           alt="No Image"
           width={1200}
           height={800}
@@ -89,7 +91,7 @@ export default function UserGuide() {
           Example of character-state selections using the multiple-entry key.
         </p>
         <Image
-          src="/img/screen02b.jpg"
+          src={`${base_path}/img/screen02b.png`}
           alt="No Image"
           width={1200}
           height={800}
@@ -135,7 +137,7 @@ export default function UserGuide() {
           Fruit” on the tab panel at the top of the page.
         </p>
         <Image
-          src="/img/screen03a.jpg"
+          src={`${base_path}/img/screen03a.jpg`}
           alt="No Image"
           width={1200}
           height={800}
@@ -145,7 +147,7 @@ export default function UserGuide() {
           Browse Insects page with <em>Ceratitis</em> fruit flies selected.
         </p>
         <Image
-          src="/img/screen03b.jpg"
+          src={`${base_path}/img/screen03b.jpg`}
           alt="No Image"
           width={1200}
           height={800}
@@ -174,7 +176,7 @@ export default function UserGuide() {
           information.
         </p>
         <Image
-          src="/img/screen07.jpg"
+          src={`${base_path}/img/screen07.jpg`}
           alt="No Image"
           width={1200}
           height={800}
@@ -202,7 +204,7 @@ export default function UserGuide() {
           shapes, etc.).
         </p>
         <Image
-          src="/img/screen04b.jpg"
+          src={`${base_path}/img/screen04b.jpg`}
           alt="No Image"
           width={1200}
           height={800}
@@ -210,7 +212,7 @@ export default function UserGuide() {
 
         <p class="caption">The alphabetically-ordered Glossary page.</p>
         <Image
-          src="/img/screen04c.jpg"
+          src={`${base_path}/img/screen04c.jpg`}
           alt="No Image"
           width={1200}
           height={800}
