@@ -6,7 +6,7 @@ const About = () => {
     <Container>
       <iframe
         title="Introduction"
-        src="/introduction.html" // Adjust the filename and path as needed
+        src="introduction.html" // Adjust the filename and path as needed
         style={{
           position: "relative",
           top: 100,
