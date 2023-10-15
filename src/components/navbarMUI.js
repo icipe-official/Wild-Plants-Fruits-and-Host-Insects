@@ -415,6 +415,7 @@ export default function TopAppBar() {
                           {menuItem.subMenu.map((subMenuItem) => (
                             <ListItem key={subMenuItem.text} ButtonBase>
                               <Link
+                                onClick={handlePopoverClose}
                                 href={subMenuItem.href}
                                 passHref
                                 style={{ textDecoration: "none" }}
