@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     [theme.breakpoints.up("md")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(10% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
   },
@@ -99,9 +99,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   popoverPaper: {
-    backgroundColor: "#f0f0f0", // Greyish background color
-    maxWidth: "250px", // Limiting the max width
-    marginLeft: "10px", // Adjusting the margin from the menu item
+    // Greyish background color
+    backgroundColor: "#f0f0f0",
+    // Limiting the max width
+    maxWidth: "250px",
+    // Adjusting the margin from the menu item
+    marginLeft: "10px",
   },
 }));
 
