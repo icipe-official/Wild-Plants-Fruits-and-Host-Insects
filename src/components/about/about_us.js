@@ -4,7 +4,7 @@ import { Box, Container, Divider } from "@mui/material";
 
 export default function AboutUs() {
   const general_introduction = `
-  This Platform enable users to examine the data of the wild fruits of
+  WiPtFruIM (Wild plants, fruits, associated insects and molecular barcodes) Platform enable users to examine the data of the wild fruits of
  Kenya and their associated insect fauna, specifically those that use
  fruits in their breeding cycles. Although the primary focus of our study was on fruits as larval
  habitats of fruit flies (Tephritidae), particularly those of economic
@@ -51,35 +51,35 @@ export default function AboutUs() {
   return (
     <Container>
       <Box sx={{ marginTop: 12, justifyContent: "center" }}>
-        <h2>General Introduction</h2>
+        <h2>About WiPtFruIM</h2>
 
         <p>{general_introduction}</p>
-        <h2>Scope of the database</h2>
+        <h2>Scope of the WiPtFruIM Database</h2>
 
         <p>
           The plant database contains approximately 873 plant types, primarily
-          species with some subspecies and varieties. The majority of these
-          species are indigenous to Kenya, but the database also encompasses
-          certain non-native, species like guava and cultivated species like
-          mango. During the early stages of the project, the collection were
-          focused on plants likely to attract frugivorous tephritids, which
-          skewed the sampling towards fruits with fleshy pulp. Notably, some
-          significant plant taxa, including many from the Asteraceae,
-          Burseraceae, and Fabaceae families, have fewer species with fleshy
-          fruits and were sampled less frequently. Furthermore, the study
-          concentration was primarily on woody plants, as they typically produce
-          a greater abundance of fruits compared to herbaceous plants. While our
-          coverage of woody plants wasn't exhaustive, it was substantial,
-          encompassing approximately 40% of all species and a significantly
-          higher percentage of those with fleshy fruits. This coverage aligns
-          closely with the information found in "Kenya Trees Shrubs and Lianas"
-          (Beentje 1994), a comprehensive guide for identifying woody plants in
-          Kenya. We also extensively sampled certain other plant groups, such as
-          the herbaceous Cucurbitaceae and Vitaceae, as well as the parasitic
-          Loranthaceae (mistletoes). Additionally, we included representatives
-          from specific plant families, like Asteraceae and Acanthaceae, which
-          are consumed by different fruit fly groups, some of which feed on
-          flower parts while others consume both flowers and fruits.
+          species. The majority of these species are indigenous to Kenya, but
+          the database also includes certain non-native, species like guava and
+          cultivated species like mango. During the early stages of the project,
+          the collection were focused on plants likely to attract frugivorous
+          tephritids, which skewed the sampling towards fruits with fleshy pulp.
+          Notably, some significant plant taxa, including many from the
+          Asteraceae, Burseraceae, and Fabaceae families, have fewer species
+          with fleshy fruits and were sampled less frequently. Furthermore, the
+          study concentration was primarily on woody plants, as they typically
+          produce a greater abundance of fruits compared to herbaceous plants.
+          While our coverage of woody plants wasn't exhaustive, it was
+          substantial, encompassing approximately 40% of all species and a
+          significantly higher percentage of those with fleshy fruits. This
+          coverage aligns closely with the information found in "Kenya Trees
+          Shrubs and Lianas" (Beentje 1994), a comprehensive guide for
+          identifying woody plants in Kenya. We also extensively sampled certain
+          other plant groups, such as the herbaceous Cucurbitaceae and Vitaceae,
+          as well as the parasitic Loranthaceae (mistletoes). Additionally, we
+          included representatives from specific plant families, like Asteraceae
+          and Acanthaceae, which are consumed by different fruit fly groups,
+          some of which feed on flower parts while others consume both flowers
+          and fruits.
         </p>
 
         <h2>Key Features of the Platform</h2>
@@ -113,7 +113,7 @@ export default function AboutUs() {
             insect species are also mentioned.
           </li>
           <li>
-            <u>Phylogeny of Plants and Isnects</u>. In this feature, users can
+            <u>Phylogeny of Plants and Insects</u>. In this feature, users can
             explore the phylogeny of insects and plants based on their barcodes.
             The phylogeny is organized by family. The phylogeny tree displayed
             is based on maturase K (matK) fir plants and Cytochrome Oxidase
