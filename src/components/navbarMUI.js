@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     [theme.breakpoints.up("md")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(10% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
   },
@@ -99,9 +99,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   popoverPaper: {
-    backgroundColor: "#f0f0f0", // Greyish background color
-    maxWidth: "250px", // Limiting the max width
-    marginLeft: "10px", // Adjusting the margin from the menu item
+    // Greyish background color
+    backgroundColor: "#f0f0f0",
+    // Limiting the max width
+    maxWidth: "250px",
+    // Adjusting the margin from the menu item
+    marginLeft: "10px",
   },
 }));
 
@@ -113,20 +116,13 @@ export default function TopAppBar() {
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
+  //set the position of submenu on hoover on About us
   const handlePopoverClose = () => {
     setAnchorEl(null);
   };
+  //handle close of the menu in small screens
   const handleMenuOpen = () => {
-    const handlePopoverOpen = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-
-    const handlePopoverClose = () => {
-      setAnchorEl(null);
-    };
-
-    const isPopoverOpen = Boolean(anchorEl);
+    setMenuOpen(false);
 
     setMenuOpen(true);
   };
@@ -240,6 +236,7 @@ export default function TopAppBar() {
                   </Box>
                   <List>
                     <Link
+                      onClick={handleMenuClose}
                       href="/"
                       passHref
                       className={`${classes.link} ${
@@ -269,6 +266,7 @@ export default function TopAppBar() {
                         }
                       >
                         <Link
+                          onClick={handleMenuClose}
                           href={menuItem.href}
                           passHref
                           className={`${classes.link} ${
@@ -322,6 +320,7 @@ export default function TopAppBar() {
                                 {menuItem.subMenu.map((subMenuItem) => (
                                   <ListItem key={subMenuItem.text} ButtonBase>
                                     <Link
+                                      onClick={handleMenuClose}
                                       href={subMenuItem.href}
                                       passHref
                                       style={{ textDecoration: "none" }}
@@ -419,6 +418,7 @@ export default function TopAppBar() {
                           {menuItem.subMenu.map((subMenuItem) => (
                             <ListItem key={subMenuItem.text} ButtonBase>
                               <Link
+                                onClick={handlePopoverClose}
                                 href={subMenuItem.href}
                                 passHref
                                 style={{ textDecoration: "none" }}
