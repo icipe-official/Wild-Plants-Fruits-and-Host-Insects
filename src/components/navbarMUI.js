@@ -264,6 +264,7 @@ export default function TopAppBar() {
                             ? handlePopoverClose
                             : null
                         }
+                        onClick={handlePopoverClose} // Add this line for click event
                       >
                         <Link
                           onClick={handleMenuClose}
