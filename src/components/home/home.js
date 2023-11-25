@@ -31,6 +31,7 @@ export default function HomePage() {
         name: " Bactrocera amplexa",
         genusId: 13,
         speciesId: 22,
+        order: "Diptera",
       },
       {
         path: "/photos/plants/0058.jpg",
@@ -42,6 +43,7 @@ export default function HomePage() {
         name: "Ceratitis argentobrunnea",
         genusId: 28,
         speciesId: 116,
+        order: "Diptera",
       },
       {
         path: "/photos/plants/01070.jpg",
@@ -65,6 +67,7 @@ export default function HomePage() {
         name: "Ceratitis rosa",
         genusId: 28,
         speciesId: 149,
+        order: "Diptera",
       },
       {
         path: "/photos/plants/0969.jpg",
@@ -128,10 +131,10 @@ export default function HomePage() {
                         }}
                         style={{
                           fontStyle: "italic",
+                          textTransform: "none",
                         }}
                       >
-                        {image.name.charAt(0).toUpperCase() +
-                          image.name.slice(1).toLowerCase()}
+                        {image.name}
                       </Button>
                     </Typography>
                   </CardContent>
