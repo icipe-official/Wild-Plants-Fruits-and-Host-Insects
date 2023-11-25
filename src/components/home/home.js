@@ -1,16 +1,79 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import { Box, Container } from "@mui/material";
-
+import {
+  Box,
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Link,
+  Button,
+} from "@mui/material";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useMediaQuery } from "@mui/material";
 export default function HomePage() {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [images, setImages] = useState([]);
+  const router = useRouter();
+  const isSmallScreen = useMediaQuery(`(max-width: 760px)`);
 
   useEffect(() => {
-    const img = new Image();
-    img.src = "/newest_home.png";
-    img.onload = () => {
-      setImageLoaded(true);
-    };
+    // List of image paths and corresponding names
+    const imageList = [
+      {
+        path: "/photos/plants/0008.jpg",
+        name: "Acokanthera oppositifolia",
+        speciesId: 8,
+      },
+      {
+        path: "/photos/insects/B001.jpg",
+        name: " Bactrocera amplexa",
+        genusId: 13,
+        speciesId: 22,
+      },
+      {
+        path: "/photos/plants/0058.jpg",
+        name: "Annona senegalensis ",
+        speciesId: 40,
+      },
+      {
+        path: "/photos/insects/c003.jpg",
+        name: "Ceratitis argentobrunnea",
+        genusId: 28,
+        speciesId: 116,
+      },
+      {
+        path: "/photos/plants/01070.jpg",
+        name: " Vepris simplex",
+        genusId: 851,
+      },
+      {
+        path: "/photos/insects/c017.jpg",
+        name: "Ceratitis cristata",
+        genusId: 28,
+        speciesId: 126,
+        order: "Diptera",
+      },
+      {
+        path: "/photos/plants/01069.jpg",
+        name: "Vepris nobilis",
+        speciesId: 850,
+      },
+      {
+        path: "/photos/insects/c046.jpg",
+        name: "Ceratitis rosa",
+        genusId: 28,
+        speciesId: 149,
+      },
+      {
+        path: "/photos/plants/0969.jpg",
+        name: "Strombosia scheffleri",
+        speciesId: 770,
+      },
+    ];
+
+    setImages(imageList);
   }, []);
 
   return (
@@ -26,22 +89,57 @@ export default function HomePage() {
           alignItems: "center",
           justifyContent: "center",
           height: "100%",
-          // marginTop: 9,
         }}
       >
-        <img
-          src="/newest_home.png"
-          alt="Picture of the plant"
-          style={{
-            display: "block",
-            width: "100%",
-            height: "auto",
-          }}
-          onLoad={() => {
-            setImageLoaded(true);
-          }}
-        />
-        {imageLoaded && <Container>{/* Content of the homepage */}</Container>}
+        <Container>
+          <Grid container spacing={2}>
+            {" "}
+            {images.map((image, index) => (
+              <Grid item xs={isSmallScreen ? 12 : 4} key={index}>
+                <Card>
+                  {" "}
+                  <Image
+                    src={image.path}
+                    alt={image.name}
+                    width={350}
+                    height={250}
+                  />
+                  <CardContent>
+                    <Typography variant="subtitle1" align="center">
+                      <Button
+                        onClick={() => {
+                          // Check if the path includes "insect"
+                          if (image.path.toLowerCase().includes("insect")) {
+                            router.push({
+                              pathname: `/insects/${image.genusId}`,
+                              query: {
+                                genus: image.genusId,
+                                species: image.speciesId,
+                                speciesName: image.name,
+                                order: image.order,
+                              },
+                            });
+                          } else {
+                            // Handle the case where the path doesn't include "insect"
+                            router.push({
+                              pathname: `/plants/${image.speciesId}`,
+                            });
+                          }
+                        }}
+                        style={{
+                          fontStyle: "italic",
+                        }}
+                      >
+                        {image.name.charAt(0).toUpperCase() +
+                          image.name.slice(1).toLowerCase()}
+                      </Button>
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </Box>
     </Box>
   );
