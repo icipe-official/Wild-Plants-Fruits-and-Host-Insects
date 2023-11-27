@@ -4,7 +4,9 @@ import { makeStyles } from "@mui/styles";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { TreeView, TreeItem } from "@mui/lab";
+// import { TreeView, TreeItem } from "@mui/lab";
+import { TreeItem, TreeView } from "@mui/x-tree-view";
+
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import FruitDetailValues from "./Fruit/fruitDetailValues";
@@ -86,9 +88,9 @@ export default function PlantDetailsFeaturesValues() {
       return [longitude, latitude];
     })
   );
-  // console.log(" plant coordinates");
+  console.log(" plant coordinates");
 
-  // console.log(data);
+  console.log(coordinates);
   return (
     <Container
       sx={{
