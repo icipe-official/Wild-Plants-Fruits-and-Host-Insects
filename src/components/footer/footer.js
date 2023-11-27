@@ -43,7 +43,7 @@ export default function Footer() {
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = "data.csv"; // Set the desired file name
+          a.download = "data.csv";
           a.click();
           setDownloading(false);
         })
@@ -57,7 +57,7 @@ export default function Footer() {
 
   return (
     <>
-      <div className={classes.content}>{/* Your page content here */}</div>
+      <div className={classes.content}></div>
       <footer className={classes.footer}>
         <Container maxWidth="lg">
           <Typography
@@ -66,22 +66,9 @@ export default function Footer() {
             color="white"
             component="p"
           >
-            Wild Plants, fruits and Host Insects
+            &copy; {new Date().getFullYear()} International Centre of Insect
+            Physiology and Ecology (icipe)
           </Typography>
-          {/* <Box
-            display="flex"
-            justifyContent="center"
-            // marginTop={2}
-            // marginBottom={2}
-          >
-            <button
-              onClick={handleDownload}
-              disabled={isDownloading || error}
-              style={{ cursor: isDownloading ? "progress" : "pointer" }}
-            >
-              {isDownloading ? "Downloading..." : "Download Data"}
-            </button>
-          </Box> */}
         </Container>
       </footer>
     </>

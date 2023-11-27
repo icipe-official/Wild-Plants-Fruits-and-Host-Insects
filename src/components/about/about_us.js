@@ -4,7 +4,7 @@ import { Box, Container, Divider } from "@mui/material";
 
 export default function AboutUs() {
   const general_introduction = `
-  WiPtFruIM (Wild plants, fruits, associated insects and molecular barcodes) Platform enable users to examine the data of the wild fruits of
+  this Platform enable users to examine the data of the wild fruits of
  Kenya and their associated insect fauna, specifically those that use
  fruits in their breeding cycles. Although the primary focus of our study was on fruits as larval
  habitats of fruit flies (Tephritidae), particularly those of economic
@@ -51,10 +51,10 @@ export default function AboutUs() {
   return (
     <Container>
       <Box sx={{ marginTop: 12, justifyContent: "center" }}>
-        <h2>About WiPtFruIM</h2>
+        <h2>Introduction</h2>
 
         <p>{general_introduction}</p>
-        <h2>Scope of the WiPtFruIM Database</h2>
+        <h2>Scope of the Database</h2>
 
         <p>
           The plant database contains approximately 873 plant types, primarily

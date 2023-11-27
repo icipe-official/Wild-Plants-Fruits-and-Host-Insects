@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   activeLink: {
-    color: "red",
+    color: "white",
     borderBottom: "1px solid white",
   },
   subMenu: {
@@ -264,6 +264,7 @@ export default function TopAppBar() {
                             ? handlePopoverClose
                             : null
                         }
+                        onClick={handlePopoverClose} // Add this line for click event
                       >
                         <Link
                           onClick={handleMenuClose}
