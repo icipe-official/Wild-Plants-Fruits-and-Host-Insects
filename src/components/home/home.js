@@ -48,7 +48,7 @@ export default function HomePage() {
       {
         path: "/photos/plants/01070.jpg",
         name: " Vepris simplex",
-        genusId: 851,
+        speciesId: 851,
       },
       {
         path: "/photos/insects/c017.jpg",
