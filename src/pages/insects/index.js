@@ -10,7 +10,8 @@ import HymenopteraBraconidaeComponent from "components/insects/hymenopterabracon
 import HymenopterahymenopteraIchneumonoidae from "components/insects/hymenopteraichmonidae";
 import OtherHymenopteracomponent from "components/insects/otherhymenoptera";
 import { makeStyles } from "@mui/styles";
-import { TreeView, TreeItem } from "@mui/lab";
+// import { TreeView, TreeItem } from "@mui/lab";
+import { TreeItem, TreeView } from "@mui/x-tree-view";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Insectssearch from "components/insects/search";
