@@ -3,7 +3,8 @@ import Grid from "@mui/material/Grid";
 import { makeStyles } from "@mui/styles";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import { TreeView, TreeItem } from "@mui/lab";
+// import { TreeView, TreeItem } from "@mui/lab";
+import { TreeItem, TreeView } from "@mui/x-tree-view";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import FruitDetailValues from "./Fruit/fruitDetailValues";
@@ -286,7 +287,7 @@ export default function PlantFirstPage() {
             </TreeItem>
 
             <TreeItem nodeId="23" label="Description">
-              <PlantDescription plants_data={props.data} />
+              <PlantDescription plants_data={data} />
             </TreeItem>
           </TreeView>
         ) : (
