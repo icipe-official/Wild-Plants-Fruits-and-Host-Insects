@@ -100,9 +100,12 @@ export default function GlossaryAll() {
   };
 
   const handleDoubleClick = (specie, index) => {
+    console.log("specie double click");
+
+    console.log(specie);
     // const url = `/plants/${specie.id}`;
     // setSelectedIndex(index);
-    router.push(`/plants/${specie.plants_photos.plant_id}`);
+    router.push(`/plants/${specie.plant_id}`);
   };
 
   //handle on click event of the image
@@ -122,26 +125,26 @@ export default function GlossaryAll() {
     // setuniqueIndex(index ? index : 0);
   }
 
-  useEffect(() => {
-    if (glossaryTerm) {
-      // setShowPhotos(true);
-      console.log("glossaryTerm5");
-      // console.log("glossaryTerm5");
+  // useEffect(() => {
+  //   if (glossaryTerm) {
+  //     // setShowPhotos(true);
+  //     console.log("glossaryTerm5");
+  //     // console.log("glossaryTerm5");
 
-      const value = Object.values(glossaryTerm)[0];
-      // console.log(value.charAt(0).toUpperCase() + value.slice(1));
-      const filteredItems = glossary?.filter((item) =>
-        item.glossary_term.includes(
-          value.charAt(0).toUpperCase() + value.slice(1)
-        )
-      );
-      console.log("glossary");
-      console.log(filteredItems);
-      if (typeof filteredItems !== null) {
-        handleClick(filteredItems);
-      }
-    }
-  }, [glossary, glossaryTerm]);
+  //     const value = Object.values(glossaryTerm)[0];
+  //     // console.log(value.charAt(0).toUpperCase() + value.slice(1));
+  //     const filteredItems = glossary?.filter((item) =>
+  //       item.glossary_term.includes(
+  //         value.charAt(0).toUpperCase() + value.slice(1)
+  //       )
+  //     );
+  //     console.log("glossary");
+  //     console.log(filteredItems);
+  //     if (typeof filteredItems !== null) {
+  //       handleClick(filteredItems);
+  //     }
+  //   }
+  // }, [glossary, glossaryTerm]);
 
   const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
   // console.log(query);
@@ -324,7 +327,14 @@ export default function GlossaryAll() {
                 <span aria-hidden="true">&times;</span>
               </Button>
               <Box sx={{ marginLeft: 0 }}>
-                <Box sx={{ color: "red" }}> {selectedType?.glossary_term} </Box>
+                <Box sx={{ color: "red" }}>
+                  {" "}
+                  {selectedType?.glossary_term +
+                    " " +
+                    "(" +
+                    selectedType.glossary_type.replace(/_/g, " ") +
+                    ")"}{" "}
+                </Box>
                 <Box> {selectedType?.glossary_description}</Box>
                 <Box>
                   <Box>
