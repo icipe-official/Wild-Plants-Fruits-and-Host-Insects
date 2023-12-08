@@ -335,7 +335,11 @@ export default function GlossaryAll() {
                     selectedType.glossary_type.replace(/_/g, " ") +
                     ")"}{" "}
                 </Box>
-                <Box> {selectedType?.glossary_description}</Box>
+                <Box>
+                  {" "}
+                  {selectedType?.glossary_description.charAt(0).toUpperCase() +
+                    selectedType?.glossary_description.slice(1)}
+                </Box>
                 <Box>
                   <Box>
                     <Box>
