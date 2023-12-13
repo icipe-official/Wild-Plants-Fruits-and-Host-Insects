@@ -20,6 +20,8 @@ export default function HomePage() {
 
   useEffect(() => {
     // List of image paths and corresponding names
+    const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
+
     const imageList = [
       {
         path: `${base_path}/photos/plants/0008.jpg`,
