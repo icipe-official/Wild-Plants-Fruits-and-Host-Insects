@@ -100,9 +100,12 @@ export default function GlossaryAll() {
   };
 
   const handleDoubleClick = (specie, index) => {
+    console.log("specie double click");
+
+    console.log(specie);
     // const url = `/plants/${specie.id}`;
     // setSelectedIndex(index);
-    router.push(`/plants/${specie.plants_photos.plant_id}`);
+    router.push(`/plants/${specie.plant_id}`);
   };
 
   //handle on click event of the image
@@ -122,26 +125,26 @@ export default function GlossaryAll() {
     // setuniqueIndex(index ? index : 0);
   }
 
-  useEffect(() => {
-    if (glossaryTerm) {
-      // setShowPhotos(true);
-      console.log("glossaryTerm5");
-      // console.log("glossaryTerm5");
+  // useEffect(() => {
+  //   if (glossaryTerm) {
+  //     // setShowPhotos(true);
+  //     console.log("glossaryTerm5");
+  //     // console.log("glossaryTerm5");
 
-      const value = Object.values(glossaryTerm)[0];
-      // console.log(value.charAt(0).toUpperCase() + value.slice(1));
-      const filteredItems = glossary?.filter((item) =>
-        item.glossary_term.includes(
-          value.charAt(0).toUpperCase() + value.slice(1)
-        )
-      );
-      console.log("glossary");
-      console.log(filteredItems);
-      if (typeof filteredItems !== null) {
-        handleClick(filteredItems);
-      }
-    }
-  }, [glossary, glossaryTerm]);
+  //     const value = Object.values(glossaryTerm)[0];
+  //     // console.log(value.charAt(0).toUpperCase() + value.slice(1));
+  //     const filteredItems = glossary?.filter((item) =>
+  //       item.glossary_term.includes(
+  //         value.charAt(0).toUpperCase() + value.slice(1)
+  //       )
+  //     );
+  //     console.log("glossary");
+  //     console.log(filteredItems);
+  //     if (typeof filteredItems !== null) {
+  //       handleClick(filteredItems);
+  //     }
+  //   }
+  // }, [glossary, glossaryTerm]);
 
   const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
   // console.log(query);
@@ -189,9 +192,7 @@ export default function GlossaryAll() {
     );
 
   if (glossary) {
-    console.log("glossaryTerm22");
-    console.log("glossaryTerm22");
-    console.log(glossaryTerm);
+    // console.log(glossaryTerm);
 
     // console.log(glossary.glossary_examples);
 
@@ -204,23 +205,23 @@ export default function GlossaryAll() {
 
       // Iterate through each glossary term in the data
       selectedType?.glossary_examples.forEach((glossaryTerm) => {
-        console.log("glossaryTerm");
+        // console.log("glossaryTerm");
 
-        console.log(glossaryTerm);
+        // console.log(glossaryTerm);
         // Check if 'glossaryTerm.glossary_examples' is an array
 
         // Iterate through each example in the array
-        selectedType.glossary_examples.forEach((example) => {
-          console.log("example");
+        selectedType?.glossary_examples.forEach((example) => {
+          // console.log("example");
 
-          console.log(example);
+          // console.log(example);
           // Check if the plant ID is not in the set, then add it
           if (!uniquePlantIds.has(example.plants_photos.plant_id)) {
             uniquePlantIds.add(example.plants_photos.plant_id);
 
             // Add the unique species to the array
             uniqueSpecies.push(example.plants_photos);
-            console.log("uniqueSpecies", uniqueSpecies);
+            // console.log("uniqueSpecies", uniqueSpecies);
           }
         });
       });
@@ -229,9 +230,9 @@ export default function GlossaryAll() {
           plant?.plants_photos?.plant_id ===
           uniqueSpecies[selectedIndex]?.plant_id
       );
-      console.log("photos_data");
+      // console.log("photos_data");
 
-      console.log(uniqueIndex);
+      // console.log(uniqueIndex);
 
       const transformedData = [
         {
@@ -324,8 +325,19 @@ export default function GlossaryAll() {
                 <span aria-hidden="true">&times;</span>
               </Button>
               <Box sx={{ marginLeft: 0 }}>
-                <Box sx={{ color: "red" }}> {selectedType?.glossary_term} </Box>
-                <Box> {selectedType?.glossary_description}</Box>
+                <Box sx={{ color: "red" }}>
+                  {" "}
+                  {selectedType?.glossary_term +
+                    " " +
+                    "(" +
+                    selectedType.glossary_type.replace(/_/g, " ") +
+                    ")"}{" "}
+                </Box>
+                <Box>
+                  {" "}
+                  {selectedType?.glossary_description.charAt(0).toUpperCase() +
+                    selectedType?.glossary_description.slice(1)}
+                </Box>
                 <Box>
                   <Box>
                     <Box>

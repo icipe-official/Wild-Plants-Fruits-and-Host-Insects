@@ -393,30 +393,23 @@ CREATE TABLE fruiting_months(
 );
 
 
-
-
 CREATE TABLE plants_fruiting_months(
    plant_id int,
-   fruiting_month_isd serial,
+   fruiting_month_id serial,
    PRIMARY KEY (plant_id,fruiting_month_id),
    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE,
    FOREIGN KEY (fruiting_month_id) REFERENCES fruiting_months(fruiting_month_id) ON DELETE CASCADE ON UPDATE CASCADE
-
-
-
-
 );
 
 
 CREATE TABLE plants_photos(
-   photo_id serial
-   plant_id,
-       photo_id int UNIQUE,
+   photo_id serial,
+   plant_id int,
+   photo_id int UNIQUE,
    photo_name varchar (100) UNIQUE NOT NULL,
-       PRIMARY KEY (plant_id,photo_id),
+   PRIMARY KEY (plant_id,photo_id),
    FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 
 CREATE TABLE fruit_colors(
        color_id  serial PRIMARY KEY,
@@ -575,9 +568,6 @@ CREATE TABLE regions(
        longitude varchar(10)
 );
 
-
-
-
 CREATE TABLE insects_regions(
    insect_id int,
    region_id int,
@@ -595,6 +585,7 @@ CREATE TABLE plants_regions(
    FOREIGN KEY (region_id) REFERENCES regions(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
 CREATE TABLE glossary(
     glossary_id int,
 	glossary_type varchar(50),
@@ -608,8 +599,9 @@ CREATE TABLE plants_matk (
 plant_id INT,
   nucleotide varchar,
   country varchar,
- genebank_accession varchar,
-PRIMARY KEY (matk_id),
+ genbank_accession varchar,
+ bold_id varchar,
+PRIMARY KEY (matk_id,plant_id),
  FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -617,9 +609,10 @@ CREATE TABLE insects_coi (
   coi_id INT,
 insect_id INT,
   country varchar,
-  genebank_accesion varchar,
+  genbank_accession varchar,
  nucleotide varchar,
-PRIMARY KEY (coi_id),
+  bold_id varchar,
+PRIMARY KEY (coi_id,insect_id),
  FOREIGN KEY (insect_id) REFERENCES insects(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -631,10 +624,13 @@ CREATE TABLE plant_coordinates (
   FOREIGN KEY (plant_id) REFERENCES plants (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
-
-
-
+CREATE TABLE glossary_examples(
+  glossary_id INT,
+  photo_name varchar(100),
+  PRIMARY KEY (glossary_id, photo_name),
+  FOREIGN KEY (photo_name) REFERENCES plants_photos(photo_name) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN KEY (glossary_id) REFERENCES glossary(glossary_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 
 
