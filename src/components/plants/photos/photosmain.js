@@ -6,10 +6,17 @@ import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import { ZoomOut } from "@mui/icons-material";
 export default function PhotosComponent({ photos_data, selectedIndex }) {
   const base_path = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}` : "";
+  console.log("photos_data");
+
   if (typeof photos_data !== "undefined") {
     const photos = photos_data[selectedIndex]?.plants_photos.map(
       (p) => p.photo_name
     );
+    // console.log(photos_data);
+
+    // console.log("photos");
+
+    console.log(photos);
     const imagePaths = photos?.map((specie) => `${base_path}/photos/plants/${specie}`);
     const hasImages = photos?.length > 0;
     const showIndicator = hasImages && photos.length > 1;

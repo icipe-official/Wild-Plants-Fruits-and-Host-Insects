@@ -11,7 +11,9 @@ import {
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
 import useSWR from "swr";
-import { TreeView, TreeItem } from "@mui/lab";
+// import { TreeView, TreeItem } from "@mui/lab";
+import { TreeItem, TreeView } from "@mui/x-tree-view";
+
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import PlantFeaturesComponent from "./plantfeatures";
