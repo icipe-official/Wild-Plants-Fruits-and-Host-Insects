@@ -192,9 +192,7 @@ export default function GlossaryAll() {
     );
 
   if (glossary) {
-    console.log("glossaryTerm22");
-    console.log("glossaryTerm22");
-    console.log(glossaryTerm);
+    // console.log(glossaryTerm);
 
     // console.log(glossary.glossary_examples);
 
@@ -207,23 +205,23 @@ export default function GlossaryAll() {
 
       // Iterate through each glossary term in the data
       selectedType?.glossary_examples.forEach((glossaryTerm) => {
-        console.log("glossaryTerm");
+        // console.log("glossaryTerm");
 
-        console.log(glossaryTerm);
+        // console.log(glossaryTerm);
         // Check if 'glossaryTerm.glossary_examples' is an array
 
         // Iterate through each example in the array
-        selectedType.glossary_examples.forEach((example) => {
-          console.log("example");
+        selectedType?.glossary_examples.forEach((example) => {
+          // console.log("example");
 
-          console.log(example);
+          // console.log(example);
           // Check if the plant ID is not in the set, then add it
           if (!uniquePlantIds.has(example.plants_photos.plant_id)) {
             uniquePlantIds.add(example.plants_photos.plant_id);
 
             // Add the unique species to the array
             uniqueSpecies.push(example.plants_photos);
-            console.log("uniqueSpecies", uniqueSpecies);
+            // console.log("uniqueSpecies", uniqueSpecies);
           }
         });
       });
@@ -232,9 +230,9 @@ export default function GlossaryAll() {
           plant?.plants_photos?.plant_id ===
           uniqueSpecies[selectedIndex]?.plant_id
       );
-      console.log("photos_data");
+      // console.log("photos_data");
 
-      console.log(uniqueIndex);
+      // console.log(uniqueIndex);
 
       const transformedData = [
         {
