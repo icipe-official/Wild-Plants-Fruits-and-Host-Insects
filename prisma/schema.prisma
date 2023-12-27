@@ -7,13 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model admin {
-  id              Int    @id @default(autoincrement())
-  username        String @db.VarChar(50)
-  password_salt   String @db.VarChar(128)
-  hashed_password String @db.VarChar(128)
-}
-
 model fruit_colors {
   color_id            Int                   @id @default(autoincrement())
   color               String                @unique @db.VarChar(20)
@@ -56,11 +49,21 @@ model fruiting_months {
 }
 
 model glossary {
-  glossary_id          Int               @id
-  glossary_type        String?           @db.VarChar(50)
-  glossary_term        String?           @db.VarChar(50)
-  glossary_description String?           @db.VarChar(500)
+  glossary_id          Int                 @id
+  glossary_type        String?             @db.VarChar(50)
+  glossary_term        String?             @db.VarChar(50)
+  glossary_description String?             @db.VarChar(500)
+  glossary_examples    glossary_examples[]
   glossary_photos      glossary_photos[]
+}
+
+model glossary_examples {
+  glossary_id   Int
+  photo_name    String        @db.VarChar(100)
+  glossary      glossary      @relation(fields: [glossary_id], references: [glossary_id], onDelete: Cascade)
+  plants_photos plants_photos @relation(fields: [photo_name], references: [photo_name], onDelete: Cascade)
+
+  @@id([glossary_id, photo_name])
 }
 
 model glossary_photos {
@@ -123,12 +126,15 @@ model insects {
 }
 
 model insects_coi {
-  coi_id            Int      @id
-  insect_id         Int?
-  country           String?  @db.VarChar
-  genebank_accesion String?  @db.VarChar
-  nucleotide        String?  @db.VarChar
-  insects           insects? @relation(fields: [insect_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  coi_id            Int
+  insect_id         Int
+  country           String? @db.VarChar
+  genbank_accession String? @db.VarChar
+  nucleotide        String? @db.VarChar
+  bold_id           String? @db.VarChar
+  insects           insects @relation(fields: [insect_id], references: [id], onDelete: Cascade)
+
+  @@id([coi_id, insect_id])
 }
 
 model insects_regions {
@@ -314,19 +320,23 @@ model plants_leaf_margins {
 }
 
 model plants_matk {
-  matk_id            Int     @id
-  plant_id           Int?
-  nucleotide         String? @db.VarChar
-  country            String? @db.VarChar
-  genebank_accession String? @db.VarChar
-  plants             plants? @relation(fields: [plant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  matk_id           Int
+  plant_id          Int
+  nucleotide        String? @db.VarChar
+  country           String? @db.VarChar
+  genbank_accession String? @db.VarChar
+  bold_id           String? @db.VarChar
+  plants            plants  @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+
+  @@id([matk_id, plant_id])
 }
 
 model plants_photos {
-  plant_id   Int
-  photo_name String @unique @db.VarChar(100)
-  photo_id   Int    @default(autoincrement())
-  plants     plants @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  plant_id          Int
+  photo_name        String              @unique @db.VarChar(100)
+  photo_id          Int                 @default(autoincrement())
+  glossary_examples glossary_examples[]
+  plants            plants              @relation(fields: [plant_id], references: [id], onDelete: Cascade)
 
   @@id([plant_id, photo_id], map: "pk_plants_photos")
   @@unique([plant_id, photo_id], map: "unique_plant_photo_combination")
