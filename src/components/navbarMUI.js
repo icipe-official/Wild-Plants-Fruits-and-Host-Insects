@@ -164,7 +164,7 @@ export default function TopAppBar() {
       href: "/plants",
     },
     {
-      text: "Multiple Entry Key",
+      text: "Advanced Plant Search",
       href: "/multipleentry",
     },
     {
