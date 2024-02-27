@@ -1050,86 +1050,10 @@ export default function PhylogenyMafft() {
 
                     {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
                   </TreeItem>
-
-                  <TreeItem nodeId="5" label="Newick file">
-                    <NewickDownload
-                      newick={newickData}
-                      data={
-                        selectedOrganism === "plants"
-                          ? filteredData
-                          : insectFilteredData
-                      }
-                    />
-                  </TreeItem>
                 </TreeItem>
               </TreeView>
             </Box>
-            <Box sx={{ marginLeft: 2 }}>
-              <TreeView
-                className={classes.root}
-                defaultCollapseIcon={<ExpandMoreIcon />}
-                defaultExpandIcon={<ChevronRightIcon />}
-                selected={selectedNode}
-                onNodeSelect={handleNodeSelect}
-              >
-                <TreeItem nodeId="9" label="Paste newick">
-                  {/* <TreeItem nodeId="10" label="Paste newick"> */}
-                  <form onSubmit={handleSubmitnewick}>
-                    <label>
-                      <textarea
-                        value={newickInput}
-                        onChange={handleInputChangenewick}
-                        placeholder="Enter newick sequence"
-                        autoFocus
-                      ></textarea>
-                    </label>
-                    <br />
-                    <button type="submit">Submit</button>
-                  </form>
-                  {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
-                  {/* </TreeItem> */}
-
-                  {/* <TreeItem nodeId="30" label="Paste fasta Sequence">
-                    <Box sx={{ marginLeft: 2 }}>
-                      <form onSubmit={handleSubmitfasta}>
-                        <label>
-                          <textarea
-                            value={fastaInput}
-                            onChange={handleInputChangefasta}
-                            placeholder="Enter FASTA sequence"
-                            autoFocus
-                          ></textarea>
-                        </label>
-                        <br />
-                        <button type="submit">Submit</button>
-                      </form>
-                    </Box>
-                  </TreeItem> */}
-                </TreeItem>
-              </TreeView>
-            </Box>
-            <Box sx={{ marginLeft: 2 }}>
-              <TreeView
-                className={classes.root}
-                defaultCollapseIcon={<ExpandMoreIcon />}
-                defaultExpandIcon={<ChevronRightIcon />}
-                selected={selectedNode}
-                onNodeSelect={handleNodeSelect}
-              >
-                <TreeItem nodeId="20" label="Upload file">
-                  <TreeItem nodeId="21" label="Upload Newick file">
-                    <form onSubmit={handleSubmitFile}>
-                      <label>
-                        Upload File:
-                        <input type="file" onChange={handleInputChangenewick} />
-                      </label>
-                      <br />
-                      <button type="submit">Submit</button>
-                    </form>
-                  </TreeItem>
-                </TreeItem>
-              </TreeView>
-            </Box>
+            <Box sx={{ marginLeft: 2 }}></Box>
             {!isSmallScreen ? (
               <Box sx={{ marginLeft: 2 }}>
                 {" "}
