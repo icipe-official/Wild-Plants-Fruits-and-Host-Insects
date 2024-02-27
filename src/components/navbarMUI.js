@@ -160,7 +160,7 @@ export default function TopAppBar() {
       href: "/",
     },
     {
-      text: "Plants and Fruits data",
+      text: "Plants and Fruits With Insects",
       href: "/plants",
     },
     {
