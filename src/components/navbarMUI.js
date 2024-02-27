@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     marginLeft: theme.spacing(15),
     "&:hover": {
-      color: "red",
+      color: "white",
       borderBottom: "1px solid white",
     },
     [theme.breakpoints.down("sm")]: {
