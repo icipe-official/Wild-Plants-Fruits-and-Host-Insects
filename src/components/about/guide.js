@@ -171,7 +171,9 @@ export default function UserGuide() {
           phylogeny were maturase K for plants and Cytochrome oxidase sub-unit I
           (COI) for insects. Clicking on each species name provides users with
           options to access external databases or locally linked morphological
-          information.
+          information. The phylogeny page includes a LINK TO INSECT-PLANT
+          PHYLOGENY for all Insect barcodes that were retrieved and have an
+          associated plant name, which is included in the labelling
         </p>
         <Image
           src="/img/screen07.jpg"
