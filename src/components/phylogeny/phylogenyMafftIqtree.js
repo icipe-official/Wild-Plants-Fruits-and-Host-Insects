@@ -1050,6 +1050,16 @@ export default function PhylogenyMafft() {
 
                     {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
                   </TreeItem>
+                  <TreeItem nodeId="5" label="Newick file">
+                    <NewickDownload
+                      newick={newickData}
+                      data={
+                        selectedOrganism === "plants"
+                          ? filteredData
+                          : insectFilteredData
+                      }
+                    />
+                  </TreeItem>
                 </TreeItem>
               </TreeView>
             </Box>
