@@ -4,7 +4,7 @@ import { Box, Container, Divider } from "@mui/material";
 
 export default function AboutUs() {
   const general_introduction = `
-  this Platform enable users to examine the data of the wild fruits of
+This Platform enable users to examine the data of the wild fruits of
  Kenya and their associated insect fauna, specifically those that use
  fruits in their breeding cycles. Although the primary focus of our study was on fruits as larval
  habitats of fruit flies (Tephritidae), particularly those of economic
