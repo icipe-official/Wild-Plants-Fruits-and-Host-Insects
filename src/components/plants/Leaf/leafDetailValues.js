@@ -36,6 +36,8 @@ export default function LeafDetailValues({ leaves_data }) {
             value={
               Array.isArray(leaf.leaf_type)
                 ? leaf.leaf_type.join(" or ")
+                : leaf.leaf_type === "none"
+                ? "Unknown"
                 : leaf.leaf_type
             }
           />
