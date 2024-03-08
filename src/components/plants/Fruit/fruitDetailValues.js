@@ -88,21 +88,40 @@ export default function FruitDetailValues({ fruits_data }) {
                 const value = month.fruiting_months.month;
 
                 // Skip if the month is "unknown"
-                if (value === "unknown") {
-                  return null;
+                if (typeof value === null) {
+                  return "null";
                 }
+                return { value, index };
+              })
+              .filter((month) => month !== null)
+              .sort((a, b) => {
+                const monthsOrder = {
+                  January: 1,
+                  February: 2,
+                  March: 3,
+                  April: 4,
+                  May: 5,
+                  June: 6,
+                  July: 7,
+                  August: 8,
+                  September: 9,
+                  October: 10,
+                  November: 11,
+                  December: 12,
+                };
 
-                const isLastValue =
-                  index === specie.plants_fruiting_months.length - 1;
-                const separator = isLastValue
-                  ? ""
-                  : index === specie.plants_fruiting_months.length - 2
-                  ? " or "
-                  : ", ";
+                return monthsOrder[a.value] - monthsOrder[b.value];
+              })
+              .map(({ value, index }, arrayIndex, array) => {
+                const isLastValue = arrayIndex === array.length - 1;
+                const separator = !isLastValue
+                  ? arrayIndex === array.length - 2
+                    ? " or "
+                    : " or "
+                  : "";
 
                 return value + separator;
-              })
-              .filter((month) => month !== null)} // Filter out "unknown" months
+              })} // Filter out "unknown" months
           />
         </Box>
       </Box>
