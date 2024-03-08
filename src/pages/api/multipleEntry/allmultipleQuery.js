@@ -43,9 +43,9 @@ export default async function handle(req, res) {
         select: {
           type_of_fruit: true,
           fruit_type_description: true,
-          fruit_types_glossary: {
-            select: { photo_id: true },
-          },
+          // fruit_types_glossary: {
+          //   select: { photo_id: true },
+          // },
         },
         orderBy: {
           type_of_fruit: "asc",
