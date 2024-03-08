@@ -995,31 +995,46 @@ export default function PhylogenyMafft() {
             {/* </Box> */}
             <Box sx={{ marginLeft: 2 }}>
               <FormControl fullWidth variant="outlined">
-                <InputLabel>
-                  Select family(only families with barcodes)
-                </InputLabel>
-                <Select
-                  value={
-                    selectedOrganism === "plants"
-                      ? selectedFamily
-                      : selecteorder
-                  }
-                  onChange={(event) => handleChange(event)}
-                  label="Families"
-                  //   IconComponent={ArrowDropDown}
-                >
-                  {selectedOrganism === "plants"
-                    ? filtered_families_list.map((family, index) => (
-                        <MenuItem key={index} value={family}>
-                          {family}
-                        </MenuItem>
-                      ))
-                    : insect_orders_list.map((order, index) => (
-                        <MenuItem key={index} value={order}>
-                          {order}
-                        </MenuItem>
-                      ))}
-                </Select>
+                <InputLabel>Select family</InputLabel>
+                {/* <Select */}
+
+                {
+                  //   selectedOrganism === "plants"
+                  //     ? selectedFamily
+                  //     : selecteorder
+                  // }
+                  // onChange={(event) => handleChange(event)}
+                  // label="Families"
+                  // //   IconComponent={ArrowDropDown}
+                  <Tooltip
+                    title="Only plant or insect families with barcode data appear in the list. The scale shown on top of the phylogeny tree shows the number of substitutions per site per unit time"
+                    arrow
+                    enterDelay={500}
+                    leaveDelay={200}
+                  >
+                    <Select
+                      value={
+                        selectedOrganism === "plants"
+                          ? selectedFamily
+                          : selectedOrder
+                      }
+                      onChange={(event) => handleChange(event)}
+                      label="Families"
+                    >
+                      {selectedOrganism === "plants"
+                        ? filtered_families_list.map((family, index) => (
+                            <MenuItem key={index} value={family}>
+                              {family}
+                            </MenuItem>
+                          ))
+                        : insect_orders_list.map((order, index) => (
+                            <MenuItem key={index} value={order}>
+                              {order}
+                            </MenuItem>
+                          ))}
+                    </Select>
+                  </Tooltip>
+                }
               </FormControl>
             </Box>
             {isSmallScreen ? (
@@ -1074,7 +1089,7 @@ export default function PhylogenyMafft() {
                 <Tooltip title="Delete"></Tooltip>
                 <Tooltip
                   describeChild
-                  title="This link showsthe insect barcodes that have an associated plant name, which is included in the labelling."
+                  title="This link shows the phylogenetic tree for the insect barcodes that have an associated plant names, which is included in the labelling. The plants are labelled starting from family name (F) to species name.Different plants are separted using '|' symbol."
                 >
                   <Button onClick={handleClick}>
                     Link to Insect-Plant Phylogeny
