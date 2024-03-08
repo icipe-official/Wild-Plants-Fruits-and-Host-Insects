@@ -30,7 +30,7 @@ export default function PlantFirstPage() {
       max_latitude: 1350,
       min_latitude: 1,
       plant_description: "nan",
-      leaf_type: "simple",
+      leaf_type: "Simple",
       plant_genera: {
         genus_name: "Abutilon",
       },
@@ -41,7 +41,7 @@ export default function PlantFirstPage() {
         {
           back_id: 3,
           woody_herbaceous: {
-            type_of_stem: "woody",
+            type_of_stem: "Woody",
           },
         },
       ],
@@ -49,7 +49,7 @@ export default function PlantFirstPage() {
         {
           fruit_latex_id: 1,
           latex: {
-            latex_description: "present",
+            latex_description: "Present",
           },
         },
       ],
@@ -57,7 +57,7 @@ export default function PlantFirstPage() {
         {
           thorn_id: 3,
           spines_thorns: {
-            thorns_spines: "absent",
+            thorns_spines: "Absent",
           },
         },
       ],
@@ -65,13 +65,13 @@ export default function PlantFirstPage() {
         {
           shrub_id: 5,
           shrub_climbings: {
-            tree_type: "herb",
+            tree_type: "Herb",
           },
         },
         {
           shrub_id: 8,
           shrub_climbings: {
-            tree_type: "shrub",
+            tree_type: "Shrub",
           },
         },
       ],
@@ -79,13 +79,13 @@ export default function PlantFirstPage() {
         {
           leaf_margin_id: 4,
           leaf_margins: {
-            type_of_leaf_margin: "serrate",
+            type_of_leaf_margin: "Serrate",
           },
         },
         {
           leaf_margin_id: 9,
           leaf_margins: {
-            type_of_leaf_margin: "crenate",
+            type_of_leaf_margin: "Crenate",
           },
         },
       ],
@@ -93,7 +93,7 @@ export default function PlantFirstPage() {
         {
           leaf_arrangement_id: 3,
           leaf_arrangements: {
-            arrangement: "alternate",
+            arrangement: "Alternate",
           },
         },
       ],
@@ -101,7 +101,7 @@ export default function PlantFirstPage() {
         {
           fruit_type_id: 2,
           fruit_types: {
-            type_of_fruit: "multiple",
+            type_of_fruit: "Multiple",
           },
         },
       ],
@@ -109,7 +109,7 @@ export default function PlantFirstPage() {
         {
           color_id: 5,
           fruit_colors: {
-            color: "green",
+            color: "Green",
           },
         },
       ],
@@ -117,7 +117,7 @@ export default function PlantFirstPage() {
         {
           fruit_shape_id: 6,
           fruit_shapes: {
-            shape: "cylindrical",
+            shape: "Cylindrical",
           },
         },
       ],
@@ -139,7 +139,7 @@ export default function PlantFirstPage() {
         {
           fruiting_month_id: 1,
           fruiting_months: {
-            month: "FEB",
+            month: "February",
           },
         },
       ],
@@ -147,7 +147,7 @@ export default function PlantFirstPage() {
         {
           ukwf_area_id: 5,
           ukwf_areas: {
-            ukwf_area: "unknown",
+            ukwf_area: "Unknown",
           },
         },
       ],
