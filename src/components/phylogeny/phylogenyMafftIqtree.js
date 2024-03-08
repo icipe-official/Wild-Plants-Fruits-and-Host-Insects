@@ -2,6 +2,8 @@ import useSWR, { mutate } from "swr";
 import { useEffect, useState } from "react";
 import TephritidaeNewick from "./tephritidae";
 import { useRef } from "react";
+import Tooltip from "@mui/material/Tooltip";
+
 // import useMediaQuery from "@mui/material";
 import {
   Box,
@@ -982,21 +984,20 @@ export default function PhylogenyMafft() {
         {/* <ConverttoFasta></ConverttoFasta> */}
         <Box sx={{ display: isSmallScreen ? "row" : "flex" }}>
           <Box sx={{ display: "flex" }}>
-            <Box>
-              <FormControl>
-                <InputLabel>select organism</InputLabel>
-                <Select
-                  value={selectedOrganism}
-                  onChange={handleOrganismChange}
-                >
-                  <MenuItem value="plants">Plants</MenuItem>
-                  <MenuItem value="insects">Insects</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+            {/* <Box> */}
+            <FormControl>
+              <InputLabel>select organism</InputLabel>
+              <Select value={selectedOrganism} onChange={handleOrganismChange}>
+                <MenuItem value="plants">Plants</MenuItem>
+                <MenuItem value="insects">Insects</MenuItem>
+              </Select>
+            </FormControl>
+            {/* </Box> */}
             <Box sx={{ marginLeft: 2 }}>
               <FormControl fullWidth variant="outlined">
-                <InputLabel>Select family</InputLabel>
+                <InputLabel>
+                  Select family(only families with barcodes)
+                </InputLabel>
                 <Select
                   value={
                     selectedOrganism === "plants"
@@ -1067,9 +1068,18 @@ export default function PhylogenyMafft() {
             {!isSmallScreen ? (
               <Box sx={{ marginLeft: 2 }}>
                 {" "}
-                <Button onClick={handleClick}>
+                {/* <Button onClick={handleClick}>
                   Link to Insect-Plant Phylogeny
-                </Button>
+                </Button> */}
+                <Tooltip title="Delete"></Tooltip>
+                <Tooltip
+                  describeChild
+                  title="This link showsthe insect barcodes that have an associated plant name, which is included in the labelling."
+                >
+                  <Button onClick={handleClick}>
+                    Link to Insect-Plant Phylogeny
+                  </Button>
+                </Tooltip>
               </Box>
             ) : null}
           </Box>
