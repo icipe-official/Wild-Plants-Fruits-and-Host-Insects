@@ -1007,7 +1007,7 @@ export default function PhylogenyMafft() {
                   // label="Families"
                   // //   IconComponent={ArrowDropDown}
                   <Tooltip
-                    title="Only plant or insect families with barcode data appear in the list. The scale shown on top of the phylogeny tree shows the number of substitutions per site per unit time"
+                    title="Only plant or insect families with barcode data appear in the list. The scale shown on top of the phylogeny tree shows the number of substitutions per site. Right click on the labels for more options"
                     arrow
                     enterDelay={500}
                     leaveDelay={200}
@@ -1089,7 +1089,7 @@ export default function PhylogenyMafft() {
                 <Tooltip title="Delete"></Tooltip>
                 <Tooltip
                   describeChild
-                  title="This link shows the phylogenetic tree for the insect barcodes that have an associated plant names, which is included in the labelling. The plants are labelled starting from family name (F) to species name (S)."
+                  title="This link shows the phylogenetic tree for the insect barcodes that have an associated plant names, which is included in the labelling. The plants are labelled starting from family (F) to genus and species name (S)."
                 >
                   <Button onClick={handleClick}>
                     Link to Insect-Plant Phylogeny
