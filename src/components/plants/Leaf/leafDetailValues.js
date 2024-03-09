@@ -33,13 +33,7 @@ export default function LeafDetailValues({ leaves_data }) {
           <DynamicValueCard
             key={`${leaf.id}type`}
             keyName="type"
-            value={
-              Array.isArray(leaf.leaf_type)
-                ? leaf.leaf_type.join(" or ")
-                : leaf.leaf_type === "none"
-                ? "Unknown"
-                : leaf.leaf_type
-            }
+            value={leaf.leaf_type !== null ? leaf.leaf_type : "Unknown"}
           />
         </Box>
       </Box>
