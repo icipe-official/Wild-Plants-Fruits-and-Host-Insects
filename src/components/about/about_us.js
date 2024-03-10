@@ -4,7 +4,7 @@ import { Box, Container, Divider } from "@mui/material";
 
 export default function AboutUs() {
   const general_introduction = `
-This Platform enable users to examine the data of the wild fruits of
+This platform enable users to examine the data of the wild fruits of
  Kenya and their associated insect fauna, specifically those that use
  fruits in their breeding cycles. Although the primary focus of our study was on fruits as larval
  habitats of fruit flies (Tephritidae), particularly those of economic
@@ -116,8 +116,8 @@ This Platform enable users to examine the data of the wild fruits of
             <u>Phylogeny of Plants and Insects</u>. In this feature, users can
             explore the phylogeny of insects and plants based on their barcodes.
             The phylogeny is organized by family. The phylogeny tree displayed
-            is based on maturase K (matK) fir plants and Cytochrome Oxidase
-            subunit I (COI) fir insects. These barcodes were retrieved from
+            is based on maturase K (matK) for plants and Cytochrome Oxidase
+            subunit I (COI) for insects. These barcodes were retrieved from
             Barcode of Life Systems Database (BOLD) systems. Upon clicking the
             species, users can navigate to the morhology page of the species, or
             navigate to external molecular databases for the selected species
