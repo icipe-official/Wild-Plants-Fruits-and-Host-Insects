@@ -1010,13 +1010,14 @@ export default function PhylogenyMafft() {
                     title="Only plant or insect families with barcode data appear in the list. The scale shown on top of the phylogeny tree shows the number of substitutions per site. Right click on the labels for more options."
                     arrow
                     enterDelay={500}
-                    leaveDelay={200}
+                    leaveDelay={20}
+                    placement="top-end"
                   >
                     <Select
                       value={
                         selectedOrganism === "plants"
                           ? selectedFamily
-                          : selectedOrder
+                          : selecteorder
                       }
                       onChange={(event) => handleChange(event)}
                       label="Families"
