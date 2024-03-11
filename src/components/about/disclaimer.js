@@ -11,13 +11,12 @@ export default function Disclaimer() {
             Disclaimer
           </a>
         </h3>
-        The barcodes that have been used for constructing the phylogeny tree of
-        respective biocollections were obtained from the BOLD database with
-        assumption that taxonomically identified individuals share identical
-        barcodes with the species that have been barcoded. The link to BOLD
-        databse as well as NCBI links of the barcodes are can be accessed upon
-        right clicking the species in the phylogeny tree that brings a n option
-        with links to BOLD database and/or NCBI.
+        The biocollections were not sent for bacoding, we downloaded the barcode
+        sequences from BOLD matched target plants and insects that were
+        identified by species names in the biocollection records. The link to
+        BOLD databse as well as NCBI links of the barcodes are can be accessed
+        upon right clicking the species in the phylogeny tree that brings a n
+        option with links to BOLD database and/or NCBI.
       </Box>
       {/* <Divider /> */}
     </Container>
