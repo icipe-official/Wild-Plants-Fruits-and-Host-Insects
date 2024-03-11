@@ -96,7 +96,11 @@ This platform enable users to examine the data of the wild fruits of
           <li>
             <u>An advanced plant search</u>, based on characters of both the
             fruit and associated leafy specimen, will enable users to identify
-            fruiting woody and herbaceous plants.
+            fruiting woody and herbaceous plants. Double-clicking on a some of
+            the complex terms (fruit shape, fruit type) in the key will bring up
+            its definition in the glossary. Photographic images illustrating a
+            term are accessed by clicking on the “images” button to the right of
+            each term definition.
           </li>
           <li>
             <u>Insects reared from collected fruits may also be browsed</u>.
@@ -123,7 +127,7 @@ This platform enable users to examine the data of the wild fruits of
             corresponding species names in the records.
           </li>
           <li>
-            An <u>illustrated glossary of botanical</u> This page can can be
+            An <u>illustrated glossary of botanical terms.</u> This page can be
             referenced when using the advanced plant serach page to access
             definitions and images of plant structures and features. Double
             Clicking on a term related fruit type, fruit shape, leaf type, leaf
@@ -133,15 +137,6 @@ This platform enable users to examine the data of the wild fruits of
             have illustrations. A comprehensive glossary is accessible in
             alphabetical order, along with category-specific glossaries (e.g.,
             terms related to leaf margin characteristics, fruit shapes, etc.).
-            <u>Advanced plant search</u> to call up definitions and images of
-            plant structures and features. Double-clicking on a some of the
-            complex terms (fruit shape, fruit type) in the key will bring up its
-            definition in the glossary. Photographic images illustrating a term
-            are accessed by clicking on the “images” button to the right of each
-            definition. Some self-evident terms are not illustrated. A general,
-            alphabetically arranged glossary is available as are
-            category-related glossaries (e.g. terms related to leaf margin
-            characteristics, fruit shapes, etc.).
           </li>
         </ol>
       </Box>
