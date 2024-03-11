@@ -22,9 +22,9 @@ This platform enable users to examine the data of the wild fruits of
 
   const keyFeatures = [
     {
-      title: "Browsing Plants and Fruits Data",
+      title: "Browsing Plants and Fruits With Insects",
       description:
-        "Easily browse through a collection of wild plants and their fruits. Each entry provides detailed descriptions, taxonomic information, habitat preferences, and other relevant data, allowing users to explore the diversity of plant life. Whether you are a scientist, a nature lover, or simply curious about the wonders of the natural world, Wild Plants, Fruits, and Host Insects BioCollections has something to offer for everyone.",
+        "Easily browse through a collection of wild plants and their fruits and insects reared from them. Each entry provides detailed descriptions, taxonomic information, habitat preferences, and other relevant data, allowing users to explore the diversity of plant life. Whether you are a scientist, a nature lover, or simply curious about the wonders of the natural world, Wild Plants, Fruits, and Host Insects BioCollections has something to offer for everyone.",
     },
     {
       title: "Browsing Insects Data",
@@ -110,14 +110,17 @@ This platform enable users to examine the data of the wild fruits of
             insect species are also mentioned.
           </li>
           <li>
-            <u>Phylogeny of Plants and Insects</u>. In this feature, users can
-            explore the phylogeny of insects and plants based on their barcodes.
-            The phylogeny is organized by family. The phylogeny tree displayed
-            is based on maturase K (matK) for plants and Cytochrome Oxidase
-            subunit I (COI) for insects. These barcodes were retrieved from
-            Barcode of Life Systems Database (BOLD) systems. Upon clicking the
-            species, users can navigate to the morhology page of the species, or
-            navigate to external molecular databases for the selected species
+            <u>Phylogeny of Plants and Insects Barcodes</u>. In this feature,
+            users can explore the phylogeny of insects and plants based on their
+            barcodes. The phylogeny is organized by family. The phylogeny tree
+            displayed is based on maturase K (matK) for plants and Cytochrome
+            Oxidase subunit I (COI) for insects. Upon clicking the species,
+            users can navigate to the morhology page of the species, or navigate
+            to external molecular databases for the selected species. Due to the
+            fact that the biocollections were not sent for bacoding, we
+            downloaded the sequnces from Life Systems Database (BOLD) using IDs
+            that successfully matched both identified specimens and contained
+            corresponding species names in the records.
           </li>
           <li>
             An <u>illustrated glossary of botanical</u> This page can can be
