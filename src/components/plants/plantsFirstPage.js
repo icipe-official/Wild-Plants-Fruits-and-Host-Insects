@@ -49,7 +49,7 @@ export default function PlantFirstPage() {
         {
           fruit_latex_id: 1,
           latex: {
-            latex_description: "Present",
+            latex_description: "Absent",
           },
         },
       ],
@@ -139,7 +139,7 @@ export default function PlantFirstPage() {
         {
           fruiting_month_id: 1,
           fruiting_months: {
-            month: "February",
+            month: "Feb",
           },
         },
       ],
