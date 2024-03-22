@@ -1116,8 +1116,8 @@ export default function PhylogenyMafft() {
                 </Box>
                 <Box sx={{ color: "red", marginLeft: 2 }}>
                   Disclamier: The barcodes used to construct phylogeny trees
-                  were downloaded from BOLD database. The scale shows the number
-                  of substitutions per site.
+                  were downloaded from BOLD database. The scale represents the
+                  number of substitutions per site.
                 </Box>
               </Box>
             ) : null}
