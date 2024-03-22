@@ -12,6 +12,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Typography,
   useMediaQuery,
 } from "@mui/material";
 import { useRouter } from "next/router";
@@ -69,9 +70,10 @@ export default function PhylogenyMafft() {
     // const newOrganism = event.target.value;
     // Clear the previous data and refetch based on selecetd organism and change api to that of selected organism
     //use the same name for api end points to
-    mutate(`${base_url}/api/plants/species`, null, false);
-    mutate(`${base_url}/api/insects/species`, null, false);
-    // Update the selected organism
+    mutate(`${base_url}/api/${selectedOrganism}plants/species`, null, false);
+    // mutate(`${base_url}/api/insects/species`, null    // setSelectedOrganism(event.target.value);
+    // , false);
+    // Update the selected organism    // setSelectedOrganism(event.target.value);
 
     handleChange(event);
   };
@@ -93,7 +95,7 @@ export default function PhylogenyMafft() {
   // );
   const [selectedFamily, setSelectedFamily] = useState(
     selectedOrganism === "insects" && !router.query.insectFamily
-      ? "Braconidae"
+      ? "Tephritidae"
       : selectedOrganism === "plants" && router.query.plantFamily
       ? router.query.plantFamily
       : "Rubiaceae"
@@ -213,11 +215,18 @@ export default function PhylogenyMafft() {
         selectedOrganism === "insects" &&
         event.target.value === "Tephritidae"
       ) {
-        setNewickData("");
+        // setNewickData(yy);
         setSelectedOrder("Tephritidae");
         setNewickData(teph.props.children);
         console.log("selectedFamily on cahnge event1");
         console.log(event.target.value);
+      } else {
+        console.log("selectedOrganism");
+
+        console.log(selectedOrganism);
+        // // setSelectedOrganism("insects");
+        // setSelectedOrder("Tephritidae");
+        // setNewickData(teph.props.children);
       }
       // if (selectedOrganism === "plants") {
       if (selectedOrganism === "plants") {
@@ -412,7 +421,9 @@ export default function PhylogenyMafft() {
             console.error(error);
           });
       }
-    } else {
+    }
+    // if not event
+    else {
       //if not event
       if (selectedOrganism === "plants") {
         console.log("Rubiaceae");
@@ -853,7 +864,7 @@ export default function PhylogenyMafft() {
           flexDirection: "column",
           justifyContent: "space-between",
           height: "100%",
-          paddingBottom: "65%", // Adjust this value to create space for the footer
+          paddingBottom: "65%",
         }}
       >
         {/* Content goes here */}
@@ -1007,7 +1018,7 @@ export default function PhylogenyMafft() {
                   // label="Families"
                   // //   IconComponent={ArrowDropDown}
                   <Tooltip
-                    title="Only plant or insect families with barcode data appear in the list. The scale shown on top of the phylogeny tree shows the number of substitutions per site. Right click on the labels for more options."
+                    title="Only plant or insect families with barcode data appear in the list. Right click on the labels for more options."
                     arrow
                     enterDelay={500}
                     leaveDelay={20}
@@ -1081,21 +1092,33 @@ export default function PhylogenyMafft() {
               </TreeView>
             </Box>
             <Box sx={{ marginLeft: 2 }}></Box>
+
             {!isSmallScreen ? (
-              <Box sx={{ marginLeft: 2 }}>
-                {" "}
-                {/* <Button onClick={handleClick}>
-                  Link to Insect-Plant Phylogeny
-                </Button> */}
-                <Tooltip title="Delete"></Tooltip>
-                <Tooltip
-                  describeChild
-                  title="This link shows the phylogenetic tree for the insect barcodes that have an associated plant names, which is included in the labelling. The plants are labelled starting from family (F) to genus and species name (S)."
-                >
-                  <Button onClick={handleClick}>
-                    Link to Insect-Plant Phylogeny
-                  </Button>
-                </Tooltip>
+              <Box sx={{ display: "flex", marginTop: 0 }}>
+                <Box>
+                  <Tooltip
+                    describeChild
+                    title="This link shows the phylogenetic tree for the insect barcodes that have an associated plant names, which is included in the labelling. The plants are labelled starting from family (F) to genus and species name (S)."
+                  >
+                    <Button onClick={handleClick}>
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          textTransform: "lowercase",
+                          "&:first-letter": { textTransform: "capitalize" },
+                          whiteSpace: "nowrap", // Ensure text stays in one line
+                        }}
+                      >
+                        link to Insect-Plant Phylogeny
+                      </Typography>
+                    </Button>
+                  </Tooltip>
+                </Box>
+                <Box sx={{ color: "red", marginLeft: 2 }}>
+                  Disclamier: The barcodes used to construct phylogeny trees
+                  were downloaded from BOLD database. The scale shows the number
+                  of substitutions per site.
+                </Box>
               </Box>
             ) : null}
           </Box>
