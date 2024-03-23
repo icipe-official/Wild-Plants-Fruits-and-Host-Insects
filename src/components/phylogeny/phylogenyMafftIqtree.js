@@ -1098,7 +1098,7 @@ export default function PhylogenyMafft() {
                 <Box>
                   <Tooltip
                     describeChild
-                    title="This link shows the phylogenetic tree for the insect barcodes that have an associated plant names, which is included in the labelling. The plants are labelled starting from family (F) to genus and species name (S)."
+                    title="This link shows the phylogenetic tree for the insect barcodes that have an associated plant names, which is included in the labelling. The plants are labelled starting from family to genus and species name separated by '|' symbol"
                   >
                     <Button onClick={handleClick}>
                       <Typography
