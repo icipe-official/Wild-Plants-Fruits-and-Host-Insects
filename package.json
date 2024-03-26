@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-		"npm": ">=8.19.3 <=8.19.3",
-		"node": ">=16.19.1 <=16.19.1"
-	},
+    "npm": ">=8.19.3 <=8.19.3",
+    "node": ">=16.19.1 <=16.19.1"
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -26,7 +26,7 @@
     "@mui/material": "^5.12.3",
     "@mui/styles": "^5.12.3",
     "@mui/x-tree-view": "^6.17.0",
-    "@prisma/client": "^5.7.1",
+    "@prisma/client": "^5.11.0",
     "@tanstack/react-query": "^4.28.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.1",
@@ -58,6 +58,6 @@
     "@capacitor/cli": "^4.8.0",
     "@svgr/webpack": "^7.0.0",
     "eslint": "^8.42.0",
-    "prisma": "^5.7.1"
+    "prisma": "^5.11.0"
   }
 }
