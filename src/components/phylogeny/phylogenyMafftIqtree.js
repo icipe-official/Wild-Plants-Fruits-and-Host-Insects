@@ -1018,7 +1018,7 @@ export default function PhylogenyMafft() {
                   // label="Families"
                   // //   IconComponent={ArrowDropDown}
                   <Tooltip
-                    title="Only plant or insect families with barcode data appear in the list. Right click on the labels for more options."
+                    title="Only plant or insect families with barcode data appear in the list. Left click on the labels for more options."
                     arrow
                     enterDelay={500}
                     leaveDelay={20}
