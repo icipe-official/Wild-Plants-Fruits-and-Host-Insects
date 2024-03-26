@@ -144,26 +144,26 @@ export default async function getFamily(req, res) {
             },
           },
         },
-        plants_ukwf_areas: {
-          select: {
-            ukwf_area_id: true,
-            ukwf_areas: {
-              select: {
-                ukwf_area: true,
-              },
-            },
-          },
-        },
-        plants_k_sectors: {
-          select: {
-            k_sector_id: true,
-            k_sectors: {
-              select: {
-                sector: true,
-              },
-            },
-          },
-        },
+        // plants_ukwf_areas: {
+        //   select: {
+        //     ukwf_area_id: true,
+        //     ukwf_areas: {
+        //       select: {
+        //         ukwf_area: true,
+        //       },
+        //     },
+        //   },
+        // },
+        // plants_k_sectors: {
+        //   select: {
+        //     k_sector_id: true,
+        //     k_sectors: {
+        //       select: {
+        //         sector: true,
+        //       },
+        //     },
+        //   },
+        // },
 
         plants_photos: {
           select: { photo_name: true },

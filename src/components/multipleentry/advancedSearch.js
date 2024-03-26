@@ -455,11 +455,11 @@ export default function QuerySelectAdvancedSearch(props) {
     // console.log(fruit_size.fruit_size.fruit_size)
     // leaf type data
     const leaf_type_data = data.leaf_types;
-    const leaf_type_array = leaf_type_data.map(
-      (specie) =>
-        // return a list of fruit color
-        specie.leaf_type
-    );
+    const leaf_type_array = leaf_type_data
+      .map((specie) => specie.leaf_type) // Extract leaf_type values
+      // Exclude NULL values
+      .filter((leaf_type) => leaf_type !== "NULL");
+
     // console.log("leaf_type_array");
     // console.log(leaf_type_array);
 

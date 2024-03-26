@@ -22,15 +22,15 @@ export default function UserGuide() {
         </p>
 
         <ul>
-          <li>Browse Plant and Fruit Data</li>
-          <li>Multiple-entry Key to the Plants</li>
+          <li>Browse Plant and Fruit With Insects</li>
+          <li>Adavanced plant search</li>
           <li>Browse Insects Reared from Fruits</li>
           <li>Phylogeny of Plants and Insects</li>
         </ul>
         {/* <p>{projectDescription}</p> */}
         <h3>
-          <a name="browse_plant_and_fruit_data" className="anchor">
-            Browsing Plant and Fruit Data
+          <a name="browse_plant_and_fruit_data" class="anchor">
+            Browsing Plant and Fruits With Insects
           </a>
         </h3>
 
@@ -56,8 +56,8 @@ export default function UserGuide() {
         </p>
 
         <h3>
-          <a name="multiple-entry-key-to-the-plants" className="anchor">
-            Multiple-entry Key to the Plants
+          <a name="multiple-entry-key-to-the-plants" class="anchor">
+            Adavanced plant search
           </a>
         </h3>
 
@@ -87,8 +87,8 @@ export default function UserGuide() {
           height={800}
         />
 
-        <p className="caption">
-          Example of character-state selections using the multiple-entry key.
+        <p class="caption">
+          Example of character-state selections using the advanced search page.
         </p>
         <Image
           src={`${base_path}/img/screen02b.jpg`}
@@ -173,7 +173,9 @@ export default function UserGuide() {
           phylogeny were maturase K for plants and Cytochrome oxidase sub-unit I
           (COI) for insects. Clicking on each species name provides users with
           options to access external databases or locally linked morphological
-          information.
+          information. The phylogeny page includes a LINK TO INSECT-PLANT
+          PHYLOGENY for all Insect barcodes that were retrieved and have an
+          associated plant name, which is included in the labelling
         </p>
         <Image
           src={`${base_path}/img/screen07.jpg`}
@@ -193,15 +195,14 @@ export default function UserGuide() {
 
         <p>
           An illustrated glossary of botanical terms can be used as a primary
-          teaching tool, or referred to when using the multiple-entry key to the
-          plants to call up definitions and images of plant structures and
-          features. Double-clicking on a term in the key will bring up its
-          definition in the glossary. Photographic images illustrating a term
-          are accessed by clicking on the “images” button to the right of each
-          definition. Some self-evident terms are not illustrated. A general,
-          alphabetically arranged glossary is available as are category-related
-          glossaries (e.g. terms related to leaf margin characteristics, fruit
-          shapes, etc.).
+          teaching tool, or referred to when using the advanced plant search
+          page, showing images of plant. Double-clicking on a term in the key
+          will bring up its definition in the glossary. Photographic images
+          illustrating a term are accessed by clicking on the “images” button to
+          the right of each definition. Some self-evident terms are not
+          illustrated. A general, alphabetically arranged glossary is available
+          as are category-related glossaries (e.g. terms related to leaf margin
+          characteristics, fruit shapes, etc.).
         </p>
         <Image
           src={`${base_path}/img/screen04b.jpg`}

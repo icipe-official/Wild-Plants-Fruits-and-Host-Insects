@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     marginLeft: theme.spacing(15),
     "&:hover": {
-      color: "red",
+      color: "white",
       borderBottom: "1px solid white",
     },
     [theme.breakpoints.down("sm")]: {
@@ -160,11 +160,11 @@ export default function TopAppBar() {
       href: "/",
     },
     {
-      text: "Plants and Fruits data",
+      text: "Plants and Fruits With Insects",
       href: "/plants",
     },
     {
-      text: "Multiple Entry Key",
+      text: "Advanced Plant Search",
       href: "/multipleentry",
     },
     {

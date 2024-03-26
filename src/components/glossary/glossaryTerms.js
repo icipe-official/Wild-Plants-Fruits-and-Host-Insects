@@ -263,7 +263,7 @@ export default function GlossaryAll() {
           {/* filter only terms with description*/}
           <Box sx={{ fontWeight: "bold", marginTop: 9 }}>Alphabetical</Box>
           {glossary
-            .filter((t) => Boolean(t.glossary_description))
+            ?.filter((t) => Boolean(t.glossary_description))
             .map((type, index) => (
               <Grid container alignItems="center">
                 <Grid item xs={true}>
