@@ -43,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
   appBarBackground: {
     backgroundColor: "#074880",
     height: "100%",
+    display: 'flex',
+    alignContent: 'center'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -207,7 +209,7 @@ export default function TopAppBar() {
     <Container>
       <AppBar position="fixed" className={classes.AppBar}>
         <CssBaseline />
-        <Toolbar>
+        <Toolbar style={{backgroundColor: "black", display: "flex", justifyContent: "center"}}>
           {isSmallScreen ? (
             <>
               <IconButton
