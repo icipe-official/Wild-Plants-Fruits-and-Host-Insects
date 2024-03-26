@@ -207,7 +207,14 @@ export default function TopAppBar() {
     <Container>
       <AppBar position="fixed" className={classes.AppBar}>
         <CssBaseline />
-        <Toolbar>
+        <Toolbar
+          style={
+            isSmallScreen
+              ? {}
+              : { width: "100%", display: "flex", justifyContent: "center" }
+          }
+        >
+          {" "}
           {isSmallScreen ? (
             <>
               <IconButton
