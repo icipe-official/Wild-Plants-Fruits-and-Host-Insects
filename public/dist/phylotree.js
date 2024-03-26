@@ -2540,94 +2540,99 @@
       const lastPart = nameParts[nameParts.length - 2]; // Get the second last part
 
       const ncbiAccessionPattern = /[A-Z]{1,2}\d+/; // Pattern for NCBI accessions (one or two letters followed by numbers)
-      const match = lastPart.match(ncbiAccessionPattern); // Check if the last part matches the pattern
+      const match = lastPart?.match(ncbiAccessionPattern); // Check if the last part matches the pattern
 
       if (match) {
-        const accession = match[0]; // Accession found
-        const ncbiURL = `https://www.ncbi.nlm.nih.gov/search/all/?term=${accession}`;
+        if (isLeafNode) {
+          const accession = match[0]; // Accession found
+          const ncbiURL = `https://www.ncbi.nlm.nih.gov/search/all/?term=${accession}`;
 
-        menu_object
-          .append("a")
-          .attr("class", "dropdown-item")
-          .attr("tabindex", "-1")
-          .text("Link to NCBI records")
-          .on("click", (d) => {
-            menu_object.style("display", "none");
+          menu_object
+            .append("a")
+            .attr("class", "dropdown-item")
+            .attr("tabindex", "-1")
+            .text("Link to NCBI records")
+            .on("click", (d) => {
+              menu_object.style("display", "none");
 
-            // Open a new window with the NCBI records page
-            window.open(ncbiURL, "_blank");
-          });
+              // Open a new window with the NCBI records page
+              window.open(ncbiURL, "_blank");
+            });
+        }
+        if (!isNaN(parseInt(plantInsectId)) && !isNaN(parseInt(Insectgenus))) {
+          menu_object
+            .append("a")
+            .attr("class", "dropdown-item")
+            .attr("tabindex", "-1")
+            .text("Insect details page")
+            .on("click", (d) => {
+              console.log("dddd");
+              console.log(plantInsectId);
+              menu_object.style("display", "none");
+              const speciesName =
+                node.data.name.split("_")[0] +
+                " " +
+                node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
+              // Generate the URL for the details page for insects
+              const detailsPageURL = `/insects/${Insectgenus}?genus=${Insectgenus}&species=${plantInsectId}&speciesName=${speciesName}`;
+              // Navigate to the details page using window.location
+              window.top.location.href = detailsPageURL;
+            });
+        }
+        //link to BOLD systems for the Insects
+
+        if (!isNaN(parseInt(plantInsectId)) && !isNaN(parseInt(Insectgenus))) {
+          menu_object
+            .append("a")
+            .attr("class", "dropdown-item")
+            .attr("tabindex", "-1")
+            .text("Link BOLD systems records")
+            .on("click", (d) => {
+              console.log("dddd");
+              console.log(plantInsectId);
+              menu_object.style("display", "none");
+
+              // Generate the URL for the BOLD systems database using the species name
+              const speciesName =
+                node.data.name.split("_")[0] +
+                " " +
+                node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
+              const nameParts = node.data.name.split("_");
+              const lastPart = nameParts[nameParts.length - 1]; // Get the last part after splitting
+              const bold_id = lastPart ? lastPart : "NA"; // Check if it's undefined and set to 'NA' if so
+
+              // https://boldsystems.org/index.php/Public_RecordView?processid=KNPA1297-09
+              // const speciesName = "Your Species Name"; // Replace "Your Species Name" with the actual species name
+              // Generate the search URL for the BOLD systems database using the species name
+              // const boldSearchURL = `https://boldsystems.org/index.php/Public_SearchTerms?query=${encodeURIComponent(
+              //   speciesName
+              // )}`;
+              const boldSearchURL = `https://boldsystems.org/index.php/Public_RecordView?processid=${bold_id}`;
+
+              // Open a new window with the search results page in the BOLD systems database
+              window.open(boldSearchURL, "_blank");
+            });
+        }
+        //link to insects coi with plant labels
+        if (isNaN(parseInt(plantInsectId)) && isNaN(parseInt(Insectgenus))) {
+          menu_object
+            .append("a")
+            .attr("class", "dropdown-item")
+            .attr("tabindex", "-1")
+            .text("Link to BOLD systems records")
+            .on("click", (d) => {
+              menu_object.style("display", "none");
+              const nameParts = node.data.name.split("_");
+              const bold_id = nameParts[2]; // Get the last part after splitting
+              const boldSearchURL = `https://boldsystems.org/index.php/Public_RecordView?processid=${encodeURIComponent(
+                bold_id
+              )}`;
+              // Open a new window with the search results page in the BOLD systems database
+              window.open(boldSearchURL, "_blank");
+              // window.open(boldURL, "_blank");
+            });
+        }
       }
-      if (!isNaN(parseInt(plantInsectId)) && !isNaN(parseInt(Insectgenus))) {
-        menu_object
-          .append("a")
-          .attr("class", "dropdown-item")
-          .attr("tabindex", "-1")
-          .text("Insect details page")
-          .on("click", (d) => {
-            console.log("dddd");
-            console.log(plantInsectId);
-            menu_object.style("display", "none");
-            const speciesName =
-              node.data.name.split("_")[0] + " " + node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
-            // Generate the URL for the details page for insects
-            const detailsPageURL = `/insects/${Insectgenus}?genus=${Insectgenus}&species=${plantInsectId}&speciesName=${speciesName}`;
-            // Navigate to the details page using window.location
-            window.top.location.href = detailsPageURL;
-          });
-      }
-      //link to BOLD systems for the Insects
-
-      if (!isNaN(parseInt(plantInsectId)) && !isNaN(parseInt(Insectgenus))) {
-        menu_object
-          .append("a")
-          .attr("class", "dropdown-item")
-          .attr("tabindex", "-1")
-          .text("Link BOLD systems records")
-          .on("click", (d) => {
-            console.log("dddd");
-            console.log(plantInsectId);
-            menu_object.style("display", "none");
-
-            // Generate the URL for the BOLD systems database using the species name
-            const speciesName =
-              node.data.name.split("_")[0] + " " + node.data.name.split("_")[1]; // Get the ID from the newick terminal node name
-            const nameParts = node.data.name.split("_");
-            const lastPart = nameParts[nameParts.length - 1]; // Get the last part after splitting
-            const bold_id = lastPart ? lastPart : "NA"; // Check if it's undefined and set to 'NA' if so
-
-            // https://boldsystems.org/index.php/Public_RecordView?processid=KNPA1297-09
-            // const speciesName = "Your Species Name"; // Replace "Your Species Name" with the actual species name
-            // Generate the search URL for the BOLD systems database using the species name
-            // const boldSearchURL = `https://boldsystems.org/index.php/Public_SearchTerms?query=${encodeURIComponent(
-            //   speciesName
-            // )}`;
-            const boldSearchURL = `https://boldsystems.org/index.php/Public_RecordView?processid=${bold_id}`;
-
-            // Open a new window with the search results page in the BOLD systems database
-            window.open(boldSearchURL, "_blank");
-          });
-      }
-      //link to insects coi with plant labels
-      if (isNaN(parseInt(plantInsectId)) && isNaN(parseInt(Insectgenus))) {
-        menu_object
-          .append("a")
-          .attr("class", "dropdown-item")
-          .attr("tabindex", "-1")
-          .text("Link to BOLD systems records")
-          .on("click", (d) => {
-            menu_object.style("display", "none");
-            const nameParts = node.data.name.split("_");
-            const bold_id = nameParts[2]; // Get the last part after splitting
-            const boldSearchURL = `https://boldsystems.org/index.php/Public_RecordView?processid=${encodeURIComponent(
-              bold_id
-            )}`;
-            // Open a new window with the search results page in the BOLD systems database
-            window.open(boldSearchURL, "_blank");
-            // window.open(boldURL, "_blank");
-          });
-      }
-
       if (!isLeafNode(node)) {
         if (options["collapsible"]) {
           menu_object
