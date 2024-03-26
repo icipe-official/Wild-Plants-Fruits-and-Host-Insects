@@ -49,10 +49,11 @@ model fruiting_months {
 }
 
 model glossary {
-  glossary_id          Int               @id
-  glossary_type        String?           @db.VarChar(50)
-  glossary_term        String?           @db.VarChar(50)
-  glossary_description String?           @db.VarChar(500)
+  glossary_id          Int                 @id
+  glossary_type        String?             @db.VarChar(50)
+  glossary_term        String?             @db.VarChar(50)
+  glossary_description String?             @db.VarChar(500)
+  glossary_examples    glossary_examples[]
   glossary_photos      glossary_photos[]
 }
 
@@ -322,10 +323,11 @@ model plants_matk {
 }
 
 model plants_photos {
-  plant_id   Int
-  photo_name String @unique @db.VarChar(100)
-  photo_id   Int    @default(autoincrement())
-  plants     plants @relation(fields: [plant_id], references: [id], onDelete: Cascade)
+  plant_id          Int
+  photo_name        String              @unique @db.VarChar(100)
+  photo_id          Int                 @default(autoincrement())
+  glossary_examples glossary_examples[]
+  plants            plants              @relation(fields: [plant_id], references: [id], onDelete: Cascade)
 
   @@id([plant_id, photo_id], map: "pk_plants_photos")
   @@unique([plant_id, photo_id], map: "unique_plant_photo_combination")
@@ -425,4 +427,13 @@ model woody_herbaceous {
   id                      Int                       @id @default(autoincrement())
   type_of_stem            String                    @unique @db.VarChar(10)
   plants_woody_herbaceous plants_woody_herbaceous[]
+}
+
+model glossary_examples {
+  glossary_id   Int
+  photo_name    String        @db.VarChar(100)
+  glossary      glossary      @relation(fields: [glossary_id], references: [glossary_id], onDelete: Cascade)
+  plants_photos plants_photos @relation(fields: [photo_name], references: [photo_name], onDelete: Cascade)
+
+  @@id([glossary_id, photo_name])
 }
