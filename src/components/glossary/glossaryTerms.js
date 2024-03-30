@@ -325,11 +325,22 @@ export default function GlossaryAll() {
             </Button> */}
               <Button
                 type="button"
-                class="close"
+                className="close"
                 aria-label="Close"
                 onClick={handleClose}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  zIndex: 1,
+                }}
               >
-                <span aria-hidden="true">&times;</span>
+                <span
+                  aria-hidden="true"
+                  style={{ fontSize: "2.5rem", color: "red" }}
+                >
+                  &times;
+                </span>
               </Button>
               <Box sx={{ marginLeft: 0 }}>
                 <Box sx={{ color: "red" }}>

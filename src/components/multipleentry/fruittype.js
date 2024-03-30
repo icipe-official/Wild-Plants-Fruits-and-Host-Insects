@@ -82,7 +82,10 @@ export default function Fruittype({
       <Box>
         <Typography sx={{ color: "red", fontWeight: "bold" }}>Fruit</Typography>
         <Typography variant="subtitle1" sx={{ color: "red" }}>
-          <Tooltip title="Double click any of the fruit types for a description">
+          <Tooltip
+            title="Double click any of the fruit types for a description"
+            placement="top"
+          >
             <span>Type</span>
           </Tooltip>{" "}
         </Typography>

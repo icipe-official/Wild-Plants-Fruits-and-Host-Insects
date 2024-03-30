@@ -57,7 +57,10 @@ export default function Leaftype({
           Leaf
         </Typography>
         <Typography variant="subtitle1" sx={{ color: "green" }}>
-          <Tooltip title="Double click any of the leaf types for a description">
+          <Tooltip
+            title="Double click any of the leaf types for a description"
+            placement="top"
+          >
             <span>Type</span>
           </Tooltip>{" "}
           {/* <Box

@@ -53,7 +53,10 @@ export default function FruitShape({
     <Box sx={{ marginLeft: isSmallScreen ? 0 : 2, width: "100%" }}>
       <Box sx={{ marginTop: 3 }}>
         <Typography variant="subtitle1" sx={{ color: "red" }}>
-          <Tooltip title="Double click any of the fruit shapes for a description">
+          <Tooltip
+            title="Double click any of the fruit shapes for a description"
+            placement="top"
+          >
             <span>Shape</span>
           </Tooltip>{" "}
           {/* <Box
