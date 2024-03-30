@@ -1,4 +1,4 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Tooltip, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles"; // custom component  styles
 import Router from "next/router";
 
@@ -82,16 +82,9 @@ export default function Fruittype({
       <Box>
         <Typography sx={{ color: "red", fontWeight: "bold" }}>Fruit</Typography>
         <Typography variant="subtitle1" sx={{ color: "red" }}>
-          Type{" "}
-          {/* <Box
-      sx={{
-        display: "inline-flex",
-        alignItems: "flex-end",
-        // marginLeft: "6rem",
-      }}
-    >
-      {message_type}
-    </Box> */}
+          <Tooltip title="Double click any of the fruit types for a description">
+            <span>Type</span>
+          </Tooltip>{" "}
         </Typography>
       </Box>
       <Box className={classes.component}>
