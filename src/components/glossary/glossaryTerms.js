@@ -342,8 +342,12 @@ export default function GlossaryAll() {
                 </Box>
                 <Box>
                   {" "}
-                  {selectedType?.glossary_description?.charAt(0).toUpperCase() +
-                    selectedType?.glossary_description?.slice(1)}
+                  {selectedType?.glossary_description
+                    ? selectedType?.glossary_description
+                        ?.charAt(0)
+                        .toUpperCase() +
+                      selectedType?.glossary_description?.slice(1)
+                    : " "}
                 </Box>
                 <Box>
                   <Box>
