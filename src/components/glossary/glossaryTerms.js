@@ -110,6 +110,9 @@ export default function GlossaryAll() {
 
   //handle on click event of the image
   function handleClick(type, index) {
+    console.log("type");
+
+    console.log(type);
     setSelectedTerm(true);
     if (type?.glossary_term) {
       // Update the selected index
@@ -125,26 +128,28 @@ export default function GlossaryAll() {
     // setuniqueIndex(index ? index : 0);
   }
 
-  // useEffect(() => {
-  //   if (glossaryTerm) {
-  //     // setShowPhotos(true);
-  //     console.log("glossaryTerm5");
-  //     // console.log("glossaryTerm5");
+  useEffect(() => {
+    if (glossaryTerm && glossary) {
+      setShowPhotos(true);
+      console.log("glossaryTerm5");
+      console.log(glossary);
+      console.log(glossaryTerm);
 
-  //     const value = Object.values(glossaryTerm)[0];
-  //     // console.log(value.charAt(0).toUpperCase() + value.slice(1));
-  //     const filteredItems = glossary?.filter((item) =>
-  //       item.glossary_term.includes(
-  //         value.charAt(0).toUpperCase() + value.slice(1)
-  //       )
-  //     );
-  //     console.log("glossary");
-  //     console.log(filteredItems);
-  //     if (typeof filteredItems !== null) {
-  //       handleClick(filteredItems);
-  //     }
-  //   }
-  // }, [glossary, glossaryTerm]);
+      const value = Object.values(glossaryTerm)[0];
+      // console.log(value.charAt(0).toUpperCase() + value.slice(1));
+      const filteredItems = glossary?.filter((item) =>
+        item.glossary_term?.includes(
+          value?.charAt(0).toUpperCase() + value?.slice(1)
+        )
+      );
+      console.log("glossary");
+      console.log(filteredItems);
+      if (typeof filteredItems !== null) {
+        // setSelectedType(filteredItems);
+        handleClick(filteredItems[0]);
+      }
+    }
+  }, [glossary, glossaryTerm]);
 
   const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
   // console.log(query);
@@ -204,14 +209,14 @@ export default function GlossaryAll() {
       var uniqueSpecies = [];
 
       // Iterate through each glossary term in the data
-      selectedType?.glossary_examples.forEach((glossaryTerm) => {
+      selectedType?.glossary_examples?.forEach((glossaryTerm) => {
         // console.log("glossaryTerm");
 
         // console.log(glossaryTerm);
         // Check if 'glossaryTerm.glossary_examples' is an array
 
         // Iterate through each example in the array
-        selectedType?.glossary_examples.forEach((example) => {
+        selectedType?.glossary_examples?.forEach((example) => {
           // console.log("example");
 
           // console.log(example);
@@ -261,7 +266,9 @@ export default function GlossaryAll() {
       return (
         <Container>
           {/* filter only terms with description*/}
-          <Box sx={{ fontWeight: "bold", marginTop: 9 }}>Alphabetical</Box>
+          <Box sx={{ fontWeight: "bold", marginTop: 9 }}>
+            Glossary Terms in Alphabetical Order
+          </Box>
           {glossary
             ?.filter((t) => Boolean(t.glossary_description))
             .map((type, index) => (
@@ -330,13 +337,13 @@ export default function GlossaryAll() {
                   {selectedType?.glossary_term +
                     " " +
                     "(" +
-                    selectedType.glossary_type.replace(/_/g, " ") +
+                    selectedType?.glossary_type?.replace(/_/g, " ") +
                     ")"}{" "}
                 </Box>
                 <Box>
                   {" "}
-                  {selectedType?.glossary_description.charAt(0).toUpperCase() +
-                    selectedType?.glossary_description.slice(1)}
+                  {selectedType?.glossary_description?.charAt(0).toUpperCase() +
+                    selectedType?.glossary_description?.slice(1)}
                 </Box>
                 <Box>
                   <Box>
