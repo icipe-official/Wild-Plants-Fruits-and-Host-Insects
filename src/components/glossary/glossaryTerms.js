@@ -337,7 +337,7 @@ export default function GlossaryAll() {
               >
                 <span
                   aria-hidden="true"
-                  style={{ fontSize: "2.5rem", color: "red" }}
+                  style={{ fontSize: "2.0rem", color: "red" }}
                 >
                   &times;
                 </span>
