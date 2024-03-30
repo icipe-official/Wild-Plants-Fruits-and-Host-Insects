@@ -144,7 +144,7 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
                   top: 0,
                   right: 0,
                   zIndex: 1,
-                  color: "white",
+                  color: "black",
                   backgroundColor: "transparent",
                 }}
               />
