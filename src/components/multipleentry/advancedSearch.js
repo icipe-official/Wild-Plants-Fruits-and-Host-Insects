@@ -705,7 +705,7 @@ export default function QuerySelectAdvancedSearch(props) {
             />
 
             <Box marginTop={4} marginBottom={2}>
-              Plants and Fruits data
+              Plants and Fruits with Insects
               <TreeView
                 className={classes.root}
                 defaultCollapseIcon={<ExpandMoreIcon />}
