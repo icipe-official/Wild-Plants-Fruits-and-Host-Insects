@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import TephritidaeNewick from "./tephritidae";
 import { useRef } from "react";
 import Tooltip from "@mui/material/Tooltip";
-
+import RubiaceaeFasta from "./rubiaceae";
 // import useMediaQuery from "@mui/material";
 import {
   Box,
@@ -161,9 +161,9 @@ export default function PhylogenyMafft() {
 
   // Now you can use the 'plantFamilyNames' constant list in your JavaScript code.
   const teph = TephritidaeNewick();
-  console.log("teph");
-  console.log(teph.props.children);
-  console.log("selectedFamily on change event");
+  const rub = RubiaceaeFasta();
+
+  // console.log("selectedFamily on change event");
 
   const [newickData, setNewickData] = useState(
     selectedFamily == "Rubiaceae" && !router.query.plantFamily
@@ -989,7 +989,10 @@ export default function PhylogenyMafft() {
         console.log("No newickData to send to iframe.");
       }
     };
+    // console.log("download");
+    // console.log(typeof download);
 
+    // console.log(typeof rub.props.children);
     return (
       <Container sx={{ marginTop: 12 }}>
         {/* <ConverttoFasta></ConverttoFasta> */}
@@ -1087,7 +1090,11 @@ export default function PhylogenyMafft() {
                 <TreeItem nodeId="1" label="Download">
                   <TreeItem nodeId="2" label="Sequences in fasta format">
                     <SequenceDownload
-                      data={download}
+                      data={
+                        selectedFamily === "Rubiaceae"
+                          ? JSON.parse(rub.props.children)
+                          : download
+                      }
                       selectdFamily={selectedFamily}
                       kmer={kmer}
                     />
