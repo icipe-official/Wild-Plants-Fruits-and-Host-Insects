@@ -106,7 +106,7 @@ export default function CombinedSearchPlantsInsects({ defaultValues }) {
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search plant or insect species with scientific name..."
+          placeholder="Search for a plant or insect species with scientific name..."
           sx={{
             flex: 1,
           }}
