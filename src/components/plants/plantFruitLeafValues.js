@@ -123,9 +123,9 @@ export default function PlantDetailsFeaturesValues() {
               </TreeItem>
             </TreeItem>
 
-            <TreeItem nodeId="11" label="Distribution">
+            {/* <TreeItem nodeId="11" label="Distribution">
               <KsectorValues k_sector_data={data} />
-            </TreeItem>
+            </TreeItem> */}
 
             <TreeItem nodeId="15" label="Image">
               <PhotosComponent photos_data={data} selectedIndex={0} />
@@ -137,9 +137,9 @@ export default function PlantDetailsFeaturesValues() {
               <InsectsRearedfromPlants />
             </TreeItem>
 
-            <TreeItem nodeId="23" label="Description">
+            {/* <TreeItem nodeId="23" label="Description">
               <PlantDescription plants_data={data} />
-            </TreeItem>
+            </TreeItem> */}
           </TreeView>
         ) : (
           <Grid container>
