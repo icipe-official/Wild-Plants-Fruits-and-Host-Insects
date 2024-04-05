@@ -1,5 +1,5 @@
-import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import { Box } from "@mui/material";
+import React, { useState } from "react";
 
 export default function SequenceDownload({ data, selectdFamily, kmer }) {
   //   const [data, setData] = useState([]);
@@ -7,7 +7,7 @@ export default function SequenceDownload({ data, selectdFamily, kmer }) {
     const handleDownload = () => {
       // Convert the data into a string in FASTA format
       // Convert sequences to FASTA format
-      let fastaString = '';
+      let fastaString = "";
       Object.entries(data).forEach(([name, sequence]) => {
         fastaString += `>${name}\n${sequence}\n`;
       });
@@ -20,13 +20,13 @@ export default function SequenceDownload({ data, selectdFamily, kmer }) {
       //   .join("\n");
 
       // Create a new Blob object with the converted data and specify the MIME type
-      const blob = new Blob([fastaString], { type: 'text/plain' });
+      const blob = new Blob([fastaString], { type: "text/plain" });
 
       // Create a new URL object with the Blob object and create a download link
       const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.download = `${selectdFamily}_${kmer}_kmer.fasta`;
+      link.download = `${selectdFamily}.fasta`;
       document.body.appendChild(link);
       link.click();
 

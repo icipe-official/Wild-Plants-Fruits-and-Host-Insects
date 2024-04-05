@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import TephritidaeNewick from "./tephritidae";
 import { useRef } from "react";
 import Tooltip from "@mui/material/Tooltip";
-
+import RubiaceaeFasta from "./rubiaceae";
 // import useMediaQuery from "@mui/material";
 import {
   Box,
@@ -25,6 +25,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ConverttoFasta from "./inputsequence";
 import { makeStyles } from "@mui/styles";
 import { kMaxLength } from "buffer";
+import TephritidaeFasta from "./tephritidaeFasta";
 // export default function Newick() {
 import FastaToDict from "./inputsequence";
 import { Download } from "@mui/icons-material";
@@ -162,9 +163,10 @@ export default function PhylogenyMafft() {
 
   // Now you can use the 'plantFamilyNames' constant list in your JavaScript code.
   const teph = TephritidaeNewick();
-  console.log("teph");
-  console.log(teph.props.children);
-  console.log("selectedFamily on change event");
+  const rub = RubiaceaeFasta();
+  const tephfasta = TephritidaeFasta();
+
+  // console.log("selectedFamily on change event");
 
   const [newickData, setNewickData] = useState(
     selectedFamily == "Rubiaceae" && !router.query.plantFamily
@@ -173,7 +175,7 @@ export default function PhylogenyMafft() {
   );
   const [kmer, setkmer] = useState(9);
   const [filteredFamily, setfilteredFamily] = useState("Acanthaceae");
-  const [selecteorder, setSelectedOrder] = useState("Braconidae");
+  const [selectedorder, setSelectedOrder] = useState("Braconidae");
   const [filteredOrder, setFilteredOrder] = useState("Braconidae");
   const [download, setDownload] = useState([]);
 
@@ -942,7 +944,7 @@ export default function PhylogenyMafft() {
 
         // console.log(orders);
         var insectFilteredData = data.filter(
-          (dat) => dat.insect_orders.order_name == selecteorder
+          (dat) => dat.insect_orders.order_name == selectedorder
         );
         // console.log("insect filteredData");
         var insect_famililes = data.filter(
@@ -990,7 +992,10 @@ export default function PhylogenyMafft() {
         console.log("No newickData to send to iframe.");
       }
     };
+    console.log("download");
+    console.log(typeof download);
 
+    console.log(typeof rub.props.children);
     return (
       <Container sx={{ marginTop: 12 }}>
         {/* <ConverttoFasta></ConverttoFasta> */}
@@ -1029,7 +1034,7 @@ export default function PhylogenyMafft() {
                       value={
                         selectedOrganism === "plants"
                           ? selectedFamily
-                          : selecteorder
+                          : selectedorder
                       }
                       onChange={(event) => handleChange(event)}
                       label="Families"
@@ -1087,12 +1092,6 @@ export default function PhylogenyMafft() {
               >
                 <TreeItem nodeId="1" label="Download">
                   <TreeItem nodeId="2" label="Sequences in fasta format">
-                    <SequenceDownload
-                      data={download}
-                      selectdFamily={selectedFamily}
-                      kmer={kmer}
-                    />
-
                     {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
                   </TreeItem>
                   <TreeItem nodeId="5" label="Newick file">
@@ -1141,7 +1140,8 @@ export default function PhylogenyMafft() {
           </Box>
         </Box>{" "}
         <Box>
-          {(selecteorder === "Tephritidae" || selecteorder === "Rubiaceae") && (
+          {(selectedorder === "Tephritidae" ||
+            selectedorder === "Rubiaceae") && (
             <iframe
               ref={iframeRef}
               onLoad={handleIframeLoad}
@@ -1155,8 +1155,9 @@ export default function PhylogenyMafft() {
               }}
             />
           )}
-          {(!selecteorder ||
-            (selecteorder !== "Tephritidae" && selecteorder !== "Rubiaceae")) &&
+          {(!selectedorder ||
+            (selectedorder !== "Tephritidae" &&
+              selectedorder !== "Rubiaceae")) &&
             newickData && (
               <iframe
                 ref={iframeRef}
@@ -1171,8 +1172,9 @@ export default function PhylogenyMafft() {
                 }}
               />
             )}
-          {(!selecteorder ||
-            (selecteorder !== "Tephritidae" && selecteorder !== "Rubiaceae")) &&
+          {(!selectedorder ||
+            (selectedorder !== "Tephritidae" &&
+              selectedorder !== "Rubiaceae")) &&
             !newickData && (
               <div
                 style={{
