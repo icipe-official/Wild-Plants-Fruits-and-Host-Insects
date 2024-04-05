@@ -21,7 +21,6 @@ import SequenceDownload from "./download";
 import NewickDownload from "./downloadnewick";
 // import { TreeView, TreeItem } from "@mui/lab";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
-
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ConverttoFasta from "./inputsequence";
