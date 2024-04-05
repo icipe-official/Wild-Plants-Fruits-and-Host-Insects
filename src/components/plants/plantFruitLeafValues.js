@@ -140,3 +140,45 @@ export default function PlantDetailsFeaturesValues() {
     </Container>
   );
 }
+
+// {isSmallScreen ? (
+//   <TreeView
+//     className={classes.root}
+//     defaultCollapseIcon={<ExpandMoreIcon />}
+//     defaultExpandIcon={<ChevronRightIcon />}
+//     selected={selectedNode}
+//     onNodeSelect={handleNodeSelect}
+//   >
+//     <TreeItem nodeId="1" label="Morphological Features">
+//       <TreeItem nodeId="2" label="Plant">
+//         <PlantDetailValues plants_data={data} />
+//       </TreeItem>
+
+//       <TreeItem nodeId="5" label="Fruit">
+//         <FruitDetailValues fruits_data={data} />
+//       </TreeItem>
+
+//       <TreeItem nodeId="8" label="Leaf">
+//         <LeafDetailValues leaves_data={data} />
+//       </TreeItem>
+//     </TreeItem>
+
+//     {/* <TreeItem nodeId="11" label="Distribution">
+//       <KsectorValues k_sector_data={data} />
+//     </TreeItem> */}
+
+//     <TreeItem nodeId="15" label="Image">
+//       <PhotosComponent photos_data={data} selectedIndex={0} />
+//     </TreeItem>
+//     <TreeItem nodeId="12" label="Map">
+//       <OpenLayersMap coordinates={coordinates} />
+//     </TreeItem>
+//     <TreeItem nodeId="19" label="Insects Reared">
+//       <InsectsRearedfromPlants />
+//     </TreeItem>
+
+//     {/* <TreeItem nodeId="23" label="Description">
+//       <PlantDescription plants_data={data} />
+//     </TreeItem> */}
+//   </TreeView>
+// )
