@@ -1053,7 +1053,23 @@ export default function PhylogenyMafft() {
             {isSmallScreen ? (
               <Box sx={{ marginLeft: 2 }}>
                 {" "}
-                <Button onClick={handleClick}>Insect-Plant Phylogeny</Button>
+                <Tooltip
+                  describeChild
+                  title="This link shows the phylogenetic tree for the insect barcodes that have an associated plant names, which is included in the labelling. The plants are labelled starting from family <F> to genus and species name <S>"
+                >
+                  <Button onClick={handleClick}>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        textTransform: "lowercase",
+                        "&:first-letter": { textTransform: "capitalize" },
+                        whiteSpace: "nowrap", // Ensure text stays in one line
+                      }}
+                    >
+                      link to Insect-Plant Phylogeny
+                    </Typography>
+                  </Button>
+                </Tooltip>{" "}
               </Box>
             ) : null}
           </Box>
@@ -1173,6 +1189,13 @@ export default function PhylogenyMafft() {
               </div>
             )}
         </Box>
+        {isSmallScreen ? (
+          <Box sx={{ color: "red", marginLeft: 2 }}>
+            Disclamier: The barcodes used to construct phylogeny trees were
+            downloaded from BOLD database. The scale represents the number of
+            substitutions per site.
+          </Box>
+        ) : null}
       </Container>
     );
   }

@@ -1,4 +1,4 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Tooltip, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles"; // custom component  styles
 import Router from "next/router";
 import { useState } from "react";
@@ -57,7 +57,12 @@ export default function Leaftype({
           Leaf
         </Typography>
         <Typography variant="subtitle1" sx={{ color: "green" }}>
-          Type{" "}
+          <Tooltip
+            title="Double click any of the leaf types for a description"
+            placement="top"
+          >
+            <span>Type</span>
+          </Tooltip>{" "}
           {/* <Box
       sx={{
         display: "inline-flex",

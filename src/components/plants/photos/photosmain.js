@@ -1,4 +1,4 @@
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Button, Modal, Tooltip } from "@mui/material";
 import { useState } from "react";
 import Image from "next/legacy/image";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
@@ -9,8 +9,8 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
   // console.log("photos_data");
 
   if (typeof photos_data !== "undefined") {
-    const photos = photos_data[selectedIndex]?.plants_photos.map(
-      (p) => p.photo_name
+    const photos = photos_data[selectedIndex]?.plants_photos?.map(
+      (p) => p?.photo_name
     );
     // console.log(photos_data);
 
@@ -91,7 +91,11 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
             <Button
               variant="contained"
               onClick={toggleModal}
-              startIcon={<ZoomInIcon />}
+              startIcon={
+                <Tooltip title="Zoom in">
+                  <ZoomInIcon />
+                </Tooltip>
+              }
               style={{
                 position: "absolute",
                 top: 0,
@@ -131,7 +135,11 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
               <Button
                 variant="contained"
                 onClick={closeModal}
-                startIcon={<ZoomOut />}
+                startIcon={
+                  <Tooltip title="Zoom out">
+                    <ZoomOut />
+                  </Tooltip>
+                }
                 style={{
                   position: "absolute",
                   top: 0,
