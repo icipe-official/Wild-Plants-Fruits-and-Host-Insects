@@ -1091,6 +1091,18 @@ export default function PhylogenyMafft() {
               >
                 <TreeItem nodeId="1" label="Download">
                   <TreeItem nodeId="2" label="Sequences in fasta format">
+                    <SequenceDownload
+                      data={
+                        selectedFamily === "Rubiaceae"
+                          ? JSON.parse(rub.props.children)
+                          : selectedorder === "Tephritidae"
+                          ? JSON.parse(tephfasta.props.children)
+                          : download
+                      }
+                      selectdFamily={selectedFamily}
+                      kmer={kmer}
+                    />
+
                     {/* <TreeItem nodeId="4" label="Grandchild 2" /> */}
                   </TreeItem>
                   <TreeItem nodeId="5" label="Newick file">
