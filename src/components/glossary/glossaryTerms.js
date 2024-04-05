@@ -129,23 +129,20 @@ export default function GlossaryAll() {
   }
 
   useEffect(() => {
-    if (glossaryTerm && glossary) {
+    if (glossaryTerm && Object.values(glossaryTerm).length > 0) {
       setShowPhotos(true);
       console.log("glossaryTerm5");
       console.log(glossary);
       console.log(glossaryTerm);
 
       const value = Object.values(glossaryTerm)[0];
-      // console.log(value.charAt(0).toUpperCase() + value.slice(1));
       const filteredItems = glossary?.filter((item) =>
-        item.glossary_term?.includes(
+        item?.glossary_term?.includes(
           value?.charAt(0).toUpperCase() + value?.slice(1)
         )
       );
-      console.log("glossary");
-      console.log(filteredItems);
-      if (typeof filteredItems !== null) {
-        // setSelectedType(filteredItems);
+
+      if (filteredItems && filteredItems.length > 0) {
         handleClick(filteredItems[0]);
       }
     }
