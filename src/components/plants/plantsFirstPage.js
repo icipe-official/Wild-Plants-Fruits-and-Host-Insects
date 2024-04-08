@@ -248,84 +248,40 @@ export default function PlantFirstPage() {
     >
       <PlantSpecieFamilyGenus />
       <Box>
-        {isSmallScreen ? (
-          <TreeView
-            className={classes.root}
-            defaultCollapseIcon={<ExpandMoreIcon />}
-            defaultExpandIcon={<ChevronRightIcon />}
-            selected={selectedNode}
-            onNodeSelect={handleNodeSelect}
-          >
-            <TreeItem nodeId="1" label="Morphological Features">
-              <TreeItem nodeId="2" label="Plant">
-                <PlantDetailValues plants_data={data} />
-              </TreeItem>
-
-              <TreeItem nodeId="5" label="Fruit">
-                <FruitDetailValues fruits_data={data} />
-              </TreeItem>
-
-              <TreeItem nodeId="8" label="Leaf">
-                <LeafDetailValues leaves_data={data} />
-              </TreeItem>
-            </TreeItem>
-
-            <TreeItem nodeId="11" label="Distribution">
-              <KsectorValues k_sector_data={data} />
-            </TreeItem>
-
-            <TreeItem nodeId="15" label="Image">
-              <PhotosComponent photos_data={data} selectedIndex={0} />
-            </TreeItem>
-
-            <TreeItem nodeId="12" label="Map">
-              <OpenLayersMap coordinates={coordinates} />
-            </TreeItem>
-
-            <TreeItem nodeId="19" label="Insects Reared">
-              <InsectsRearedfromPlants />
-            </TreeItem>
-
-            <TreeItem nodeId="23" label="Description">
-              <PlantDescription plants_data={data} />
-            </TreeItem>
-          </TreeView>
-        ) : (
-          <Grid container>
-            <Grid item xs={12} sm={6} md={5} lg={3}>
-              <Box className={classes.root} sx={{ marginTop: 2 }}>
-                <Box>
-                  <PlantDetailValues plants_data={data} />
-                </Box>
-                <Box sx={{ padding: 0.5 }}>
-                  <LeafDetailValues leaves_data={data} />
-                </Box>
-                <Box sx={{ padding: 0.5 }}>
-                  <FruitDetailValues fruits_data={data} />
-                </Box>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={5} lg={4}>
-              <Box sx={{ marginLeft: 0 }}>
-                <PhotosComponent photos_data={data} selectedIndex={0} />
-                <Box sx={{ fontWeight: "bold", marginTop: 2 }}>
-                  Regions collected
-                </Box>
-                <OpenLayersMap coordinates={coordinates} />
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={5} lg={5}>
+        <Grid container>
+          <Grid item xs={12} sm={6} md={5} lg={3}>
+            <Box className={classes.root} sx={{ marginTop: 2 }}>
               <Box>
-                <Box sx={{ marginLeft: 2, marginTop: 3 }}>
-                  <Box sx={{ fontWeight: "bold" }}>Insects reared</Box>
-                  <Box>
-                    <InsectsRearedfromPlants />
-                  </Box>
+                <PlantDetailValues plants_data={data} />
+              </Box>
+              <Box sx={{ padding: 0.5 }}>
+                <LeafDetailValues leaves_data={data} />
+              </Box>
+              <Box sx={{ padding: 0.5 }}>
+                <FruitDetailValues fruits_data={data} />
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={5} lg={4}>
+            <Box sx={{ marginLeft: 0 }}>
+              <PhotosComponent photos_data={data} selectedIndex={0} />
+              <Box sx={{ fontWeight: "bold", marginTop: 2 }}>
+                Regions collected
+              </Box>
+              <OpenLayersMap coordinates={coordinates} />
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={5} lg={5}>
+            <Box>
+              <Box sx={{ marginLeft: 2, marginTop: 3 }}>
+                <Box sx={{ fontWeight: "bold" }}>Insects reared</Box>
+                <Box>
+                  <InsectsRearedfromPlants />
                 </Box>
               </Box>
-            </Grid>
+            </Box>
           </Grid>
-        )}
+        </Grid>
       </Box>
     </Container>
   );
