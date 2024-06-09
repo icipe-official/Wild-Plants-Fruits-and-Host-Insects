@@ -213,7 +213,9 @@ export default function PlantFirstPage() {
 
   // console.log(data);
   // const data = DataFirstpage;
-  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  // const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const isSmallScreen = useMediaQuery(`(max-width: 1282px)`);
+
   const [selectedNode, setSelectedNode] = useState(null);
   const handleNodeSelect = (event, nodeId) => {
     setSelectedNode(nodeId);
