@@ -8,7 +8,7 @@ export default function Home() {
       <>
         {" "}
         <Typography
-          variant="h3"
+          variant="h1"
           sx={{
             fontWeight: "bold",
             fontSize: 40,
