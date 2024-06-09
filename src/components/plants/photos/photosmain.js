@@ -111,8 +111,8 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
             {currentImage + 1}/{photos.length}
           </span>
         )}
-        <span style={{ marginLeft: "55%" }}>
-          Specimen ID: {photos[currentImage].split(".")[0]}
+        <span style={{ marginLeft: "50%" }}>
+          Specimen ID: {photos[currentImage]?.split(".")[0]}
         </span>{" "}
         <Modal
           open={showImage.showModal}
