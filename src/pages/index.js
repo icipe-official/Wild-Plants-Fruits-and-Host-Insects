@@ -16,9 +16,8 @@ export default function Home() {
             marginLeft: 3,
           }}
         >
-          WiPFIM: A digital platform for interlinking biocollections of wild
-          plants, fruits, associated insects, and their molecular barcodes in
-          Kenya{" "}
+          WiPFIM: A digital platform for interlinking insects associated with
+          wild fruits of Kenya
         </Typography>
         <CombinedSearchPlantsInsects />
         <HomePage />
