@@ -192,9 +192,11 @@ export default function InsectPhotos({ photos_data }) {
             </>
           )}
         </Box>
-        <span style={{ marginLeft: "10%" }}>
-          Specimen ID: {photos[open]?.photo_id}
-        </span>{" "}
+        {hasPhotos && (
+          <span style={{ marginLeft: "10%" }}>
+            Specimen ID: {photos[open]?.photo_id}
+          </span>
+        )}
       </Box>
 
       {/* 
