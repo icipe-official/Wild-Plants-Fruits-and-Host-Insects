@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Open Sans",
     fontWeight: 400,
     textTransform: "uppercase",
-    marginLeft: theme.spacing(5),
+    marginLeft: theme.spacing(6),
     "&:hover": {
       color: "white",
       borderBottom: "1px solid white",
