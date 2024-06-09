@@ -65,19 +65,19 @@ export default function InsectPhotos({ photos_data }) {
             }}
           />
           <Image
-            src={`/photos/insects/${photos[open].photo_id}.jpg`}
+            src={`/photos/insects/${photos[open]?.photo_id}.jpg`}
             alt="No Image"
             width={500}
             height={400}
           />
-          {photos[open] && photos[open].sex && (
+          {photos[open] && photos[open]?.sex && (
             <Box style={{ position: "absolute", bottom: 0, right: 0 }}>
               <Typography
                 variant="body1"
                 fontWeight="bold"
                 textTransform="capitalize"
               >
-                {photos[open].sex}
+                {photos[open]?.sex}
               </Typography>
             </Box>
           )}
@@ -113,7 +113,7 @@ export default function InsectPhotos({ photos_data }) {
           {hasPhotos ? (
             <>
               <Image
-                src={`/photos/insects/${photos[open].photo_id}.jpg`}
+                src={`/photos/insects/${photos[open]?.photo_id}.jpg`}
                 alt="No Image"
                 width={showImage.isFullScreen ? 800 : 600}
                 height={showImage.isFullScreen ? 600 : 400}
@@ -187,7 +187,7 @@ export default function InsectPhotos({ photos_data }) {
               </button>
               <span></span>{" "}
               <span style={{ marginRight: "5px", marginLeft: "5px" }}>
-                {open + 1}/{photos.length}
+                {open + 1}/{photos?.length}
               </span>
             </>
           )}
