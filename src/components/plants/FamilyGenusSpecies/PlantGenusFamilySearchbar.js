@@ -412,7 +412,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
               name="species"
               style={{
                 width: isSmallScreen ? "100%" : "200px",
-                marginTop: isSmallScreen ? "0.5rem" : "0.5rem",
+                marginTop: isSmallScreen ? "0.5rem" : "0.8rem",
                 height: "60%",
               }}
               //    defaultValue={"value"}
