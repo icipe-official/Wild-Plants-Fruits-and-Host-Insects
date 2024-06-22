@@ -8,15 +8,16 @@ export default function Home() {
       <>
         {" "}
         <Typography
-          variant="h6"
+          variant="h1"
           sx={{
             fontWeight: "bold",
-            fontSize: 50,
+            fontSize: 40,
             color: "maroon",
             marginLeft: 3,
           }}
         >
-          Insects Associated With Wild Fruits of Kenya
+          WiPFIM: A digital platform for interlinking insects associated with
+          wild fruits of Kenya
         </Typography>
         <CombinedSearchPlantsInsects />
         <HomePage />

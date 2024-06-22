@@ -8,7 +8,9 @@ export default function InsectPhotos({ photos_data }) {
   const photos = photos_data[0]?.insect_photos || [];
   const hasPhotos = photos.length > 0;
   const showNextImage = hasPhotos && photos.length > 1;
-
+  const [currentImage, setCurrentImage] = useState(0);
+  const hasImages = photos?.length > 0;
+  const showIndicator = hasImages && photos.length > 1;
   const [showImage, setShowImage] = useState({
     showModal: false,
     isFullScreen: false,
@@ -64,19 +66,19 @@ export default function InsectPhotos({ photos_data }) {
             }}
           />
           <Image
-            src={`${base_path}/photos/insects/${photos[open].photo_id}.jpg`}
+            src={`${base_path}/photos/insects/${photos[open]?.photo_id}.jpg`}
             alt="No Image"
             width={500}
             height={400}
           />
-          {photos[open] && photos[open].sex && (
+          {photos[open] && photos[open]?.sex && (
             <Box style={{ position: "absolute", bottom: 0, right: 0 }}>
               <Typography
                 variant="body1"
                 fontWeight="bold"
                 textTransform="capitalize"
               >
-                {photos[open].sex}
+                {photos[open]?.sex}
               </Typography>
             </Box>
           )}
@@ -112,7 +114,7 @@ export default function InsectPhotos({ photos_data }) {
           {hasPhotos ? (
             <>
               <Image
-                src={`${base_path}/photos/insects/${photos[open].photo_id}.jpg`}
+                src={`${base_path}/photos/insects/${photos[open]?.photo_id}.jpg`}
                 alt="No Image"
                 width={showImage.isFullScreen ? 800 : 600}
                 height={showImage.isFullScreen ? 600 : 400}
@@ -156,25 +158,57 @@ export default function InsectPhotos({ photos_data }) {
         </Box>
       </Modal>
 
-      {showNextImage && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: 2,
-          }}
-        >
-          <Button onClick={() => openImage(open)} className="ground">
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: 2,
+        }}
+      >
+        {/* <Button onClick={() => openImage(open)} className="ground">
             <Typography variant="body1" sx={{ marginRight: "10px" }}>
               Next Image
             </Typography>
             <span>{open + 1}</span>
             <span>/</span>
             <span>{photos.length}</span>
-          </Button>
+            <span style={{ marginLeft: "10%" }}>
+              Specimen ID: {photos[open].photo_id}
+            </span>{" "}
+          </Button> */}
+        <Box>
+          {photos.length > 1 && (
+            <>
+              <button onClick={() => openImage(open)} className="ground">
+                &lt;
+              </button>
+              <button onClick={() => openImage(open)} className="ground">
+                &gt;
+              </button>
+              <span></span>{" "}
+              <span style={{ marginRight: "5px", marginLeft: "5px" }}>
+                {open + 1}/{photos?.length}
+              </span>
+            </>
+          )}
         </Box>
+        {hasPhotos && (
+          <span style={{ marginLeft: "10%" }}>
+            Specimen ID: {photos[open]?.photo_id}
+          </span>
+        )}
+      </Box>
+
+      {/* 
+      {showIndicator && (
+        <span>
+          {currentImage + 1}/{photos.length}
+        </span>
       )}
+      <span style={{ marginLeft: "55%" }}>
+        Specimen ID: {photos[open].photo_id}
+      </span> */}
     </Box>
   );
 }

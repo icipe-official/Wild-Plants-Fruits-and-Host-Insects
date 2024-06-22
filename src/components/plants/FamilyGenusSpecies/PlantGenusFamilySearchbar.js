@@ -307,16 +307,20 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
           <FormControl
             sx={{
               width: "100%",
-              marginTop: isSmallScreen ? "0rem" : "2rem",
+              marginTop: isSmallScreen ? "0.5rem" : "2rem",
               marginLeft: "1.5rem",
             }}
           >
             <InputLabel id="Input label">Select</InputLabel>
+
             <Select
-              name="family"
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              label="Age"
+              name="species"
               style={{
                 width: isSmallScreen ? "100%" : "200px",
-                marginTop: isSmallScreen ? "0rem" : "1rem",
+                marginTop: isSmallScreen ? "0.5rem" : "1rem",
                 height: "60%",
               }}
               value={family}
@@ -352,12 +356,15 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
             }}
           >
             <InputLabel id="Input label">Select</InputLabel>
+
             <Select
-              labelId="demo-simple-select-label"
-              name="genus"
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              label="Age"
+              name="species"
               style={{
                 width: isSmallScreen ? "100%" : "200px",
-                marginTop: isSmallScreen ? "0rem" : "1rem",
+                marginTop: isSmallScreen ? "0.5rem" : "1rem",
                 height: "60%",
               }}
               defaultValue="value"
@@ -383,7 +390,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
         <Box sx={{ display: "flex" }}>
           <Box
             sx={{
-              marginTop: isSmallScreen ? "0rem" : "3.5rem",
+              marginTop: isSmallScreen ? "0.5rem" : "3.5rem",
               marginLeft: isSmallScreen ? "0" : "3rem",
               fontWeight: "bold",
             }}
@@ -405,7 +412,7 @@ export default function PlantFamilyGenusSpecies({ defaultValues }) {
               name="species"
               style={{
                 width: isSmallScreen ? "100%" : "200px",
-                marginTop: isSmallScreen ? "" : "1rem",
+                marginTop: isSmallScreen ? "0.5rem" : "1rem",
                 height: "60%",
               }}
               //    defaultValue={"value"}

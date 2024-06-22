@@ -112,7 +112,11 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
             {currentImage + 1}/{photos.length}
           </span>
         )}
-
+        {photos.length > 0 && (
+          <span style={{ marginLeft: "50%" }}>
+            Specimen ID: {photos[currentImage]?.split(".")[0]}
+          </span>
+        )}
         <Modal
           open={showImage.showModal}
           onClose={toggleModal}
@@ -152,7 +156,6 @@ export default function PhotosComponent({ photos_data, selectedIndex }) {
             )}
           </Box>
         </Modal>
-
         {showIndicator && !showImage.isFullScreen && (
           <Box>
             <button onClick={previousImage} className="ground">

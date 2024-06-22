@@ -18,9 +18,9 @@ export default function InsectQuery2() {
   const router = useRouter();
   // destructure to obtain insect oredr ans species
   const { genus, order } =
-    typeof router.query !== "undefined" ? router.query : null;
+    typeof router?.query !== "undefined" ? router?.query : null;
 
-  const species = parseInt(router.query.species);
+  const species = parseInt(router.query?.species);
   // console.log("species");
   // console.log(genus);
   // const base_url = "http://localhost:3000";
@@ -53,15 +53,15 @@ export default function InsectQuery2() {
   // console.log("species insect page");
   // console.log(typeof species);
   // console.log("genus_data");
-  const { speciesName } = router.query;
+  const { speciesName } = router?.query;
   // console.log(data);
   // console.log("insect_data");
   // console.log(insect_data);
 
   // console.log("selected_species client side");
   if (data) {
-    const fruits = data.map((fruit) =>
-      fruit.plants_insects.map((specie) => specie.plants)
+    const fruits = data?.map((fruit) =>
+      fruit.plants_insects?.map((specie) => specie?.plants)
     )[0]; // [0] extract the first object
     // console.log("fruits reatred Fruits functionsl component");
     // console.log(fruits);
@@ -70,11 +70,11 @@ export default function InsectQuery2() {
     // console.log(fruits);
     // console.log("singleList");
 
-    const insects_region = data.filter((insect) => insect.id === species);
+    const insects_region = data?.filter((insect) => insect?.id === species);
     // console.log("insect region");
     // console.log(insects_region);
 
-    const coordinates1 = insects_region.map((specie) =>
+    const coordinates1 = insects_region?.map((specie) =>
       specie.insects_regions.map((region) => {
         const latitude = parseFloat(region.regions.latitude);
         const longitude = parseFloat(region.regions.longitude);
@@ -82,7 +82,7 @@ export default function InsectQuery2() {
       })
     );
 
-    const coordinates = insects_region.flatMap((specie) =>
+    const coordinates = insects_region?.flatMap((specie) =>
       specie.plants_insects?.map((insect) =>
         typeof insect.plants.plant_coordinates !== "undefined" ?
         insect.plants.plant_coordinates.map((region) => {
